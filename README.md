@@ -1,3 +1,1 @@
-# SIMS
-
-                
+# Specifikacija i modelovanje softvera
