@@ -2,6 +2,7 @@ package model;
 
 import model.enums.TipIzvodjenja;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Izvodjenje {
     private int id, brPristupa, brGlasova, ukupnoPrisupa, trajanje;
     private Date vremeIzvodjenja;
     private TipIzvodjenja tipIzvodjenja;
-    private List<Recenzija> recenzije;
+    private List<Recenzija> listaRecenzija;
     private List<Izvodjac> listaIzvodjaca;
     private List<MuzickoDelo> listaMuzickihDela;
     private MestoIzvodjenja mestoIzvodjenja;
@@ -82,28 +83,16 @@ public class Izvodjenje {
         this.tipIzvodjenja = tipIzvodjenja;
     }
 
-    public List<Recenzija> getRecenzije() {
-        return recenzije;
-    }
-
-    public void setRecenzije(List<Recenzija> recenzije) {
-        this.recenzije = recenzije;
+    public List<Recenzija> getListaRecenzija() {
+        return listaRecenzija;
     }
 
     public List<Izvodjac> getListaIzvodjaca() {
         return listaIzvodjaca;
     }
 
-    public void setListaIzvodjaca(List<Izvodjac> listaIzvodjaca) {
-        this.listaIzvodjaca = listaIzvodjaca;
-    }
-
     public List<MuzickoDelo> getListaMuzickihDela() {
         return listaMuzickihDela;
-    }
-
-    public void setListaMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
-        this.listaMuzickihDela = listaMuzickihDela;
     }
 
     public MestoIzvodjenja getMestoIzvodjenja() {
@@ -112,6 +101,63 @@ public class Izvodjenje {
 
     public void setMestoIzvodjenja(MestoIzvodjenja mestoIzvodjenja) {
         this.mestoIzvodjenja = mestoIzvodjenja;
+    }
+
+    public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            listaMuzickihDela = new ArrayList<MuzickoDelo>();
+        }
+        listaMuzickihDela.add(muzickoDelo);
+    }
+
+    public boolean obrisiMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            return false;
+        }
+        try {
+            listaMuzickihDela.remove(muzickoDelo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void dodajRecenziju(Recenzija recenzija) {
+        if (listaRecenzija == null) {
+            listaRecenzija = new ArrayList<Recenzija>();
+        }
+        listaRecenzija.add(recenzija);
+    }
+
+    public boolean obrisiRecenziju(Recenzija recenzija) {
+        if (listaRecenzija == null) {
+            return false;
+        }
+        try {
+            listaRecenzija.remove(recenzija);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void dodajIzvodjaca(Izvodjac izvodjac) {
+        if (listaIzvodjaca == null) {
+            listaIzvodjaca = new ArrayList<Izvodjac>();
+        }
+        listaIzvodjaca.add(izvodjac);
+    }
+
+    public boolean obrisiIzvodjaca(Izvodjac izvodjac) {
+        if (listaIzvodjaca == null) {
+            return false;
+        }
+        try {
+            listaIzvodjaca.remove(izvodjac);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -124,7 +170,7 @@ public class Izvodjenje {
                 ", trajanje=" + trajanje +
                 ", vremeIzvodjenja=" + vremeIzvodjenja +
                 ", tipIzvodjenja=" + tipIzvodjenja +
-                ", recenzije=" + recenzije +
+                ", recenzije=" + listaRecenzija +
                 ", listaIzvodjaca=" + listaIzvodjaca +
                 ", listaMuzickihDela=" + listaMuzickihDela +
                 ", mestoIzvodjenja=" + mestoIzvodjenja +

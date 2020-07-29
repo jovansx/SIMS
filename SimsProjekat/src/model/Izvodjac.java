@@ -2,6 +2,7 @@ package model;
 
 import model.enums.TipIzvodjaca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Izvodjac {
@@ -10,13 +11,14 @@ public class Izvodjac {
     private String nazivIzvodjaca, opis;
     private TipIzvodjaca tipIzvodjaca;
     private Izvodjac pripadaGrupi;
-    private List<Izvodjac> imaClanoce;
+    private List<Izvodjac> imaClanove;
     private List<Izvodjenje> listaIzvodjenja;
 
     public Izvodjac(int id, String nazivIzvodjaca, TipIzvodjaca tipIzvodjaca) {
         this.id = id;
         this.nazivIzvodjaca = nazivIzvodjaca;
         this.tipIzvodjaca = tipIzvodjaca;
+        this.opis = "";
     }
 
     public int getId() {
@@ -59,20 +61,50 @@ public class Izvodjac {
         this.pripadaGrupi = pripadaGrupi;
     }
 
-    public List<Izvodjac> getImaClanoce() {
-        return imaClanoce;
-    }
-
-    public void setImaClanoce(List<Izvodjac> imaClanoce) {
-        this.imaClanoce = imaClanoce;
+    public List<Izvodjac> getImaClanove() {
+        return imaClanove;
     }
 
     public List<Izvodjenje> getListaIzvodjenja() {
         return listaIzvodjenja;
     }
 
-    public void setListaIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
-        this.listaIzvodjenja = listaIzvodjenja;
+    public void dodajClana(Izvodjac izvodjac) {
+        if (imaClanove == null) {
+            imaClanove = new ArrayList<Izvodjac>();
+        }
+        imaClanove.add(izvodjac);
+    }
+
+    public boolean obrisiClana(Izvodjac izvodjac) {
+        if (imaClanove == null) {
+            return false;
+        }
+        try {
+            imaClanove.remove(izvodjac);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void dodajIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            listaIzvodjenja = new ArrayList<Izvodjenje>();
+        }
+        listaIzvodjenja.add(izvodjenje);
+    }
+
+    public boolean obrisiIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            return false;
+        }
+        try {
+            listaIzvodjenja.remove(izvodjenje);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -83,7 +115,7 @@ public class Izvodjac {
                 ", opis='" + opis + '\'' +
                 ", tipIzvodjaca=" + tipIzvodjaca +
                 ", pripadaGrupi=" + pripadaGrupi +
-                ", imaClanoce=" + imaClanoce +
+                ", imaClanoce=" + imaClanove +
                 ", listaIzvodjenja=" + listaIzvodjenja +
                 '}';
     }

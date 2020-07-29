@@ -2,6 +2,7 @@ package model;
 
 import model.enums.TipAlbuma;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,9 @@ public class Album extends MuzickoDelo {
     private TipAlbuma tipAlbuma;
     private List<MuzickoDelo> listaMuzickihDela;
 
-    public Album(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka) {
+    public Album(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka, TipAlbuma tipAlbuma) {
         super(id, nazivDela, datumPostavljanja, vremeNastanka);
+        this.tipAlbuma = tipAlbuma;
     }
 
     @Override
@@ -37,8 +39,23 @@ public class Album extends MuzickoDelo {
         return listaMuzickihDela;
     }
 
-    public void setListaMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
-        this.listaMuzickihDela = listaMuzickihDela;
+    public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            listaMuzickihDela = new ArrayList<MuzickoDelo>();
+        }
+        listaMuzickihDela.add(muzickoDelo);
+    }
+
+    public boolean obrisiMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            return false;
+        }
+        try {
+            listaMuzickihDela.remove(muzickoDelo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
