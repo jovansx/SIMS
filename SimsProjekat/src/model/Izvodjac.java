@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.TipIzvodjaca;
+
 import java.util.List;
 
 public class Izvodjac {

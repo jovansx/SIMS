@@ -5,10 +5,10 @@ public class Recenzija {
     private int id, ocena;
     private String komentar;
     private RegistovaniKorisnik autorRecenzije;
-    private Izvodnjenje izvodnjenje;
+    private Izvodjenje izvodnjenje;
     private Urednik urednik;
 
-    public Recenzija(int id, int ocena, String komentar, RegistovaniKorisnik autorRecenzije, Izvodnjenje izvodnjenje, Urednik urednik) {
+    public Recenzija(int id, int ocena, String komentar, RegistovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik) {
         this.id = id;
         this.ocena = ocena;
         this.komentar = komentar;
@@ -49,11 +49,11 @@ public class Recenzija {
         this.autorRecenzije = autorRecenzije;
     }
 
-    public Izvodnjenje getIzvodnjenje() {
+    public Izvodjenje getIzvodnjenje() {
         return izvodnjenje;
     }
 
-    public void setIzvodnjenje(Izvodnjenje izvodnjenje) {
+    public void setIzvodnjenje(Izvodjenje izvodnjenje) {
         this.izvodnjenje = izvodnjenje;
     }
 

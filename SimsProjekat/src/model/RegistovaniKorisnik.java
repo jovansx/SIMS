@@ -5,12 +5,12 @@ import java.util.List;
 
 public class RegistovaniKorisnik extends Korisnik {
 
-    private List<Izvodjenja> listaOmiljenogSadrzaja;
+    private List<Izvodjenje> listaOmiljenogSadrzaja;
     private List<Recenzija> listaRecenzija;
     private List<PlejLista> listaPlejListi;
     private boolean jeVidljiv;
 
-    public RegistovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja, List<Izvodjenja> listaOmiljenogSadrzaja, List<Recenzija> listaRecenzija, List<PlejLista> listaPlejListi) {
+    public RegistovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja, List<Izvodjenje> listaOmiljenogSadrzaja, List<Recenzija> listaRecenzija, List<PlejLista> listaPlejListi) {
         super(id, ime, prezime, email, kontaktTelefon, korisnickoIme, lozicka, godinaRodjenja);
         this.listaOmiljenogSadrzaja = listaOmiljenogSadrzaja;
         this.listaRecenzija = listaRecenzija;
@@ -18,11 +18,11 @@ public class RegistovaniKorisnik extends Korisnik {
         this.jeVidljiv = true;
     }
 
-    public List<Izvodjenja> getListaOmiljenogSadrzaja() {
+    public List<Izvodjenje> getListaOmiljenogSadrzaja() {
         return listaOmiljenogSadrzaja;
     }
 
-    public void setListaOmiljenogSadrzaja(List<Izvodjenja> listaOmiljenogSadrzaja) {
+    public void setListaOmiljenogSadrzaja(List<Izvodjenje> listaOmiljenogSadrzaja) {
         this.listaOmiljenogSadrzaja = listaOmiljenogSadrzaja;
     }
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.TipIzvodjenja;
+
 import java.util.Date;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.TipUcesnika;
+
 import java.util.List;
 
 public class Ucesnik {
