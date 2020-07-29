@@ -62,7 +62,7 @@ public class Ucesnik {
         listaMuzickihDela.add(muzickoDelo);
     }
 
-    public boolean obrisiRecenziju(MuzickoDelo muzickoDelo) {
+    public boolean obrisiMuzickoDelo(MuzickoDelo muzickoDelo) {
         if (listaMuzickihDela == null) {
             return false;
         }

@@ -48,7 +48,7 @@ public class Urednik extends Korisnik {
         listaZanrova.add(zanr);
     }
 
-    public boolean obrisiZadatak(Zanr zanr) {
+    public boolean obrisiZanr(Zanr zanr) {
         if (listaZanrova == null) {
             return false;
         }
