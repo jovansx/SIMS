@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlejLista {
@@ -9,11 +10,10 @@ public class PlejLista {
     private String naziv;
     private List<MuzickoDelo> listaMuzickihDela;
 
-    public PlejLista(int id, String naziv, List<MuzickoDelo> listaMuzickihDela) {
+    public PlejLista(int id, String naziv) {
         this.id = id;
         this.jeJavna = true;
         this.naziv = naziv;
-        this.listaMuzickihDela = listaMuzickihDela;
     }
 
     public int getId() {
@@ -44,8 +44,23 @@ public class PlejLista {
         return listaMuzickihDela;
     }
 
-    public void setListaMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
-        this.listaMuzickihDela = listaMuzickihDela;
+    public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            listaMuzickihDela = new ArrayList<MuzickoDelo>();
+        }
+        listaMuzickihDela.add(muzickoDelo);
+    }
+
+    public boolean obrisiRecenziju(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            return false;
+        }
+        try {
+            listaMuzickihDela.remove(muzickoDelo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

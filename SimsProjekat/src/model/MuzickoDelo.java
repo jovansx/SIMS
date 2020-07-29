@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -83,41 +84,119 @@ public class MuzickoDelo {
         return listaZanrova;
     }
 
-    public void setListaZanrova(List<Zanr> listaZanrova) {
-        this.listaZanrova = listaZanrova;
+    public void dodajZanr(Zanr zanr) {
+        if (listaZanrova == null) {
+            listaZanrova = new ArrayList<Zanr>();
+        }
+        listaZanrova.add(zanr);
     }
+
+    public boolean obrisiZadatak(Zanr zanr) {
+        if (listaZanrova == null) {
+            return false;
+        }
+        try {
+            listaZanrova.remove(zanr);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public List<Izvodjenje> getListaIzvodjenja() {
         return listaIzvodjenja;
     }
 
-    public void setListaIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
-        this.listaIzvodjenja = listaIzvodjenja;
+    public void dodajIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            listaIzvodjenja = new ArrayList<Izvodjenje>();
+        }
+        listaIzvodjenja.add(izvodjenje);
+    }
+
+    public boolean obrisiIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            return false;
+        }
+        try {
+            listaIzvodjenja.remove(izvodjenje);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public List<Ucesnik> getListaUcesnika() {
         return listaUcesnika;
     }
 
-    public void setListaUcesnika(List<Ucesnik> listaUcesnika) {
-        this.listaUcesnika = listaUcesnika;
+    public void dodajUcesnika(Ucesnik ucesnik) {
+        if (listaUcesnika == null) {
+            listaUcesnika = new ArrayList<Ucesnik>();
+        }
+        listaUcesnika.add(ucesnik);
+    }
+
+    public boolean obrisiUcesnika(Ucesnik ucesnik) {
+        if (listaUcesnika == null) {
+            return false;
+        }
+        try {
+            listaUcesnika.remove(ucesnik);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public List<Recenzija> getListaRecenzija() {
         return listaRecenzija;
     }
 
-    public void setListaRecenzija(List<Recenzija> listaRecenzija) {
-        this.listaRecenzija = listaRecenzija;
+    public void dodajRecenziju(Recenzija recenzija) {
+        if (listaRecenzija == null) {
+            listaRecenzija = new ArrayList<Recenzija>();
+        }
+        listaRecenzija.add(recenzija);
     }
+
+    public boolean obrisiRecenziju(Recenzija recenzija) {
+        if (listaRecenzija == null) {
+            return false;
+        }
+        try {
+            listaRecenzija.remove(recenzija);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public List<Album> getListaAlbuma() {
         return listaAlbuma;
     }
 
-    public void setListaAlbuma(List<Album> listaAlbuma) {
-        this.listaAlbuma = listaAlbuma;
+    public void dodajAlbum(Album album) {
+        if (listaAlbuma == null) {
+            listaAlbuma = new ArrayList<Album>();
+        }
+        listaAlbuma.add(album);
     }
+
+    public boolean obrisiAlbum(Album album) {
+        if (listaAlbuma == null) {
+            return false;
+        }
+        try {
+            listaAlbuma.remove(album);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     @Override
     public String toString() {

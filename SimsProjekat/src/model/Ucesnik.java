@@ -2,6 +2,7 @@ package model;
 
 import model.enums.TipUcesnika;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ucesnik {
@@ -11,12 +12,11 @@ public class Ucesnik {
     private TipUcesnika tip;
     private List<MuzickoDelo> listaMuzickihDela;
 
-    public Ucesnik(int id, String naziv, String opis, TipUcesnika tip, List<MuzickoDelo> listaMuzickihDela) {
+    public Ucesnik(int id, String naziv, String opis, TipUcesnika tip) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
         this.tip = tip;
-        this.listaMuzickihDela = listaMuzickihDela;
     }
 
     public int getId() {
@@ -55,8 +55,23 @@ public class Ucesnik {
         return listaMuzickihDela;
     }
 
-    public void setListaMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
-        this.listaMuzickihDela = listaMuzickihDela;
+    public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            listaMuzickihDela = new ArrayList<MuzickoDelo>();
+        }
+        listaMuzickihDela.add(muzickoDelo);
+    }
+
+    public boolean obrisiRecenziju(MuzickoDelo muzickoDelo) {
+        if (listaMuzickihDela == null) {
+            return false;
+        }
+        try {
+            listaMuzickihDela.remove(muzickoDelo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

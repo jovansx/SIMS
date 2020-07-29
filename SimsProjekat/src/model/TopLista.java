@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,10 +10,9 @@ public class TopLista {
     private Date datumGlasanja;
     private List<Izvodjenje> listaIzvodjenja;
 
-    public TopLista(int id, Date datumGlasanja, List<Izvodjenje> listaIzvodjenja) {
+    public TopLista(int id, Date datumGlasanja) {
         this.id = id;
         this.datumGlasanja = datumGlasanja;
-        this.listaIzvodjenja = listaIzvodjenja;
     }
 
     public int getId() {
@@ -35,8 +35,23 @@ public class TopLista {
         return listaIzvodjenja;
     }
 
-    public void setListaIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
-        this.listaIzvodjenja = listaIzvodjenja;
+    public void dodajIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            listaIzvodjenja = new ArrayList<Izvodjenje>();
+        }
+        listaIzvodjenja.add(izvodjenje);
+    }
+
+    public boolean obrisiIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            return false;
+        }
+        try {
+            listaIzvodjenja.remove(izvodjenje);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
