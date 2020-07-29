@@ -11,10 +11,9 @@ public class FConnection {
     public static Connection getInstance(){
         if(instance==null){
             try {
-                System.out.println("proba");
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 instance=DriverManager.getConnection("jdbc:mysql://localhost:3306","root","Simares*99");
-                System.out.println("uspelo");
+                System.out.println("Connected to database");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
