@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SIMS.iml" filepath="$PROJECT_DIR$/.idea/SIMS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SimsProjekat/SimsProjekat.iml" filepath="$PROJECT_DIR$/SimsProjekat/SimsProjekat.iml" />
     </modules>
   </component>
 </project>

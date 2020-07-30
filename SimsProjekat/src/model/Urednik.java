@@ -10,8 +10,8 @@ public class Urednik extends Korisnik {
     private List<Zanr> listaZanrova;
     private List<Recenzija> listaRecenzija;
 
-    public Urednik(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja) {
-        super(id, ime, prezime, email, kontaktTelefon, korisnickoIme, lozicka, godinaRodjenja);
+    public Urednik(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
+        super(id, ime, prezime, email,kontaktTelefon,godinaRodjenja, nalog);
     }
 
     public List<Zadatak> getListaZadataka() {

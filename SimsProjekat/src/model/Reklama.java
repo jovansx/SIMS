@@ -6,6 +6,7 @@ public class Reklama {
     private String naziv, text;
     private Double cena;
 
+    public Reklama(){};
     public Reklama(int id, String naziv, String text, Double cena) {
         this.id = id;
         this.brojPristupa = 0;

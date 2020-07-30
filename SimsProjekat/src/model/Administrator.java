@@ -9,8 +9,9 @@ public class Administrator extends Korisnik {
     private List<Reklama> izlazeReklame;
     private List<Zahtev> listaZahteva;
 
-    public Administrator(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja) {
-        super(id, ime, prezime, email, kontaktTelefon, korisnickoIme, lozicka, godinaRodjenja);
+    public Administrator() {}
+    public Administrator(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
+        super(id, ime, prezime, email, kontaktTelefon, godinaRodjenja, nalog);
     }
 
     public List<Reklama> getIzlazeReklame() {
@@ -21,6 +22,9 @@ public class Administrator extends Korisnik {
         return listaZahteva;
     }
 
+    public void setIzlazeReklame(List<Reklama> reklame){this.izlazeReklame=reklame;}
+
+    public void setListaZahteva(List<Zahtev> zahtjevi) {this.listaZahteva=zahtjevi;}
     public void dodajReklamu(Reklama reklama) {
         if (izlazeReklame == null) {
             izlazeReklame = new ArrayList<Reklama>();
