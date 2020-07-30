@@ -1,0 +1,547 @@
+create database muzicki_sistem;
+use muzicki_sistem;
+
+CREATE TABLE MestoIzvodjenja (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+pttBroj INT,
+nazivMesta VARCHAR(30),
+drzava VARCHAR(30)
+);
+
+INSERT INTO 
+MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
+VALUES('Novi Sad', 21000, 'Srbija');
+
+INSERT INTO 
+MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
+VALUES('London', 32452, 'Engleska');
+
+INSERT INTO 
+MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
+VALUES('Pariz', 43560, 'Francuska');
+
+CREATE TABLE TopLista (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+datumGlasanja DATE
+);
+
+INSERT INTO 
+TopLista(datumGlasanja)
+VALUES('2020.01.01.');
+
+INSERT INTO 
+TopLista(datumGlasanja)
+VALUES('2020.02.01.');
+
+INSERT INTO 
+TopLista(datumGlasanja)
+VALUES('2020.03.01.');
+
+CREATE TABLE Izvodjenje (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+vremeIzvodjenja DATE,
+trajanje INT,
+tipIzvodjenja VARCHAR(6),
+brojPristupa INT,
+brojGlasova INT,
+ukupnoPristupa INT,
+idMesta INT UNSIGNED,
+CONSTRAINT FK_MESTO FOREIGN KEY (idMesta) REFERENCES MestoIzvodjenja(id)
+);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
+VALUES('2018.03.14.', 120, 'VIDEO', 0, 0, 0, 1);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
+VALUES('2017.05.11.', 120, 'AUDIO', 0, 0, 0, 2);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
+VALUES('2019.10.04.', 120, 'ZAPIS', 0, 0, 0, 3);
+
+CREATE TABLE IzvodjenjaUTopListi (
+idIzvodjenja INT UNSIGNED,
+idTopListe INT UNSIGNED,
+obrisano BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_IZVODJENJE FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
+CONSTRAINT FK_TOP_LISTA FOREIGN KEY (idTopListe) REFERENCES TopLista(id),
+PRIMARY KEY (idIzvodjenja, idTopListe)
+);
+
+INSERT INTO 
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(1, 2);
+
+INSERT INTO 
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(3, 1);
+
+INSERT INTO 
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(2, 3);
+
+CREATE TABLE Izvodjac (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+nazivIzvodjaca VARCHAR(50),
+tip VARCHAR(12),
+opis VARCHAR(200),
+pripadaGrupi INT UNSIGNED,
+CONSTRAINT FK_PRIPADA FOREIGN KEY (pripadaGrupi) REFERENCES Izvodjac(id)
+);
+
+INSERT INTO 
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Hurricane', 'BEND');
+
+INSERT INTO 
+Izvodjac(nazivIzvodjaca, tip, pripadaGrupi)
+VALUES('Ksenija Knezevic', 'CLAN_GRUPE', 1);
+
+INSERT INTO 
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Jovan Perisic', 'SOLISTA');
+
+CREATE TABLE IzvodjacIzvodi (
+idIzvodjaca INT UNSIGNED,
+idIzvodjenja INT UNSIGNED,
+obrisano BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_IZVODJENJE2 FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
+CONSTRAINT FK_IZVODJAC FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
+PRIMARY KEY (idIzvodjenja, idIzvodjaca)
+);
+
+INSERT INTO 
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(1, 1);
+
+INSERT INTO 
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(2, 2);
+
+INSERT INTO 
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(3, 3);
+
+CREATE TABLE Zanr (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+nazivZanra VARCHAR(30),
+datumNastanka DATE,
+opis VARCHAR(100)
+);
+
+INSERT INTO 
+Zanr(nazivZanra, datumNastanka)
+VALUES('Krajiska', '1991.02.02.');
+
+INSERT INTO 
+Zanr(nazivZanra, datumNastanka)
+VALUES('Pop', '2005.11.14.');
+
+INSERT INTO 
+Zanr(nazivZanra, datumNastanka)
+VALUES('Rok', '1987.04.18.');
+
+CREATE TABLE Ucesnik (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+nazivUcesnika VARCHAR(50),
+tip VARCHAR(30),
+opis VARCHAR(200)
+);
+
+INSERT INTO 
+Ucesnik(nazivUcesnika, tip)
+VALUES('Grand', 'MUZICKA_PRODUKCIJA');
+
+INSERT INTO 
+Ucesnik(nazivUcesnika, tip)
+VALUES('Baja Mali Knindza', 'TEKSTOPISAC');
+
+INSERT INTO 
+Ucesnik(nazivUcesnika, tip)
+VALUES('Stevan Stojanovic Mokranjac', 'KOMPOZITOR');
+
+CREATE TABLE MuzickoDelo (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+nazivDela VARCHAR(50),
+datumPostavljanja DATE,
+vremeNastanka DATE,
+prosecnaOcena DOUBLE,
+opis VARCHAR(200),
+sadrzaj VARCHAR(200),
+tipAlbuma VARCHAR(10),
+pripadaAlbumu INT UNSIGNED,
+CONSTRAINT FK_ALBUM FOREIGN KEY (pripadaAlbumu) REFERENCES MuzickoDelo(id)
+);
+
+INSERT INTO 
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka, tipAlbuma)
+VALUES('Sama pala, sama ubila se', '2017.11.19', '2010.11.18', 'CD');
+
+INSERT INTO 
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka, pripadaAlbumu)
+VALUES('Kosibaso', '2017.11.19', '2010.11.18', 1);
+
+INSERT INTO 
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Za Elizu', '2018.09.14.', '1889.02.05');
+
+CREATE TABLE ZanrMuzickogDela (
+idZanra INT UNSIGNED,
+idMuzickogDela INT UNSIGNED,
+obrisano BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_ZANR FOREIGN KEY (idZanra) REFERENCES Zanr(id),
+CONSTRAINT FK_MUZICKO_DELO FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+PRIMARY KEY (idZanra, idMuzickogDela)
+);
+
+INSERT INTO 
+ZanrMuzickogDela(idZanra, idMuzickogDela)
+VALUES(1, 1);
+
+INSERT INTO 
+ZanrMuzickogDela(idZanra, idMuzickogDela)
+VALUES(1, 2);
+
+INSERT INTO 
+ZanrMuzickogDela(idZanra, idMuzickogDela)
+VALUES(3, 3);
+
+CREATE TABLE UcesnikMuzickogDela (
+idUcesnika INT UNSIGNED,
+idMuzickogDela INT UNSIGNED,
+obrisano BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_UCESNIK FOREIGN KEY (idUcesnika) REFERENCES Ucesnik(id),
+CONSTRAINT FK_MUZICKO_DELO2 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+PRIMARY KEY (idUcesnika, idMuzickogDela)
+);
+
+INSERT INTO 
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(1, 1);
+
+INSERT INTO 
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(2, 2);
+
+INSERT INTO 
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(3, 3);
+
+CREATE TABLE IzvodjenjaMuzickogDela (
+idIzvodjenja INT UNSIGNED,
+idMuzickogDela INT UNSIGNED,
+CONSTRAINT FK_Izvodjenje3 FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
+CONSTRAINT FK_MUZICKO_DELO3 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+PRIMARY KEY (idIzvodjenja, idMuzickogDela)
+);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(1, 1);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(2, 2);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(3, 3);
+
+
+CREATE TABLE KorisnickiNalog (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+korisnickoIme VARCHAR(30),
+lozinka VARCHAR(30),
+tipKorisnika VARCHAR(15)
+);
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('coca', 'coca', 'UREDNIK');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('acab', 'acab', 'UREDNIK');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('nina', 'nina', 'UREDNIK');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('dada', 'dada', 'UREDNIK');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('coca2', 'coca2', 'ADMINISTRATOR');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('acab2', 'acab2', 'ADMINISTRATOR');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('nina2', 'nina2', 'ADMINISTRATOR');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('dada2', 'dada2', 'ADMINISTRATOR');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('coca3', 'coca3', 'REGISTROVANI');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('acab3', 'acab3', 'REGISTROVANI');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('nina3', 'nina3', 'REGISTROVANI');
+
+INSERT INTO 
+KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
+VALUES('dada3', 'dada3', 'REGISTROVANI');
+
+CREATE TABLE Administrator (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+ime VARCHAR(30),
+prezime VARCHAR(30),
+email VARCHAR(30),
+kontaktTelefon VARCHAR(30),
+godinaRodjenja DATE,
+idNaloga INT UNSIGNED,
+CONSTRAINT FK_NALOG FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
+);
+
+INSERT INTO 
+Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 6);
+
+INSERT INTO 
+Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 5);
+
+INSERT INTO 
+Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 7);
+
+INSERT INTO 
+Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 8);
+
+CREATE TABLE Urednik (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+ime VARCHAR(30),
+prezime VARCHAR(30),
+email VARCHAR(30),
+kontaktTelefon VARCHAR(30),
+godinaRodjenja DATE,
+idNaloga INT UNSIGNED,
+CONSTRAINT FK_NALOG2 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
+);
+
+INSERT INTO 
+Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 2);
+
+INSERT INTO 
+Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 1);
+
+INSERT INTO 
+Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 3);
+
+INSERT INTO 
+Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 4);
+
+CREATE TABLE RegistrovaniKorisnik (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+ime VARCHAR(30),
+prezime VARCHAR(30),
+email VARCHAR(30),
+kontaktTelefon VARCHAR(30),
+godinaRodjenja DATE,
+idNaloga INT UNSIGNED,
+jeVidljiv BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_NALOG3 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
+);
+
+INSERT INTO 
+RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 10);
+
+INSERT INTO 
+RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 9);
+
+INSERT INTO 
+RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 11);
+
+INSERT INTO 
+RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
+VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 12);
+
+CREATE TABLE Reklama (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+naziv VARCHAR(50) NOT NULL,
+textReklame VARCHAR(100) NOT NULL,
+cena DOUBLE,
+brojPristupa INT,
+brojPrikaza INT,
+idAdmina INT UNSIGNED,
+CONSTRAINT FK_REKLAMA FOREIGN KEY (idAdmina) REFERENCES Administrator(id)
+);
+
+INSERT INTO 
+Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
+VALUES('Joy', 'Osvezavajuce', 130.99, 0, 0, 3);
+
+INSERT INTO 
+Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
+VALUES('Fanta', 'Sokantna', 150.99, 0, 0, 3);
+
+INSERT INTO 
+Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
+VALUES('Coca Cola', 'Deda mraz', 120.99, 0, 0, 3);
+
+
+CREATE TABLE PlayLista (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+jeJavna BOOLEAN DEFAULT TRUE,
+naziv VARCHAR(50) NOT NULL,
+idKorisnika INT UNSIGNED,
+CONSTRAINT FK_PLAY_LISTA FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id)
+);
+
+INSERT INTO 
+PlayLista(naziv, idKorisnika)
+VALUES('Krajiski sokolovi', 1);
+
+INSERT INTO 
+PlayLista(naziv, idKorisnika)
+VALUES('Elitni odredi lista', 2);
+
+INSERT INTO 
+PlayLista(naziv, idKorisnika)
+VALUES('MIX pesama', 4);
+
+CREATE TABLE MuzickaDelaPlayListi (
+idPlayListe INT UNSIGNED,
+idMuzickogDela INT UNSIGNED,
+obrisano BOOLEAN DEFAULT FALSE,
+CONSTRAINT FK_PLAY_LISTA2 FOREIGN KEY (idPlayListe) REFERENCES PlayLista(id),
+CONSTRAINT FK_MUZICKO_DELO4 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+PRIMARY KEY (idPlayListe, idMuzickogDela)
+);
+
+INSERT INTO 
+MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
+VALUES(1, 1);
+
+INSERT INTO 
+MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
+VALUES(2, 2);
+
+INSERT INTO 
+MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
+VALUES(3, 3);
+
+CREATE TABLE Zadatak (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+textZadatka VARCHAR(200),
+idMuzickogDela INT UNSIGNED,
+idZanra INT UNSIGNED,
+idUcesnika INT UNSIGNED,
+idIzvodjaca INT UNSIGNED,
+idUrednika INT UNSIGNED,
+CONSTRAINT FK_MUZICKO_DELO5 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+CONSTRAINT FK_ZANR2 FOREIGN KEY (idZanra) REFERENCES Zanr(id),
+CONSTRAINT FK_UCESNIK2 FOREIGN KEY (idUcesnika) REFERENCES Ucesnik(id),
+CONSTRAINT FK_IZVODJAC2 FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
+CONSTRAINT FK_UREDNIK FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
+);
+
+INSERT INTO 
+Zadatak(idMuzickogDela, textZadatka, idUrednika)
+VALUES(1, 'Uradi mi ovo do ponedeljka!', 1);
+
+INSERT INTO 
+Zadatak(idZanra, textZadatka, idUrednika)
+VALUES(2, 'Ako ovo ne uradis za pola sata dobijas otkaz !', 2);
+
+INSERT INTO 
+Zadatak(idUcesnika, textZadatka, idUrednika, idIzvodjaca)
+VALUES(3, 'Kad stignes..', 3, 1);
+
+
+CREATE TABLE Recenzija (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+ocena INT,
+komentar VARCHAR(200),
+idMuzickogDela INT UNSIGNED,
+idIzvodjenja INT UNSIGNED,
+idKorisnika INT UNSIGNED,
+idUrednika INT UNSIGNED,
+CONSTRAINT FK_MUZICKO_DELO6 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
+CONSTRAINT FK_IZVODJENJE4 FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
+CONSTRAINT FK_KORISNIK FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id),
+CONSTRAINT FK_UREDNIK2 FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
+);
+
+INSERT INTO 
+Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
+VALUES(4, 'Mogu ponovo recenzirati ?', 1, 1, 1, 1);
+
+INSERT INTO 
+Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
+VALUES(5, 'Samo jako!', 2, 2, 2, 2);
+
+INSERT INTO 
+Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
+VALUES(1, 'Uzas...', 3, 3, 3, 3);
+
+CREATE TABLE Zahtev (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+obrisano BOOLEAN DEFAULT FALSE,
+naziv VARCHAR(50),
+opis VARCHAR(200),
+jeOdobren BOOLEAN,
+jeObradjen BOOLEAN,
+idAdmina INT UNSIGNED,
+idKorisnika INT UNSIGNED DEFAULT FALSE,
+idRecenzije INT UNSIGNED DEFAULT FALSE,
+CONSTRAINT FK_ADMIN FOREIGN KEY (idAdmina) REFERENCES Administrator(id),
+CONSTRAINT FK_KORISNIK2 FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id),
+CONSTRAINT FK_RECENZIJA FOREIGN KEY (idRecenzije) REFERENCES Recenzija(id)
+);
+
+INSERT INTO 
+Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
+VALUES('Pitanje u vezi recenzije', 'Nezadovoljan sam prethodnom recenzijom, moze opet :D ?', 1, 1, 1);
+
+INSERT INTO 
+Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
+VALUES('Pitanje', 'Moze opet :D ?', 2, 2, 2);
+
+INSERT INTO 
+Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
+VALUES('...', 'Nezadovoljan sam prethodnom recenzijom :( ?', 3, 3, 3);
+
+
+
