@@ -1,0 +1,14 @@
+plejlista da ne vidi reg korisnika
+urednik kolekcija listaZadataka se treba obrisati
+Zahtev se odnosi na -> recenzija
+Recenzija ocena integer->int
+ucesnik nazivUceniska->naziv
+mestoIzvodjenja treba veliko M jer je klasa, dodati id
+prepraviti na ekavicu, npr izvodnjenje
+tip uzivo ?
+zanr dodati id
+dodati klasu korisnicki nalog id, korisnickoIme,sifra,tip(Enum)
+zadatak dodati obelezje opis : String
+recenzija ocena integer - > int
+
+dodati sve nedostajuce kardinalitete i opise veza
