@@ -20,7 +20,7 @@ public class ZadatakDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
-                Zanr zanr = ZanrDAO.getZanrPoId(rs.getInt(5));
+                Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
                 Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadatak = new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac);
@@ -41,7 +41,7 @@ public class ZadatakDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
-                Zanr zanr = ZanrDAO.getZanrPoId(rs.getInt(5));
+                Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
                 Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadaci.add(new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac));
@@ -64,7 +64,7 @@ public class ZadatakDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
-                Zanr zanr = ZanrDAO.getZanrPoId(rs.getInt(5));
+                Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
                 Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadaci.add(new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac));
@@ -79,10 +79,10 @@ public class ZadatakDAO {
 
     public static void insert(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("insert into muzicki_sistem.zadatak (textZadatka,idMuzickogDela,idZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
+                .prepareStatement("insert into muzicki_sistem.zadatak (textZadatka,idMuzickogDela,nazivZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
         ps.setString(1, zadatak.getText());
         ps.setInt(2, zadatak.getDelo().getId());
-        ps.setInt(3, zadatak.getZanr().getId());
+        ps.setString(3, zadatak.getZanr().getNazivZanra());
         ps.setInt(4, zadatak.getUcesnik().getId());
         ps.setInt(5, zadatak.getIzvodjac().getId());
 
@@ -95,10 +95,10 @@ public class ZadatakDAO {
 
     public static void update(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zadatak set textZadatka=?,idMuzickogDela=?,idZanra=?,idUcesnika?,idIzvodjaca=? where id=? and obrisano=false");
+                .prepareStatement("update muzicki_sistem.zadatak set textZadatka=?,idMuzickogDela=?,nazivZanra=?,idUcesnika?,idIzvodjaca=? where id=? and obrisano=false");
         ps.setString(1, zadatak.getText());
         ps.setInt(2, zadatak.getDelo().getId());
-        ps.setInt(3, zadatak.getZanr().getId());
+        ps.setString(3, zadatak.getZanr().getNazivZanra());
         ps.setInt(4, zadatak.getUcesnik().getId());
         ps.setInt(5, zadatak.getIzvodjac().getId());
         ps.setInt(6, zadatak.getId());
@@ -116,7 +116,7 @@ public class ZadatakDAO {
     }
 
     public static String[] columns() {
-        String[] result = {"Id", "TextZadatka", "IdMuzickogDela", "IdZanra", "IdUcesnika", "IdIzvodjaca", "IdUrednika"};
+        String[] result = {"Id", "TextZadatka", "IdMuzickogDela", "NazivZanra", "IdUcesnika", "IdIzvodjaca", "IdUrednika"};
         return result;
     }
 
@@ -125,10 +125,10 @@ public class ZadatakDAO {
         for (int i = 0; i < zadaci.size(); i++) {
             result[i][0] = String.valueOf(zadaci.get(i).getId());
             result[i][1] = zadaci.get(i).getText();
-            result[i][2] = String.valueOf(zadaci.get(i).getDelo());
-            result[i][3] = String.valueOf(zadaci.get(i).getZanr());
-            result[i][4] = String.valueOf(zadaci.get(i).getUcesnik());
-            result[i][5] = String.valueOf(zadaci.get(i).getIzvodjac());
+            result[i][2] = String.valueOf(zadaci.get(i).getDelo().getId());
+            result[i][3] = String.valueOf(zadaci.get(i).getZanr().getNazivZanra());
+            result[i][4] = String.valueOf(zadaci.get(i).getUcesnik().getId());
+            result[i][5] = String.valueOf(zadaci.get(i).getIzvodjac().getId());
             Urednik urednik = UrednikDAO.getUrednikZadatka(zadaci.get(i));
             result[i][6] = String.valueOf(urednik.getId());
         }

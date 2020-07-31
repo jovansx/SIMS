@@ -108,8 +108,8 @@ public class ZahtevDAO {
             result[i][4] = String.valueOf(zahtevi.get(i).isJeObradjen());
             Administrator administrator = AdministratorDAO.getAdministratorOdZahteva(zahtevi.get(i));
             result[i][5] = String.valueOf(administrator.getId());
-            result[i][6] = String.valueOf(zahtevi.get(i).getPodnosilacZahteva());
-            result[i][7] = String.valueOf(zahtevi.get(i).getRecenzija());
+            result[i][6] = String.valueOf(zahtevi.get(i).getPodnosilacZahteva().getId());
+            result[i][7] = String.valueOf(zahtevi.get(i).getRecenzija().getId());
         }
         return result;
     }
