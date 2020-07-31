@@ -3,13 +3,15 @@ package model;
 public class Zadatak {
 
     private int id;
+    private String text;
     private MuzickoDelo delo;
     private Zanr zanr;
     private Ucesnik ucesnik;
     private Izvodjac izvodjac;
 
-    public Zadatak(int id, MuzickoDelo delo, Zanr zanr, Ucesnik ucesnik, Izvodjac izvodjac) {
+    public Zadatak(int id, String text, MuzickoDelo delo, Zanr zanr, Ucesnik ucesnik, Izvodjac izvodjac) {
         this.id = id;
+        this.text = text;
         this.delo = delo;
         this.zanr = zanr;
         this.ucesnik = ucesnik;
@@ -22,6 +24,14 @@ public class Zadatak {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public MuzickoDelo getDelo() {

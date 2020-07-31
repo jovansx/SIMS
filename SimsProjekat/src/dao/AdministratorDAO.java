@@ -39,6 +39,35 @@ public class AdministratorDAO {
         }
         return admin;
     }
+
+    public static Administrator getAdministratorOdZahteva(Zahtev zahtev) {
+        Administrator admin=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,ime,prezime,email, kontaktTelefon, godinaRodjenja, idNaloga from administrator where obrisano = false and id in (select idAdmina from muzicki_sistem.zahtev where obrisano = false and id = ? )");
+            ps.setInt(1, zahtev.getId());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                admin=new Administrator();
+                admin.setId(rs.getInt(1));
+                admin.setIme(rs.getString(2));
+                admin.setPrezime(rs.getString(3));
+                admin.setEmail(rs.getString(4));
+                admin.setKontaktTelefon(rs.getString(5));
+                admin.setGodinaRodjenja(rs.getDate(6));
+                admin.setNalog(KorisnickiNalogDAO.getNalog(rs.getInt(7)));
+                admin.setIzlazeReklame(getReklame(rs.getInt(1)));
+                admin.setListaZahteva(getZahtjeve(rs.getInt(1)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
+
+
     public static List<Reklama> getReklame(Integer id){
         Reklama reklama=null;
         List<Reklama> reklame = new ArrayList<Reklama>();

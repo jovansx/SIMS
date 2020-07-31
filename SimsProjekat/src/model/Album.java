@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Album extends MuzickoDelo {
+public class
+Album extends MuzickoDelo {
 
     private int id;
     private TipAlbuma tipAlbuma;
