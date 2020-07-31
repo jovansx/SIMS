@@ -15,7 +15,7 @@ public class ZadatakDAO {
         Zadatak zadatak = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zadatak where id=? and obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Zadatak where id=? and obrisano=false");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -37,7 +37,7 @@ public class ZadatakDAO {
         List<Zadatak> zadaci = new ArrayList<Zadatak>();
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zadatak where obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Zadatak where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
@@ -59,7 +59,7 @@ public class ZadatakDAO {
         List<Zadatak> zadaci = new ArrayList<Zadatak>();
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zadatak where idUrednika=? and obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Zadatak where idUrednika=? and obrisano=false");
             ps.setInt(1, urednik.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -79,7 +79,7 @@ public class ZadatakDAO {
 
     public static void insert(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("insert into muzicki_sistem.zadatak (textZadatka,idMuzickogDela,nazivZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
+                .prepareStatement("insert into muzicki_sistem.Zadatak (textZadatka,idMuzickogDela,nazivZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
         ps.setString(1, zadatak.getText());
         ps.setInt(2, zadatak.getDelo().getId());
         ps.setString(3, zadatak.getZanr().getNazivZanra());
@@ -95,7 +95,7 @@ public class ZadatakDAO {
 
     public static void update(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zadatak set textZadatka=?,idMuzickogDela=?,nazivZanra=?,idUcesnika?,idIzvodjaca=? where id=? and obrisano=false");
+                .prepareStatement("update muzicki_sistem.Zadatak set textZadatka=?,idMuzickogDela=?,nazivZanra=?,idUcesnika?,idIzvodjaca=? where id=? and obrisano=false");
         ps.setString(1, zadatak.getText());
         ps.setInt(2, zadatak.getDelo().getId());
         ps.setString(3, zadatak.getZanr().getNazivZanra());
@@ -108,7 +108,7 @@ public class ZadatakDAO {
 
     public static void delete(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zadatak set obrisan=? where id=?");
+                .prepareStatement("update muzicki_sistem.Zadatak set obrisan=? where id=?");
         ps.setBoolean(1, true);
         ps.setInt(2, zadatak.getId());
         ps.executeUpdate();

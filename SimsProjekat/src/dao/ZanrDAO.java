@@ -18,7 +18,7 @@ public class ZanrDAO {
         Zanr zanr = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr where nazivZanra=?");
+                    .prepareStatement("select * from muzicki_sistem.Zanr where nazivZanra=?");
             ps.setString(1, naziv);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -37,7 +37,7 @@ public class ZanrDAO {
         List<Zanr> zanrovi = new ArrayList<Zanr>();
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr");
+                    .prepareStatement("select * from muzicki_sistem.Zanr");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 zanrovi.add(new Zanr(rs.getString(1), rs.getString(3), rs.getDate(2)));
@@ -54,7 +54,7 @@ public class ZanrDAO {
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.muzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.zanrmuzickogdela where nazivZanra=?)");
+                    .prepareStatement("select * from muzicki_sistem.Zuzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.Zanrmuzickogdela where nazivZanra=?)");
             ps.setString(1, zanr.getNazivZanra());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -72,7 +72,7 @@ public class ZanrDAO {
         List<Zanr> zanrovi=new ArrayList<Zanr>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.zanrmuzickogdela where idMuzickogDela=?)");
+                    .prepareStatement("select * from muzicki_sistem.Zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.Zanrmuzickogdela where idMuzickogDela=?)");
             ps.setInt(1, muzickoDelo.getId());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -90,7 +90,7 @@ public class ZanrDAO {
         List<Zanr> zanrovi=new ArrayList<Zanr>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.urednikpoznajezanrove where idUrednika=?)");
+                    .prepareStatement("select * from muzicki_sistem.Zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.UrednikPoznajeZanrove where idUrednika=?)");
             ps.setInt(1, urednik.getId());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -106,7 +106,7 @@ public class ZanrDAO {
 
     public static void insert(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("insert into muzicki_sistem.zanr (nazivZanra,datumNastanka,opis) values (?,?,?)");
+                .prepareStatement("insert into muzicki_sistem.Zanr (nazivZanra,datumNastanka,opis) values (?,?,?)");
         ps.setString(1, zanr.getNazivZanra());
         ps.setDate(2, (Date) zanr.getDatumNastanka());
         ps.setString(3, zanr.getOpis());
@@ -116,7 +116,7 @@ public class ZanrDAO {
 
     public static void update(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zanr set datumNastanka=?,opis=? where nazivZanra=?");
+                .prepareStatement("update muzicki_sistem.Zanr set datumNastanka=?,opis=? where nazivZanra=?");
         ps.setDate(1, (Date) zanr.getDatumNastanka());
         ps.setString(2, zanr.getOpis());
         ps.setString(3, zanr.getNazivZanra());
@@ -126,7 +126,7 @@ public class ZanrDAO {
 
     public static void delete(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.zanr where nazivZanra=?");
+                .prepareStatement("delete from muzicki_sistem.Zanr where nazivZanra=?");
         ps.setString(1, zanr.getNazivZanra());
         cascadeDelete(zanr);
         ps.executeUpdate();
@@ -135,13 +135,13 @@ public class ZanrDAO {
 
     private static void cascadeDelete(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.zanrmuzickogdela where nazivZanra=?");
+                .prepareStatement("delete from muzicki_sistem.Zanrmuzickogdela where nazivZanra=?");
         ps.setString(1, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();
 
         ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.urednikpoznajezanrove where nazivZanra=?");
+                .prepareStatement("delete from muzicki_sistem.Urednikpoznajezanrove where nazivZanra=?");
         ps.setString(1, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();

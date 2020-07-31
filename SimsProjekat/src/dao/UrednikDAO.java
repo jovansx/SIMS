@@ -16,7 +16,7 @@ public class UrednikDAO {
         Urednik urednik = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.urednik where id=? and obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Urednik where id=? and obrisano=false");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -35,7 +35,7 @@ public class UrednikDAO {
         Urednik urednik = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.urednik where obrisano=false and id in (select idUrednika from muzicki_sistem.zadatak where obrisano = false and id=?)");
+                    .prepareStatement("select * from muzicki_sistem.Urednik where obrisano=false and id in (select idUrednika from muzicki_sistem.Zadatak where obrisano = false and id=?)");
             ps.setInt(1, zadatak.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -54,7 +54,7 @@ public class UrednikDAO {
         List<Urednik> urednici = new ArrayList<Urednik>();
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.urednik where obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Urednik where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 KorisnickiNalog korisnickiNalog = KorisnickiNalogDAO.getNalog(rs.getInt(8));
@@ -70,7 +70,7 @@ public class UrednikDAO {
 
     public static void insert(Urednik urednik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("insert into muzicki_sistem.urednik (ime,prezime,email,kontaktTelefon,godinaRodjenja,idNaloga) values (?,?,?,?,?,?)");
+                .prepareStatement("insert into muzicki_sistem.Urednik (ime,prezime,email,kontaktTelefon,godinaRodjenja,idNaloga) values (?,?,?,?,?,?)");
         ps.setString(1, urednik.getIme());
         ps.setString(2, urednik.getPrezime());
         ps.setString(3, urednik.getEmail());
@@ -83,7 +83,7 @@ public class UrednikDAO {
 
     public static void update(Urednik urednik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.urednik set ime=?,prezime=?,email=?,kontaktTelefon?,godinaRodjenja=?,idNaloga=? where id=? and obrisano=false");
+                .prepareStatement("update muzicki_sistem.Urednik set ime=?,prezime=?,email=?,kontaktTelefon?,godinaRodjenja=?,idNaloga=? where id=? and obrisano=false");
         ps.setString(1, urednik.getIme());
         ps.setString(2, urednik.getPrezime());
         ps.setString(3, urednik.getEmail());
@@ -96,7 +96,7 @@ public class UrednikDAO {
 
     public static void delete(Urednik urednik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.urednik set obrisan=? where id=?");
+                .prepareStatement("update muzicki_sistem.Urednik set obrisan=? where id=?");
         ps.setBoolean(1, true);
         ps.setInt(2, urednik.getId());
 

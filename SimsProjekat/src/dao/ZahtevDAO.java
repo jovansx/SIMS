@@ -18,7 +18,7 @@ public class ZahtevDAO {
         Zahtev zahtev = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zahtev where id=? and obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Zahtev where id=? and obrisano=false");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -38,7 +38,7 @@ public class ZahtevDAO {
         List<Zahtev> zahtevi = new ArrayList<Zahtev>();
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zahtev where obrisano=false");
+                    .prepareStatement("select * from muzicki_sistem.Zahtev where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 RegistrovaniKorisnik registrovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
@@ -55,7 +55,7 @@ public class ZahtevDAO {
 
     public static void insert(Zahtev zahtev) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("insert into muzicki_sistem.zahtev (naziv,opis,jeOdobren,jeObradjen,idAdmina,idKorisnika,idRecenzije) values (?,?,?,?,?,?,?)");
+                .prepareStatement("insert into muzicki_sistem.Zahtev (naziv,opis,jeOdobren,jeObradjen,idAdmina,idKorisnika,idRecenzije) values (?,?,?,?,?,?,?)");
         ps.setString(1, zahtev.getNaziv());
         ps.setString(2, zahtev.getOpis());
         ps.setBoolean(3, zahtev.isJeOdobren());
@@ -72,7 +72,7 @@ public class ZahtevDAO {
 
     public static void update(Zahtev zahtev) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zahtev set naziv=?,opis=?,jeOdobren=?,jeObradje?,idKorisnika=?,idRecenzije=? where id=? and obrisano=false");
+                .prepareStatement("update muzicki_sistem.Zahtev set naziv=?,opis=?,jeOdobren=?,jeObradje?,idKorisnika=?,idRecenzije=? where id=? and obrisano=false");
         ps.setString(1, zahtev.getNaziv());
         ps.setString(2, zahtev.getOpis());
         ps.setBoolean(3, zahtev.isJeOdobren());
@@ -86,7 +86,7 @@ public class ZahtevDAO {
 
     public static void delete(Zahtev zahtev) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zahtev set obrisano=? where id=?");
+                .prepareStatement("update muzicki_sistem.Zahtev set obrisano=? where id=?");
         ps.setBoolean(1, true);
         ps.setInt(2, zahtev.getId());
         ps.executeUpdate();
