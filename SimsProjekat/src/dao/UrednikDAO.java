@@ -79,6 +79,19 @@ public class UrednikDAO {
         ps.setInt(6, urednik.getNalog().getId());
         ps.executeUpdate();
         ps.close();
+
+        insertZanroveKojePoznajeUrednik(urednik);
+    }
+
+    public static void insertZanroveKojePoznajeUrednik(Urednik urednik) throws SQLException {
+        for (Zanr z: urednik.getListaZanrova()) {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("insert into muzicki_sistem.UrednikPoznajeZanrove (idUrednika,nazivZanra) values (?,?)");
+            ps.setInt(1, urednik.getId());
+            ps.setString(2, z.getNazivZanra());
+            ps.executeUpdate();
+            ps.close();
+        }
     }
 
     public static void update(Urednik urednik) throws SQLException {
