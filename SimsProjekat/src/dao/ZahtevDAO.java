@@ -2,7 +2,7 @@ package dao;
 
 import model.Administrator;
 import model.Recenzija;
-import model.RegistovaniKorisnik;
+import model.RegistrovaniKorisnik;
 import model.Zahtev;
 import util.FConnection;
 
@@ -22,9 +22,9 @@ public class ZahtevDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                RegistovaniKorisnik registovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
+                RegistrovaniKorisnik registrovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
                 Recenzija recenzija = RecenzijaDAO.getRecenzijaPoId(rs.getInt(9));
-                zahtev = new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registovaniKorisnik, recenzija);
+                zahtev = new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registrovaniKorisnik, recenzija);
             }
             rs.close();
             ps.close();
@@ -41,9 +41,9 @@ public class ZahtevDAO {
                     .prepareStatement("select * from muzicki_sistem.zahtev where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                RegistovaniKorisnik registovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
+                RegistrovaniKorisnik registrovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
                 Recenzija recenzija = RecenzijaDAO.getRecenzijaPoId(rs.getInt(9));
-                zahtevi.add(new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registovaniKorisnik, recenzija));
+                zahtevi.add(new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registrovaniKorisnik, recenzija));
             }
             rs.close();
             ps.close();

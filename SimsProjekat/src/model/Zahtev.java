@@ -5,11 +5,11 @@ public class Zahtev {
     private int id;
     private String naziv, opis;
     private boolean jeOdobren, jeObradjen;
-    private RegistovaniKorisnik podnosilacZahteva;
+    private RegistrovaniKorisnik podnosilacZahteva;
     private Recenzija recenzija;
 
     public Zahtev(){};
-    public Zahtev(int id, String naziv, String opis, boolean jeOdobren, boolean jeObradjen, RegistovaniKorisnik podnosilacZahteva, Recenzija recenzija) {
+    public Zahtev(int id, String naziv, String opis, boolean jeOdobren, boolean jeObradjen, RegistrovaniKorisnik podnosilacZahteva, Recenzija recenzija) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
@@ -59,11 +59,11 @@ public class Zahtev {
         this.jeObradjen = jeObradjen;
     }
 
-    public RegistovaniKorisnik getPodnosilacZahteva() {
+    public RegistrovaniKorisnik getPodnosilacZahteva() {
         return podnosilacZahteva;
     }
 
-    public void setPodnosilacZahteva(RegistovaniKorisnik podnosilacZahteva) {
+    public void setPodnosilacZahteva(RegistrovaniKorisnik podnosilacZahteva) {
         this.podnosilacZahteva = podnosilacZahteva;
     }
 
