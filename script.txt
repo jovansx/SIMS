@@ -21,7 +21,8 @@ VALUES('Pariz', 43560, 'Francuska');
 
 CREATE TABLE TopLista (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-datumGlasanja DATE
+datumGlasanja DATE,
+obrisano BOOLEAN DEFAULT FALSE
 );
 
 INSERT INTO 

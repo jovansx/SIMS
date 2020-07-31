@@ -1,23 +1,51 @@
 package dao;
 
+import model.KorisnickiNalog;
+import model.RegistrovaniKorisnik;
+import util.FConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.KorisnickiNalog;
-import model.RegistrovaniKorisnik;
-import model.enums.TipKorisnika;
-import util.FConnection;
-
 public class RegistrovaniKorisnikDAO {
 
+    public static List<RegistrovaniKorisnik> getRegistrovaneKorisnike() {
+        List<RegistrovaniKorisnik> korisnici = new ArrayList<RegistrovaniKorisnik>();
+        RegistrovaniKorisnik korisnik = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,ime,prezime,email,kontaktTelefon,godinaRodjenja,jeVidljiv,idNaloga from RegistrovaniKorisnik where obrisano=false");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                korisnik = new RegistrovaniKorisnik();
+                korisnik.setId(rs.getInt(1));
+                korisnik.setIme(rs.getString(2));
+                korisnik.setPrezime(rs.getString(3));
+                korisnik.setEmail(rs.getString(4));
+                korisnik.setKontaktTelefon(rs.getString(5));
+                korisnik.setGodinaRodjenja(rs.getDate(6));
+                korisnik.setJeVidljiv(rs.getBoolean(7));
+                KorisnickiNalog nalog = KorisnickiNalogDAO.getNalog(rs.getInt(8));
+                korisnik.setNalog(nalog);
+                korisnici.add(korisnik);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return korisnici;
+    }
+
     //Eventualno se moze namestiti da se korisnik dobavlja po korisnickom imenu i lozinci
-    public static RegistrovaniKorisnik getRegistrovaniKorisnik(int id){
-        RegistrovaniKorisnik korisnik=null;
+    public static RegistrovaniKorisnik getRegistrovaniKorisnik(int id) {
+        RegistrovaniKorisnik korisnik = null;
         KorisnickiNalog nalog = null;
         int idNaloga = -1;
         try {
-            PreparedStatement ps=FConnection.getInstance()
+            PreparedStatement ps = FConnection.getInstance()
                     .prepareStatement("select id,ime,prezime,email,kontaktTelefon,godinaRodjenja,idNaloga,jeVidljiv from RegistrovaniKorisnik where id=? and obrisano=false");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
@@ -66,6 +94,7 @@ public class RegistrovaniKorisnikDAO {
         if(korisnik.getKontaktTelefon()!=null) ps.setString(4, korisnik.getKontaktTelefon()); else ps.setNull(4, java.sql.Types.VARCHAR);
         if(korisnik.getGodinaRodjenja()!=null) ps.setDate(5, (Date) korisnik.getGodinaRodjenja()); else ps.setNull(5, Types.DATE);
         ps.setBoolean(6, korisnik.isJeVidljiv());
+        ps.setInt(7, korisnik.getId());
         ps.executeUpdate();
         ps.close();
     }
