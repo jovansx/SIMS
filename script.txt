@@ -2,8 +2,7 @@ create database muzicki_sistem;
 use muzicki_sistem;
 
 CREATE TABLE MestoIzvodjenja (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-pttBroj INT,
+pttBroj INT UNSIGNED PRIMARY KEY,
 nazivMesta VARCHAR(30),
 drzava VARCHAR(30)
 );
@@ -46,21 +45,21 @@ tipIzvodjenja VARCHAR(6),
 brojPristupa INT,
 brojGlasova INT,
 ukupnoPristupa INT,
-idMesta INT UNSIGNED,
-CONSTRAINT FK_MESTO FOREIGN KEY (idMesta) REFERENCES MestoIzvodjenja(id)
+pttBrojMesta INT UNSIGNED,
+CONSTRAINT FK_MESTO FOREIGN KEY (pttBrojMesta) REFERENCES MestoIzvodjenja(pttBroj)
 );
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
-VALUES('2018.03.14.', 120, 'VIDEO', 0, 0, 0, 1);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
+VALUES('2018.03.14.', 120, 'VIDEO', 0, 0, 0, 21000);
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
-VALUES('2017.05.11.', 120, 'AUDIO', 0, 0, 0, 2);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
+VALUES('2017.05.11.', 120, 'AUDIO', 0, 0, 0, 21000);
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, idMesta)
-VALUES('2019.10.04.', 120, 'ZAPIS', 0, 0, 0, 3);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
+VALUES('2019.10.04.', 120, 'ZAPIS', 0, 0, 0, 21000);
 
 CREATE TABLE IzvodjenjaUTopListi (
 idIzvodjenja INT UNSIGNED,
@@ -126,8 +125,7 @@ IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
 VALUES(3, 3);
 
 CREATE TABLE Zanr (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-nazivZanra VARCHAR(30),
+nazivZanra VARCHAR(30) PRIMARY KEY,
 datumNastanka DATE,
 opis VARCHAR(100)
 );
@@ -190,25 +188,25 @@ MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
 VALUES('Za Elizu', '2018.09.14.', '1889.02.05');
 
 CREATE TABLE ZanrMuzickogDela (
-idZanra INT UNSIGNED,
+nazivZanra VARCHAR(30),
 idMuzickogDela INT UNSIGNED,
 obrisano BOOLEAN DEFAULT FALSE,
-CONSTRAINT FK_ZANR FOREIGN KEY (idZanra) REFERENCES Zanr(id),
+CONSTRAINT FK_ZANR FOREIGN KEY (nazivZanra) REFERENCES Zanr(nazivZanra),
 CONSTRAINT FK_MUZICKO_DELO FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
-PRIMARY KEY (idZanra, idMuzickogDela)
+PRIMARY KEY (nazivZanra, idMuzickogDela)
 );
 
 INSERT INTO 
-ZanrMuzickogDela(idZanra, idMuzickogDela)
-VALUES(1, 1);
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Krajiska', 1);
 
 INSERT INTO 
-ZanrMuzickogDela(idZanra, idMuzickogDela)
-VALUES(1, 2);
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Pop', 2);
 
 INSERT INTO 
-ZanrMuzickogDela(idZanra, idMuzickogDela)
-VALUES(3, 3);
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Rok', 3);
 
 CREATE TABLE UcesnikMuzickogDela (
 idUcesnika INT UNSIGNED,
@@ -364,6 +362,26 @@ INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 4);
 
+CREATE TABLE UrednikPoznajeZanrove(
+idUrednika INT UNSIGNED,
+nazivZanra VARCHAR(30),
+CONSTRAINT FK_UREDNIKA5 FOREIGN KEY (idUrednika) REFERENCES Urednik(id),
+CONSTRAINT FK_ZANR5 FOREIGN KEY (nazivZanra) REFERENCES Zanr(nazivZanra),
+PRIMARY KEY (nazivZanra, idUrednika)
+);
+
+INSERT INTO 
+UrednikPoznajeZanrove(idUrednika, nazivZanra)
+VALUES(1, 'Krajiska');
+
+INSERT INTO 
+UrednikPoznajeZanrove(idUrednika, nazivZanra)
+VALUES(2, 'Pop');
+
+INSERT INTO 
+UrednikPoznajeZanrove(idUrednika, nazivZanra)
+VALUES(3, 'Rok');
+
 CREATE TABLE RegistrovaniKorisnik (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
@@ -465,12 +483,12 @@ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
 textZadatka VARCHAR(200),
 idMuzickogDela INT UNSIGNED,
-idZanra INT UNSIGNED,
+nazivZanra VARCHAR(30),
 idUcesnika INT UNSIGNED,
 idIzvodjaca INT UNSIGNED,
 idUrednika INT UNSIGNED,
 CONSTRAINT FK_MUZICKO_DELO5 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
-CONSTRAINT FK_ZANR2 FOREIGN KEY (idZanra) REFERENCES Zanr(id),
+CONSTRAINT FK_ZANR2 FOREIGN KEY (nazivZanra) REFERENCES Zanr(nazivZanra),
 CONSTRAINT FK_UCESNIK2 FOREIGN KEY (idUcesnika) REFERENCES Ucesnik(id),
 CONSTRAINT FK_IZVODJAC2 FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
 CONSTRAINT FK_UREDNIK FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
@@ -481,8 +499,8 @@ Zadatak(idMuzickogDela, textZadatka, idUrednika)
 VALUES(1, 'Uradi mi ovo do ponedeljka!', 1);
 
 INSERT INTO 
-Zadatak(idZanra, textZadatka, idUrednika)
-VALUES(2, 'Ako ovo ne uradis za pola sata dobijas otkaz !', 2);
+Zadatak(nazivZanra, textZadatka, idUrednika)
+VALUES('Krajiska', 'Ako ovo ne uradis za pola sata dobijas otkaz !', 2);
 
 INSERT INTO 
 Zadatak(idUcesnika, textZadatka, idUrednika, idIzvodjaca)
@@ -542,6 +560,5 @@ VALUES('Pitanje', 'Moze opet :D ?', 2, 2, 2);
 INSERT INTO 
 Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
 VALUES('...', 'Nezadovoljan sam prethodnom recenzijom :( ?', 3, 3, 3);
-
 
 
