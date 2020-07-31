@@ -16,6 +16,7 @@ public class Izvodjenje {
     private List<MuzickoDelo> listaMuzickihDela;
     private MestoIzvodjenja mestoIzvodjenja;
 
+    public Izvodjenje(){};
     public Izvodjenje(int id, Date vremeIzvodjenja, TipIzvodjenja tipIzvodjenja, MestoIzvodjenja mestoIzvodjenja) {
         this.id = id;
         this.brPristupa = 0;
@@ -87,13 +88,19 @@ public class Izvodjenje {
         return listaRecenzija;
     }
 
+    public void setListaRecenzija(List<Recenzija> recenzije){this.listaRecenzija=recenzije;}
+
     public List<Izvodjac> getListaIzvodjaca() {
         return listaIzvodjaca;
     }
 
+    public void setListaIzvodjaca(List<Izvodjac> izvodjaci){this.listaIzvodjaca=izvodjaci;}
+
     public List<MuzickoDelo> getListaMuzickihDela() {
         return listaMuzickihDela;
     }
+
+    public void setListaMuzickihDela(List<MuzickoDelo> dela){this.listaMuzickihDela=dela;}
 
     public MestoIzvodjenja getMestoIzvodjenja() {
         return mestoIzvodjenja;

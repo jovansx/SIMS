@@ -14,6 +14,7 @@ public class Izvodjac {
     private List<Izvodjac> imaClanove;
     private List<Izvodjenje> listaIzvodjenja;
 
+    public Izvodjac(){};
     public Izvodjac(int id, String nazivIzvodjaca, TipIzvodjaca tipIzvodjaca) {
         this.id = id;
         this.nazivIzvodjaca = nazivIzvodjaca;

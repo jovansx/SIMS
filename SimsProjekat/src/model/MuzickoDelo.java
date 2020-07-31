@@ -16,6 +16,7 @@ public class MuzickoDelo {
     private List<Recenzija> listaRecenzija;
     private List<Album> listaAlbuma;
 
+    public MuzickoDelo(){}
     public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka) {
         this.id = id;
         this.nazivDela = nazivDela;

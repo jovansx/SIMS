@@ -11,8 +11,8 @@ public class RegistovaniKorisnik extends Korisnik {
     private List<PlejLista> listaPlejListi;
     private boolean jeVidljiv;
 
-    public RegistovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja) {
-        super(id, ime, prezime, email, kontaktTelefon, korisnickoIme, lozicka, godinaRodjenja);
+    public RegistovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
+        super(id, ime, prezime, email, kontaktTelefon, godinaRodjenja, nalog);
         this.jeVidljiv = true;
     }
 

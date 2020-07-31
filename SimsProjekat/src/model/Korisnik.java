@@ -5,18 +5,19 @@ import java.util.Date;
 public abstract class Korisnik {
 
     private int id;
-    private String ime, prezime, email, kontaktTelefon, korisnickoIme, lozicka;
+    private String ime, prezime, email, kontaktTelefon;
     private Date godinaRodjenja;
+    private KorisnickiNalog nalog;
 
-    public Korisnik(int id, String ime, String prezime, String email, String kontaktTelefon, String korisnickoIme, String lozicka, Date godinaRodjenja) {
+    public Korisnik(){}
+    public Korisnik(int id, String ime, String prezime, String email, String kontaktTelefon, Date godinaRodjenja, KorisnickiNalog nalog) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.kontaktTelefon = kontaktTelefon;
-        this.korisnickoIme = korisnickoIme;
-        this.lozicka = lozicka;
         this.godinaRodjenja = godinaRodjenja;
+        this.nalog=nalog;
     }
 
     public int getId() {
@@ -59,21 +60,9 @@ public abstract class Korisnik {
         this.kontaktTelefon = kontaktTelefon;
     }
 
-    public String getKorisnickoIme() {
-        return korisnickoIme;
-    }
+    public KorisnickiNalog getNalog(){ return this.nalog; }
 
-    public void setKorisnickoIme(String korisnickoIme) {
-        this.korisnickoIme = korisnickoIme;
-    }
-
-    public String getLozicka() {
-        return lozicka;
-    }
-
-    public void setLozicka(String lozicka) {
-        this.lozicka = lozicka;
-    }
+    public void setNalog(KorisnickiNalog nalog) {this.nalog=nalog; }
 
     public Date getGodinaRodjenja() {
         return godinaRodjenja;
@@ -91,8 +80,7 @@ public abstract class Korisnik {
                 ", prezime='" + prezime + '\'' +
                 ", email='" + email + '\'' +
                 ", kontaktTelefon='" + kontaktTelefon + '\'' +
-                ", korisnickoIme='" + korisnickoIme + '\'' +
-                ", lozicka='" + lozicka + '\'' +
+                ", nalog='" + nalog + '\'' +
                 ", godinaRodjenja=" + godinaRodjenja +
                 '}';
     }

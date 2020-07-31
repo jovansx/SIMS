@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Album extends MuzickoDelo {
+public class
+Album extends MuzickoDelo {
 
     private int id;
     private TipAlbuma tipAlbuma;
     private List<MuzickoDelo> listaMuzickihDela;
 
+    public Album(){}
     public Album(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka, TipAlbuma tipAlbuma) {
         super(id, nazivDela, datumPostavljanja, vremeNastanka);
         this.tipAlbuma = tipAlbuma;
@@ -39,6 +41,7 @@ public class Album extends MuzickoDelo {
         return listaMuzickihDela;
     }
 
+    public void setListaMuzickihDela(List<MuzickoDelo> dela) {this.listaMuzickihDela=dela;}
     public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
         if (listaMuzickihDela == null) {
             listaMuzickihDela = new ArrayList<MuzickoDelo>();

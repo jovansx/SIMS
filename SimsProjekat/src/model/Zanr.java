@@ -4,13 +4,23 @@ import java.util.Date;
 
 public class Zanr {
 
+    private Integer id;
     private String nazivZanra, opis;
     private Date datumNastanka;
 
-    public Zanr(String nazivZanra, String opis, Date datumNastanka) {
+    public Zanr(int id, String nazivZanra, String opis, Date datumNastanka) {
+        this.id = id;
         this.nazivZanra = nazivZanra;
         this.opis = opis;
         this.datumNastanka = datumNastanka;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNazivZanra() {

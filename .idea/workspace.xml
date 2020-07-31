@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="984e2d85-7cde-473e-ba65-a96dc592cd34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/script.txt" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="pokusaj konektovanja">
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/model/enums/TipKorisnika.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Administrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Administrator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjenje.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjenje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Korisnik.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/MuzickoDelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/MuzickoDelo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/RegistovaniKorisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/RegistovaniKorisnik.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Reklama.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Reklama.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Zahtev.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Zahtev.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +51,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -24,29 +64,76 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1fMhhroIY8no920twTXmX3TuOGp" />
+  <component name="ProjectId" id="1fPjmUC7OOPyQ2rfzIvLeghhmBb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/SimsProjekat/src/main/mysql-connector-java-8.0.21.jar" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-8.0.21.jar" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
-      <module name="SimsProjekat" />
+      <module name="SIMS" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="SIMS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="SIMS" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -60,67 +147,65 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="984e2d85-7cde-473e-ba65-a96dc592cd34" name="Default Changelist" comment="" />
-      <created>1596033990769</created>
+      <changelist id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="" />
+      <created>1596126781399</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1596033990769</updated>
+      <updated>1596126781399</updated>
     </task>
-    <task id="LOCAL-00001" summary="Zbog skidanja projekta moram commit">
-      <created>1596034120813</created>
+    <task id="LOCAL-00001" summary="pokusaj konektovanja">
+      <created>1596127069870</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1596034120813</updated>
+      <updated>1596127069870</updated>
     </task>
-    <task id="LOCAL-00002" summary="Dodata nova klasa RegistrovaniKOrisnikDAO">
-      <created>1596203395875</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1596203395875</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Zbog skidanja projekta moram commit" />
-    <MESSAGE value="male izmene" />
-    <MESSAGE value="Dodata nova klasa RegistrovaniKOrisnikDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodata nova klasa RegistrovaniKOrisnikDAO" />
+    <MESSAGE value="pokusaj konektovanja" />
+    <option name="LAST_COMMIT_MESSAGE" value="pokusaj konektovanja" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="222" y="27" width="912" height="741" key="CommitChangelistDialog2" timestamp="1596203395760">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1596128446761">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="222" y="27" width="912" height="741" key="CommitChangelistDialog2/0.27.1366.741@0.27.1366.741" timestamp="1596203395760" />
-    <state x="305" y="141" width="735" height="520" key="FileChooserDialogImpl" timestamp="1596037177013">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596128446761" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596142122783">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="305" y="141" width="735" height="520" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1596037177013" />
-    <state width="637" height="28" key="GridCell.Tab.0.bottom" timestamp="1596134052644">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596142122783">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="637" height="28" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1596134052644" />
-    <state width="637" height="28" key="GridCell.Tab.0.center" timestamp="1596134052643">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596142122783">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="637" height="28" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1596134052643" />
-    <state width="637" height="28" key="GridCell.Tab.0.left" timestamp="1596134052643">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596142122783">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="637" height="28" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1596134052643" />
-    <state width="637" height="28" key="GridCell.Tab.0.right" timestamp="1596134052644">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
+    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1596127121373">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="637" height="28" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1596134052644" />
-    <state x="166" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1596037187195">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1596127121373" />
+    <state x="277" y="0" key="SettingsEditor" timestamp="1596128456154">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="166" y="27" width="1024" height="741" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1596037187195" />
-    <state x="122" y="312" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596203404184">
-      <screen x="0" y="27" width="1366" height="741" />
-    </state>
-    <state x="122" y="312" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1366.741@0.27.1366.741" timestamp="1596203404184" />
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596128456154" />
   </component>
 </project>

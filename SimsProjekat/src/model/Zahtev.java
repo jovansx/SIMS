@@ -8,6 +8,7 @@ public class Zahtev {
     private RegistovaniKorisnik podnosilacZahteva;
     private Recenzija recenzija;
 
+    public Zahtev(){};
     public Zahtev(int id, String naziv, String opis, boolean jeOdobren, boolean jeObradjen, RegistovaniKorisnik podnosilacZahteva, Recenzija recenzija) {
         this.id = id;
         this.naziv = naziv;
