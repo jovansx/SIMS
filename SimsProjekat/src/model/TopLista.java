@@ -10,6 +10,9 @@ public class TopLista {
     private Date datumGlasanja;
     private List<Izvodjenje> listaIzvodjenja;
 
+    public TopLista() {
+    }
+
     public TopLista(int id, Date datumGlasanja) {
         this.id = id;
         this.datumGlasanja = datumGlasanja;

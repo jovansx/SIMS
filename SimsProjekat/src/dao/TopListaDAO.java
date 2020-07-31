@@ -1,7 +1,6 @@
 package dao;
 
 import model.Izvodjenje;
-import model.Reklama;
 import model.TopLista;
 import util.FConnection;
 
@@ -9,9 +8,32 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopListaDAO {
+
+    public static List<TopLista> getTopListe() {
+        List<TopLista> topListe = new ArrayList<TopLista>();
+        TopLista topLista = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,datumGlasanja from TopLista where obrisano=false");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                topLista = new TopLista();
+                topLista.setId(rs.getInt(1));
+                topLista.setDatumGlasanja(rs.getDate(2));
+                topListe.add(topLista);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return topListe;
+    }
 
     //Eventualno se moze namestiti da se top lista dobavlja po drugim parametrima
     //Ako zatreba, samo ucitj njena izvodjenja

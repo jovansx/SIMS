@@ -12,6 +12,9 @@ public class Ucesnik {
     private TipUcesnika tip;
     private List<MuzickoDelo> listaMuzickihDela;
 
+    public Ucesnik() {
+    }
+
     public Ucesnik(int id, String naziv, String opis, TipUcesnika tip) {
         this.id = id;
         this.naziv = naziv;
