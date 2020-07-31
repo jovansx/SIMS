@@ -4,11 +4,11 @@ public class Recenzija {
 
     private int id, ocena;
     private String komentar;
-    private RegistovaniKorisnik autorRecenzije;
+    private RegistrovaniKorisnik autorRecenzije;
     private Izvodjenje izvodnjenje;
     private Urednik urednik;
 
-    public Recenzija(int id, int ocena, String komentar, RegistovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik) {
+    public Recenzija(int id, int ocena, String komentar, RegistrovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik) {
         this.id = id;
         this.ocena = ocena;
         this.komentar = komentar;
@@ -41,11 +41,11 @@ public class Recenzija {
         this.komentar = komentar;
     }
 
-    public RegistovaniKorisnik getAutorRecenzije() {
+    public RegistrovaniKorisnik getAutorRecenzije() {
         return autorRecenzije;
     }
 
-    public void setAutorRecenzije(RegistovaniKorisnik autorRecenzije) {
+    public void setAutorRecenzije(RegistrovaniKorisnik autorRecenzije) {
         this.autorRecenzije = autorRecenzije;
     }
 

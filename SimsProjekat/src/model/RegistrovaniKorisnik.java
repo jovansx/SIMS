@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RegistovaniKorisnik extends Korisnik {
+public class RegistrovaniKorisnik extends Korisnik {
 
     private List<Izvodjenje> listaOmiljenogSadrzaja;
     private List<Recenzija> listaRecenzija;
     private List<PlejLista> listaPlejListi;
     private boolean jeVidljiv;
 
-    public RegistovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
+    public RegistrovaniKorisnik(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
         super(id, ime, prezime, email, kontaktTelefon, godinaRodjenja, nalog);
         this.jeVidljiv = true;
     }

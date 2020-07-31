@@ -1,6 +1,7 @@
 package dao;
 
 import model.MuzickoDelo;
+import model.Urednik;
 import model.Zanr;
 import util.FConnection;
 
@@ -13,15 +14,15 @@ import java.util.List;
 
 public class ZanrDAO {
 
-    public static Zanr getZanrPoId(int id) {
+    public static Zanr getZanrPoNazivu(String naziv) {
         Zanr zanr = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr where id=?");
-            ps.setInt(1, id);
+                    .prepareStatement("select * from muzicki_sistem.zanr where nazivZanra=?");
+            ps.setString(1, naziv);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                zanr = new Zanr(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getDate(3));
+                zanr = new Zanr(rs.getString(1), rs.getString(3), rs.getDate(2));
             }
             rs.close();
             ps.close();
@@ -39,7 +40,7 @@ public class ZanrDAO {
                     .prepareStatement("select * from muzicki_sistem.zanr");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                zanrovi.add(new Zanr(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getDate(3)));
+                zanrovi.add(new Zanr(rs.getString(1), rs.getString(3), rs.getDate(2)));
             }
             rs.close();
             ps.close();
@@ -53,8 +54,8 @@ public class ZanrDAO {
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.muzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.zanrmuzickogdela where idZanra=?)");
-            ps.setInt(1, zanr.getId());
+                    .prepareStatement("select * from muzicki_sistem.muzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.zanrmuzickogdela where nazivZanra=?)");
+            ps.setString(1, zanr.getNazivZanra());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 dela.add(new MuzickoDelo(rs.getInt(1),rs.getString(3),rs.getDate(4), rs.getDate(5)));
@@ -71,11 +72,11 @@ public class ZanrDAO {
         List<Zanr> zanrovi=new ArrayList<Zanr>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.zanr z where z.id in (select idZanra from muzicki_sistem.zanrmuzickogdela where idMuzickogDela=?)");
+                    .prepareStatement("select * from muzicki_sistem.zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.zanrmuzickogdela where idMuzickogDela=?)");
             ps.setInt(1, muzickoDelo.getId());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                zanrovi.add(new Zanr(rs.getInt(1),rs.getString(2),rs.getString(4), rs.getDate(3)));
+                zanrovi.add(new Zanr(rs.getString(1),rs.getString(3), rs.getDate(2)));
             }
             rs.close();
             ps.close();
@@ -85,8 +86,23 @@ public class ZanrDAO {
         return zanrovi;
     }
 
-
-    //TO DO -- treba se napraviti novi poveznik i onda implementirati one operacije ovde
+    public static List<Zanr> getZanroviPoUredniku(Urednik urednik){
+        List<Zanr> zanrovi=new ArrayList<Zanr>();
+        try {
+            PreparedStatement ps=FConnection.getInstance()
+                    .prepareStatement("select * from muzicki_sistem.zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.urednikpoznajezanrove where idUrednika=?)");
+            ps.setInt(1, urednik.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                zanrovi.add(new Zanr(rs.getString(1),rs.getString(3), rs.getDate(2)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return zanrovi;
+    }
 
     public static void insert(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
@@ -100,19 +116,18 @@ public class ZanrDAO {
 
     public static void update(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.zanr set nazivZanra=?,datumNastanka=?,opis=? where id=?");
-        ps.setString(1, zanr.getNazivZanra());
-        ps.setDate(2, (Date) zanr.getDatumNastanka());
-        ps.setString(3, zanr.getOpis());
-        ps.setInt(4, zanr.getId());
+                .prepareStatement("update muzicki_sistem.zanr set datumNastanka=?,opis=? where nazivZanra=?");
+        ps.setDate(1, (Date) zanr.getDatumNastanka());
+        ps.setString(2, zanr.getOpis());
+        ps.setString(3, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();
     }
 
     public static void delete(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.zanr where id=?");
-        ps.setInt(1, zanr.getId());
+                .prepareStatement("delete from muzicki_sistem.zanr where nazivZanra=?");
+        ps.setString(1, zanr.getNazivZanra());
         cascadeDelete(zanr);
         ps.executeUpdate();
         ps.close();
@@ -120,24 +135,29 @@ public class ZanrDAO {
 
     private static void cascadeDelete(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.zanrmuzickogdela where idZanra=?");
-        ps.setInt(1, zanr.getId());
+                .prepareStatement("delete from muzicki_sistem.zanrmuzickogdela where nazivZanra=?");
+        ps.setString(1, zanr.getNazivZanra());
+        ps.executeUpdate();
+        ps.close();
+
+        ps = FConnection.getInstance()
+                .prepareStatement("delete from muzicki_sistem.urednikpoznajezanrove where nazivZanra=?");
+        ps.setString(1, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();
     }
 
     public static String[] columns() {
-        String[] result = {"Id", "Naziv", "DatumNastanka", "Opis"};
+        String[] result = {"Naziv", "DatumNastanka", "Opis"};
         return result;
     }
 
     public static String[][] toTableData(List<Zanr> zanrovi) {
         String[][] result = new String[zanrovi.size()][4];
         for (int i = 0; i < zanrovi.size(); i++) {
-            result[i][0] = String.valueOf(zanrovi.get(i).getId());
-            result[i][1] = zanrovi.get(i).getNazivZanra();
-            result[i][2] = zanrovi.get(i).getDatumNastanka().toString();
-            result[i][3] = zanrovi.get(i).getOpis();
+            result[i][0] = zanrovi.get(i).getNazivZanra();
+            result[i][1] = zanrovi.get(i).getDatumNastanka().toString();
+            result[i][2] = zanrovi.get(i).getOpis();
         }
         return result;
     }
