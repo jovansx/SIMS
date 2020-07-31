@@ -77,7 +77,7 @@ public class ZadatakDAO {
         return zadaci;
     }
 
-    public static void insert(Zadatak zadatak) throws SQLException {
+    public static void insert(Zadatak zadatak, int idUrednika) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("insert into muzicki_sistem.Zadatak (textZadatka,idMuzickogDela,nazivZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
         ps.setString(1, zadatak.getText());
@@ -85,10 +85,7 @@ public class ZadatakDAO {
         ps.setString(3, zadatak.getZanr().getNazivZanra());
         ps.setInt(4, zadatak.getUcesnik().getId());
         ps.setInt(5, zadatak.getIzvodjac().getId());
-
-        Urednik urednik = UrednikDAO.getUrednikZadatka(zadatak);
-
-        ps.setInt(6, urednik.getId());
+        ps.setInt(6, idUrednika);
         ps.executeUpdate();
         ps.close();
     }
@@ -116,7 +113,7 @@ public class ZadatakDAO {
     }
 
     public static String[] columns() {
-        String[] result = {"Id", "TextZadatka", "IdMuzickogDela", "NazivZanra", "IdUcesnika", "IdIzvodjaca", "IdUrednika"};
+        String[] result = {"Id", "TextZadatka", "IdMuzickogDela", "NazivZanra", "IdUcesnika", "IdIzvodjaca"};
         return result;
     }
 
@@ -129,8 +126,6 @@ public class ZadatakDAO {
             result[i][3] = String.valueOf(zadaci.get(i).getZanr().getNazivZanra());
             result[i][4] = String.valueOf(zadaci.get(i).getUcesnik().getId());
             result[i][5] = String.valueOf(zadaci.get(i).getIzvodjac().getId());
-            Urednik urednik = UrednikDAO.getUrednikZadatka(zadaci.get(i));
-            result[i][6] = String.valueOf(urednik.getId());
         }
         return result;
     }

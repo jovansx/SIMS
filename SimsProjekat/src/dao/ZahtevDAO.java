@@ -53,17 +53,14 @@ public class ZahtevDAO {
         return zahtevi;
     }
 
-    public static void insert(Zahtev zahtev) throws SQLException {
+    public static void insert(Zahtev zahtev, int idAdmina) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("insert into muzicki_sistem.Zahtev (naziv,opis,jeOdobren,jeObradjen,idAdmina,idKorisnika,idRecenzije) values (?,?,?,?,?,?,?)");
         ps.setString(1, zahtev.getNaziv());
         ps.setString(2, zahtev.getOpis());
         ps.setBoolean(3, zahtev.isJeOdobren());
         ps.setBoolean(4, zahtev.isJeObradjen());
-
-        Administrator administrator = AdministratorDAO.getAdministratorOdZahteva(zahtev);
-
-        ps.setInt(5, administrator.getId());
+        ps.setInt(5, idAdmina);
         ps.setInt(6, zahtev.getPodnosilacZahteva().getId());
         ps.setInt(7, zahtev.getRecenzija().getId());
         ps.executeUpdate();
@@ -94,7 +91,7 @@ public class ZahtevDAO {
     }
 
     public static String[] columns() {
-        String[] result = {"Id", "Naziv", "Opis", "JeOdobren", "JeObradjen", "IdAdmina", "IdKorisnika", "IdRecenzije"};
+        String[] result = {"Id", "Naziv", "Opis", "JeOdobren", "JeObradjen", "IdKorisnika", "IdRecenzije"};
         return result;
     }
 
@@ -106,10 +103,8 @@ public class ZahtevDAO {
             result[i][2] = zahtevi.get(i).getOpis();
             result[i][3] = String.valueOf(zahtevi.get(i).isJeOdobren());
             result[i][4] = String.valueOf(zahtevi.get(i).isJeObradjen());
-            Administrator administrator = AdministratorDAO.getAdministratorOdZahteva(zahtevi.get(i));
-            result[i][5] = String.valueOf(administrator.getId());
-            result[i][6] = String.valueOf(zahtevi.get(i).getPodnosilacZahteva().getId());
-            result[i][7] = String.valueOf(zahtevi.get(i).getRecenzija().getId());
+            result[i][5] = String.valueOf(zahtevi.get(i).getPodnosilacZahteva().getId());
+            result[i][6] = String.valueOf(zahtevi.get(i).getRecenzija().getId());
         }
         return result;
     }
