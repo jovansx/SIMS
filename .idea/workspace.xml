@@ -16,32 +16,24 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:source" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="pokusaj konektovanja">
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/model/enums/TipKorisnika.java" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Administrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Administrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjenje.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjenje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/MuzickoDelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/MuzickoDelo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/RegistovaniKorisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/RegistovaniKorisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Reklama.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Reklama.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Zahtev.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Zahtev.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +49,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -160,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596127069870</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste">
+      <created>1596143119579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596143119579</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,7 +173,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="source" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -176,7 +193,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pokusaj konektovanja" />
-    <option name="LAST_COMMIT_MESSAGE" value="pokusaj konektovanja" />
+    <MESSAGE value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
+    <option name="LAST_COMMIT_MESSAGE" value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
   </component>
   <component name="WindowStateProjectService">
     <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1596128446761">
@@ -207,5 +225,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596128456154" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596154732688">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596154732688" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596319281065">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596319281065" />
   </component>
 </project>

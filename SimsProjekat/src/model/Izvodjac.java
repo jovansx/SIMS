@@ -66,9 +66,13 @@ public class Izvodjac {
         return imaClanove;
     }
 
+    public void setImaClanove(List<Izvodjac> clanovi){this.imaClanove=clanovi;}
+
     public List<Izvodjenje> getListaIzvodjenja() {
         return listaIzvodjenja;
     }
+
+    public void setListaIzvodjenja(List<Izvodjenje> izvodjenja){this.listaIzvodjenja=izvodjenja;}
 
     public void dodajClana(Izvodjac izvodjac) {
         if (imaClanove == null) {
