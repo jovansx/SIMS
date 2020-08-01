@@ -10,19 +10,20 @@ public class MuzickoDelo {
     private String nazivDela, opis, sadrzaj;
     private Date datumPostavljanja, vremeNastanka;
     private double prosecnaOcena;
+    private int idAlbuma;
     private List<Zanr> listaZanrova;
     private List<Izvodjenje> listaIzvodjenja;
     private List<Ucesnik> listaUcesnika;
     private List<Recenzija> listaRecenzija;
-    private List<Album> listaAlbuma;
 
     public MuzickoDelo(){}
-    public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka) {
+    public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka,int idAlbuma) {
         this.id = id;
         this.nazivDela = nazivDela;
         this.datumPostavljanja = datumPostavljanja;
         this.vremeNastanka = vremeNastanka;
         this.prosecnaOcena = 0;
+        this.idAlbuma = idAlbuma;
     }
 
     public int getId() {
@@ -80,6 +81,10 @@ public class MuzickoDelo {
     public void setProsecnaOcena(double prosecnaOcena) {
         this.prosecnaOcena = prosecnaOcena;
     }
+
+    public int getIdAlbuma(){return idAlbuma;}
+
+    public void setIdAlbuma(int idAlbuma){this.idAlbuma = idAlbuma;}
 
     public List<Zanr> getListaZanrova() {
         return listaZanrova;
@@ -175,28 +180,7 @@ public class MuzickoDelo {
     }
 
 
-    public List<Album> getListaAlbuma() {
-        return listaAlbuma;
-    }
 
-    public void dodajAlbum(Album album) {
-        if (listaAlbuma == null) {
-            listaAlbuma = new ArrayList<Album>();
-        }
-        listaAlbuma.add(album);
-    }
-
-    public boolean obrisiAlbum(Album album) {
-        if (listaAlbuma == null) {
-            return false;
-        }
-        try {
-            listaAlbuma.remove(album);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
 
     @Override
@@ -213,7 +197,7 @@ public class MuzickoDelo {
                 ", listaIzvodjenja=" + listaIzvodjenja +
                 ", listaUcesnika=" + listaUcesnika +
                 ", listaRecenzija=" + listaRecenzija +
-                ", listaAlbuma=" + listaAlbuma +
+                ", idAlbuma=" + idAlbuma +
                 '}';
     }
 }

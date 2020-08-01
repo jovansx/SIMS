@@ -19,9 +19,9 @@ public class ZadatakDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
+                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4));
                 Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
-                Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
+                Ucesnik ucesnik = UcesnikDAO.getUcesnik(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadatak = new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac);
             }
@@ -40,9 +40,9 @@ public class ZadatakDAO {
                     .prepareStatement("select * from muzicki_sistem.Zadatak where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
+                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4));
                 Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
-                Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
+                Ucesnik ucesnik = UcesnikDAO.getUcesnik(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadaci.add(new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac));
 
@@ -63,9 +63,9 @@ public class ZadatakDAO {
             ps.setInt(1, urednik.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDeloPoId(rs.getInt(4));
+                MuzickoDelo muzickoDelo = MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4));
                 Zanr zanr = ZanrDAO.getZanrPoNazivu(rs.getString(5));
-                Ucesnik ucesnik = UcesnikDAO.getUcesnikPoId(rs.getInt(6));
+                Ucesnik ucesnik = UcesnikDAO.getUcesnik(rs.getInt(6));
                 Izvodjac izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(7));
                 zadaci.add(new Zadatak(rs.getInt(1), rs.getString(3), muzickoDelo, zanr, ucesnik, izvodjac));
             }

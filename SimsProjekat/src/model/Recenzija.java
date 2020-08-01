@@ -7,15 +7,18 @@ public class Recenzija {
     private RegistrovaniKorisnik autorRecenzije;
     private Izvodjenje izvodnjenje;
     private Urednik urednik;
+    private MuzickoDelo delo;
 
-    public Recenzija(int id, int ocena, String komentar, RegistrovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik) {
+    public Recenzija(int id, int ocena, String komentar, RegistrovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik,MuzickoDelo delo) {
         this.id = id;
         this.ocena = ocena;
         this.komentar = komentar;
         this.autorRecenzije = autorRecenzije;
         this.izvodnjenje = izvodnjenje;
         this.urednik = urednik;
+        this.delo = delo;
     }
+    public Recenzija(){}
 
     public int getId() {
         return id;
@@ -65,6 +68,14 @@ public class Recenzija {
         this.urednik = urednik;
     }
 
+    public MuzickoDelo getMuzickoDelo() {
+        return delo;
+    }
+
+    public void setMuzickoDelo(MuzickoDelo delo) {
+        this.delo = delo;
+    }
+
     @Override
     public String toString() {
         return "Recenzija{" +
@@ -73,6 +84,7 @@ public class Recenzija {
                 ", komentar='" + komentar + '\'' +
                 ", autorRecenzije=" + autorRecenzije +
                 ", izvodnjenje=" + izvodnjenje +
+                ", delo="+ delo+
                 '}';
     }
 }

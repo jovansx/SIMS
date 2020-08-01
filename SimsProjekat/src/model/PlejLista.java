@@ -15,6 +15,7 @@ public class PlejLista {
         this.jeJavna = true;
         this.naziv = naziv;
     }
+    public PlejLista(){}
 
     public int getId() {
         return id;

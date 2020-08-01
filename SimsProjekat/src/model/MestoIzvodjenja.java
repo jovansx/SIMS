@@ -9,6 +9,7 @@ public class MestoIzvodjenja {
         this.drzava = drzava;
         this.nazivMesta = nazivMesta;
     }
+    public MestoIzvodjenja(){}
 
     public int getPttBroj() {
         return pttBroj;
