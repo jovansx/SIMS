@@ -1,0 +1,19 @@
+package gui.dialogs;
+
+import gui.panels.PanelRegistracije;
+
+import javax.swing.*;
+
+public class DialogRegistracije extends JDialog {
+
+    public DialogRegistracije() {
+
+        setTitle("Registrovanje na sistem");
+        setResizable(false);
+        add(new PanelRegistracije(this));
+        pack();
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+    }
+
+}
