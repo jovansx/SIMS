@@ -22,7 +22,8 @@ public class ZahtevDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                RegistrovaniKorisnik registrovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
+
+                RegistrovaniKorisnik registrovaniKorisnik = RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(8));;
                 Recenzija recenzija = RecenzijaDAO.getRecenzija(rs.getInt(9));
                 zahtev = new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registrovaniKorisnik, recenzija);
             }
@@ -41,7 +42,7 @@ public class ZahtevDAO {
                     .prepareStatement("select * from muzicki_sistem.Zahtev where obrisano=false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                RegistrovaniKorisnik registrovaniKorisnik = RegistovaniKorisnikDao.getKorisnikPoId(rs.getInt(8));
+                RegistrovaniKorisnik registrovaniKorisnik = RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(8));;
                 Recenzija recenzija = RecenzijaDAO.getRecenzija(rs.getInt(9));
                 zahtevi.add(new Zahtev(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getBoolean(6), registrovaniKorisnik, recenzija));
             }

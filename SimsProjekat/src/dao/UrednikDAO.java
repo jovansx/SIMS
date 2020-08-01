@@ -12,6 +12,8 @@ import java.util.List;
 
 public class UrednikDAO {
 
+    //TO DO UCITATI I SVE LISTE
+
     public static Urednik getUrednikPoId(int id) {
         Urednik urednik = null;
         try {

@@ -105,7 +105,8 @@ public class RegistrovaniKorisnikDAO {
         ps.setInt(1, korisnik.getId());
         ps.executeUpdate();
         ps.close();
-        KorisnickiNalogDAO.delete(korisnik.getNalog());
+        // kad dragana doradi dao ovo treba da se otkomentarise
+        //KorisnickiNalogDAO.delete(korisnik.getNalog());
     }
 
     public static String[] columns(){
