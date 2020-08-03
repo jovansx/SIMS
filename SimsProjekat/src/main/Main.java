@@ -30,7 +30,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                NoviProzor gp = new NoviProzor();
+                GlavniProzor gp = new GlavniProzor();
                 gp.setVisible(true);
             }
         });

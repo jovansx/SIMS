@@ -31,14 +31,23 @@ public class Element extends JPanel{
 
         StringBuilder izvodjaci = new StringBuilder();
         for (Izvodjac izv: iz.getListaIzvodjaca()) {
-            System.out.println(izv.getNazivIzvodjaca());
             izvodjaci.append(izv.getNazivIzvodjaca()).append(",");
         }
         String line = izvodjaci.toString();
         if (!line.equals("")){
             line = line.substring(0, line.length() - 1);
         }
-        labelaOpisa.setText("Izvodjaci : "+ line);
+        String line2 = "Broj pristupa : "+iz.getBrPristupa();
+        String line4 = "Trajanje : "+iz.getTrajanje();
+        String line3 = "Mesto izvodjenja : "+iz.getMestoIzvodjenja().getNazivMesta();
+        String line5 = "Vreme izvodjenja : "+iz.getVremeIzvodjenja();
+        String line6;
+        if (iz.getListaRecenzija() == null){
+            line6 = "Broj recenzija : 0";
+        } else {
+            line6 = "Broj recenzija : "+iz.getListaRecenzija().size();
+        }
+        labelaOpisa.setText("<html>"+line+"<br/>"+line2+"<br/>"+line3+"<br/>"+line4+"<br/>"+line5+"<br/>"+line6+"</html>");
 
     }
 
