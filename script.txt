@@ -43,24 +43,56 @@ obrisano BOOLEAN DEFAULT FALSE,
 vremeIzvodjenja DATE,
 trajanje INT,
 tipIzvodjenja VARCHAR(6),
-brojPristupa INT,
-brojGlasova INT,
-ukupnoPristupa INT,
+brojPristupa INT DEFAULT 0,
+brojGlasova INT DEFAULT 0,
+ukupnoPristupa INT DEFAULT 0,
 pttBrojMesta INT UNSIGNED,
 CONSTRAINT FK_MESTO FOREIGN KEY (pttBrojMesta) REFERENCES MestoIzvodjenja(pttBroj)
 );
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
-VALUES('2018.03.14.', 120, 'VIDEO', 0, 0, 0, 21000);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2018.10.05.', 10, 'AUDIO', 21000);
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
-VALUES('2017.05.11.', 120, 'AUDIO', 0, 0, 0, 21000);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2020.02.19.', 20, 'AUDIO', 21000);
 
 INSERT INTO 
-Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, brojPristupa, brojGlasova, ukupnoPristupa, pttBrojMesta)
-VALUES('2019.10.04.', 120, 'ZAPIS', 0, 0, 0, 21000);
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2016.03.23.', 100, 'ZAPIS', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2018.11.24.', 60, 'VIDEO', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2017.03.14.', 45, 'ZAPIS', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('1999.01.01.', 160, 'ZAPIS', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2017.03.14.', 4, 'VIDEO', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2018.01.14.', 5, 'VIDEO', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2020.02.19.', 120, 'VIDEO', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2019.03.14.', 4, 'VIDEO', 21000);
+
+INSERT INTO 
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2018.02.14.', 5, 'ZAPIS', 21000);
 
 CREATE TABLE IzvodjenjaUTopListi (
 idIzvodjenja INT UNSIGNED,
@@ -249,6 +281,38 @@ VALUES(2, 2);
 INSERT INTO 
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(3, 3);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(4, 1);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(5, 2);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(6, 3);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(7, 1);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(8, 2);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(9, 3);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(10, 3);
+
+INSERT INTO 
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(11, 2);
 
 
 CREATE TABLE KorisnickiNalog (
