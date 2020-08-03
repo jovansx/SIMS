@@ -3,6 +3,8 @@ package main;
 import gui.elementi.GlavniProzor;
 import gui.dialogs.DialogPrijave;
 import javax.swing.*;
+
+import gui.elementi.NoviProzor;
 import util.FConnection;
 import java.io.*;
 import java.sql.Connection;
@@ -28,7 +30,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GlavniProzor gp = new GlavniProzor();
+                NoviProzor gp = new NoviProzor();
                 gp.setVisible(true);
             }
         });

@@ -19,8 +19,6 @@ public class Element extends JPanel{
 
         podesiPanelGlavni();
 
-        add(panelGlavni);
-
         StringBuilder name = new StringBuilder();
         for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
             name.append(mz.getNazivDela()).append(",");
@@ -35,7 +33,7 @@ public class Element extends JPanel{
         }
         izvodjaci = izvodjaci.substring(1,izvodjaci.length()-1);
         labelaOpisa.setText("Izvodjaci : "+ izvodjaci);*/
-
+        add(panelGlavni);
     }
 
     private void podesiPanelGlavni() {
