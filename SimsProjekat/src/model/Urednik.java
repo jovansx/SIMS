@@ -9,7 +9,9 @@ public class Urednik extends Korisnik {
     private List<Zadatak> listaZadataka;
     private List<Zanr> listaZanrova;
     private List<Recenzija> listaRecenzija;
+    public Urednik(){
 
+    }
     public Urednik(int id, String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
         super(id, ime, prezime, email,kontaktTelefon,godinaRodjenja, nalog);
     }
