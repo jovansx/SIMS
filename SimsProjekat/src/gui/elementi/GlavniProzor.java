@@ -36,6 +36,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     public GlavniProzor() {
         super("Muzicki sistem");
 
+        panelAkcija.setPreferredSize(new Dimension());
         podesiPanelaSkrola();
 
         add(panelGlavni);
