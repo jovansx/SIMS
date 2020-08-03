@@ -25,16 +25,16 @@ public class Element extends JPanel{
         for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
             name.append(mz.getNazivDela()).append(",");
         }
-        name = new StringBuilder(name.substring(0, name.length() - 2));
+        name = new StringBuilder(name.substring(0, name.length() - 1));
 
         labelaNaslova.setText(name.toString());
 
-        String izvodjaci = "";
+        /*String izvodjaci = "";
         for (Izvodjac izv: iz.getListaIzvodjaca()) {
             izvodjaci = izvodjaci+","+izv.getNazivIzvodjaca();
         }
         izvodjaci = izvodjaci.substring(1,izvodjaci.length()-1);
-        labelaOpisa.setText("Izvodjaci : "+ izvodjaci);
+        labelaOpisa.setText("Izvodjaci : "+ izvodjaci);*/
 
     }
 

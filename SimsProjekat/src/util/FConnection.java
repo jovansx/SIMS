@@ -13,8 +13,7 @@ public class FConnection {
             try {
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                instance=DriverManager.getConnection("jdbc:mysql://localhost:3306/muzicki_sistem","root","aca");
-                System.out.println("Connected to database");
+                instance=DriverManager.getConnection("jdbc:mysql://localhost:3306/muzicki_sistem","root","Simares*99");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }

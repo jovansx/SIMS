@@ -100,7 +100,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
         con.gridx = 0;
         con.gridy = 4;
         con.gridwidth = 2;
-        add(slikaL, con);
+        add(upozorenja, con);
     }
 
     @Override
@@ -108,20 +108,6 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         //DialogRegistracije sDialog = new DialogRegistracije();
         //sDialog.setVisible(true);
-        try {
-            Statement st = FConnection.getInstance().createStatement();
-            ResultSet rs = st.executeQuery("select * from MuzickoDelo where id=" + 4);
-            if(rs.next()) {
-                byte[] img = rs.getBytes("Slika");
-                ImageIcon image = new ImageIcon(img);
-                Image im = image.getImage();
-                Image myImg = im.getScaledInstance(slikaL.getWidth(), slikaL.getHeight(), Image.SCALE_DEFAULT);
-                ImageIcon newImage = new ImageIcon(myImg);
-                slikaL.setIcon(newImage);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
 
         /*int counter = 0;
         String username = nameField.getText();

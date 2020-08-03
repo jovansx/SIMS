@@ -30,6 +30,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
     private List<Element> elementi;
+    private int brojElemenata;
 
     public GlavniProzor() {
         super("Muzicki sistem");
@@ -41,6 +42,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
         setResizable(false);
         setLocationRelativeTo(null);
 
+        brojElemenata = 5;
         elementi = new ArrayList<Element>();
 
         ucitajPocetnuStranu();
@@ -69,7 +71,8 @@ public class GlavniProzor extends JFrame implements ActionListener{
             public void adjustmentValueChanged(AdjustmentEvent e) {
                 JViewport vp = skrol.getViewport();
                 if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
-                    System.out.println("end");
+                    brojElemenata+=1;
+                    ucitajPocetnuStranu();
                 }
             }
         });
@@ -90,6 +93,9 @@ public class GlavniProzor extends JFrame implements ActionListener{
             dr.setVisible(true);
             }
         else if (button == pocetnaStranicaButton) {
+            JViewport vp = skrol.getViewport();
+            vp.setViewPosition(new Point(0, 0));
+            brojElemenata = 5;
             ucitajPocetnuStranu();
         }
         else if (button == popularnoButton) {
@@ -104,7 +110,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     public void ucitajPocetnuStranu() {
         resetElemente();
 
-        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenja();
+        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenja(brojElemenata);
 
         for (Izvodjenje iz : izvodjenja) {
             Element el = new Element(iz);
@@ -121,7 +127,6 @@ public class GlavniProzor extends JFrame implements ActionListener{
 
     private void resetElemente() {
         elementi.clear();
-
         panelOdSkrola.removeAll();
         panelOdSkrola.validate();
         panelOdSkrola.repaint();

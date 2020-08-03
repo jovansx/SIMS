@@ -29,7 +29,11 @@ public class MuzickoDeloDAO {
                     delo.setProsecnaOcena(rs.getDouble(6));
                     delo.setOpis(rs.getString(7));
                     delo.setSadrzaj(rs.getString(8));
-                    delo.setIdAlbuma(AlbumDAO.getAlbum(rs.getInt(9)).getId());
+                    try {
+                        delo.setIdAlbuma(AlbumDAO.getAlbum(rs.getInt(9)).getId());
+                    }catch (Exception ex) {
+                        delo.setIdAlbuma(-1);
+                    }
                 }
             }
             rs.close();
@@ -67,6 +71,28 @@ public class MuzickoDeloDAO {
 
         return dela;
     }
+
+    public static List<MuzickoDelo> getMuzickaDelaIzvodjenja(int idIzvodjenja) {
+        List<MuzickoDelo> dela = new ArrayList<MuzickoDelo>();
+        MuzickoDelo delo = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select idMuzickogDela from IzvodjenjaMuzickogDela where idIzvodjenja=?");
+            ps.setInt(1, idIzvodjenja);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                delo = MuzickoDeloDAO.getMuzickoDelo(rs.getInt(1));
+                dela.add(delo);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dela;
+    }
+
     public static void insert(MuzickoDelo delo) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into MuzickoDelo (id,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis,sadrzaj,pripadaAlbumu) values (?,?,?,?,?,?,?,?)");

@@ -32,15 +32,5 @@ public class Main {
                 gp.setVisible(true);
             }
         });
-        //Connection con = FConnection.getInstance();
-       // PreparedStatement ps=con
-               // .prepareStatement("insert into MuzickoDelo (nazivDela,slika) values (?,?)");
-        //ps.setString(1, "Difoltna slika");
-        //InputStream is = new FileInputStream(new File("/home/jovansx/Desktop/default.jpg"));
-        //ps.setBlob(2, is);
-        //ps.executeUpdate();
-        //ps.close();
-        //DialogPrijave logIn = new DialogPrijave();
-        //logIn.setVisible(true);
     }
 }
