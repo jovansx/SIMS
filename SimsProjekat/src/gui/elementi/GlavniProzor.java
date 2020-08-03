@@ -8,6 +8,7 @@ import model.Izvodjenje;
 import model.Zanr;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,34 @@ public class GlavniProzor extends JFrame{
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
     private List<Element> elementi;
+    private Toolkit tool;
+    private Dimension dimension;
+    int width;
 
     public GlavniProzor(){
         super("Muzicki sistem");
+        tool = Toolkit.getDefaultToolkit();
+        dimension = tool.getScreenSize();
+        width = dimension.width/4*3;
+        int height = dimension.height/4*3;
+        this.setSize(width, height);
+        panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(panelGlavni);
-        setSize(1100, 800);
         setResizable(false);
         setLocationRelativeTo(null);
         elementi = new ArrayList<Element>();
+        ucitajPocetnuStranu();
+        skrol.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                JViewport vp = skrol.getViewport();
+                if(vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y){
+                    System.out.println(vp.getViewPosition().y);
+                }
+            }
+        });
 
         prijavaButton.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +98,9 @@ public class GlavniProzor extends JFrame{
 
         panelOdSkrola.validate();
         panelOdSkrola.repaint();
-        System.out.println("ucitano");
+        //panelOdSkrola.setPreferredSize(new Dimension(width/3*2, panelOdSkrola.getComponentCount()));
+        skrol.validate();
+        skrol.repaint();
     }
 
     /*public void dodajElement(){

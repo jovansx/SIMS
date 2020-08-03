@@ -2,26 +2,23 @@ package gui.panels;
 
 import gui.dialogs.DialogPrijave;
 import gui.dialogs.DialogRegistracije;
+import util.FConnection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*import view.meni.ZajednickiMenuBar;
-import view.prozori.DostavljacevProzor;
-import view.prozori.MainWindow;
-import view.prozori.MusterijinProzor;
-import view.prozori.RadnikovProzor;
-import view.prozori.VlasnikovProzor;*/
-
-//import model.entiteti.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class PanelPrijave extends JPanel implements ActionListener {
 
     private DialogPrijave dialog;
     private String separator;
-    private JLabel name, lastName, labela, upozorenja;
+    private JLabel name, lastName, labela, upozorenja, slikaL;
     private JTextField nameField;
     private JPasswordField lastNameField;
     private JButton button;
@@ -52,6 +49,9 @@ public class PanelPrijave extends JPanel implements ActionListener {
         button.addActionListener(this);
         Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "ikona.png");
         labela = new JLabel(icon);
+        slikaL = new JLabel();
+        slikaL.setSize(200, 100);
+        slikaL.setPreferredSize(new Dimension(200, 100));
 
     }
 
@@ -100,11 +100,28 @@ public class PanelPrijave extends JPanel implements ActionListener {
         con.gridx = 0;
         con.gridy = 4;
         con.gridwidth = 2;
-        add(upozorenja, con);
+        add(slikaL, con);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        //DialogRegistracije sDialog = new DialogRegistracije();
+        //sDialog.setVisible(true);
+        try {
+            Statement st = FConnection.getInstance().createStatement();
+            ResultSet rs = st.executeQuery("select * from MuzickoDelo where id=" + 4);
+            if(rs.next()) {
+                byte[] img = rs.getBytes("Slika");
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                Image myImg = im.getScaledInstance(slikaL.getWidth(), slikaL.getHeight(), Image.SCALE_DEFAULT);
+                ImageIcon newImage = new ImageIcon(myImg);
+                slikaL.setIcon(newImage);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         /*int counter = 0;
         String username = nameField.getText();

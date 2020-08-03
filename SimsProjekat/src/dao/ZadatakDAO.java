@@ -118,7 +118,7 @@ public class ZadatakDAO {
     }
 
     public static String[][] toTableData(List<Zadatak> zadaci) {
-        String[][] result = new String[zadaci.size()][4];
+        String[][] result = new String[zadaci.size()][6];
         for (int i = 0; i < zadaci.size(); i++) {
             result[i][0] = String.valueOf(zadaci.get(i).getId());
             result[i][1] = zadaci.get(i).getText();

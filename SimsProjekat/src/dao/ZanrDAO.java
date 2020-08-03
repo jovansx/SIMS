@@ -135,13 +135,13 @@ public class ZanrDAO {
 
     private static void cascadeDelete(Zanr zanr) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.Zanrmuzickogdela where nazivZanra=?");
+                .prepareStatement("delete from muzicki_sistem.ZanrMuzickogDela where nazivZanra=?");
         ps.setString(1, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();
 
         ps = FConnection.getInstance()
-                .prepareStatement("delete from muzicki_sistem.Urednikpoznajezanrove where nazivZanra=?");
+                .prepareStatement("delete from muzicki_sistem.UrednikPoznajeZanrove where nazivZanra=?");
         ps.setString(1, zanr.getNazivZanra());
         ps.executeUpdate();
         ps.close();

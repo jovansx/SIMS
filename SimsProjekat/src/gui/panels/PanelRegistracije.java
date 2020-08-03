@@ -7,14 +7,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*import view.meni.ZajednickiMenuBar;
-import view.prozori.DostavljacevProzor;
-import view.prozori.MainWindow;
-import view.prozori.MusterijinProzor;
-import view.prozori.RadnikovProzor;
-import view.prozori.VlasnikovProzor;*/
-
-//import model.entiteti.*;
 
 public class PanelRegistracije extends JPanel implements ActionListener {
 
@@ -138,18 +130,6 @@ public class PanelRegistracije extends JPanel implements ActionListener {
         con.gridy = 8;
         add(button, con);
 
-        /*con.gridy = 1;
-        con.insets = new Insets(5, 5, 15, 20);
-        con.anchor = GridBagConstraints.LINE_START;
-        add(nameField, con);
-
-        con.gridy = 2;
-        add(lastNameField, con);
-
-        con.gridx = 0;
-        con.gridy = 4;
-        con.gridwidth = 2;
-        add(upozorenja, con);*/
     }
 
     @Override

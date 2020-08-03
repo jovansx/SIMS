@@ -40,7 +40,6 @@ public class AdministratorDAO {
         return admin;
     }
 
-
     public static List<Reklama> getReklame(Integer id){
         Reklama reklama=null;
         List<Reklama> reklame = new ArrayList<Reklama>();
