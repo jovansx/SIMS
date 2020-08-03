@@ -15,7 +15,7 @@ Album extends MuzickoDelo {
 
     public Album(){}
     public Album(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka, TipAlbuma tipAlbuma) {
-        super(id, nazivDela, datumPostavljanja, vremeNastanka);
+        super(id, nazivDela, datumPostavljanja, vremeNastanka, null);
         this.tipAlbuma = tipAlbuma;
     }
 

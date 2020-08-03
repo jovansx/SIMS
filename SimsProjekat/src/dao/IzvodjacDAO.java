@@ -3,6 +3,7 @@ package dao;
 import model.Album;
 import model.Izvodjac;
 import model.Izvodjenje;
+import model.MuzickoDelo;
 import model.enums.TipIzvodjaca;
 import model.enums.TipIzvodjenja;
 import util.FConnection;
@@ -14,19 +15,22 @@ import java.util.List;
 public class IzvodjacDAO {
     public static Izvodjac getIzvodjac(Integer id){
         Izvodjac izvodjac=null;
+
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi,obrisan from Izvodjac where id=?");
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                if(!rs.getBoolean(5)){
-                    izvodjac=new Izvodjac();
-                    izvodjac.setId(rs.getInt(1));
-                    izvodjac.setNazivIzvodjaca(rs.getString(2));
-                    izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
-                    izvodjac.setOpis(rs.getString(4));
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(1));
+                izvodjac.setNazivIzvodjaca(rs.getString(2));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+                if(rs.getInt(5) > 0){
                     izvodjac.setPripadaGrupi(getGrupa(id));
+                } else {
+                    izvodjac.setPripadaGrupi(null);
                 }
 
             }
@@ -43,8 +47,8 @@ public class IzvodjacDAO {
         Izvodjac izvodjac=null;
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where pripadaGrupi=?");
-            ps.setInt(5, id);
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where id=?");
+            ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 izvodjac=new Izvodjac();
@@ -76,7 +80,7 @@ public class IzvodjacDAO {
                 izvodjac.setNazivIzvodjaca(rs.getString(2));
                 izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
                 izvodjac.setOpis(rs.getString(4));
-                izvodjac.setPripadaGrupi(getGrupa(rs.getInt(1)));
+                izvodjac.setPripadaGrupi(getIzvodjac(rs.getInt(1)));
                 izvodjaci.add(izvodjac);
             }
             rs.close();
@@ -84,6 +88,27 @@ public class IzvodjacDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return izvodjaci;
+    }
+
+    public static List<Izvodjac> getIzvodjaciIzvodjenja(int idIzvodjenja) {
+        List<Izvodjac> izvodjaci = new ArrayList<Izvodjac>();
+        Izvodjac izvodjac = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select * from izvodjacIzvodi where obrisano=false and idIzvodjenja=?");
+            ps.setInt(1, idIzvodjenja);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(1));
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return izvodjaci;
     }
 
@@ -181,6 +206,7 @@ public class IzvodjacDAO {
         }
         return result;
     }
+
 }
 
 

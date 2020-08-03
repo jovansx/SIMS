@@ -1,5 +1,6 @@
 package dao;
 
+import model.Album;
 import model.MuzickoDelo;
 import model.Urednik;
 import model.Zanr;
@@ -54,11 +55,15 @@ public class ZanrDAO {
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
         try {
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.Zuzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.Zanrmuzickogdela where nazivZanra=?)");
+                    .prepareStatement("select * from muzicki_sistem.Muzickodelo md where obrisano = false and md.id in (select idMuzickogDela from muzicki_sistem.Zanrmuzickogdela where nazivZanra=?)");
             ps.setString(1, zanr.getNazivZanra());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                dela.add(new MuzickoDelo(rs.getInt(1),rs.getString(3),rs.getDate(4), rs.getDate(5)));
+                Album a = null;
+                if (rs.getInt(9)>0){
+                    a  = AlbumDAO.getAlbum(rs.getInt(9));
+                }
+                dela.add(new MuzickoDelo(rs.getInt(1),rs.getString(3),rs.getDate(4), rs.getDate(5), a));
             }
             rs.close();
             ps.close();

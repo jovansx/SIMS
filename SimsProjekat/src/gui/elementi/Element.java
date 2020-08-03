@@ -29,12 +29,16 @@ public class Element extends JPanel{
 
         labelaNaslova.setText(name.toString());
 
-        /*String izvodjaci = "";
+        StringBuilder izvodjaci = new StringBuilder();
         for (Izvodjac izv: iz.getListaIzvodjaca()) {
-            izvodjaci = izvodjaci+","+izv.getNazivIzvodjaca();
+            System.out.println(izv.getNazivIzvodjaca());
+            izvodjaci.append(izv.getNazivIzvodjaca()).append(",");
         }
-        izvodjaci = izvodjaci.substring(1,izvodjaci.length()-1);
-        labelaOpisa.setText("Izvodjaci : "+ izvodjaci);*/
+        String line = izvodjaci.toString();
+        if (!line.equals("")){
+            line = line.substring(0, line.length() - 1);
+        }
+        labelaOpisa.setText("Izvodjaci : "+ line);
 
     }
 

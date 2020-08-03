@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumDAO {
-    public static Album getAlbum(Integer id){
+    public static Album getAlbum(Integer idMuzickogDela){
         Album album=null;
         try {
             PreparedStatement ps= FConnection.getInstance()
                     .prepareStatement("select id,nazivDela,datumPostavljanja, vremeNastanka, prosecnaOcena, " +
                             "opis, sadrzaj, tipAlbuma, pripadaAlbumu,obrisano from MuzickoDelo where id=?");
-            ps.setInt(1, id);
+            ps.setInt(1, idMuzickogDela);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 if(!rs.getBoolean(9) && rs.getString(8)!=null){
@@ -31,7 +31,7 @@ public class AlbumDAO {
                     album.setOpis(rs.getString(6));
                     album.setSadrzaj(rs.getString(7));
                     album.setTipAlbuma(TipAlbuma.valueOf(rs.getString(8)));
-                    album.setListaMuzickihDela(getDjela(id));
+                    album.setListaMuzickihDela(getDela(idMuzickogDela));
                 }
 
             }
@@ -43,7 +43,7 @@ public class AlbumDAO {
         return album;
     }
 
-    public static List<MuzickoDelo> getDjela(Integer id){
+    public static List<MuzickoDelo> getDela(Integer id){
         MuzickoDelo delo =null;
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
         try {
@@ -53,16 +53,17 @@ public class AlbumDAO {
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                if(!rs.getBoolean(9))
-                delo=new MuzickoDelo();
-                delo.setId(rs.getInt(1));
-                delo.setNazivDela(rs.getString(2));
-                delo.setDatumPostavljanja(rs.getDate(3));
-                delo.setVremeNastanka(rs.getDate(4));
-                delo.setProsecnaOcena(rs.getDouble(5));
-                delo.setOpis(rs.getString(6));
-                delo.setSadrzaj(rs.getString(7));
-                dela.add(delo);
+                if(!rs.getBoolean(9)) {
+                    delo=new MuzickoDelo();
+                    delo.setId(rs.getInt(1));
+                    delo.setNazivDela(rs.getString(3));
+                    delo.setDatumPostavljanja(rs.getDate(4));
+                    delo.setVremeNastanka(rs.getDate(5));
+                    delo.setProsecnaOcena(rs.getDouble(6));
+                    delo.setOpis(rs.getString(7));
+                    delo.setSadrzaj(rs.getString(8));
+                    dela.add(delo);
+                }
             }
             rs.close();
             ps.close();
@@ -91,7 +92,7 @@ public class AlbumDAO {
                     album.setOpis(rs.getString(6));
                     album.setSadrzaj(rs.getString(7));
                     album.setTipAlbuma(TipAlbuma.valueOf(rs.getString(8)));
-                    album.setListaMuzickihDela(getDjela(rs.getInt(1)));
+                    album.setListaMuzickihDela(getDela(rs.getInt(1)));
                 }
             }
         } catch(SQLException e){

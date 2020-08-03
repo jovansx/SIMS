@@ -29,10 +29,10 @@ public class MuzickoDeloDAO {
                     delo.setProsecnaOcena(rs.getDouble(6));
                     delo.setOpis(rs.getString(7));
                     delo.setSadrzaj(rs.getString(8));
-                    try {
-                        delo.setIdAlbuma(AlbumDAO.getAlbum(rs.getInt(9)).getId());
-                    }catch (Exception ex) {
-                        delo.setIdAlbuma(-1);
+                    if(rs.getInt(9) > 0){
+                        delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(9)));
+                    }else {
+                        delo.setAlbumKomPripada(null);
                     }
                 }
             }
@@ -60,7 +60,11 @@ public class MuzickoDeloDAO {
                 delo.setProsecnaOcena(rs.getDouble(5));
                 delo.setOpis(rs.getString(6));
                 delo.setSadrzaj(rs.getString(7));
-                delo.setIdAlbuma(rs.getInt(8));
+                if(rs.getInt(9) > 0){
+                    delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(9)));
+                }else {
+                    delo.setAlbumKomPripada(null);
+                }
                 dela.add(delo);
             }
             rs.close();
@@ -103,7 +107,7 @@ public class MuzickoDeloDAO {
         ps.setDouble(5,delo.getProsecnaOcena());
         ps.setString(6,delo.getOpis());
         ps.setString(7,delo.getSadrzaj());
-        ps.setInt(8,delo.getIdAlbuma());
+        ps.setInt(8,delo.getAlbumKomPripada().getId());
         ps.executeUpdate();
         ps.close();
     }
@@ -138,7 +142,7 @@ public class MuzickoDeloDAO {
             result[i][4] = String.valueOf(dela.get(i).getProsecnaOcena());
             result[i][5] = dela.get(i).getOpis();
             result[i][6] = dela.get(i).getSadrzaj();
-            result[i][7] = String.valueOf(dela.get(i).getIdAlbuma());
+            result[i][7] = String.valueOf(dela.get(i).getAlbumKomPripada().getId());
         }
         return result;
     }

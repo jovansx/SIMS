@@ -41,7 +41,7 @@ public class IzvodjenjeDAO {
         return izvodjenje;
     }
 
-    public static List<Izvodjenje> getIzvodjenja(int brojElemenata){
+    public static List<Izvodjenje> getIzvodjenjaZaPocetnuStranicu(int brojElemenata){
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
         Izvodjenje izvodjenje = null;
         try {
@@ -60,6 +60,7 @@ public class IzvodjenjeDAO {
                 izvodjenje.setUkupnoPrisupa(rs.getInt(7));
                 izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
                 izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
+                izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
                 izvodjenja.add(izvodjenje);
             }
             rs.close();

@@ -10,7 +10,7 @@ public class MuzickoDelo {
     private String nazivDela, opis, sadrzaj;
     private Date datumPostavljanja, vremeNastanka;
     private double prosecnaOcena;
-    private int idAlbuma;
+    private Album albumKomPripada;
     private List<Zanr> listaZanrova;
     private List<Izvodjenje> listaIzvodjenja;
     private List<Ucesnik> listaUcesnika;
@@ -18,22 +18,13 @@ public class MuzickoDelo {
 
     public MuzickoDelo(){}
 
-    public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka) {
+    public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka,Album album) {
         this.id = id;
         this.nazivDela = nazivDela;
         this.datumPostavljanja = datumPostavljanja;
         this.vremeNastanka = vremeNastanka;
         this.prosecnaOcena = 0;
-        this.idAlbuma = -1;
-    }
-
-    public MuzickoDelo(int id, String nazivDela, Date datumPostavljanja, Date vremeNastanka,int idAlbuma) {
-        this.id = id;
-        this.nazivDela = nazivDela;
-        this.datumPostavljanja = datumPostavljanja;
-        this.vremeNastanka = vremeNastanka;
-        this.prosecnaOcena = 0;
-        this.idAlbuma = idAlbuma;
+        this.albumKomPripada = album;
     }
 
     public int getId() {
@@ -92,9 +83,13 @@ public class MuzickoDelo {
         this.prosecnaOcena = prosecnaOcena;
     }
 
-    public int getIdAlbuma(){return idAlbuma;}
+    public Album getAlbumKomPripada() {
+        return albumKomPripada;
+    }
 
-    public void setIdAlbuma(int idAlbuma){this.idAlbuma = idAlbuma;}
+    public void setAlbumKomPripada(Album albumKomPripada) {
+        this.albumKomPripada = albumKomPripada;
+    }
 
     public List<Zanr> getListaZanrova() {
         return listaZanrova;
@@ -189,10 +184,6 @@ public class MuzickoDelo {
         }
     }
 
-
-
-
-
     @Override
     public String toString() {
         return "MuzickoDelo{" +
@@ -203,11 +194,11 @@ public class MuzickoDelo {
                 ", datumPostavljanja=" + datumPostavljanja +
                 ", vremeNastanka=" + vremeNastanka +
                 ", prosecnaOcena=" + prosecnaOcena +
+                ", albumKomPripada=" + albumKomPripada +
                 ", listaZanrova=" + listaZanrova +
                 ", listaIzvodjenja=" + listaIzvodjenja +
                 ", listaUcesnika=" + listaUcesnika +
                 ", listaRecenzija=" + listaRecenzija +
-                ", idAlbuma=" + idAlbuma +
                 '}';
     }
 }

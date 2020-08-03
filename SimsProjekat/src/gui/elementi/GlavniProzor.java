@@ -29,6 +29,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     private JButton registracijaButton;
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
+
     private List<Element> elementi;
     private int brojElemenata;
 
@@ -110,7 +111,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     public void ucitajPocetnuStranu() {
         resetElemente();
 
-        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenja(brojElemenata);
+        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenjaZaPocetnuStranicu(brojElemenata);
 
         for (Izvodjenje iz : izvodjenja) {
             Element el = new Element(iz);
