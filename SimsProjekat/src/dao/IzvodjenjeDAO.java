@@ -46,7 +46,7 @@ public class IzvodjenjeDAO {
         try {
             PreparedStatement ps= FConnection.getInstance()
                     .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja, brojPristupa, brojGlasova, " +
-                            "ukupnoPristupa, idMesta, obrisano from Izvodjenje where id=?");
+                            "ukupnoPristupa, idMesta, obrisano from Izvodjenje");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 if(!rs.getBoolean(9)){

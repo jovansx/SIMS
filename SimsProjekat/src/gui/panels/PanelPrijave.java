@@ -106,8 +106,6 @@ public class PanelPrijave extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        DialogRegistracije sDialog = new DialogRegistracije();
-        sDialog.setVisible(true);
         /*int counter = 0;
         String username = nameField.getText();
         @SuppressWarnings("deprecation")
