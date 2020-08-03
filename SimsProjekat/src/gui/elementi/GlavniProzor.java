@@ -9,11 +9,14 @@ import model.Zanr;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GlavniProzor extends JFrame{
+public class GlavniProzor extends JFrame implements ActionListener{
     private JPanel panelOperacija;
     private JPanel panelReklama;
     protected JPanel panelAkcija;
@@ -27,99 +30,100 @@ public class GlavniProzor extends JFrame{
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
     private List<Element> elementi;
-    private Toolkit tool;
-    private Dimension dimension;
-    int width;
 
-    public GlavniProzor(){
+    public GlavniProzor() {
         super("Muzicki sistem");
-        tool = Toolkit.getDefaultToolkit();
-        dimension = tool.getScreenSize();
-        width = dimension.width/4*3;
-        int height = dimension.height/4*3;
-        this.setSize(width, height);
-        panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        podesiPanelaSkrola();
+
         add(panelGlavni);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
+
         elementi = new ArrayList<Element>();
+
         ucitajPocetnuStranu();
+
+        podesiAkcije();
+    }
+
+    private void podesiPanelaSkrola() {
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Dimension dimension = tool.getScreenSize();
+        int width = dimension.width / 4 * 3;
+        int height = dimension.height / 4 * 3;
+        this.setSize(width, height);
+        panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
+    }
+
+    private void podesiAkcije() {
+        prijavaButton.addActionListener(this);
+        registracijaButton.addActionListener(this);
+        pocetnaStranicaButton.addActionListener(this);
+        popularnoButton.addActionListener(this);
+
         skrol.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
             @Override
             public void adjustmentValueChanged(AdjustmentEvent e) {
                 JViewport vp = skrol.getViewport();
-                if(vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y){
-                    System.out.println(vp.getViewPosition().y);
+                if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
+                    System.out.println("end");
                 }
             }
         });
 
-        prijavaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DialogPrijave dp = new DialogPrijave(GlavniProzor.this);
-                dp.setVisible(true);
-            }
-        });
-        registracijaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
-                dr.setVisible(true);
-            }
-        });
-
-        pocetnaStranicaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ucitajPocetnuStranu();
-            }
-        });
-
-
-        popularnoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetElemente();
-            }
-        });
     }
 
-    public void ucitajPocetnuStranu(){
-        List<Zanr> zanrovi = ZanrDAO.getZanrove();
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        for (Zanr z : zanrovi) {
-            Element el = new Element(z);
+        JButton button = (JButton)e.getSource();
+
+        if (button == prijavaButton) {
+            DialogPrijave dp = new DialogPrijave(GlavniProzor.this);
+            dp.setVisible(true);
+        }
+        else if (button == registracijaButton) {
+            DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
+            dr.setVisible(true);
+            }
+        else if (button == pocetnaStranicaButton) {
+            ucitajPocetnuStranu();
+        }
+        else if (button == popularnoButton) {
+            ucitajPopularanSadrzaj();
+        }
+    }
+
+    private void ucitajPopularanSadrzaj() {
+
+    }
+
+    public void ucitajPocetnuStranu() {
+        resetElemente();
+
+        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenja();
+
+        for (Izvodjenje iz : izvodjenja) {
+            Element el = new Element(iz);
             elementi.add(el);
             panelOdSkrola.add(el);
         }
 
         panelOdSkrola.validate();
         panelOdSkrola.repaint();
-        //panelOdSkrola.setPreferredSize(new Dimension(width/3*2, panelOdSkrola.getComponentCount()));
+
         skrol.validate();
         skrol.repaint();
     }
 
-    /*public void dodajElement(){
-        Element el = new Element();
-        elementi.add(el);
-
-        panelOdSkrola.add(el);
-        panelOdSkrola.validate();
-        panelOdSkrola.repaint();
-        System.out.println("dodajem");
-    }
-
-     */
-    public void resetElemente(){
+    private void resetElemente() {
         elementi.clear();
 
         panelOdSkrola.removeAll();
         panelOdSkrola.validate();
         panelOdSkrola.repaint();
-        System.out.println("brisem");
     }
 }

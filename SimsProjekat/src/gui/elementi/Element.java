@@ -1,6 +1,8 @@
 package gui.elementi;
 
+import model.Izvodjac;
 import model.Izvodjenje;
+import model.MuzickoDelo;
 import model.Zanr;
 
 import javax.swing.*;
@@ -11,30 +13,36 @@ public class Element extends JPanel{
     private JLabel labelaNaslova;
     private JLabel labelaOpisa;
     private JLabel labelaIkone;
-    private Toolkit tool;
-    private Dimension dimension;
 
-    public Element(Zanr z) {
+    public Element(Izvodjenje iz) {
         super();
-        tool = Toolkit.getDefaultToolkit();
-        dimension = tool.getScreenSize();
+
+        podesiPanelGlavni();
+
+        add(panelGlavni);
+
+        StringBuilder name = new StringBuilder();
+        for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
+            name.append(mz.getNazivDela()).append(",");
+        }
+        name = new StringBuilder(name.substring(0, name.length() - 2));
+
+        labelaNaslova.setText(name.toString());
+
+        String izvodjaci = "";
+        for (Izvodjac izv: iz.getListaIzvodjaca()) {
+            izvodjaci = izvodjaci+","+izv.getNazivIzvodjaca();
+        }
+        izvodjaci = izvodjaci.substring(1,izvodjaci.length()-1);
+        labelaOpisa.setText("Izvodjaci : "+ izvodjaci);
+
+    }
+
+    private void podesiPanelGlavni() {
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Dimension dimension = tool.getScreenSize();
         int width = dimension.width/4*3;
         int height = dimension.height/4*3;
         panelGlavni.setPreferredSize(new Dimension(width/3*2, height/5));
-        add(panelGlavni);
-        /*
-        labelaNaslova.setText(i.getListaMuzickihDela().get(0).getNazivDela());
-
-        labelaOpisa.setText("");
-        for (Izvodjac izv: i.getListaIzvodjaca()) {
-            labelaOpisa.setText(labelaOpisa.getText()+","+izv.getNazivIzvodjaca());
-        }
-        labelaOpisa.setText("Izvodjaci : "+ labelaOpisa.getText());
-
-         */
-        labelaNaslova.setText(z.getNazivZanra());
-        labelaOpisa.setText(z.getOpis());
-
-
     }
 }
