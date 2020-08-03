@@ -25,15 +25,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste">
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog.">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Izvodjac.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596143119579</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog.">
+      <created>1596323386578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596323386578</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,7 +198,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pokusaj konektovanja" />
     <MESSAGE value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
-    <option name="LAST_COMMIT_MESSAGE" value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
+    <MESSAGE value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
   </component>
   <component name="WindowStateProjectService">
     <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1596128446761">
@@ -225,13 +230,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596128456154" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596154732688">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596323396768">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596154732688" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596319281065">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596323396768" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596443253723">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596319281065" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596443253723" />
   </component>
 </project>

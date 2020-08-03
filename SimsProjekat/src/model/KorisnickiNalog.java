@@ -7,13 +7,15 @@ public class KorisnickiNalog {
     private String korisnickoIme;
     private String lozinka;
     private TipKorisnika korisnik;
+    private Korisnik osoba;
 
     public KorisnickiNalog(){}
-    public KorisnickiNalog(int i, String ki, String l, TipKorisnika k){
+    public KorisnickiNalog(int i, String ki, String l, TipKorisnika k, Korisnik o){
         this.id=i;
         this.korisnickoIme=ki;
         this.lozinka=l;
         this.korisnik=k;
+        this.osoba=o;
     }
 
     public int getId(){
@@ -26,6 +28,7 @@ public class KorisnickiNalog {
         return lozinka;
     }
     public TipKorisnika getKorisnik(){ return this.korisnik; }
+    public Korisnik getOsoba(){return this.osoba;}
     public void setId(int id){
         this.id=id;
     }
@@ -38,5 +41,6 @@ public class KorisnickiNalog {
     public void setKorisnik(TipKorisnika korisnik){
         this.korisnik=korisnik;
     }
+    public void setOsoba(Korisnik osoba){this.osoba=osoba;}
 }
 

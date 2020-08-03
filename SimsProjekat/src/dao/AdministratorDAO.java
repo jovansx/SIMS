@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Administrator;
-import model.Izvodjenje;
 import model.Reklama;
 import model.Zahtev;
 import util.FConnection;
