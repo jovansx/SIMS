@@ -47,9 +47,9 @@ brojPristupa INT DEFAULT 0,
 brojGlasova INT DEFAULT 0,
 ukupnoPristupa INT DEFAULT 0,
 pttBrojMesta INT UNSIGNED,
+slika BLOB,
 CONSTRAINT FK_MESTO FOREIGN KEY (pttBrojMesta) REFERENCES MestoIzvodjenja(pttBroj)
 );
-
 INSERT INTO 
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2018.10.05.', 10, 'AUDIO', 21000);

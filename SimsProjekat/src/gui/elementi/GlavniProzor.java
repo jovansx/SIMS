@@ -29,6 +29,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
     private JButton registracijaButton;
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
+    private boolean pocetnaTrenutno;
 
     private List<Element> elementi;
     private int brojElemenata;
@@ -36,28 +37,29 @@ public class GlavniProzor extends JFrame implements ActionListener{
     public GlavniProzor() {
         super("Muzicki sistem");
 
-        panelAkcija.setPreferredSize(new Dimension());
-        podesiPanelaSkrola();
+        //Kad podesimo u GlavniProzor.from boju ne mora ovo ovde
+        pocetnaStranicaButton.setBackground(Color.GREEN);
+        pocetnaTrenutno = true; //Ako je false onda je popularno pritisnutno
+        brojElemenata = 5;
+        elementi = new ArrayList<Element>();
+        skrol.getVerticalScrollBar().setUnitIncrement(16);      //brzina skrola
 
+        podesiPanelSkrola();
+        ucitajPocetnuStranu();
+        podesiAkcije();
         add(panelGlavni);
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
-
-        brojElemenata = 5;
-        elementi = new ArrayList<Element>();
-
-        ucitajPocetnuStranu();
-
-        podesiAkcije();
     }
 
-    private void podesiPanelaSkrola() {
+    private void podesiPanelSkrola() {
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension dimension = tool.getScreenSize();
         int width = dimension.width / 4 * 3;
         int height = dimension.height / 4 * 3;
-        this.setSize(width, height);
+        setSize(width, height);
         panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
     }
 
@@ -98,21 +100,31 @@ public class GlavniProzor extends JFrame implements ActionListener{
             JViewport vp = skrol.getViewport();
             vp.setViewPosition(new Point(0, 0));
             brojElemenata = 5;
+            pocetnaTrenutno = true;
+            pocetnaStranicaButton.setBackground(Color.GREEN);
+            popularnoButton.setBackground(new Color(81,110,114));
             ucitajPocetnuStranu();
         }
         else if (button == popularnoButton) {
-            ucitajPopularanSadrzaj();
+            JViewport vp = skrol.getViewport();
+            vp.setViewPosition(new Point(0, 0));
+            brojElemenata = 5;
+            pocetnaTrenutno = false;
+            popularnoButton.setBackground(Color.GREEN);
+            pocetnaStranicaButton.setBackground(new Color(81,110,114));
+            ucitajPocetnuStranu();
         }
-    }
-
-    private void ucitajPopularanSadrzaj() {
-
     }
 
     public void ucitajPocetnuStranu() {
         resetElemente();
 
-        List<Izvodjenje> izvodjenja = IzvodjenjeDAO.getIzvodjenjaZaPocetnuStranicu(brojElemenata);
+        List<Izvodjenje> izvodjenja;
+        if(pocetnaTrenutno) {
+            izvodjenja = IzvodjenjeDAO.getIzvodjenjaZaPocetnuStranicu(brojElemenata, "vremeIzvodjenja");
+        }else {
+            izvodjenja = IzvodjenjeDAO.getIzvodjenjaZaPocetnuStranicu(brojElemenata, "brojPristupa");
+        }
 
         for (Izvodjenje iz : izvodjenja) {
             Element el = new Element(iz);

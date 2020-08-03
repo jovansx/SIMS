@@ -96,7 +96,7 @@ public class IzvodjacDAO {
         Izvodjac izvodjac = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select * from izvodjacIzvodi where obrisano=false and idIzvodjenja=?");
+                    .prepareStatement("select * from IzvodjacIzvodi where obrisano=false and idIzvodjenja=?");
             ps.setInt(1, idIzvodjenja);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -1,18 +1,11 @@
 package gui.panels;
 
 import gui.dialogs.DialogPrijave;
-import gui.dialogs.DialogRegistracije;
-import util.FConnection;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class PanelPrijave extends JPanel implements ActionListener {
 
@@ -39,7 +32,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         name = new JLabel("Korisnicko ime:");
         lastName = new JLabel("Sifra:");
-        upozorenja = new JLabel("");
+        upozorenja = new JLabel("Unesite validne podatke");
         upozorenja.setForeground(new Color(62, 100, 103));
         nameField = new JTextField(15);
         lastNameField = new JPasswordField(15);
@@ -105,9 +98,6 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        //DialogRegistracije sDialog = new DialogRegistracije();
-        //sDialog.setVisible(true);
 
         /*int counter = 0;
         String username = nameField.getText();

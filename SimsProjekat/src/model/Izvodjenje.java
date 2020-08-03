@@ -2,6 +2,7 @@ package model;
 
 import model.enums.TipIzvodjenja;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Izvodjenje {
     private List<Izvodjac> listaIzvodjaca;
     private List<MuzickoDelo> listaMuzickihDela;
     private MestoIzvodjenja mestoIzvodjenja;
+    private Icon image; //Mozda i ne mora da sadrzi sliku, moze se kroz jdbc dobaviti
 
     public Izvodjenje(){};
     public Izvodjenje(int id, Date vremeIzvodjenja, TipIzvodjenja tipIzvodjenja, MestoIzvodjenja mestoIzvodjenja) {
@@ -26,6 +28,7 @@ public class Izvodjenje {
         this.vremeIzvodjenja = vremeIzvodjenja;
         this.tipIzvodjenja = tipIzvodjenja;
         this.mestoIzvodjenja = mestoIzvodjenja;
+        this.image = null;
     }
 
     public int getId() {
@@ -109,6 +112,10 @@ public class Izvodjenje {
     public void setMestoIzvodjenja(MestoIzvodjenja mestoIzvodjenja) {
         this.mestoIzvodjenja = mestoIzvodjenja;
     }
+
+    public Icon getImage() { return image; }
+
+    public void setImage(Icon image) { this.image = image; }
 
     public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
         if (listaMuzickihDela == null) {

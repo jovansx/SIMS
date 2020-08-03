@@ -1,23 +1,36 @@
 package gui.elementi;
 
+import dao.IzvodjenjeDAO;
 import model.Izvodjac;
 import model.Izvodjenje;
 import model.MuzickoDelo;
 import model.Zanr;
+import util.FConnection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Element extends JPanel{
     private JPanel panelGlavni;
     private JLabel labelaNaslova;
     private JLabel labelaOpisa;
     private JLabel labelaIkone;
+    private String separator;
+    private Toolkit tool;
+    private Dimension dimension;
 
     public Element(Izvodjenje iz) {
         super();
 
-        podesiPanelGlavni();
+        tool = Toolkit.getDefaultToolkit();
+        dimension = tool.getScreenSize();
+        separator = System.getProperty("file.separator");
+        panelGlavni.setPreferredSize(
+                new Dimension(dimension.width/4*3,dimension.height/20*3));
+        labelaIkone.setSize(200, dimension.height/20*3 - 10);
 
         add(panelGlavni);
 
@@ -49,13 +62,11 @@ public class Element extends JPanel{
         }
         labelaOpisa.setText("<html>"+line+"<br/>"+line2+"<br/>"+line3+"<br/>"+line4+"<br/>"+line5+"<br/>"+line6+"</html>");
 
-    }
-
-    private void podesiPanelGlavni() {
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
-        int width = dimension.width/4*3;
-        int height = dimension.height/4*3;
-        panelGlavni.setPreferredSize(new Dimension(width/3*2, height/5));
+        ImageIcon retImageIcon = IzvodjenjeDAO.getSlikuIzvodjenja(iz, separator);
+        Image im = retImageIcon.getImage();
+        Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon newImage = new ImageIcon(myImg);
+        labelaIkone.setIcon(newImage);
+        iz.setImage(newImage);
     }
 }

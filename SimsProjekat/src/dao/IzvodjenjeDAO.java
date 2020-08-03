@@ -5,11 +5,55 @@ import model.*;
 import model.enums.TipIzvodjenja;
 import util.FConnection;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IzvodjenjeDAO {
+
+    public static ImageIcon getSlikuIzvodjenja(Izvodjenje iz, String separator) {
+        Statement st = null;
+        ImageIcon retImageIcon = null;
+        try {
+            st = FConnection.getInstance().createStatement();
+            ResultSet rs = st.executeQuery("select * from Izvodjenje where id=" + iz.getId());
+            if(rs.next()) {
+                byte[] img = rs.getBytes("slika");
+                if(img == null) {
+                    return new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "ikoneIzvodjenja" + separator +"default.jpg");
+                }
+                retImageIcon = new ImageIcon(img);
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return retImageIcon;
+    }
+
+    /**
+        Metoda za unos slike, jer nece direktno u bazi
+    */
+    public static void updateSliku(int id, String path) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("update Izvodjenje set slika=? where id=?");
+        InputStream is;
+        try {
+            is = new FileInputStream(new File(path));
+        }catch(Exception ex) {
+            is = null;
+        }
+        ps.setBlob(1, is);
+        ps.setInt(2, id);
+        ps.executeUpdate();
+        ps.close();
+    }
 
     public static Izvodjenje getIzvodjenje(Integer id){
         Izvodjenje izvodjenje=null;
@@ -41,12 +85,12 @@ public class IzvodjenjeDAO {
         return izvodjenje;
     }
 
-    public static List<Izvodjenje> getIzvodjenjaZaPocetnuStranicu(int brojElemenata){
+    public static List<Izvodjenje> getIzvodjenjaZaPocetnuStranicu(int brojElemenata, String kriterijum){
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
         Izvodjenje izvodjenje = null;
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false order by vremeIzvodjenja desc limit ?");
+                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false order by " + kriterijum + " desc limit ?");
             ps.setInt(1, brojElemenata);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -61,6 +105,7 @@ public class IzvodjenjeDAO {
                 izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
                 izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
                 izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
+                izvodjenje.setImage(null);
                 izvodjenja.add(izvodjenje);
             }
             rs.close();
@@ -71,6 +116,7 @@ public class IzvodjenjeDAO {
         }
         return izvodjenja;
     }
+
     //Trazenje izvodjaca koja su ucestovala u izvodjenju
     public static List<Izvodjac> getizvodjaci(Integer id){
         Izvodjac izvodjac =null;
