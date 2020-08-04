@@ -5,7 +5,6 @@ import gui.elementi.GlavniProzor;
 import gui.dialogs.DialogPrijave;
 import javax.swing.*;
 
-import gui.elementi.NoviProzor;
 import gui.elementi.UrednikovProzor;
 import model.*;
 import util.FConnection;
@@ -30,7 +29,9 @@ public class Main {
         IzvodjenjeDAO.updateSliku(7, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"haris.jpg");
         IzvodjenjeDAO.updateSliku(8, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"baja.jpg");
         IzvodjenjeDAO.updateSliku(9, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"hurricane.jpg");
-        IzvodjenjeDAO.updateSliku(10, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"nastup.jpg");*/
+        IzvodjenjeDAO.updateSliku(10, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"nastup.jpg");
+
+         */
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -58,7 +59,7 @@ public class Main {
                 lista.add(r);
                 UrednikovProzor u = new UrednikovProzor(lista);
                 u.setVisible(true);
-                //GlavniProzor gp = new GlavniProzor();
+                //UrednikovProzor gp = new UrednikovProzor();
                 //gp.setVisible(true);
             }
         });

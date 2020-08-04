@@ -9,6 +9,9 @@ import util.FConnection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,18 +21,15 @@ public class Element extends JPanel{
     private JLabel labelaNaslova;
     private JLabel labelaOpisa;
     private JLabel labelaIkone;
-    private String separator;
-    private Toolkit tool;
-    private Dimension dimension;
 
     public Element(Izvodjenje iz) {
         super();
 
-        tool = Toolkit.getDefaultToolkit();
-        dimension = tool.getScreenSize();
-        separator = System.getProperty("file.separator");
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Dimension dimension = tool.getScreenSize();
+
         panelGlavni.setPreferredSize(
-                new Dimension(dimension.width/4*3,dimension.height/20*3));
+                new Dimension(dimension.width/4*3, dimension.height/20*3));
         labelaIkone.setSize(200, dimension.height/20*3 - 10);
 
         add(panelGlavni);
@@ -62,11 +62,25 @@ public class Element extends JPanel{
         }
         labelaOpisa.setText("<html>"+line+"<br/>"+line2+"<br/>"+line3+"<br/>"+line4+"<br/>"+line5+"<br/>"+line6+"</html>");
 
+        String separator = System.getProperty("file.separator");
+
+
         ImageIcon retImageIcon = IzvodjenjeDAO.getSlikuIzvodjenja(iz, separator);
         Image im = retImageIcon.getImage();
         Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
         ImageIcon newImage = new ImageIcon(myImg);
         labelaIkone.setIcon(newImage);
         iz.setImage(newImage);
+
+
+        panelGlavni.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("ooooooooooooooooooj");
+                PrikazElementa pe = new PrikazElementa(iz, Element.this);
+                pe.setVisible(true);
+            }
+        });
     }
 }

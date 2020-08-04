@@ -97,11 +97,6 @@ public class RegistrovaniKorisnik extends Korisnik {
 
     @Override
     public String toString() {
-        return "RegistovaniKorisnik{" +
-                "listaOmiljenogSadrzaja=" + listaOmiljenogSadrzaja +
-                ", listaRecenzija=" + listaRecenzija +
-                ", listaPlejListi=" + listaPlejListi +
-                ", jeVidljiv=" + jeVidljiv +
-                '}';
+        return "RegKorisnik "+getIme()+" "+getPrezime();
     }
 }

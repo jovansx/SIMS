@@ -37,10 +37,6 @@ public class MestoIzvodjenja {
 
     @Override
     public String toString() {
-        return "MestoIzvodjenja{" +
-                "pttBroj=" + pttBroj +
-                ", drzava='" + drzava + '\'' +
-                ", nazivMesta='" + nazivMesta + '\'' +
-                '}';
+        return  nazivMesta + ", "+ drzava +  ", "+ pttBroj;
     }
 }

@@ -125,11 +125,7 @@ GlavniProzor extends JFrame implements ActionListener{
             if(izvodjenja.size() == 0) {
                 panelOdSkrola.add(nothingFoundL);
             }
-            /*if(izvodjenja.size() != 0) {
-                ucitajPretrazi(izvodjenja);
-            }else {
-                System.out.println("Nema rezultata !");
-            }*/
+
         }
         else if (button == pocetnaStranicaButton) {
             JViewport vp = skrol.getViewport();
