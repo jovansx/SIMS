@@ -25,12 +25,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog.">
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi.">
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogProfilAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogSadrzaja.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/content.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AdministratorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/KorisnickiNalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/NoviProzor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,11 +75,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-8.0.21.jar" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/SimsProjekat/src/gui/icons" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\filip\Desktop\Sims\SimsProjekat\src\gui\icons" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -169,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596323386578</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi.">
+      <created>1596444586388</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596444586388</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,29 +221,34 @@
     <MESSAGE value="pokusaj konektovanja" />
     <MESSAGE value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
     <MESSAGE value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
+    <MESSAGE value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1596531991559">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1596531991559" />
     <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1596128446761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596128446761" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596142122783">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596538112188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596142122783">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596538112188" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596538112187">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596142122783">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596538112187">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596142122783">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596538112187">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596142122783" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
     <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1596127121373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -230,13 +257,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596128456154" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596323396768">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596444591729">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596323396768" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596443253723">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596444591729" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596528134903">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596443253723" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596528134903" />
   </component>
 </project>
