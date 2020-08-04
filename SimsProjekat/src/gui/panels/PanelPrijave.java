@@ -1,6 +1,9 @@
 package gui.panels;
 
 import gui.dialogs.DialogPrijave;
+import gui.elementi.AdminovProzor;
+import gui.elementi.GlavniProzor;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;

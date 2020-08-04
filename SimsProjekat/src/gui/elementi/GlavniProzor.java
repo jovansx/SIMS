@@ -16,7 +16,8 @@ import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GlavniProzor extends JFrame implements ActionListener{
+public class
+GlavniProzor extends JFrame implements ActionListener{
     private JPanel panelOperacija;
     private JPanel panelReklama;
     protected JPanel panelAkcija;
