@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws SQLException {
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
-        String sep = System.getProperty("file.separator");
+        /*String sep = System.getProperty("file.separator");
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"klinka.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"zareGoci.jpg");
         IzvodjenjeDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"rasta.jpg");
@@ -30,7 +30,7 @@ public class Main {
         IzvodjenjeDAO.updateSliku(7, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"haris.jpg");
         IzvodjenjeDAO.updateSliku(8, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"baja.jpg");
         IzvodjenjeDAO.updateSliku(9, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"hurricane.jpg");
-        IzvodjenjeDAO.updateSliku(10, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"nastup.jpg");
+        IzvodjenjeDAO.updateSliku(10, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"nastup.jpg");*/
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -45,7 +45,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                /*ArrayList<Recenzija> lista = new ArrayList<Recenzija>();
+                ArrayList<Recenzija> lista = new ArrayList<Recenzija>();
                 RegistrovaniKorisnik autorRecenzije = new RegistrovaniKorisnik();
                 autorRecenzije.setId(5);
                 Izvodjenje izvodnjenje = new Izvodjenje();
@@ -57,9 +57,9 @@ public class Main {
                 Recenzija r = new Recenzija(1,10,"top",autorRecenzije,izvodnjenje,urednik,delo);
                 lista.add(r);
                 UrednikovProzor u = new UrednikovProzor(lista);
-                u.setVisible(true);*/
-                GlavniProzor gp = new GlavniProzor();
-                gp.setVisible(true);
+                u.setVisible(true);
+                //GlavniProzor gp = new GlavniProzor();
+                //gp.setVisible(true);
             }
         });
     }
