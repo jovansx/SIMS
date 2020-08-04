@@ -28,7 +28,7 @@ public class PanelOdobravanje extends JPanel {
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(226, 206, 158));
-        setLayout(null);
+        //setLayout(null);
         namesti();
 
     }

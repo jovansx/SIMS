@@ -4,6 +4,7 @@ import dao.IzvodjenjeDAO;
 import dao.ZanrDAO;
 import gui.dialogs.DialogPrijave;
 import gui.dialogs.DialogRegistracije;
+import kontroler.GlavniProzorKON;
 import model.Izvodjenje;
 import model.Zanr;
 
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +26,18 @@ GlavniProzor extends JFrame implements ActionListener{
     private JScrollPane skrol;
     private JPanel panelGlavni;
     private JButton popularnoButton;
-    private JTextField textField1;
+    private JTextField pretraziF;
     private JButton pretraziButton;
     private JButton prijavaButton;
     private JButton registracijaButton;
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
     private boolean pocetnaTrenutno;
+    private boolean pretraziTrenutno;
+    private JLabel nothingFoundL;
+    private Toolkit tool;
+    private Dimension dimension;
+    private String separator;
 
     private List<Element> elementi;
     private int brojElemenata;
@@ -38,14 +45,23 @@ GlavniProzor extends JFrame implements ActionListener{
     public GlavniProzor() {
         super("Muzicki sistem");
 
+        tool = Toolkit.getDefaultToolkit();
+        dimension = tool.getScreenSize();
+        separator = System.getProperty("file.separator");
+        Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "nothingFound.png");
+        nothingFoundL = new JLabel(icon);
+        nothingFoundL.setPreferredSize(new Dimension(dimension.width / 8 * 3, dimension.height / 8 * 3));
         //Kad podesimo u GlavniProzor.from boju ne mora ovo ovde
         pocetnaStranicaButton.setBackground(Color.GREEN);
         pocetnaTrenutno = true; //Ako je false onda je popularno pritisnutno
+        pretraziTrenutno = false;
         brojElemenata = 5;
         elementi = new ArrayList<Element>();
         skrol.getVerticalScrollBar().setUnitIncrement(16);      //brzina skrola
 
-        podesiPanelSkrola();
+        setSize(dimension.width / 4 * 3, dimension.height / 4 * 3);
+        panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
+
         ucitajPocetnuStranu();
         podesiAkcije();
         add(panelGlavni);
@@ -55,20 +71,12 @@ GlavniProzor extends JFrame implements ActionListener{
         setLocationRelativeTo(null);
     }
 
-    private void podesiPanelSkrola() {
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
-        int width = dimension.width / 4 * 3;
-        int height = dimension.height / 4 * 3;
-        setSize(width, height);
-        panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
-    }
-
     private void podesiAkcije() {
         prijavaButton.addActionListener(this);
         registracijaButton.addActionListener(this);
         pocetnaStranicaButton.addActionListener(this);
         popularnoButton.addActionListener(this);
+        pretraziButton.addActionListener(this);
 
         skrol.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
@@ -77,7 +85,9 @@ GlavniProzor extends JFrame implements ActionListener{
                 JViewport vp = skrol.getViewport();
                 if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
                     brojElemenata+=1;
-                    ucitajPocetnuStranu();
+                    if(!pretraziTrenutno) {
+                        ucitajPocetnuStranu();
+                    }
                 }
             }
         });
@@ -97,11 +107,36 @@ GlavniProzor extends JFrame implements ActionListener{
             DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
             dr.setVisible(true);
             }
+        else if (button == pretraziButton){
+            if(pretraziF.getText().equals("")) {
+                return;
+            }
+            List<Izvodjenje> izvodjenja = null;
+            JViewport vp = skrol.getViewport();
+            vp.setViewPosition(new Point(0, 0));
+            brojElemenata = 5;
+            pretraziTrenutno = true;
+            try {
+                izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenata);
+            }catch(SQLException ex) {
+                System.out.println("Nema rezultata !");
+            }
+            ucitajPretrazi(izvodjenja);
+            if(izvodjenja.size() == 0) {
+                panelOdSkrola.add(nothingFoundL);
+            }
+            /*if(izvodjenja.size() != 0) {
+                ucitajPretrazi(izvodjenja);
+            }else {
+                System.out.println("Nema rezultata !");
+            }*/
+        }
         else if (button == pocetnaStranicaButton) {
             JViewport vp = skrol.getViewport();
             vp.setViewPosition(new Point(0, 0));
             brojElemenata = 5;
             pocetnaTrenutno = true;
+            pretraziTrenutno = false;
             pocetnaStranicaButton.setBackground(Color.GREEN);
             popularnoButton.setBackground(new Color(81,110,114));
             ucitajPocetnuStranu();
@@ -111,10 +146,27 @@ GlavniProzor extends JFrame implements ActionListener{
             vp.setViewPosition(new Point(0, 0));
             brojElemenata = 5;
             pocetnaTrenutno = false;
+            pretraziTrenutno = false;
             popularnoButton.setBackground(Color.GREEN);
             pocetnaStranicaButton.setBackground(new Color(81,110,114));
             ucitajPocetnuStranu();
         }
+    }
+
+    public void ucitajPretrazi(List<Izvodjenje> izvodjenja) {
+        resetElemente();
+
+        for (Izvodjenje iz : izvodjenja) {
+            Element el = new Element(iz);
+            elementi.add(el);
+            panelOdSkrola.add(el);
+        }
+
+        panelOdSkrola.validate();
+        panelOdSkrola.repaint();
+
+        skrol.validate();
+        skrol.repaint();
     }
 
     public void ucitajPocetnuStranu() {
