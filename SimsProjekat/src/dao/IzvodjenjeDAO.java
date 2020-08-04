@@ -73,7 +73,7 @@ public class IzvodjenjeDAO {
                     izvodjenje.setBrPristupa(rs.getInt(5));
                     izvodjenje.setBrGlasova(rs.getInt(6));
                     izvodjenje.setUkupnoPrisupa(rs.getInt(7));
-                    //izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+                    izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
                 }
 
             }

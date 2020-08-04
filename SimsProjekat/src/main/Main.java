@@ -1,11 +1,12 @@
 package main;
 
 import dao.IzvodjenjeDAO;
+import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
 import gui.dialogs.DialogPrijave;
 import javax.swing.*;
 
-import gui.elementi.NoviProzor;
+
 import gui.elementi.UrednikovProzor;
 import model.*;
 import util.FConnection;
@@ -45,6 +46,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                /*
                 ArrayList<Recenzija> lista = new ArrayList<Recenzija>();
                 RegistrovaniKorisnik autorRecenzije = new RegistrovaniKorisnik();
                 autorRecenzije.setId(5);
@@ -60,6 +62,10 @@ public class Main {
                 u.setVisible(true);
                 //GlavniProzor gp = new GlavniProzor();
                 //gp.setVisible(true);
+
+                 */
+                AdminovProzor u = new AdminovProzor(null, null, null, null, null);
+                u.setVisible(true);
             }
         });
     }

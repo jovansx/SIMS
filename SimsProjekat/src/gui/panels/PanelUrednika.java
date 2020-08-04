@@ -1,8 +1,10 @@
 package gui.panels;
 
-import gui.dialogs.DialogZahteva;
-import model.Zahtev;
-import tables.TabelaZahteva;
+import gui.dialogs.DialogUrednika;
+import model.Recenzija;
+import model.Urednik;
+import tables.TabelaAktivnosti;
+import tables.TabelaUrednika;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,28 +16,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class PanelZahteva extends JPanel {
-    private DialogZahteva dialog;
-    public ArrayList<Zahtev> zahtevi;
-    private JButton odobri, otkazi;
-    public JTable tabela;
+public class PanelUrednika extends JPanel {
+    private DialogUrednika dialog;
+    public ArrayList<Urednik> urednici;
+    public JButton ocjene, sadrzaj;
 
-    public PanelZahteva(DialogZahteva dz, ArrayList<Zahtev> zahtevi){
-        this.dialog=dz;
-        this.zahtevi=zahtevi;
 
+    public PanelUrednika(DialogUrednika dialog, ArrayList<Urednik> urednici){
+        this.dialog=dialog;
+        this.urednici=urednici;
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(229, 255, 204));
         setLayout(null);
         namesti();
-
     }
-    public void namesti(){
-        TabelaZahteva t = new TabelaZahteva(zahtevi);
-        tabela=new JTable(t);
 
+    private void namesti() {
+
+        TabelaUrednika tabelaUrednika=new TabelaUrednika(urednici);
+        JTable tabela =new JTable(tabelaUrednika);
         JScrollPane sp = new JScrollPane(tabela);
         sp.setBounds(30, 30, 630, 450);
         add(sp);
@@ -81,28 +83,9 @@ public class PanelZahteva extends JPanel {
 
 
 
-        odobri=new JButton("Odgovori");
-        odobri.setBackground(new Color(51, 102, 153));
-        odobri.setForeground(Color.white);
-        odobri.setBounds(140, 510, 90, 30);
-        odobri.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ;
-            }
-        });
-        add(odobri);
 
-        otkazi=new JButton("Otkazi");
-        otkazi.setForeground(Color.white);
-        otkazi.setBounds(435, 510, 90, 30);
-        otkazi.setBackground(new Color(51, 102, 153));
-        otkazi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ;
-            }
-        });
-        add(otkazi);
+
     }
+
+
 }

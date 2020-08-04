@@ -1,6 +1,7 @@
 package gui.elementi;
 
 import dao.RecenzijaDAO;
+import dao.UrednikDAO;
 import dao.ZahtevDAO;
 import gui.dialogs.*;
 import model.*;
@@ -104,10 +105,20 @@ public class AdminovProzor extends GlavniProzor{
         pregled.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ;
+                DialogUrednika du = new DialogUrednika(getUrednici());
+                du.setVisible(true);
             }
         });
         panelAkcija.add(pregled);
+    }
+
+    //Ovo cu u kontroler prebaciti, za sad samo da imam testirati
+    public ArrayList<Urednik> getUrednici(){
+        ArrayList<Urednik> urednici= (ArrayList<Urednik>) UrednikDAO.getUrednike();
+        for(Urednik u: urednici){
+            u.setListaRecenzija((ArrayList<Recenzija>) UrednikDAO.getRecenzijeUrednika(u.getId()));
+        }
+        return urednici;
     }
 
 }
