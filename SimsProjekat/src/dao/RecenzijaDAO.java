@@ -14,7 +14,7 @@ public class RecenzijaDAO {
     public static Recenzija getRecenzija(int id){
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika from Recenzija where id=?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()) {
@@ -29,6 +29,7 @@ public class RecenzijaDAO {
                     recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(6)));
                     recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
                     recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(8)));
+                    recenzija.setOdobreno(rs.getBoolean(9));
                 }
             }
             rs.close();
@@ -73,13 +74,14 @@ public class RecenzijaDAO {
 
     public static void insert(Recenzija recenzija) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika from Recenzija where id=?");
+                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
         ps.setInt(2,recenzija.getOcena());
         ps.setString(3,recenzija.getKomentar());
         ps.setInt(4,recenzija.getMuzickoDelo().getId());
         ps.setInt(5,recenzija.getIzvodnjenje().getId());
         ps.setInt(6,recenzija.getAutorRecenzije().getId());
         ps.setInt(7,recenzija.getUrednik().getId());
+        ps.setBoolean(8, recenzija.isOdobreno());
         ps.executeUpdate();
         ps.close();
     }
@@ -100,7 +102,7 @@ public class RecenzijaDAO {
         ps.close();
     }
     public static String[] columns(){
-        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika"};
+        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika","Odobreno"};
     }
 
     public static String[][] toTableData(List<Recenzija> recenzije){
@@ -113,6 +115,7 @@ public class RecenzijaDAO {
             result[i][4] = String.valueOf(recenzije.get(i).getAutorRecenzije());
             result[i][5] = String.valueOf(recenzije.get(i).getIzvodnjenje());
             result[i][6] = String.valueOf(recenzije.get(i).getUrednik());
+            result[i][7] = String.valueOf(recenzije.get(i).isOdobreno());
         }
         return result;
     }

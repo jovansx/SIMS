@@ -9,6 +9,7 @@ public class Urednik extends Korisnik {
     private List<Zadatak> listaZadataka;
     private List<Zanr> listaZanrova;
     private List<Recenzija> listaRecenzija;
+
     public Urednik(){
 
     }
@@ -61,6 +62,8 @@ public class Urednik extends Korisnik {
             return false;
         }
     }
+
+    public void setListaRecenzija(ArrayList<Recenzija> recenzije){ this.listaRecenzija=recenzije; }
 
     public List<Recenzija> getListaRecenzija() {
         return listaRecenzija;
