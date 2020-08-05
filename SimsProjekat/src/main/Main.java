@@ -64,7 +64,7 @@ public class Main {
                 //gp.setVisible(true);
 
                  */
-                AdminovProzor u = new AdminovProzor(null, null, null, null, null);
+                AdminovProzor u = new AdminovProzor();
                 u.setVisible(true);
             }
         });
