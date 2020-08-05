@@ -18,6 +18,13 @@ public class KorisnickiNalog {
         this.osoba=o;
     }
 
+    public KorisnickiNalog(int i, String ki, String l, TipKorisnika k){
+        this.id=i;
+        this.korisnickoIme=ki;
+        this.lozinka=l;
+        this.korisnik=k;
+    }
+
     public int getId(){
         return id;
     }

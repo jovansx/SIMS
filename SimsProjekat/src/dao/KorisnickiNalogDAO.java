@@ -42,6 +42,28 @@ public class KorisnickiNalogDAO {
         }
         return korisnik;
     }
+
+    public static KorisnickiNalog getNalogPoKorisnickomImenu(String korIme){
+        KorisnickiNalog nalog=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,korisnickoIme,lozinka,tipKorisnika from KorisnickiNalog where korisnickoIme=?");
+            ps.setString(1, korIme);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                nalog = new KorisnickiNalog();
+                nalog.setId(rs.getInt(1));
+                nalog.setKorisnickoIme(rs.getString(2));
+                nalog.setLozinka(rs.getString(3));
+                nalog.setKorisnik(TipKorisnika.valueOf(rs.getString(4)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nalog;
+    }
     public static List<KorisnickiNalog> getNalozi(){
         List<KorisnickiNalog> nalozi=new ArrayList<>();
         KorisnickiNalog korisnik=null;
@@ -137,6 +159,45 @@ public class KorisnickiNalogDAO {
             e.printStackTrace();
         }
         return korisnik;
+    }
+
+    /**
+     * Param: korIme - Korisnicko ime
+     * return: true - Ne postoji to vec korisnicko ime
+     *         false - Postoji vec to korisnicko ime
+     */
+    private static boolean proveriKorisnickoIme(String korIme) throws SQLException {
+        PreparedStatement ps = FConnection.getInstance().
+                prepareStatement("select * from KorisnickiNalog where korisnickoIme=?");
+        ps.setString(1, korIme);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            return false;
+        }
+        rs.close();
+        ps.close();
+        return true;
+    }
+
+    public static KorisnickiNalog insertValues(String korIme, String lozinka, TipKorisnika tip) throws Exception {
+
+        if(!KorisnickiNalogDAO.proveriKorisnickoIme(korIme)) {  //Ako vec postoji korisnicko ime
+            throw new Exception(String.valueOf(3));
+        }
+
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("insert into KorisnickiNalog(korisnickoIme,lozinka,tipKorisnika) values (?,?,?)");
+            ps.setString(1, korIme);
+            ps.setString(2, lozinka);
+            ps.setString(3, tip.toString());
+            ps.executeUpdate();
+            ps.close();
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return KorisnickiNalogDAO.getNalogPoKorisnickomImenu(korIme);
     }
 
     //Insert

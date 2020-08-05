@@ -18,6 +18,11 @@ public class RegistrovaniKorisnik extends Korisnik {
         this.jeVidljiv = true;
     }
 
+    public RegistrovaniKorisnik(String ime, String prezime, String email, String kontaktTelefon, KorisnickiNalog nalog, Date godinaRodjenja) {
+        super(ime, prezime, email, kontaktTelefon, godinaRodjenja, nalog);
+        this.jeVidljiv = true;
+    }
+
     public List<Izvodjenje> getListaOmiljenogSadrzaja() {
         return listaOmiljenogSadrzaja;
     }

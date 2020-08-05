@@ -1,6 +1,8 @@
 package gui.panels;
 
 import gui.dialogs.DialogRegistracije;
+import kontroler.RegistracijaKON;
+import kontroler.RegistracijaKON;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,7 +14,7 @@ public class PanelRegistracije extends JPanel implements ActionListener {
 
     private DialogRegistracije dialog;
     private String separator;
-    private JLabel ime, prezime, email, telefon, godina, korIme, sifra, labelaIkone;
+    private JLabel ime, prezime, email, telefon, godina, korIme, sifra, labelaIkone, upozorenje;
     private JTextField imeTF, prezimeTF, emailTF, telefonTF, godinaTF, korImeTF;
     private JPasswordField sifraTF;
     private JButton button;
@@ -21,7 +23,6 @@ public class PanelRegistracije extends JPanel implements ActionListener {
 
         this.dialog = dialog;
         separator = System.getProperty("file.separator");
-
         setBackground(new Color(221, 179, 164));
         podesiKomponente();
         setPanel();
@@ -38,6 +39,7 @@ public class PanelRegistracije extends JPanel implements ActionListener {
         godina = new JLabel("Godina rodjenja: ");
         korIme = new JLabel("Korisnicko ime: ");
         sifra = new JLabel("Sifra: ");
+        upozorenje = new JLabel("");
 
         imeTF = new JTextField(15);
         prezimeTF = new JTextField(15);
@@ -46,8 +48,9 @@ public class PanelRegistracije extends JPanel implements ActionListener {
         godinaTF = new JTextField(15);
         korImeTF = new JTextField(15);
         sifraTF = new JPasswordField(15);
+        sifraTF.setToolTipText("Slaba: manje od 4, srednja: manje od 8, velika slova, jaka: specijalni znakovi(*,_,..)");
 
-        button = new JButton("Prijava");
+        button = new JButton("Potvrdi");
         button.setBackground(new Color(62, 100, 103));
         button.setForeground(Color.white);
         button.addActionListener(this);
@@ -102,8 +105,15 @@ public class PanelRegistracije extends JPanel implements ActionListener {
         con.gridy = 7;
         add(sifra, con);
 
+        con.gridy = 9;
+        con.fill = GridBagConstraints.BOTH;
+        con.gridwidth = 2;
+        add(upozorenje, con);
+
         con.gridy = 1;
         con.gridx = 1;
+        con.fill = GridBagConstraints.BOTH;
+        con.gridwidth = 1;
         con.insets = new Insets(5, 5, 5, 20);
         add(imeTF, con);
 
@@ -135,48 +145,33 @@ public class PanelRegistracije extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        /*int counter = 0;
-        String username = nameField.getText();
-        @SuppressWarnings("deprecation")
-        String password = lastNameField.getText();
+        String ime, prezime, email, telefon, godina, korIme;
+        ime = imeTF.getText();
+        prezime = prezimeTF.getText();
+        email = emailTF.getText();
+        telefon = telefonTF.getText();
+        godina = godinaTF.getText();
+        korIme = korImeTF.getText();
+        String sifra = new String(sifraTF.getPassword());
 
-        MyReader reader = new MyReader("src" + separator + "podaci" + separator + "logInPodaci.csv", "UTF8");
-        ArrayList<String[]> lista = reader.readlinesWithSeparator(",");
-
-        for (String[] podaci: lista) {
-            if (podaci[0].equals(username) && podaci[1].equals(password)) {
-                counter++;
-                ManagerKorisnici menagerK = ManagerKorisnici.getInstance();
-                MainWindow window = new MainWindow();
-
-                upozorenja.setText("Nakon unosa pritisnite 'Prijava'");
-                nameField.setText(""); lastNameField.setText("");
-
-                Osoba osoba = menagerK.returnUser(username, password);
-                if (osoba == null) {
-                    continue;
-                }else {
-                    if (osoba instanceof Musterija) {
-                        window.podesiPanel(new MusterijinProzor((Musterija) osoba, window));
-                    }else if(osoba instanceof Dostavljac) {
-                        window.podesiPanel(new DostavljacevProzor((Dostavljac) osoba));
-                    }else if(osoba instanceof Vlasnik) {
-                        window.podesiPanel(new VlasnikovProzor((Vlasnik) osoba));
-                    }else {
-                        window.podesiPanel(new RadnikovProzor((Radnik) osoba));
-                    }
-                }
-                window.podesiMenuBar(new ZajednickiMenuBar(window, dialog));
-                window.setVisible(true);
-
-                dialog.setVisible(false);
-                break;
+        boolean retVal = false;
+        try {
+            retVal = RegistracijaKON.proslediPodatke(ime, prezime, email, telefon, godina, korIme, sifra);
+        } catch (Exception ex) {
+            String tipIzuzetka = ex.getMessage();
+            if (tipIzuzetka.equals("1")) {
+                upozorenje.setText("Morate popuniti sva polja !");
+            }else if(tipIzuzetka.equals("2")) {
+                upozorenje.setText("Format datuma mora biti -> dd-MM-yyyy !");
+            }else if(tipIzuzetka.equals("3")) {
+                upozorenje.setText("Korisnicko ime vec postoji !");
             }
         }
 
-        if (counter == 0) {
-            upozorenja.setText("Nesto ste pogresno uneli !");
-            nameField.setText(""); lastNameField.setText("");
-        }*/
+        if(retVal) {
+            dialog.dispose();
+            JOptionPane.showMessageDialog(null, "Uspeno ste se registrovali !\n" +
+                    "Mozete da se prijavite kao registrovani korisnik !");
+        }
     }
 }
