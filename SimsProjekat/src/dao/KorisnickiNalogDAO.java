@@ -1,9 +1,6 @@
 package dao;
 
-import model.Administrator;
-import model.KorisnickiNalog;
-import model.RegistrovaniKorisnik;
-import model.Urednik;
+import model.*;
 import model.enums.TipKorisnika;
 import util.FConnection;
 
@@ -42,6 +39,28 @@ public class KorisnickiNalogDAO {
         }
         return korisnik;
     }
+
+    public static KorisnickiNalog getNalogPoKorisnickomImenu(String korIme){
+        KorisnickiNalog nalog=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,korisnickoIme,lozinka,tipKorisnika from KorisnickiNalog where korisnickoIme=?");
+            ps.setString(1, korIme);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                nalog = new KorisnickiNalog();
+                nalog.setId(rs.getInt(1));
+                nalog.setKorisnickoIme(rs.getString(2));
+                nalog.setLozinka(rs.getString(3));
+                nalog.setKorisnik(TipKorisnika.valueOf(rs.getString(4)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nalog;
+    }
     public static List<KorisnickiNalog> getNalozi(){
         List<KorisnickiNalog> nalozi=new ArrayList<>();
         KorisnickiNalog korisnik=null;
@@ -69,11 +88,11 @@ public class KorisnickiNalogDAO {
         try {
             PreparedStatement ps= FConnection.getInstance()
                     .prepareStatement("select id,ime,prezime,email, kontaktTelefon, godinaRodjenja, idNaloga, " +
-                            "obrisano from administrator where idNaloga=?");
+                            "obrisano from Administrator where idNaloga=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                if(rs.getBoolean(8)){
+                if(!rs.getBoolean(8)){
                     admin=new Administrator();
                     admin.setId(rs.getInt(1));
                     admin.setIme(rs.getString(2));
@@ -81,8 +100,8 @@ public class KorisnickiNalogDAO {
                     admin.setEmail(rs.getString(4));
                     admin.setKontaktTelefon(rs.getString(5));
                     admin.setGodinaRodjenja(rs.getDate(6));
-                    admin.setIzlazeReklame(AdministratorDAO.getReklame(id));
-                    admin.setListaZahteva(AdministratorDAO.getZahteve(id));
+                    //admin.setIzlazeReklame(AdministratorDAO.getReklame(id));
+                    //admin.setListaZahteva(AdministratorDAO.getZahteve(id));
                 }
 
             }
@@ -91,6 +110,7 @@ public class KorisnickiNalogDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return admin;
     }
     //Nadji urednika
@@ -111,6 +131,7 @@ public class KorisnickiNalogDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return urednik;
     }
     //Nadji registrovanogKorisnika
@@ -136,6 +157,73 @@ public class KorisnickiNalogDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return korisnik;
+    }
+
+    /**
+     * Param: korIme - Korisnicko ime
+     * return: true - Ne postoji to vec korisnicko ime
+     *         false - Postoji vec to korisnicko ime
+     */
+    private static boolean proveriKorisnickoIme(String korIme) throws SQLException {
+        PreparedStatement ps = FConnection.getInstance().
+                prepareStatement("select * from KorisnickiNalog where korisnickoIme=?");
+        ps.setString(1, korIme);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            return false;
+        }
+        rs.close();
+        ps.close();
+        return true;
+    }
+
+    public static KorisnickiNalog insertValues(String korIme, String lozinka, TipKorisnika tip) throws Exception {
+
+        if(!KorisnickiNalogDAO.proveriKorisnickoIme(korIme)) {  //Ako vec postoji korisnicko ime
+            throw new Exception(String.valueOf(3));
+        }
+
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("insert into KorisnickiNalog(korisnickoIme,lozinka,tipKorisnika) values (?,?,?)");
+            ps.setString(1, korIme);
+            ps.setString(2, lozinka);
+            ps.setString(3, tip.toString());
+            ps.executeUpdate();
+            ps.close();
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return KorisnickiNalogDAO.getNalogPoKorisnickomImenu(korIme);
+    }
+
+    public static Korisnik getPrijavljeniKorisnik(String korIme, String sifra) {
+
+        Korisnik korisnik = null;
+
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,tipKorisnika from KorisnickiNalog where korisnickoIme=? and lozinka=? and obrisano=false");
+            ps.setString(1, korIme);
+            ps.setString(2, sifra);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                if(rs.getString(2).equals("REGISTROVANI")) {
+                    korisnik = KorisnickiNalogDAO.getRegistrovaniKorisnik(rs.getInt(1));
+                }else if(rs.getString(2).equals("UREDNIK")) {
+                    korisnik = KorisnickiNalogDAO.getUrednik(rs.getInt(1));
+                }else {
+                    korisnik = KorisnickiNalogDAO.getAdmin(rs.getInt(1));
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return korisnik;
     }
 

@@ -20,6 +20,15 @@ public abstract class Korisnik {
         this.nalog=nalog;
     }
 
+    public Korisnik(String ime, String prezime, String email, String kontaktTelefon, Date godinaRodjenja, KorisnickiNalog nalog) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.kontaktTelefon = kontaktTelefon;
+        this.godinaRodjenja = godinaRodjenja;
+        this.nalog=nalog;
+    }
+
     public int getId() {
         return id;
     }

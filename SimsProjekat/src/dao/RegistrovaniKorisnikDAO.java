@@ -74,11 +74,11 @@ public class RegistrovaniKorisnikDAO {
     public static void insert(RegistrovaniKorisnik korisnik) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into RegistrovaniKorisnik (ime,prezime,email,kontaktTelefon,godinaRodjenja,jeVidljiv,idNaloga) values (?,?,?,?,?,?,?)");
-        if(korisnik.getIme()!=null) ps.setString(1, korisnik.getIme()); else ps.setNull(1, java.sql.Types.VARCHAR);
-        if(korisnik.getPrezime()!=null) ps.setString(2, korisnik.getPrezime()); else ps.setNull(2, java.sql.Types.VARCHAR);
-        if(korisnik.getEmail()!=null) ps.setString(3, korisnik.getEmail()); else ps.setNull(3, java.sql.Types.VARCHAR);
-        if(korisnik.getKontaktTelefon()!=null) ps.setString(4, korisnik.getKontaktTelefon()); else ps.setNull(4, java.sql.Types.VARCHAR);
-        if(korisnik.getGodinaRodjenja()!=null) ps.setDate(5, (Date) korisnik.getGodinaRodjenja()); else ps.setNull(5, Types.DATE);
+        ps.setString(1, korisnik.getIme());
+        ps.setString(2, korisnik.getPrezime());
+        ps.setString(3, korisnik.getEmail());
+        ps.setString(4, korisnik.getKontaktTelefon());
+        ps.setDate(5, new java.sql.Date(korisnik.getGodinaRodjenja().getTime()));
         ps.setBoolean(6, korisnik.isJeVidljiv());
         ps.setInt(7, korisnik.getNalog().getId());
         ps.executeUpdate();

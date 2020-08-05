@@ -3,6 +3,10 @@ package gui.panels;
 import gui.dialogs.DialogPrijave;
 import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
+import gui.elementi.KorisnikovProzor;
+import gui.elementi.UrednikovProzor;
+import kontroler.RegistrovaniKorisnikKON;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,11 +21,13 @@ public class PanelPrijave extends JPanel implements ActionListener {
     private JLabel name, lastName, labela, upozorenja, slikaL;
     private JTextField nameField;
     private JPasswordField lastNameField;
-    private JButton button;
+    private JButton prijavaButton;
+    private GlavniProzor glavniProzor;
 
-    public PanelPrijave(DialogPrijave dialog) {
+    public PanelPrijave(DialogPrijave dialog, GlavniProzor gp) {
 
         this.dialog = dialog;
+        this.glavniProzor = gp;
         separator = System.getProperty("file.separator");
 
         setBackground(new Color(226, 206, 158));
@@ -39,10 +45,10 @@ public class PanelPrijave extends JPanel implements ActionListener {
         upozorenja.setForeground(new Color(62, 100, 103));
         nameField = new JTextField(15);
         lastNameField = new JPasswordField(15);
-        button = new JButton("Prijava");
-        button.setBackground(new Color(62, 100, 103));
-        button.setForeground(Color.white);
-        button.addActionListener(this);
+        prijavaButton = new JButton("Prijava");
+        prijavaButton.setBackground(new Color(62, 100, 103));
+        prijavaButton.setForeground(Color.white);
+        prijavaButton.addActionListener(this);
         Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "ikona.png");
         labela = new JLabel(icon);
         slikaL = new JLabel();
@@ -83,7 +89,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         con.gridx = 1;
         con.gridy = 3;
-        add(button, con);
+        add(prijavaButton, con);
 
         con.gridy = 1;
         con.insets = new Insets(5, 5, 15, 20);
@@ -102,48 +108,32 @@ public class PanelPrijave extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        /*int counter = 0;
-        String username = nameField.getText();
-        @SuppressWarnings("deprecation")
-        String password = lastNameField.getText();
 
-        MyReader reader = new MyReader("src" + separator + "podaci" + separator + "logInPodaci.csv", "UTF8");
-        ArrayList<String[]> lista = reader.readlinesWithSeparator(",");
+        String korIme = nameField.getText();
+        String sifra = new String(lastNameField.getPassword());
 
-        for (String[] podaci: lista) {
-            if (podaci[0].equals(username) && podaci[1].equals(password)) {
-                counter++;
-                ManagerKorisnici menagerK = ManagerKorisnici.getInstance();
-                MainWindow window = new MainWindow();
-
-                upozorenja.setText("Nakon unosa pritisnite 'Prijava'");
-                nameField.setText(""); lastNameField.setText("");
-
-                Osoba osoba = menagerK.returnUser(username, password);
-                if (osoba == null) {
-                    continue;
-                }else {
-                    if (osoba instanceof Musterija) {
-                        window.podesiPanel(new MusterijinProzor((Musterija) osoba, window));
-                    }else if(osoba instanceof Dostavljac) {
-                        window.podesiPanel(new DostavljacevProzor((Dostavljac) osoba));
-                    }else if(osoba instanceof Vlasnik) {
-                        window.podesiPanel(new VlasnikovProzor((Vlasnik) osoba));
-                    }else {
-                        window.podesiPanel(new RadnikovProzor((Radnik) osoba));
-                    }
-                }
-                window.podesiMenuBar(new ZajednickiMenuBar(window, dialog));
-                window.setVisible(true);
-
-                dialog.setVisible(false);
-                break;
+        Korisnik korisnik = null;
+        try {
+            korisnik = RegistrovaniKorisnikKON.proslediPodatkePrijave(korIme, sifra);
+            if(korisnik == null) return;
+        } catch (Exception ex) {
+            String tipIzuzetka = ex.getMessage();
+            if (tipIzuzetka.equals("1")) {
+                upozorenja.setText("Morate popuniti sva polja !");
             }
+            return;
         }
 
-        if (counter == 0) {
-            upozorenja.setText("Nesto ste pogresno uneli !");
-            nameField.setText(""); lastNameField.setText("");
-        }*/
+        dialog.dispose();       //Ugasi dialog prijave
+        glavniProzor.dispose();     //Ugasi pocetni prozor
+        GlavniProzor prozorPrijavljenog = null;
+        if(korisnik instanceof RegistrovaniKorisnik)
+            prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
+        else if(korisnik instanceof Urednik)
+            prozorPrijavljenog = new UrednikovProzor((Urednik) korisnik);
+        else
+            prozorPrijavljenog = new AdminovProzor((Administrator) korisnik);
+        prozorPrijavljenog.setVisible(true);
     }
+
 }

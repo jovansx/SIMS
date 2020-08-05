@@ -3,6 +3,7 @@ package gui.elementi;
 import gui.dialogs.DialogOdobravanje;
 import gui.dialogs.DialogProfil;
 import model.Recenzija;
+import model.Urednik;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,12 @@ import java.util.ArrayList;
 public class UrednikovProzor extends GlavniProzor{
     JButton profil,odobravanje,glasanje,zadaci;
     ArrayList<Recenzija> lista;
+
+    public UrednikovProzor(Urednik urednik) {
+        super();
+        inicijalizuj();
+    }
+
     public UrednikovProzor(ArrayList<Recenzija> listaRecenzija){
         super();
         this.lista = listaRecenzija;
@@ -55,5 +62,12 @@ public class UrednikovProzor extends GlavniProzor{
         });
         panelAkcija.add(zadaci);
 
+    }
+
+    private void inicijalizuj() {
+
+        panelOperacija.remove(prijavaButton);
+        panelOperacija.remove(registracijaButton);
+        odjavaButton.setVisible(true);
     }
 }

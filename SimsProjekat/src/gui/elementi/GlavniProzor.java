@@ -20,7 +20,7 @@ import java.util.List;
 
 public class
 GlavniProzor extends JFrame implements ActionListener{
-    private JPanel panelOperacija;
+    protected JPanel panelOperacija;
     private JPanel panelReklama;
     protected JPanel panelAkcija;
     private JScrollPane skrol;
@@ -28,16 +28,17 @@ GlavniProzor extends JFrame implements ActionListener{
     private JButton popularnoButton;
     private JTextField pretraziF;
     private JButton pretraziButton;
-    private JButton prijavaButton;
-    private JButton registracijaButton;
+    protected JButton prijavaButton;
+    protected JButton registracijaButton;
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
+    protected JButton odjavaButton;
     private boolean pocetnaTrenutno;
     private boolean pretraziTrenutno;
     private JLabel nothingFoundL;
     private Toolkit tool;
     private Dimension dimension;
-    private String separator;
+    protected String separator;
 
     private List<Element> elementi;
     private int brojElemenata;
@@ -73,6 +74,7 @@ GlavniProzor extends JFrame implements ActionListener{
 
     private void podesiAkcije() {
         prijavaButton.addActionListener(this);
+        odjavaButton.addActionListener(this);
         registracijaButton.addActionListener(this);
         pocetnaStranicaButton.addActionListener(this);
         popularnoButton.addActionListener(this);
@@ -102,6 +104,14 @@ GlavniProzor extends JFrame implements ActionListener{
         if (button == prijavaButton) {
             DialogPrijave dp = new DialogPrijave(GlavniProzor.this);
             dp.setVisible(true);
+        }else if(button == odjavaButton) {
+            Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "logOut.png");
+            int retVal = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zeleite da se odjavite ?", "Odjava", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+            if(retVal == 0) {
+                dispose();
+                GlavniProzor gp = new GlavniProzor();
+                gp.setVisible(true);
+            }
         }
         else if (button == registracijaButton) {
             DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
@@ -125,11 +135,7 @@ GlavniProzor extends JFrame implements ActionListener{
             if(izvodjenja.size() == 0) {
                 panelOdSkrola.add(nothingFoundL);
             }
-            /*if(izvodjenja.size() != 0) {
-                ucitajPretrazi(izvodjenja);
-            }else {
-                System.out.println("Nema rezultata !");
-            }*/
+
         }
         else if (button == pocetnaStranicaButton) {
             JViewport vp = skrol.getViewport();
@@ -157,7 +163,7 @@ GlavniProzor extends JFrame implements ActionListener{
         resetElemente();
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }
@@ -180,7 +186,7 @@ GlavniProzor extends JFrame implements ActionListener{
         }
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }
