@@ -1,7 +1,7 @@
 package gui.elementi;
 
+import dao.IzvodjenjeDAO;
 import dao.RecenzijaDAO;
-import kontroler.GlavniProzorKON;
 import model.Izvodjac;
 import model.Izvodjenje;
 import model.MuzickoDelo;
@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,33 +34,34 @@ public class PrikazElementa extends JDialog {
     private List<ElementRecenzija> elementi;
     private int brojElemenata;
 
-    public PrikazElementa(Izvodjenje iz, Element el){
+    public PrikazElementa(Izvodjenje iz, GlavniProzor gp){
         super();
         setModal(true);
         setTitle("Prikaz nformacija izvodjenja");
 
-        createUIComponents();
-        podesiKomponente(iz);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Dimension dimension = tool.getScreenSize();
+
+        podesiKomponente(iz, dimension);
 
         elementi = new ArrayList<ElementRecenzija>();
         skrolPaneRecenzija.getVerticalScrollBar().setUnitIncrement(10);
 
         panelSkrola.setLayout(new BoxLayout(panelSkrola, BoxLayout.Y_AXIS));
+        skrolPaneRecenzija.setPreferredSize(new Dimension(dimension.width / 4, dimension.height / 5));
 
         brojElemenata = 3;
         ucitajRecenzije(iz);
-        //podesiAkcije();
+
         add(panelGlavni);
 
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
         setSize(dimension.width / 4 + dimension.width / 17, dimension.height / 2);
 
         setResizable(false);
-        setLocationRelativeTo(el);
+        setLocationRelativeTo(gp);
     }
 
-    private void podesiKomponente(Izvodjenje iz) {
+    private void podesiKomponente(Izvodjenje iz, Dimension dim) {
         StringBuilder name = new StringBuilder();
         for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
             name.append(mz.getNazivDela()).append(",");
@@ -88,6 +91,22 @@ public class PrikazElementa extends JDialog {
                 }
             }
         });
+
+        String separator = System.getProperty("file.separator");
+
+        labelaIkone.setSize(200, dim.height/20*3 - 10);
+        ImageIcon retImageIcon = IzvodjenjeDAO.getSlikuIzvodjenja(iz, separator);
+        Image im = retImageIcon.getImage();
+        Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon newImage = new ImageIcon(myImg);
+        labelaIkone.setIcon(newImage);
+        iz.setImage(newImage);
+
+        comboBoxIzvodjaca = new JComboBox<String>(getNizIzvodjaca(iz.getListaIzvodjaca()));
+        panelGlavni.add(comboBoxIzvodjaca);
+
+        comboBoxMuzickihDela = new JComboBox<String>(getNizMuzickihDela(iz.getListaMuzickihDela()));
+        panelGlavni.add(comboBoxMuzickihDela);
     }
 
 
@@ -118,7 +137,25 @@ public class PrikazElementa extends JDialog {
         panelSkrola.repaint();
     }
 
-    private void createUIComponents(){
-        comboBoxIzvodjaca = new JComboBox(new String[]{"Bird", "Cat", "Dog", "Rabbit", "Pig"});
+    private String[] getNizIzvodjaca(List<Izvodjac> listaIzvodjaca) {
+        String[] itemsArray = new String[listaIzvodjaca.size()];
+        int index = 0;
+        for(Izvodjac izvodjac : listaIzvodjaca){
+            itemsArray[index] = izvodjac.getNazivIzvodjaca();
+            index++;
+
+        }
+        return itemsArray;
+    }
+
+    private String[] getNizMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
+        String[] itemsArray = new String[listaMuzickihDela.size()];
+        int index = 0;
+        for(MuzickoDelo muzickoDelo : listaMuzickihDela){
+            itemsArray[index] = muzickoDelo.getNazivDela();
+            index++;
+
+        }
+        return itemsArray;
     }
 }

@@ -22,7 +22,7 @@ public class Element extends JPanel{
     private JLabel labelaOpisa;
     private JLabel labelaIkone;
 
-    public Element(Izvodjenje iz) {
+    public Element(Izvodjenje iz, GlavniProzor gp) {
         super();
 
         Toolkit tool = Toolkit.getDefaultToolkit();
@@ -77,8 +77,7 @@ public class Element extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("ooooooooooooooooooj");
-                PrikazElementa pe = new PrikazElementa(iz, Element.this);
+                PrikazElementa pe = new PrikazElementa(iz, gp);
                 pe.setVisible(true);
             }
         });

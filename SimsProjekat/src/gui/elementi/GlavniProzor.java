@@ -153,7 +153,7 @@ GlavniProzor extends JFrame implements ActionListener{
         resetElemente();
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }
@@ -176,7 +176,7 @@ GlavniProzor extends JFrame implements ActionListener{
         }
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }

@@ -27,7 +27,7 @@ public class ElementRecenzija extends JPanel {
         Dimension dimension = tool.getScreenSize();
 
         //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
-        panelGlavni.setPreferredSize(new Dimension(dimension.width / 5 + dimension.width / 75 , dimension.height / 15));
+        panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30 , dimension.height / 15));
         add(panelGlavni);
 
         labelaAutora.setText(recenzija.getAutorRecenzije().toString());
