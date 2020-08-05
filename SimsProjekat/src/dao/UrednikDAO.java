@@ -53,34 +53,6 @@ public class UrednikDAO {
         return urednik;
     }
 
-    public static List<Recenzija> getRecenzijeUrednika(int id){
-        List<Recenzija> recenzije = new ArrayList<Recenzija>();
-        Recenzija recenzija=null;
-        try {
-            PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika," +
-                            "idUrednika,odobreno from Recenzija where idUrednika=? and obrisano=false");
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                recenzija = new Recenzija();
-                recenzija.setId(rs.getInt(1));
-                recenzija.setOcena(rs.getInt(2));
-                recenzija.setKomentar(rs.getString(3));
-                recenzija.setMuzickoDelo(MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4)));
-                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(5)));
-                recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(6)));
-                recenzija.setOdobreno(rs.getBoolean(8));
-                recenzija.setUrednik(null);
-                recenzije.add(recenzija);
-            }
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return recenzije;
-    }
     public static List<Urednik> getUrednike() {
         List<Urednik> urednici = new ArrayList<Urednik>();
         try {

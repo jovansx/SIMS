@@ -1,15 +1,11 @@
 package gui.panels;
 
-import dao.RecenzijaDAO;
-import dao.UrednikDAO;
-import gui.dialogs.DialogUrednika;
 import gui.dialogs.DialogUrednikovihRecenzija;
-import kontroler.AdminovProzorKON;
 import model.Recenzija;
-import model.Urednik;
 import tables.TabelaAktivnosti;
-import tables.TabelaUrednika;
+import tables.TabelaZahteva;
 
+import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;
@@ -22,16 +18,17 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//Panel za  prikaz urednika i broja recenzija koje su napisali
-public class PanelUrednika extends JPanel {
-    private DialogUrednika dialog;
-    public ArrayList<Urednik> urednici;
+public class PanelUrednikovihRecenzija extends JPanel {
+    private DialogUrednikovihRecenzija dialog;
+    public ArrayList<Recenzija> recenzije;
+    public JTable tabela;
+    public JButton uredu;
+    public HashMap<Recenzija, Double> ocjene;
 
-
-
-    public PanelUrednika(DialogUrednika dialog, ArrayList<Urednik> urednici){
-        this.dialog=dialog;
-        this.urednici=urednici;
+    public PanelUrednikovihRecenzija(DialogUrednikovihRecenzija dr, ArrayList<Recenzija> recenzije, HashMap<Recenzija, Double> prosjecneOcjene){
+        this.dialog=dr;
+        this.recenzije=recenzije;
+        this.ocjene=prosjecneOcjene;
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(229, 255, 204));
@@ -40,16 +37,11 @@ public class PanelUrednika extends JPanel {
     }
 
     private void namesti() {
+        TabelaAktivnosti t = new TabelaAktivnosti(ocjene,recenzije);
+        tabela=new JTable(t);
 
-        JLabel labela = new JLabel("Da biste vidjeli recenzije urednika pritisnite na zeljenjog urednika");
-        labela.setBounds(32, 20, 400, 30);
-        labela.setForeground(new Color(51, 102, 153));
-        add(labela);
-
-        TabelaUrednika tabelaUrednika=new TabelaUrednika(urednici);
-        JTable tabela =new JTable(tabelaUrednika);
         JScrollPane sp = new JScrollPane(tabela);
-        sp.setBounds(30, 60, 630, 450);
+        sp.setBounds(30, 30, 630, 450);
         add(sp);
 
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -60,15 +52,10 @@ public class PanelUrednika extends JPanel {
         tabela.setRowSorter(tableSorter);
 
 
-        tabela.addMouseListener(new MouseListener() {
+        tabela.getTableHeader().addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent me) {
-                int row= tabela.rowAtPoint(me.getPoint());
-                ArrayList<Recenzija> recenzije = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika((int)tabela.getValueAt(row,0));
-                HashMap<Recenzija, Double> ocjene= AdminovProzorKON.getProsjecneOcjeneKorisnika(recenzije);
-                DialogUrednikovihRecenzija dr=new DialogUrednikovihRecenzija(recenzije, ocjene);
-                dr.setVisible(true);
             }
 
             @Override
@@ -96,11 +83,17 @@ public class PanelUrednika extends JPanel {
             }
         });
 
-
-
-
-
+        uredu=new JButton("U redu");
+        uredu.setForeground(Color.white);
+        uredu.setBounds(555, 520, 90, 30);
+        uredu.setBackground(new Color(51, 102, 153));
+        uredu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ;
+            }
+        });
+        add(uredu);
     }
-
 
 }

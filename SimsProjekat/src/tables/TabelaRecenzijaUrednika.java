@@ -37,11 +37,26 @@ public class TabelaRecenzijaUrednika extends AbstractTableModel {
             case 0:
                 return r.getId();
             case 1:
-                return r.getUrednik().getNalog().getKorisnickoIme();
+                if(r.getUrednik()!=null) {
+                    return r.getUrednik().getNalog().getKorisnickoIme();
+                }
+                else{
+                    return "-";
+                }
             case 2:
-                return r.getMuzickoDelo().getNazivDela();
+                if(r.getMuzickoDelo()!=null){
+                    return r.getMuzickoDelo().getNazivDela();
+                }
+                else{
+                    return "-";
+                }
             case 3:
-                return r.getIzvodnjenje().getId();
+                if(r.getIzvodnjenje()!=null){
+                    return r.getIzvodnjenje().getId();
+                }
+                else{
+                    return "-";
+                }
             case 4:
                 return r.isOdobreno();
 
