@@ -34,13 +34,8 @@ public class Element extends JPanel{
 
         add(panelGlavni);
 
-        StringBuilder name = new StringBuilder();
-        for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
-            name.append(mz.getNazivDela()).append(",");
-        }
-        name = new StringBuilder(name.substring(0, name.length() - 1));
 
-        labelaNaslova.setText(name.toString());
+        labelaNaslova.setText(generateNazivIzvodjenja(iz));
 
         StringBuilder izvodjaci = new StringBuilder();
         for (Izvodjac izv: iz.getListaIzvodjaca()) {
@@ -81,5 +76,14 @@ public class Element extends JPanel{
                 pe.setVisible(true);
             }
         });
+    }
+
+    public static String generateNazivIzvodjenja(Izvodjenje izvodjenje){
+        StringBuilder name = new StringBuilder();
+        for (MuzickoDelo mz : izvodjenje.getListaMuzickihDela()) {
+            name.append(mz.getNazivDela()).append(",");
+        }
+        name = new StringBuilder(name.substring(0, name.length() - 1));
+        return name.toString();
     }
 }

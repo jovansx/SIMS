@@ -114,14 +114,6 @@ public class Izvodjac {
 
     @Override
     public String toString() {
-        return "Izvodjac{" +
-                "id=" + id +
-                ", nazivIzvodjaca='" + nazivIzvodjaca + '\'' +
-                ", opis='" + opis + '\'' +
-                ", tipIzvodjaca=" + tipIzvodjaca +
-                ", pripadaGrupi=" + pripadaGrupi +
-                ", imaClanoce=" + imaClanove +
-                ", listaIzvodjenja=" + listaIzvodjenja +
-                '}';
+        return  nazivIzvodjaca + " " + tipIzvodjaca;
     }
 }

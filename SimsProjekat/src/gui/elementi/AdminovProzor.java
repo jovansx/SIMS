@@ -15,24 +15,14 @@ import java.util.ArrayList;
 
 public class AdminovProzor extends GlavniProzor{
     JButton profil,inbox,zadaci,promenaLozinke,odobravanje, sadrzaj, pregled;
-    ArrayList<Recenzija> recenzije;
-    ArrayList<Zanr> zanrovi;
-    ArrayList<Ucesnik> ucesnici;
-    ArrayList<Izvodjac> izvodjaci;
-    ArrayList<MuzickoDelo> djela;
+
 
     public AdminovProzor(Administrator administrator) {
         super();
         inicijalizuj();
     }
 
-    public AdminovProzor(ArrayList<Recenzija> recenzije, ArrayList<Zanr> zanrovi, ArrayList<Ucesnik> ucesnici, ArrayList<Izvodjac> izvodjaci, ArrayList<MuzickoDelo> djela){
-        this.recenzije=recenzije;
-        this.zanrovi=zanrovi;
-        this.djela=djela;
-        this.izvodjaci=izvodjaci;
-        this.ucesnici=ucesnici;
-
+    public AdminovProzor(){
 
         panelAkcija.setLayout(new BoxLayout(panelAkcija,BoxLayout.PAGE_AXIS));
         profil = new JButton("Profil");

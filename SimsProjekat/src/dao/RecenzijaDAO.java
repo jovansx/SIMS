@@ -39,6 +39,97 @@ public class RecenzijaDAO {
         }
         return recenzija;
     }
+    public static List<Recenzija> getRecenzijeKojeJeUrednikKreirao(){
+        List<Recenzija> recenzije = new ArrayList<Recenzija>();
+        Recenzija recenzija=null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika," +
+                            "idUrednika,odobreno from Recenzija where idKorisnika is null and obrisano=false");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                recenzija = new Recenzija();
+                recenzija.setId(rs.getInt(1));
+                recenzija.setOcena(rs.getInt(2));
+                recenzija.setKomentar(rs.getString(3));
+                recenzija.setMuzickoDelo(MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4)));
+                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(5)));
+                recenzija.setAutorRecenzije(null);
+                recenzija.setOdobreno(rs.getBoolean(8));
+                recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(7)));
+                recenzije.add(recenzija);
+
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recenzije;
+    }
+    public static List<Recenzija> getRecenzijeUrednika(int id){
+        List<Recenzija> recenzije = new ArrayList<Recenzija>();
+        Recenzija recenzija=null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika," +
+                            "idUrednika,odobreno from Recenzija where idUrednika=? and obrisano=false");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                recenzija = new Recenzija();
+                recenzija.setId(rs.getInt(1));
+                recenzija.setOcena(rs.getInt(2));
+                recenzija.setKomentar(rs.getString(3));
+                recenzija.setMuzickoDelo(MuzickoDeloDAO.getMuzickoDelo(rs.getInt(4)));
+                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(5)));
+                recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(6)));
+                recenzija.setOdobreno(rs.getBoolean(8));
+                recenzija.setUrednik(null);
+                recenzije.add(recenzija);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recenzije;
+    }
+    public static double getProsjecnaOcjenaPoIdIzvodjenja(int id){
+        double d=0.0;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select avg(ocena) from Recenzija where idIzvodjenja=?");
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()) {
+                d=rs.getDouble(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return d;
+    }
+
+    public static double getProsjecnaOcjenaPoIdDela(int id){
+        double d=0.0;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select avg(ocena) from Recenzija where idMuzickogDela=?");
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()) {
+                d=rs.getDouble(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return d;
+    }
 
     public static List<Recenzija> getRecenzijeIzvodjenja(int idIzvodjenja, int limit){
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
