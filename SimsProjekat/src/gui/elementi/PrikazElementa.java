@@ -7,12 +7,10 @@ import model.Izvodjenje;
 import model.MuzickoDelo;
 import model.Recenzija;
 
+import javax.naming.event.ObjectChangeListener;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,6 @@ public class PrikazElementa extends JDialog {
     private JButton buttonPrikaziIzvodjaca;
     private JButton prikaziMuzickoDeloButton;
     private JLabel vremeIzvodjenjaLabela;
-    private List<ElementRecenzija> elementi;
     private int brojElemenata;
 
     public PrikazElementa(Izvodjenje iz, GlavniProzor gp){
@@ -44,7 +41,6 @@ public class PrikazElementa extends JDialog {
 
         podesiKomponente(iz, dimension);
 
-        elementi = new ArrayList<ElementRecenzija>();
         skrolPaneRecenzija.getVerticalScrollBar().setUnitIncrement(10);
 
         panelSkrola.setLayout(new BoxLayout(panelSkrola, BoxLayout.Y_AXIS));
@@ -62,13 +58,8 @@ public class PrikazElementa extends JDialog {
     }
 
     private void podesiKomponente(Izvodjenje iz, Dimension dim) {
-        StringBuilder name = new StringBuilder();
-        for (MuzickoDelo mz : iz.getListaMuzickihDela()) {
-            name.append(mz.getNazivDela()).append(",");
-        }
-        name = new StringBuilder(name.substring(0, name.length() - 1));
 
-        nazivDelaLabela.setText("Naziv dela : "+name.toString());
+        nazivDelaLabela.setText("Naziv dela : "+Element.generateNazivIzvodjenja(iz));
 
         vremeIzvodjenjaLabela.setText("Vreme izvodjenja : "+iz.getVremeIzvodjenja().toString());
 
@@ -92,6 +83,32 @@ public class PrikazElementa extends JDialog {
             }
         });
 
+        buttonPrikaziIzvodjaca.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = comboBoxIzvodjaca.getSelectedIndex();
+                if (index < 0){
+                    JOptionPane.showMessageDialog(PrikazElementa.this, "Ne postoji izvodjac");
+                } else {
+                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(iz.getListaIzvodjaca().get(index), PrikazElementa.this);
+                    pi.setVisible(true);
+                }
+            }
+        });
+
+        prikaziMuzickoDeloButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = comboBoxMuzickihDela.getSelectedIndex();
+                if (index < 0){
+                    JOptionPane.showMessageDialog(PrikazElementa.this, "Ne postoji muzicko delo");
+                } else {
+                    PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), PrikazElementa.this);
+                    pi.setVisible(true);
+                }
+            }
+        });
+
         String separator = System.getProperty("file.separator");
 
         labelaIkone.setSize(200, dim.height/20*3 - 10);
@@ -103,9 +120,11 @@ public class PrikazElementa extends JDialog {
         iz.setImage(newImage);
 
         comboBoxIzvodjaca = new JComboBox<String>(getNizIzvodjaca(iz.getListaIzvodjaca()));
+        comboBoxIzvodjaca.setBackground(new Color(186,186,178));
         panelGlavni.add(comboBoxIzvodjaca);
 
         comboBoxMuzickihDela = new JComboBox<String>(getNizMuzickihDela(iz.getListaMuzickihDela()));
+        comboBoxMuzickihDela.setBackground(new Color(186,186,178));
         panelGlavni.add(comboBoxMuzickihDela);
     }
 
@@ -118,7 +137,6 @@ public class PrikazElementa extends JDialog {
 
         for (Recenzija r : recenzije) {
             ElementRecenzija el = new ElementRecenzija(r);
-            elementi.add(el);
             panelSkrola.add(el);
         }
 
@@ -131,13 +149,12 @@ public class PrikazElementa extends JDialog {
     }
 
     private void resetRecenzije() {
-        elementi.clear();
         panelSkrola.removeAll();
         panelSkrola.validate();
         panelSkrola.repaint();
     }
 
-    private String[] getNizIzvodjaca(List<Izvodjac> listaIzvodjaca) {
+    public static String[] getNizIzvodjaca(List<Izvodjac> listaIzvodjaca) {
         String[] itemsArray = new String[listaIzvodjaca.size()];
         int index = 0;
         for(Izvodjac izvodjac : listaIzvodjaca){
@@ -148,7 +165,7 @@ public class PrikazElementa extends JDialog {
         return itemsArray;
     }
 
-    private String[] getNizMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
+    public static String[] getNizMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
         String[] itemsArray = new String[listaMuzickihDela.size()];
         int index = 0;
         for(MuzickoDelo muzickoDelo : listaMuzickihDela){

@@ -46,6 +46,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                /*
                 ArrayList<Recenzija> lista = new ArrayList<Recenzija>();
                 RegistrovaniKorisnik autorRecenzije = new RegistrovaniKorisnik();
                 autorRecenzije.setId(5);
@@ -61,6 +62,10 @@ public class Main {
                 u.setVisible(true);
                 //UrednikovProzor gp = new UrednikovProzor();
                 //gp.setVisible(true);
+
+                 */
+                GlavniProzor gp = new GlavniProzor();
+                gp.setVisible(true);
             }
         });
     }

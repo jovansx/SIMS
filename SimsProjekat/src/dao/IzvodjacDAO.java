@@ -27,12 +27,17 @@ public class IzvodjacDAO {
                 izvodjac.setNazivIzvodjaca(rs.getString(2));
                 izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
                 izvodjac.setOpis(rs.getString(4));
+
+
                 if(rs.getInt(5) > 0){
-                    izvodjac.setPripadaGrupi(getGrupa(id));
+                    izvodjac.setPripadaGrupi(getGrupa(rs.getInt(5)));
                 } else {
                     izvodjac.setPripadaGrupi(null);
                 }
 
+                izvodjac.setImaClanove(getClanoveIzvodjaca(izvodjac.getId()));
+
+                //izvodjac.setListaIzvodjenja(IzvodjenjeDAO.getIzvodjenjaIzvodjaca(izvodjac.getId()));
             }
             rs.close();
             ps.close();
@@ -40,6 +45,41 @@ public class IzvodjacDAO {
             e.printStackTrace();
         }
         return izvodjac;
+    }
+
+    private static List<Izvodjac> getClanoveIzvodjaca(int idIzvodjaca) {
+        List<Izvodjac> izvodjaci = new ArrayList<Izvodjac>();
+        Izvodjac izvodjac=null;
+
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where pripadaGrupi=?");
+            ps.setInt(1, idIzvodjaca);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(1));
+                izvodjac.setNazivIzvodjaca(rs.getString(2));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+
+
+                if(rs.getInt(5) > 0){
+                    izvodjac.setPripadaGrupi(getGrupa(rs.getInt(5)));
+                } else {
+                    izvodjac.setPripadaGrupi(null);
+                }
+
+                izvodjac.setImaClanove(getClanoveIzvodjaca(izvodjac.getId()));
+
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjaci;
     }
 
     //Trazi grupu kojoj pripada izvodjac

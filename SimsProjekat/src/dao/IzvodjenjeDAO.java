@@ -187,6 +187,16 @@ public class IzvodjenjeDAO {
         }
         return dela;
     }
+/*
+    public static List<Izvodjenje> getIzvodjenjaIzvodjaca(int idIzvodjaca) {
+        System.out.println("get");
+
+
+    }
+
+
+ */
+
     //Trazenje recenzija za izvodjenje
     public static List<Recenzija> getRecenzije(Integer id){
         List<Recenzija> recenzije=new ArrayList<>();
@@ -271,5 +281,26 @@ public class IzvodjenjeDAO {
             result[i][6]= String.valueOf(izvodjenja.get(i).getUkupnoPrisupa());
         }
         return result;
+    }
+
+    public static List<Izvodjenje> popuniListeIzvodjaca(Izvodjac izvodjac) {
+        List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
+        Izvodjenje izvodjenje = null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select * from IzvodjacIzvodi where obrisano=false and idIzvodjaca = ?");
+            ps.setInt(1, izvodjac.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjenje=getIzvodjenje(rs.getInt(2));
+                izvodjenja.add(izvodjenje);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjenja;
     }
 }
