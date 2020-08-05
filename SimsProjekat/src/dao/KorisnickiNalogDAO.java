@@ -88,11 +88,11 @@ public class KorisnickiNalogDAO {
         try {
             PreparedStatement ps= FConnection.getInstance()
                     .prepareStatement("select id,ime,prezime,email, kontaktTelefon, godinaRodjenja, idNaloga, " +
-                            "obrisano from administrator where idNaloga=?");
+                            "obrisano from Administrator where idNaloga=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                if(rs.getBoolean(8)){
+                if(!rs.getBoolean(8)){
                     admin=new Administrator();
                     admin.setId(rs.getInt(1));
                     admin.setIme(rs.getString(2));
@@ -100,8 +100,8 @@ public class KorisnickiNalogDAO {
                     admin.setEmail(rs.getString(4));
                     admin.setKontaktTelefon(rs.getString(5));
                     admin.setGodinaRodjenja(rs.getDate(6));
-                    admin.setIzlazeReklame(AdministratorDAO.getReklame(id));
-                    admin.setListaZahteva(AdministratorDAO.getZahteve(id));
+                    //admin.setIzlazeReklame(AdministratorDAO.getReklame(id));
+                    //admin.setListaZahteva(AdministratorDAO.getZahteve(id));
                 }
 
             }
@@ -110,6 +110,7 @@ public class KorisnickiNalogDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return admin;
     }
     //Nadji urednika
@@ -130,6 +131,7 @@ public class KorisnickiNalogDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return urednik;
     }
     //Nadji registrovanogKorisnika
@@ -210,7 +212,7 @@ public class KorisnickiNalogDAO {
             if(rs.next()) {
                 if(rs.getString(2).equals("REGISTROVANI")) {
                     korisnik = KorisnickiNalogDAO.getRegistrovaniKorisnik(rs.getInt(1));
-                }else if(rs.getString(1).equals("UREDNIK")) {
+                }else if(rs.getString(2).equals("UREDNIK")) {
                     korisnik = KorisnickiNalogDAO.getUrednik(rs.getInt(1));
                 }else {
                     korisnik = KorisnickiNalogDAO.getAdmin(rs.getInt(1));

@@ -155,7 +155,7 @@ public class PanelRegistracije extends JPanel implements ActionListener {
 
         boolean retVal = false;
         try {
-            retVal = RegistrovaniKorisnikKON.proslediPodatke(ime, prezime, email, telefon, godina, korIme, sifra);
+            retVal = RegistrovaniKorisnikKON.proslediPodatkeRegistarcije(ime, prezime, email, telefon, godina, korIme, sifra);
         } catch (Exception ex) {
             String tipIzuzetka = ex.getMessage();
             if (tipIzuzetka.equals("1")) {

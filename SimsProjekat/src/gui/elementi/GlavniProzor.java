@@ -74,6 +74,7 @@ GlavniProzor extends JFrame implements ActionListener{
 
     private void podesiAkcije() {
         prijavaButton.addActionListener(this);
+        odjavaButton.addActionListener(this);
         registracijaButton.addActionListener(this);
         pocetnaStranicaButton.addActionListener(this);
         popularnoButton.addActionListener(this);
@@ -103,6 +104,14 @@ GlavniProzor extends JFrame implements ActionListener{
         if (button == prijavaButton) {
             DialogPrijave dp = new DialogPrijave(GlavniProzor.this);
             dp.setVisible(true);
+        }else if(button == odjavaButton) {
+            Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "logOut.png");
+            int retVal = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zeleite da se odjavite ?", "Odjava", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+            if(retVal == 0) {
+                dispose();
+                GlavniProzor gp = new GlavniProzor();
+                gp.setVisible(true);
+            }
         }
         else if (button == registracijaButton) {
             DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);

@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class RegistrovaniKorisnikKON {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     public static Korisnik proslediPodatkePrijave(String korIme, String sifra) throws Exception {
 
@@ -27,7 +27,7 @@ public class RegistrovaniKorisnikKON {
      * return: true - Ako je uspesan upis
      *
      */
-    public static boolean proslediPodatke(String ime, String prezime, String email,
+    public static boolean proslediPodatkeRegistarcije(String ime, String prezime, String email,
                                           String telefon, String godina, String korIme, String sifra) throws Exception {
         //Ukoliko je nesto od polja prazno
         if(ime.equals("") || prezime.equals("") || email.equals("") ||

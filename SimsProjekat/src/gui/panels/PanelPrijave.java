@@ -1,8 +1,10 @@
 package gui.panels;
 
 import gui.dialogs.DialogPrijave;
+import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
 import gui.elementi.KorisnikovProzor;
+import gui.elementi.UrednikovProzor;
 import kontroler.RegistrovaniKorisnikKON;
 import model.*;
 
@@ -127,10 +129,10 @@ public class PanelPrijave extends JPanel implements ActionListener {
         GlavniProzor prozorPrijavljenog = null;
         if(korisnik instanceof RegistrovaniKorisnik)
             prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
-        //else if(korisnik instanceof Urednik)
-            //prozorPrijavljenog = new UrednikovProzor();
-        //else:
-            //prozorPrijavljenog = new AdminovProzor();
+        else if(korisnik instanceof Urednik)
+            prozorPrijavljenog = new UrednikovProzor((Urednik) korisnik);
+        else
+            prozorPrijavljenog = new AdminovProzor((Administrator) korisnik);
         prozorPrijavljenog.setVisible(true);
     }
 

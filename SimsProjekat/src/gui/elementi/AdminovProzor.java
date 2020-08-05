@@ -20,6 +20,12 @@ public class AdminovProzor extends GlavniProzor{
     ArrayList<Ucesnik> ucesnici;
     ArrayList<Izvodjac> izvodjaci;
     ArrayList<MuzickoDelo> djela;
+
+    public AdminovProzor(Administrator administrator) {
+        super();
+        inicijalizuj();
+    }
+
     public AdminovProzor(ArrayList<Recenzija> recenzije, ArrayList<Zanr> zanrovi, ArrayList<Ucesnik> ucesnici, ArrayList<Izvodjac> izvodjaci, ArrayList<MuzickoDelo> djela){
         this.recenzije=recenzije;
         this.zanrovi=zanrovi;
@@ -119,6 +125,13 @@ public class AdminovProzor extends GlavniProzor{
             u.setListaRecenzija((ArrayList<Recenzija>) UrednikDAO.getRecenzijeUrednika(u.getId()));
         }
         return urednici;
+    }
+
+    private void inicijalizuj() {
+
+        panelOperacija.remove(prijavaButton);
+        panelOperacija.remove(registracijaButton);
+        odjavaButton.setVisible(true);
     }
 
 }
