@@ -9,7 +9,7 @@ public class DialogSadrzaja extends JDialog {
 
     public DialogSadrzaja(){
         setTitle("Dodaj sadrzaj");
-        setSize(500, 500);
+        setSize(500, 400);
         setResizable(false);
         panelSadrzaja = new PanelSadrzaja(this);
         setContentPane(panelSadrzaja);

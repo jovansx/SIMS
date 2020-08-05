@@ -25,21 +25,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi.">
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogProfilAdmin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogSadrzaja.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/content.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina">
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogUrednika.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelUrednika.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/tables/TabelaAktivnosti.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/tables/TabelaUrednika.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/NoviProzor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/RecenzijaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/RecenzijaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/UrednikDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/UrednikDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelZahteva.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelZahteva.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Urednik.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +190,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596444586388</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora.">
+      <created>1596538320509</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596538320509</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina">
+      <created>1596562216424</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1596562216424</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,33 +235,35 @@
     <MESSAGE value="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste" />
     <MESSAGE value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
     <MESSAGE value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
+    <MESSAGE value="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora." />
+    <MESSAGE value="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1596531991559">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1596558781766">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1596531991559" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1596558781766" />
     <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1596128446761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596128446761" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596538112188">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596576975928">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596538112188" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596538112187">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596576975928" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596576975928">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596538112187">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596576975928" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596576975928">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596538112187">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596576975928" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596576975928">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596538112187" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596576975928" />
     <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1596127121373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -257,13 +272,31 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596128456154" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596444591729">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596562246889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596444591729" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596528134903">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596562246889" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596570428364">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596528134903" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596570428364" />
+    <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596576768663">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1596576768663" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1596548863261">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596548863261" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

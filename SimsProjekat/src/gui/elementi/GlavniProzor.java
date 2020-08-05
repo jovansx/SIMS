@@ -125,11 +125,7 @@ GlavniProzor extends JFrame implements ActionListener{
             if(izvodjenja.size() == 0) {
                 panelOdSkrola.add(nothingFoundL);
             }
-            /*if(izvodjenja.size() != 0) {
-                ucitajPretrazi(izvodjenja);
-            }else {
-                System.out.println("Nema rezultata !");
-            }*/
+
         }
         else if (button == pocetnaStranicaButton) {
             JViewport vp = skrol.getViewport();
@@ -157,7 +153,7 @@ GlavniProzor extends JFrame implements ActionListener{
         resetElemente();
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }
@@ -180,7 +176,7 @@ GlavniProzor extends JFrame implements ActionListener{
         }
 
         for (Izvodjenje iz : izvodjenja) {
-            Element el = new Element(iz);
+            Element el = new Element(iz, this);
             elementi.add(el);
             panelOdSkrola.add(el);
         }

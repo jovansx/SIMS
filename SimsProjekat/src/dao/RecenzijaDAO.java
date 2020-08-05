@@ -7,13 +7,14 @@ import util.FConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecenzijaDAO {
     public static Recenzija getRecenzija(int id){
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika from Recenzija where id=?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()) {
@@ -28,6 +29,7 @@ public class RecenzijaDAO {
                     recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(6)));
                     recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
                     recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(8)));
+                    recenzija.setOdobreno(rs.getBoolean(9));
                 }
             }
             rs.close();
@@ -37,15 +39,49 @@ public class RecenzijaDAO {
         }
         return recenzija;
     }
+
+    public static List<Recenzija> getRecenzijeIzvodjenja(int idIzvodjenja, int limit){
+        List<Recenzija> recenzije = new ArrayList<Recenzija>();
+        Recenzija recenzija = null;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idIzvodjenja=? limit ?");
+            ps.setInt(1, idIzvodjenja);
+            ps.setInt(2, limit);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                recenzija = new Recenzija();
+                recenzija.setId(rs.getInt(1));
+                recenzija.setOcena(rs.getInt(3));
+                recenzija.setKomentar(rs.getString(4));
+                recenzija.setMuzickoDelo(null);
+                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(6)));
+                if (rs.getInt(7) > 0){
+                    recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
+                } else {
+                    recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(8)));
+                }
+                recenzije.add(recenzija);
+                }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recenzije;
+    }
+
+
+
     public static void insert(Recenzija recenzija) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika from Recenzija where id=?");
+                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
         ps.setInt(2,recenzija.getOcena());
         ps.setString(3,recenzija.getKomentar());
         ps.setInt(4,recenzija.getMuzickoDelo().getId());
         ps.setInt(5,recenzija.getIzvodnjenje().getId());
         ps.setInt(6,recenzija.getAutorRecenzije().getId());
         ps.setInt(7,recenzija.getUrednik().getId());
+        ps.setBoolean(8, recenzija.isOdobreno());
         ps.executeUpdate();
         ps.close();
     }
@@ -66,7 +102,7 @@ public class RecenzijaDAO {
         ps.close();
     }
     public static String[] columns(){
-        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika"};
+        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika","Odobreno"};
     }
 
     public static String[][] toTableData(List<Recenzija> recenzije){
@@ -79,6 +115,7 @@ public class RecenzijaDAO {
             result[i][4] = String.valueOf(recenzije.get(i).getAutorRecenzije());
             result[i][5] = String.valueOf(recenzije.get(i).getIzvodnjenje());
             result[i][6] = String.valueOf(recenzije.get(i).getUrednik());
+            result[i][7] = String.valueOf(recenzije.get(i).isOdobreno());
         }
         return result;
     }

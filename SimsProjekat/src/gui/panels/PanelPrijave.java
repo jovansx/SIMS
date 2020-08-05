@@ -17,7 +17,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
     private JLabel name, lastName, labela, upozorenja, slikaL;
     private JTextField nameField;
     private JPasswordField lastNameField;
-    private JButton button;
+    private JButton prijavaButton;
 
     public PanelPrijave(DialogPrijave dialog) {
 
@@ -39,10 +39,10 @@ public class PanelPrijave extends JPanel implements ActionListener {
         upozorenja.setForeground(new Color(62, 100, 103));
         nameField = new JTextField(15);
         lastNameField = new JPasswordField(15);
-        button = new JButton("Prijava");
-        button.setBackground(new Color(62, 100, 103));
-        button.setForeground(Color.white);
-        button.addActionListener(this);
+        prijavaButton = new JButton("Prijava");
+        prijavaButton.setBackground(new Color(62, 100, 103));
+        prijavaButton.setForeground(Color.white);
+        prijavaButton.addActionListener(this);
         Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "ikona.png");
         labela = new JLabel(icon);
         slikaL = new JLabel();
@@ -83,7 +83,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         con.gridx = 1;
         con.gridy = 3;
-        add(button, con);
+        add(prijavaButton, con);
 
         con.gridy = 1;
         con.insets = new Insets(5, 5, 15, 20);
@@ -102,6 +102,16 @@ public class PanelPrijave extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        JButton button = (JButton)e.getSource();
+
+        if (button == prijavaButton) {
+            String username = nameField.getText();
+            String password = String.valueOf(lastNameField.getPassword());
+            //boolean provera = proveriNalog(username, password);
+            System.out.println("username:"+username+",password:"+password);
+        }
+        
+        
         /*int counter = 0;
         String username = nameField.getText();
         @SuppressWarnings("deprecation")
@@ -145,5 +155,9 @@ public class PanelPrijave extends JPanel implements ActionListener {
             upozorenja.setText("Nesto ste pogresno uneli !");
             nameField.setText(""); lastNameField.setText("");
         }*/
+    }
+
+    private boolean proveriNalog(String username, String password) {
+        return true;
     }
 }
