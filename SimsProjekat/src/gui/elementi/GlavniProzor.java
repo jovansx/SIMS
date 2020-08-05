@@ -1,11 +1,13 @@
 package gui.elementi;
 
 import dao.IzvodjenjeDAO;
+import dao.ReklamaDAO;
 import dao.ZanrDAO;
 import gui.dialogs.DialogPrijave;
 import gui.dialogs.DialogRegistracije;
 import kontroler.GlavniProzorKON;
 import model.Izvodjenje;
+import model.Reklama;
 import model.Zanr;
 
 import javax.swing.*;
@@ -16,12 +18,13 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class
 GlavniProzor extends JFrame implements ActionListener{
     protected JPanel panelOperacija;
-    private JPanel panelReklama;
+    public JPanel panelReklama;
     protected JPanel panelAkcija;
     private JScrollPane skrol;
     private JPanel panelGlavni;
@@ -41,7 +44,10 @@ GlavniProzor extends JFrame implements ActionListener{
     protected String separator;
 
     private List<Element> elementi;
+    private List<ElementReklame> reklame;
     private int brojElemenata;
+    private boolean prviPutReklame;
+    private int maxIdReklame;
 
     public GlavniProzor() {
         super("Muzicki sistem");
@@ -49,22 +55,38 @@ GlavniProzor extends JFrame implements ActionListener{
         tool = Toolkit.getDefaultToolkit();
         dimension = tool.getScreenSize();
         separator = System.getProperty("file.separator");
+
         Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "nothingFound.png");
         nothingFoundL = new JLabel(icon);
         nothingFoundL.setPreferredSize(new Dimension(dimension.width / 8 * 3, dimension.height / 8 * 3));
+
         //Kad podesimo u GlavniProzor.from boju ne mora ovo ovde
         pocetnaStranicaButton.setBackground(Color.GREEN);
+        skrol.getVerticalScrollBar().setUnitIncrement(16);      //brzina skrola
         pocetnaTrenutno = true; //Ako je false onda je popularno pritisnutno
         pretraziTrenutno = false;
         brojElemenata = 5;
+        prviPutReklame = true;
+        maxIdReklame = -1;
         elementi = new ArrayList<Element>();
-        skrol.getVerticalScrollBar().setUnitIncrement(16);      //brzina skrola
+        reklame = new ArrayList<ElementReklame>();
 
         setSize(dimension.width / 4 * 3, dimension.height / 4 * 3);
         panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
-
+        panelReklama.setLayout(new BoxLayout(panelReklama, BoxLayout.Y_AXIS));
+        /*Reklama r = new Reklama();
+        reklame.add(new ElementReklame(r, this));
+        reklame.add(new ElementReklame(r, this));
+        reklame.add(new ElementReklame(r, this));
+        for(ElementReklame el: reklame) {
+            panelReklama.add(el);
+        }
+        panelReklama.validate();
+        panelReklama.repaint();*/
+        ucitajReklamu();
         ucitajPocetnuStranu();
         podesiAkcije();
+
         add(panelGlavni);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -204,4 +226,44 @@ GlavniProzor extends JFrame implements ActionListener{
         panelOdSkrola.validate();
         panelOdSkrola.repaint();
     }
+
+    public void ucitajReklamu() {
+
+        java.sql.Date danasnjiDatum = new java.sql.Date(System.currentTimeMillis());
+
+        if(prviPutReklame) {
+            for (int i = 0; i < 3; i++) {
+                Reklama reklama = ReklamaDAO.getReklamaZaReklamniBafer(maxIdReklame, danasnjiDatum);
+                if(reklama != null) {
+                    maxIdReklame = reklama.getId();
+                    ElementReklame elementReklame = new ElementReklame(reklama, this);
+                    reklame.add(elementReklame);
+                    panelReklama.add(elementReklame);
+                }
+            }
+            prviPutReklame = false;
+        }else {
+            Reklama reklama = ReklamaDAO.getReklamaZaReklamniBafer(maxIdReklame, danasnjiDatum);
+            if(reklama != null) {
+                maxIdReklame = reklama.getId();
+                ElementReklame elementReklame = new ElementReklame(reklama, this);
+                reklame.add(elementReklame);
+                panelReklama.add(elementReklame);
+            }
+        }
+
+        panelReklama.validate();
+        panelReklama.repaint();
+
+    }
+
+    public void obrisiReklamu(Reklama r, ElementReklame er) {
+        reklame.remove(er);
+        panelReklama.remove(er);
+        panelReklama.validate();
+        panelReklama.repaint();
+        ucitajReklamu();
+    }
+
+
 }

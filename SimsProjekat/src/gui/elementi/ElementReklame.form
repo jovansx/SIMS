@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.elementi.ElementReklame">
+  <grid id="27dc6" binding="panelReklame" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="28" y="20" width="382" height="414"/>
+    </constraints>
+    <properties>
+      <background color="-9861237"/>
+      <enabled value="false"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="c7965" class="javax.swing.JLabel" binding="labelaIkone">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-9861237"/>
+          <enabled value="true"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="283d9" class="javax.swing.JLabel" binding="labelaNaziva">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <text value="Joy"/>
+        </properties>
+      </component>
+      <component id="479d8" class="javax.swing.JLabel" binding="labelaOpisa">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="2.0" ipady="2"/>
+        </constraints>
+        <properties>
+          <horizontalTextPosition value="2"/>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

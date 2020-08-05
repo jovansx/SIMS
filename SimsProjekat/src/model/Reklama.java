@@ -1,19 +1,24 @@
 package model;
 
+import java.util.Date;
+
 public class Reklama {
 
-    private int id, brojPristupa, brojPrikaza;
-    private String naziv, text;
+    private int id, brojPristupa;
+    private String naziv, text, url;
+    private Date datumIsteka;
     private Double cena;
 
     public Reklama(){};
-    public Reklama(int id, String naziv, String text, Double cena) {
+
+    public Reklama(int id, String naziv, String text, Double cena, Date datumIsteka, String url) {
         this.id = id;
         this.brojPristupa = 0;
-        this.brojPrikaza = 15;
         this.naziv = naziv;
         this.text = text;
         this.cena = cena;
+        this.url = url;
+        this.datumIsteka = datumIsteka;
     }
 
     public int getId() {
@@ -22,10 +27,6 @@ public class Reklama {
 
     public int getBrojPristupa() {
         return brojPristupa;
-    }
-
-    public int getBrojPrikaza() {
-        return brojPrikaza;
     }
 
     public String getNaziv() {
@@ -48,10 +49,6 @@ public class Reklama {
         this.brojPristupa = brojPristupa;
     }
 
-    public void setBrojPrikaza(int brojPrikaza) {
-        this.brojPrikaza = brojPrikaza;
-    }
-
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
@@ -64,15 +61,20 @@ public class Reklama {
         this.cena = cena;
     }
 
-    @Override
-    public String toString() {
-        return "Reklama{" +
-                "id=" + id +
-                ", brojPristupa=" + brojPristupa +
-                ", brojPrikaza=" + brojPrikaza +
-                ", naziv='" + naziv + '\'' +
-                ", text='" + text + '\'' +
-                ", cena=" + cena +
-                '}';
+    public String getUrl() {
+        return url;
     }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Date getDatumIsteka() {
+        return datumIsteka;
+    }
+
+    public void setDatumIsteka(Date datumIsteka) {
+        this.datumIsteka = datumIsteka;
+    }
+
 }

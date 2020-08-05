@@ -45,7 +45,7 @@ public class AdministratorDAO {
         List<Reklama> reklame = new ArrayList<Reklama>();
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,naziv,textReklame,cena, brojPristupa, brojPrikaza, idAdmina, obrisano from Reklama where idAdmina=?");
+                    .prepareStatement("select id,naziv,textReklame,cena, brojPristupa, datumIsteka, idAdmina,url obrisano from Reklama where idAdmina=?");
             ps.setInt(7, id);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -56,7 +56,8 @@ public class AdministratorDAO {
                     reklama.setText(rs.getString(3));
                     reklama.setCena(rs.getDouble(4));
                     reklama.setBrojPristupa(rs.getInt(5));
-                    reklama.setBrojPrikaza(rs.getInt(6));
+                    reklama.setDatumIsteka(rs.getDate(6));
+                    reklama.setUrl(rs.getString(7));
                     reklame.add(reklama);
                 }
 

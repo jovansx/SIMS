@@ -482,23 +482,29 @@ obrisano BOOLEAN DEFAULT FALSE,
 naziv VARCHAR(50) NOT NULL,
 textReklame VARCHAR(100) NOT NULL,
 cena DOUBLE,
-brojPristupa INT,
-brojPrikaza INT,
+brojPristupa INT DEFAULT 0,
+datumIsteka DATE,
+slika BLOB,
+url VARCHAR(200),
 idAdmina INT UNSIGNED,
 CONSTRAINT FK_REKLAMA FOREIGN KEY (idAdmina) REFERENCES Administrator(id)
 );
 
-INSERT INTO 
-Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
-VALUES('Joy', 'Osvezavajuce', 130.99, 0, 0, 3);
+INSERT INTO
+Reklama(naziv, textReklame, cena, datumIsteka, idAdmina, url)
+VALUES('Coca cola', 'Osvezavajuce !', 100000, '2020.12.31.', 3, 'https://www.coca-cola.rs/pocetna-strana');
 
 INSERT INTO 
-Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
-VALUES('Fanta', 'Sokantna', 150.99, 0, 0, 3);
+Reklama(naziv, textReklame, cena, datumIsteka, idAdmina, url)
+VALUES('Nike', 'Najbolji kvalitet', 50000, '2020.11.30.', 3, 'https://www.nike.com/');
 
-INSERT INTO 
-Reklama(naziv, textReklame, cena, brojPristupa, brojPrikaza, idAdmina)
-VALUES('Coca Cola', 'Deda mraz', 120.99, 0, 0, 3);
+INSERT INTO
+Reklama(naziv, textReklame, cena, datumIsteka, idAdmina,url)
+VALUES('MC Donalds', 'Extra ponuda', 170000, '2021.11.30.', 3, 'https://www.mcdonalds.rs/');
+
+INSERT INTO
+Reklama(naziv, textReklame, cena, datumIsteka, idAdmina,url)
+VALUES('Instagram', 'Pridruzite nam se', 200000, '2022.10.20.', 2, 'https://www.instagram.com/?hl=sr');
 
 
 CREATE TABLE PlayLista (
