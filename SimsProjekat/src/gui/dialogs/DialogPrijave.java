@@ -12,7 +12,7 @@ public class DialogPrijave extends JDialog {
         setTitle("Prijava na sistem");
         setResizable(false);
         setModal(true);
-        add(new PanelPrijave(this));
+        add(new PanelPrijave(this, gp));
         pack();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(gp);

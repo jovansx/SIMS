@@ -1,9 +1,6 @@
 package dao;
 
-import model.Administrator;
-import model.KorisnickiNalog;
-import model.RegistrovaniKorisnik;
-import model.Urednik;
+import model.*;
 import model.enums.TipKorisnika;
 import util.FConnection;
 
@@ -198,6 +195,34 @@ public class KorisnickiNalogDAO {
         }
 
         return KorisnickiNalogDAO.getNalogPoKorisnickomImenu(korIme);
+    }
+
+    public static Korisnik getPrijavljeniKorisnik(String korIme, String sifra) {
+
+        Korisnik korisnik = null;
+
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,tipKorisnika from KorisnickiNalog where korisnickoIme=? and lozinka=? and obrisano=false");
+            ps.setString(1, korIme);
+            ps.setString(2, sifra);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                if(rs.getString(2).equals("REGISTROVANI")) {
+                    korisnik = KorisnickiNalogDAO.getRegistrovaniKorisnik(rs.getInt(1));
+                }else if(rs.getString(1).equals("UREDNIK")) {
+                    korisnik = KorisnickiNalogDAO.getUrednik(rs.getInt(1));
+                }else {
+                    korisnik = KorisnickiNalogDAO.getAdmin(rs.getInt(1));
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return korisnik;
     }
 
     //Insert

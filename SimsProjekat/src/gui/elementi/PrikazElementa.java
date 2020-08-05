@@ -37,7 +37,7 @@ public class PrikazElementa extends JDialog {
     public PrikazElementa(Izvodjenje iz, GlavniProzor gp){
         super();
         setModal(true);
-        setTitle("Prikaz nformacija izvodjenja");
+        setTitle("Prikaz informacija izvodjenja");
 
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension dimension = tool.getScreenSize();

@@ -1,8 +1,10 @@
 package gui.panels;
 
 import gui.dialogs.DialogPrijave;
-import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
+import gui.elementi.KorisnikovProzor;
+import kontroler.RegistrovaniKorisnikKON;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,10 +20,12 @@ public class PanelPrijave extends JPanel implements ActionListener {
     private JTextField nameField;
     private JPasswordField lastNameField;
     private JButton prijavaButton;
+    private GlavniProzor glavniProzor;
 
-    public PanelPrijave(DialogPrijave dialog) {
+    public PanelPrijave(DialogPrijave dialog, GlavniProzor gp) {
 
         this.dialog = dialog;
+        this.glavniProzor = gp;
         separator = System.getProperty("file.separator");
 
         setBackground(new Color(226, 206, 158));
@@ -102,62 +106,32 @@ public class PanelPrijave extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        JButton button = (JButton)e.getSource();
 
-        if (button == prijavaButton) {
-            String username = nameField.getText();
-            String password = String.valueOf(lastNameField.getPassword());
-            //boolean provera = proveriNalog(username, password);
-            System.out.println("username:"+username+",password:"+password);
-        }
-        
-        
-        /*int counter = 0;
-        String username = nameField.getText();
-        @SuppressWarnings("deprecation")
-        String password = lastNameField.getText();
+        String korIme = nameField.getText();
+        String sifra = new String(lastNameField.getPassword());
 
-        MyReader reader = new MyReader("src" + separator + "podaci" + separator + "logInPodaci.csv", "UTF8");
-        ArrayList<String[]> lista = reader.readlinesWithSeparator(",");
-
-        for (String[] podaci: lista) {
-            if (podaci[0].equals(username) && podaci[1].equals(password)) {
-                counter++;
-                ManagerKorisnici menagerK = ManagerKorisnici.getInstance();
-                MainWindow window = new MainWindow();
-
-                upozorenja.setText("Nakon unosa pritisnite 'Prijava'");
-                nameField.setText(""); lastNameField.setText("");
-
-                Osoba osoba = menagerK.returnUser(username, password);
-                if (osoba == null) {
-                    continue;
-                }else {
-                    if (osoba instanceof Musterija) {
-                        window.podesiPanel(new MusterijinProzor((Musterija) osoba, window));
-                    }else if(osoba instanceof Dostavljac) {
-                        window.podesiPanel(new DostavljacevProzor((Dostavljac) osoba));
-                    }else if(osoba instanceof Vlasnik) {
-                        window.podesiPanel(new VlasnikovProzor((Vlasnik) osoba));
-                    }else {
-                        window.podesiPanel(new RadnikovProzor((Radnik) osoba));
-                    }
-                }
-                window.podesiMenuBar(new ZajednickiMenuBar(window, dialog));
-                window.setVisible(true);
-
-                dialog.setVisible(false);
-                break;
+        Korisnik korisnik = null;
+        try {
+            korisnik = RegistrovaniKorisnikKON.proslediPodatkePrijave(korIme, sifra);
+            if(korisnik == null) return;
+        } catch (Exception ex) {
+            String tipIzuzetka = ex.getMessage();
+            if (tipIzuzetka.equals("1")) {
+                upozorenja.setText("Morate popuniti sva polja !");
             }
+            return;
         }
 
-        if (counter == 0) {
-            upozorenja.setText("Nesto ste pogresno uneli !");
-            nameField.setText(""); lastNameField.setText("");
-        }*/
+        dialog.dispose();       //Ugasi dialog prijave
+        glavniProzor.dispose();     //Ugasi pocetni prozor
+        GlavniProzor prozorPrijavljenog = null;
+        if(korisnik instanceof RegistrovaniKorisnik)
+            prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
+        //else if(korisnik instanceof Urednik)
+            //prozorPrijavljenog = new UrednikovProzor();
+        //else:
+            //prozorPrijavljenog = new AdminovProzor();
+        prozorPrijavljenog.setVisible(true);
     }
 
-    private boolean proveriNalog(String username, String password) {
-        return true;
-    }
 }

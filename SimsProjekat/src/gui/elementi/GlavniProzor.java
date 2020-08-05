@@ -20,7 +20,7 @@ import java.util.List;
 
 public class
 GlavniProzor extends JFrame implements ActionListener{
-    private JPanel panelOperacija;
+    protected JPanel panelOperacija;
     private JPanel panelReklama;
     protected JPanel panelAkcija;
     private JScrollPane skrol;
@@ -28,16 +28,17 @@ GlavniProzor extends JFrame implements ActionListener{
     private JButton popularnoButton;
     private JTextField pretraziF;
     private JButton pretraziButton;
-    private JButton prijavaButton;
-    private JButton registracijaButton;
+    protected JButton prijavaButton;
+    protected JButton registracijaButton;
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
+    protected JButton odjavaButton;
     private boolean pocetnaTrenutno;
     private boolean pretraziTrenutno;
     private JLabel nothingFoundL;
     private Toolkit tool;
     private Dimension dimension;
-    private String separator;
+    protected String separator;
 
     private List<Element> elementi;
     private int brojElemenata;

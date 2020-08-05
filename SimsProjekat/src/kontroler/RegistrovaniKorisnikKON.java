@@ -3,14 +3,23 @@ package kontroler;
 import dao.KorisnickiNalogDAO;
 import dao.RegistrovaniKorisnikDAO;
 import model.KorisnickiNalog;
+import model.Korisnik;
 import model.RegistrovaniKorisnik;
 import model.enums.TipKorisnika;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RegistracijaKON {
+public class RegistrovaniKorisnikKON {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+    public static Korisnik proslediPodatkePrijave(String korIme, String sifra) throws Exception {
+
+        if (korIme.equals("") || sifra.equals("")) throw new Exception(String.valueOf(1));
+
+        return KorisnickiNalogDAO.getPrijavljeniKorisnik(korIme, sifra);
+    }
 
     /**Prima podatke, proverava ih i kreira nalog i registrovanog korisnika
      *
@@ -19,10 +28,10 @@ public class RegistracijaKON {
      *
      */
     public static boolean proslediPodatke(String ime, String prezime, String email,
-                                         String telefon, String godina, String korIme, String sifra) throws Exception {
+                                          String telefon, String godina, String korIme, String sifra) throws Exception {
         //Ukoliko je nesto od polja prazno
         if(ime.equals("") || prezime.equals("") || email.equals("") ||
-            telefon.equals("") || godina.equals("") || korIme.equals("") || sifra.equals(""))
+                telefon.equals("") || godina.equals("") || korIme.equals("") || sifra.equals(""))
             throw new Exception(String.valueOf(1));
 
         //Ako nije dobar format datuma
@@ -47,4 +56,5 @@ public class RegistracijaKON {
 
         return true;
     }
+
 }

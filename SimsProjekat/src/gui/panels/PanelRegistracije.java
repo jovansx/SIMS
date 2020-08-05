@@ -1,8 +1,7 @@
 package gui.panels;
 
 import gui.dialogs.DialogRegistracije;
-import kontroler.RegistracijaKON;
-import kontroler.RegistracijaKON;
+import kontroler.RegistrovaniKorisnikKON;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -156,7 +155,7 @@ public class PanelRegistracije extends JPanel implements ActionListener {
 
         boolean retVal = false;
         try {
-            retVal = RegistracijaKON.proslediPodatke(ime, prezime, email, telefon, godina, korIme, sifra);
+            retVal = RegistrovaniKorisnikKON.proslediPodatke(ime, prezime, email, telefon, godina, korIme, sifra);
         } catch (Exception ex) {
             String tipIzuzetka = ex.getMessage();
             if (tipIzuzetka.equals("1")) {
