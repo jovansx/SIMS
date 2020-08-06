@@ -86,7 +86,7 @@ public class PrikaziIzvodjaca extends JDialog {
         String[] itemsArray = new String[listaIzvodjenja.size()];
         int index = 0;
         for(Izvodjenje izvodjenje : listaIzvodjenja){
-            itemsArray[index] = Element.generateNazivIzvodjenja(izvodjenje);
+            itemsArray[index] = ElementIzvodjenja.generateNazivIzvodjenja(izvodjenje);
             index++;
 
         }

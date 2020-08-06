@@ -16,13 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Element extends JPanel{
+public class ElementIzvodjenja extends JPanel{
     private JPanel panelGlavni;
     private JLabel labelaNaslova;
     private JLabel labelaOpisa;
     private JLabel labelaIkone;
 
-    public Element(Izvodjenje iz, GlavniProzor gp) {
+    public ElementIzvodjenja(Izvodjenje iz, GlavniProzor gp) {
         super();
 
         Toolkit tool = Toolkit.getDefaultToolkit();

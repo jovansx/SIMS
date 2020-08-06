@@ -86,12 +86,14 @@ public class IzvodjenjeDAO {
     }
 
     public static List<Izvodjenje> getIzvodjenjaZaPocetnuStranicu(int brojElemenata, String kriterijum){
+        System.out.println("kriterijum u dao je "+kriterijum);
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
         Izvodjenje izvodjenje = null;
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false order by " + kriterijum + " desc limit ?");
-            ps.setInt(1, brojElemenata);
+                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false order by ? desc limit ?");
+            ps.setString(1, kriterijum);
+            ps.setInt(2, brojElemenata);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 izvodjenje=new Izvodjenje();

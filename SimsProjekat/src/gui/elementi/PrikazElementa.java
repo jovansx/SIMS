@@ -7,11 +7,9 @@ import model.Izvodjenje;
 import model.MuzickoDelo;
 import model.Recenzija;
 
-import javax.naming.event.ObjectChangeListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PrikazElementa extends JDialog {
@@ -59,7 +57,7 @@ public class PrikazElementa extends JDialog {
 
     private void podesiKomponente(Izvodjenje iz, Dimension dim) {
 
-        nazivDelaLabela.setText("Naziv dela : "+Element.generateNazivIzvodjenja(iz));
+        nazivDelaLabela.setText("Naziv dela : "+ ElementIzvodjenja.generateNazivIzvodjenja(iz));
 
         vremeIzvodjenjaLabela.setText("Vreme izvodjenja : "+iz.getVremeIzvodjenja().toString());
 
