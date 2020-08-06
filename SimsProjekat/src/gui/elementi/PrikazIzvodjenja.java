@@ -208,7 +208,7 @@ public class PrikazIzvodjenja extends JDialog {
                 if (index < 0) {
                     JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji muzicko delo");
                 } else {
-                    PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), PrikazIzvodjenja.this);
+                    PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), gp);
                     PrikazIzvodjenja.this.dispose();
                     pi.setVisible(true);
 

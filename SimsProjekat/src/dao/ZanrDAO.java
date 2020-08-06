@@ -1,9 +1,6 @@
 package dao;
 
-import model.Album;
-import model.MuzickoDelo;
-import model.Urednik;
-import model.Zanr;
+import model.*;
 import util.FConnection;
 
 import java.sql.Date;
@@ -71,24 +68,6 @@ public class ZanrDAO {
             e.printStackTrace();
         }
         return dela;
-    }
-
-    public static List<Zanr> getZanroviPoMuzickomDelu(MuzickoDelo muzickoDelo){
-        List<Zanr> zanrovi=new ArrayList<Zanr>();
-        try {
-            PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("select * from muzicki_sistem.Zanr z where z.nazivZanra in (select nazivZanra from muzicki_sistem.Zanrmuzickogdela where idMuzickogDela=?)");
-            ps.setInt(1, muzickoDelo.getId());
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                zanrovi.add(new Zanr(rs.getString(1),rs.getString(3), rs.getDate(2)));
-            }
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return zanrovi;
     }
 
     public static List<Zanr> getZanroviPoUredniku(Urednik urednik){
@@ -165,5 +144,26 @@ public class ZanrDAO {
             result[i][2] = zanrovi.get(i).getOpis();
         }
         return result;
+    }
+
+    public static List<Zanr> getZanroviPoMuzickomDelu(MuzickoDelo muzickoDelo) {
+        List<Zanr> zanrovi=new ArrayList<Zanr>();
+        Zanr zanr = null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select * from ZanrMuzickogDela where obrisano=false and idMuzickogDela = ?");
+            ps.setInt(1, muzickoDelo.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                zanr=getZanrPoNazivu(rs.getString(1));
+                zanrovi.add(zanr);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return zanrovi;
     }
 }

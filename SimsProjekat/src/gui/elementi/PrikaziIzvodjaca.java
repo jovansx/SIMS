@@ -56,7 +56,7 @@ public class PrikaziIzvodjaca extends JDialog {
             labelaPripada.setText("Pripada izvodjacu : " + izvodjac.getPripadaGrupi().toString());
         }
 
-        comboBoxClanova = new JComboBox<String>(PrikazElementa.getNizIzvodjaca(izvodjac.getImaClanove()));
+        comboBoxClanova = new JComboBox<String>(PrikazIzvodjenja.getNizIzvodjaca(izvodjac.getImaClanove()));
         comboBoxClanova.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxClanova);
 
@@ -71,8 +71,6 @@ public class PrikaziIzvodjaca extends JDialog {
         for (Izvodjenje izvodjenje : izvodjac.getListaIzvodjenja()) {
             izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(izvodjenje.getId()));
         }
-
-
     }
 
     private void podesiAkcije(Izvodjac izvodjac, GlavniProzor gp) {
@@ -85,6 +83,7 @@ public class PrikaziIzvodjaca extends JDialog {
                     JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjac");
                 } else {
                     PrikaziIzvodjaca pi = new PrikaziIzvodjaca(izvodjac.getImaClanove().get(index), gp);
+                    PrikaziIzvodjaca.this.dispose();
                     pi.setVisible(true);
                 }
             }
@@ -97,7 +96,8 @@ public class PrikaziIzvodjaca extends JDialog {
                 if (index < 0) {
                     JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjenje");
                 } else {
-                    PrikazElementa pi = new PrikazElementa(izvodjac.getListaIzvodjenja().get(index), gp);
+                    PrikazIzvodjenja pi = new PrikazIzvodjenja(izvodjac.getListaIzvodjenja().get(index), gp);
+                    PrikaziIzvodjaca.this.dispose();
                     pi.setVisible(true);
                 }
             }

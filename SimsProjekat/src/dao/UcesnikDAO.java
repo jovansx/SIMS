@@ -2,6 +2,7 @@ package dao;
 
 import model.MuzickoDelo;
 import model.Ucesnik;
+import model.Zanr;
 import model.enums.TipUcesnika;
 import util.FConnection;
 
@@ -36,24 +37,25 @@ public class UcesnikDAO {
     }
 
     //Prosledio sam muzicko delo kao parametar a moze i samo njegov id
-    public static List<Ucesnik> getUcesniciMuzickogDela(MuzickoDelo muzickoDelo) throws SQLException {
-        List<Ucesnik> ucesnici = new ArrayList<Ucesnik>();
+    public static List<Ucesnik> getUcesniciMuzickogDela(MuzickoDelo muzickoDelo)  {
+        List<Ucesnik> ucesniki =new ArrayList<Ucesnik>();
         Ucesnik ucesnik = null;
-        int idUcesnika = -1;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select * from UcesnikMuzickogDela where obrisano=false and idMuzickogDela = ?");
+            ps.setInt(1, muzickoDelo.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                ucesnik=getUcesnik(rs.getInt(1));
+                ucesniki.add(ucesnik);
+            }
+            rs.close();
+            ps.close();
 
-        PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("select idUcesnika from UcesnikMuzickogDela where idMuzickogDela = ? and obrisano = false");
-        ps.setInt(1, muzickoDelo.getId());
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            idUcesnika = rs.getInt(1);
-            ucesnik = UcesnikDAO.getUcesnik(idUcesnika);
-            ucesnici.add(ucesnik);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        rs.close();
-        ps.close();
-
-        return ucesnici;
+        return ucesniki;
     }
 
     //Eventualno se moze namestiti da se ucesnik dobavlja po korisnickom imenu i lozinci
@@ -61,7 +63,8 @@ public class UcesnikDAO {
         Ucesnik ucesnik = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where obrisano=false");
+                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where id=?");
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ucesnik = new Ucesnik();

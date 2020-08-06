@@ -303,4 +303,25 @@ public class IzvodjenjeDAO {
         }
         return izvodjenja;
     }
+
+    public static List<Izvodjenje> getIzvodjenjaMuzickogDela(MuzickoDelo muzickoDelo) {
+        List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
+        Izvodjenje izvodjenje = null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select * from IzvodjenjaMuzickogDela where idMuzickogDela = ?");
+            ps.setInt(1, muzickoDelo.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjenje=getIzvodjenje(rs.getInt(1));
+                izvodjenja.add(izvodjenje);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjenja;
+    }
 }

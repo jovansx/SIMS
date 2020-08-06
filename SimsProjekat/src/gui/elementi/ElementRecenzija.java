@@ -32,7 +32,11 @@ public class ElementRecenzija extends JPanel {
         prikaziPodatkeAutoraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+                PrikaziKorisnika pk = null;
+                if (recenzija.getAutorRecenzije()!=null)
+                    pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+                else
+                    pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
                 pk.setVisible(true);
             }
         });

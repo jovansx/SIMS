@@ -95,6 +95,22 @@ public class MuzickoDelo {
         return listaZanrova;
     }
 
+    public void setListaZanrova(List<Zanr> listaZanrova) {
+        this.listaZanrova = listaZanrova;
+    }
+
+    public void setListaIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
+        this.listaIzvodjenja = listaIzvodjenja;
+    }
+
+    public void setListaUcesnika(List<Ucesnik> listaUcesnika) {
+        this.listaUcesnika = listaUcesnika;
+    }
+
+    public void setListaRecenzija(List<Recenzija> listaRecenzija) {
+        this.listaRecenzija = listaRecenzija;
+    }
+
     public void dodajZanr(Zanr zanr) {
         if (listaZanrova == null) {
             listaZanrova = new ArrayList<Zanr>();
