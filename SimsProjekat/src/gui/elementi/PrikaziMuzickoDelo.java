@@ -1,15 +1,14 @@
 package gui.elementi;
 
 import dao.*;
-import model.Izvodjenje;
-import model.MuzickoDelo;
-import model.Ucesnik;
-import model.Zanr;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.List;
 
 public class PrikaziMuzickoDelo extends JDialog {
@@ -23,10 +22,14 @@ public class PrikaziMuzickoDelo extends JDialog {
     private JLabel labelaAlbum;
     private JButton prikaziIzvodjenjaButton;
     private JButton prikaziUcesnikeButton;
+    private JPanel panelSkrola;
+    private JScrollPane skrol;
     private Dimension dimension;
     private JComboBox comboBoxZanrova;
     private JComboBox comboBoxUcesnika;
     private JComboBox comboBoxIzvodjenja;
+    private int brojElemenata;
+    private String prosecnaOcena;
 
     public PrikaziMuzickoDelo(MuzickoDelo muzickoDelo, GlavniProzor gp) {
         super();
@@ -39,13 +42,40 @@ public class PrikaziMuzickoDelo extends JDialog {
 
         dodeliAcije(muzickoDelo, gp);
 
+        ucitajRecenzije(muzickoDelo, gp);
+
+        osveziLabeluProseka();
+
         add(panelGlavni);
 
-        setSize(dimension.width / 3, dimension.height / 4);
+        setSize(dimension.width / 3, dimension.height / 2);
 
         setResizable(false);
         setLocationRelativeTo(gp);
 
+    }
+
+    private void osveziLabeluProseka() {
+        labelaProsecnaOcena.setText("Prosecna ocena : " + prosecnaOcena);
+    }
+
+    private void ucitajRecenzije(MuzickoDelo muzickoDelo, GlavniProzor gp) {
+        resetRecenzije(gp);
+
+        List<Recenzija> recenzije = RecenzijaDAO.getRecenzijeMuzickogDela(muzickoDelo.getId(), brojElemenata);
+        for (Recenzija r : recenzije) {
+            ElementRecenzija el = new ElementRecenzija(r);
+            panelSkrola.add(el);
+        }
+
+        gp.osveziKomponentu(skrol);
+
+        prosecnaOcena = generisiProsecnuOcenu(recenzije);
+    }
+
+    private void resetRecenzije(GlavniProzor gp) {
+        panelSkrola.removeAll();
+        gp.osveziKomponentu(panelSkrola);
     }
 
     private void dodeliAcije(MuzickoDelo muzickoDelo, GlavniProzor gp) {
@@ -54,7 +84,7 @@ public class PrikaziMuzickoDelo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = comboBoxIzvodjenja.getSelectedIndex();
-                if (index < 0){
+                if (index < 0) {
                     JOptionPane.showMessageDialog(PrikaziMuzickoDelo.this, "Ne postoji muzicko delo");
                 } else {
                     PrikazIzvodjenja pi = new PrikazIzvodjenja(muzickoDelo.getListaIzvodjenja().get(index), gp);
@@ -68,12 +98,24 @@ public class PrikaziMuzickoDelo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = comboBoxUcesnika.getSelectedIndex();
-                if (index < 0){
+                if (index < 0) {
                     JOptionPane.showMessageDialog(PrikaziMuzickoDelo.this, "Ne postoji ucesnik");
                 } else {
                     PrikazUcesnika pu = new PrikazUcesnika(muzickoDelo.getListaUcesnika().get(index), gp);
                     PrikaziMuzickoDelo.this.dispose();
                     pu.setVisible(true);
+                }
+            }
+        });
+
+        skrol.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                JViewport vp = skrol.getViewport();
+                if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
+                    brojElemenata += 1;
+                    ucitajRecenzije(muzickoDelo, gp);
                 }
             }
         });
@@ -88,8 +130,6 @@ public class PrikaziMuzickoDelo extends JDialog {
         }
 
         muzickoDelo.setListaUcesnika(UcesnikDAO.getUcesniciMuzickogDela(muzickoDelo));
-
-
     }
 
     private void inicijalizuj(MuzickoDelo muzickoDelo) {
@@ -97,11 +137,20 @@ public class PrikaziMuzickoDelo extends JDialog {
         dimension = tool.getScreenSize();
 
         labelaNaziva.setText("Naziv : " + muzickoDelo.getNazivDela());
-        labelaOpis.setText("Opis : " + muzickoDelo.getOpis());
-        labelaSadrzaj.setText("Sadrzaj : " + muzickoDelo.getSadrzaj());
-        labelaProsecnaOcena.setText("Prosecna ocena : " + muzickoDelo.getProsecnaOcena());
         labelaDatumPostavljanja.setText("Datum postavljanja : " + muzickoDelo.getDatumPostavljanja());
         labelaVremeNastanka.setText("Vreme nastanka : " + muzickoDelo.getVremeNastanka());
+
+        if (muzickoDelo.getOpis() == null) {
+            labelaOpis.setText("Opis : Nema opisa");
+        } else {
+            labelaOpis.setText("Opis : " + muzickoDelo.getOpis());
+        }
+
+        if (muzickoDelo.getOpis() == null) {
+            labelaSadrzaj.setText("Opis : Nema sadrzaja");
+        } else {
+            labelaSadrzaj.setText("Opis : " + muzickoDelo.getSadrzaj());
+        }
 
         if (muzickoDelo.getAlbumKomPripada() == null) {
             labelaAlbum.setText("Pripada albumu : Ne pripada");
@@ -109,18 +158,38 @@ public class PrikaziMuzickoDelo extends JDialog {
             labelaAlbum.setText("Pripada albumu : " + muzickoDelo.getAlbumKomPripada().getNazivDela());
         }
 
-
         comboBoxZanrova = new JComboBox<String>(getNizZanrova(muzickoDelo.getListaZanrova()));
-        comboBoxZanrova.setBackground(new Color(186,186,178));
+        comboBoxZanrova.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxZanrova);
 
         comboBoxIzvodjenja = new JComboBox<String>(PrikaziIzvodjaca.getNizIzvodjenja(muzickoDelo.getListaIzvodjenja()));
-        comboBoxIzvodjenja.setBackground(new Color(186,186,178));
+        comboBoxIzvodjenja.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxIzvodjenja);
 
         comboBoxUcesnika = new JComboBox<String>(getNizUcesnika(muzickoDelo.getListaUcesnika()));
-        comboBoxUcesnika.setBackground(new Color(186,186,178));
+        comboBoxUcesnika.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxUcesnika);
+
+        panelSkrola.setBackground(new Color(153, 179, 185));
+        panelSkrola.setLayout(new BoxLayout(panelSkrola, BoxLayout.Y_AXIS));
+
+        skrol.getVerticalScrollBar().setUnitIncrement(10);
+        skrol.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 18, 2 * dimension.height / 12));
+        brojElemenata = 3;
+    }
+
+    private String generisiProsecnuOcenu(List<Recenzija> recenzije) {
+        int sum = 0;
+        for (Recenzija r : recenzije) {
+            sum += r.getOcena();
+        }
+        double prosek;
+        if (recenzije.size() == 0)
+            prosek = 0;
+        else
+            prosek = (double) sum / recenzije.size();
+
+        return String.valueOf(String.format("%.2f", prosek));
     }
 
     private static String[] getNizUcesnika(List<Ucesnik> listaUcesnika) {

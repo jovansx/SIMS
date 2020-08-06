@@ -1,7 +1,6 @@
 package gui.elementi;
 
 import model.Korisnik;
-import model.Urednik;
 
 import javax.swing.*;
 import java.awt.*;

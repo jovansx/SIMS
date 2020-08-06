@@ -51,6 +51,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-6704199"/>
           <text value="PrikaziClana"/>
         </properties>
       </component>
@@ -60,6 +61,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-6704199"/>
           <text value="PrikaziIzvodjenje"/>
         </properties>
       </component>

@@ -6,6 +6,7 @@ import gui.dialogs.DialogRegistracije;
 import kontroler.GlavniProzorKON;
 import model.Izvodjenje;
 import model.Reklama;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ import java.awt.event.AdjustmentListener;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GlavniProzor extends JFrame implements ActionListener{
+public class GlavniProzor extends JFrame implements ActionListener {
     protected JPanel panelOperacija;
     public JPanel panelReklama;
     protected JPanel panelAkcija;
@@ -83,7 +84,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
             public void adjustmentValueChanged(AdjustmentEvent e) {
                 JViewport vp = skrol.getViewport();
                 if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
-                    brojElemenataIzvodjenja+=1;
+                    brojElemenataIzvodjenja += 1;
                     ucitajIzvodjenjaZaPocetnuStranu();
                 }
             }
@@ -93,41 +94,37 @@ public class GlavniProzor extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        JButton button = (JButton)e.getSource();
+        JButton button = (JButton) e.getSource();
 
         if (button == prijavaButton) {
             DialogPrijave dp = new DialogPrijave(GlavniProzor.this);
             dp.setVisible(true);
-        } else if(button == odjavaButton) {
+        } else if (button == odjavaButton) {
             Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "logOut.png");
             int retVal = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zeleite da se odjavite ?", "Odjava", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
-            if(retVal == 0) {
+            if (retVal == 0) {
                 dispose();
                 GlavniProzor gp = new GlavniProzor();
                 gp.setVisible(true);
             }
-        }
-        else if (button == registracijaButton) {
+        } else if (button == registracijaButton) {
             DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
             dr.setVisible(true);
-            }
-        else if (button == pretraziButton) {
-            if(pretraziF.getText().equals("")) return;
+        } else if (button == pretraziButton) {
+            if (pretraziF.getText().equals("")) return;
 
             podigniSkrol();
             podesiParametreZaPocetnuStranu(popularnoTrenutno, true);
             ucitajIzvodjenjaZaPocetnuStranu();
-        }
-        else if (button == pocetnaStranicaButton) {
+        } else if (button == pocetnaStranicaButton) {
             pocetnaStranicaButton.setBackground(new Color(188, 204, 111));
-            popularnoButton.setBackground(new Color(153,179,185));
+            popularnoButton.setBackground(new Color(153, 179, 185));
             podigniSkrol();
             podesiParametreZaPocetnuStranu(false, false);
             ucitajIzvodjenjaZaPocetnuStranu();
-        }
-        else if (button == popularnoButton) {
+        } else if (button == popularnoButton) {
             popularnoButton.setBackground(new Color(188, 204, 111));
-            pocetnaStranicaButton.setBackground(new Color(153,179,185));
+            pocetnaStranicaButton.setBackground(new Color(153, 179, 185));
             podigniSkrol();
             podesiParametreZaPocetnuStranu(true, false);
             ucitajIzvodjenjaZaPocetnuStranu();
@@ -141,10 +138,10 @@ public class GlavniProzor extends JFrame implements ActionListener{
     }
 
     private void ucitajIzvodjenjaZaPocetnuStranu() {
-        resetElemente();
+        resetujElemente();
 
         String parametar;
-        if(popularnoTrenutno) parametar = "brojPristupa";
+        if (popularnoTrenutno) parametar = "brojPristupa";
         else parametar = "vremeIzvodjenja";
 
         List<Izvodjenje> izvodjenja = null;
@@ -154,23 +151,22 @@ public class GlavniProzor extends JFrame implements ActionListener{
                 izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenataIzvodjenja);
             else
                 izvodjenja = GlavniProzorKON.dobaviIzvodjenja(parametar, brojElemenataIzvodjenja);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if(izvodjenja.size() == 0) panelOdSkrola.add(nothingFoundL);
+        if (izvodjenja.size() == 0) panelOdSkrola.add(nothingFoundL);
 
         for (Izvodjenje iz : izvodjenja)
             panelOdSkrola.add(new ElementIzvodjenja(iz, this));
 
-        refreshComponent(panelOdSkrola);
-        refreshComponent(skrol);
+        osveziKomponentu(panelOdSkrola);
+        osveziKomponentu(skrol);
     }
 
-    private void resetElemente() {
+    private void resetujElemente() {
         panelOdSkrola.removeAll();
-        refreshComponent(panelOdSkrola);
+        osveziKomponentu(panelOdSkrola);
     }
 
     private void ucitajReklamu() {
@@ -178,25 +174,25 @@ public class GlavniProzor extends JFrame implements ActionListener{
         java.sql.Date danasnjiDatum = new java.sql.Date(System.currentTimeMillis());
 
         for (int i = 0; i < 3; i++) {
-            if (naknadnoUcitajReklamu && i==1) break;
+            if (naknadnoUcitajReklamu && i == 1) break;
             Reklama reklama = ReklamaDAO.getReklamaZaReklamniBafer(maxIdReklame, danasnjiDatum);
-            if(reklama != null) {
+            if (reklama != null) {
                 maxIdReklame = reklama.getId();
                 panelReklama.add(new ElementReklame(reklama, this));
             }
         }
 
         naknadnoUcitajReklamu = true;
-        refreshComponent(panelReklama);
+        osveziKomponentu(panelReklama);
     }
 
     public void obrisiReklamu(ElementReklame er) {
         panelReklama.remove(er);
-        refreshComponent(panelReklama);
+        osveziKomponentu(panelReklama);
         ucitajReklamu();
     }
 
-    public void refreshComponent(Component component) {
+    public void osveziKomponentu(Component component) {
         component.validate();
         component.repaint();
     }

@@ -50,6 +50,12 @@ public class PrikaziIzvodjaca extends JDialog {
         labelaOpisa.setText("Opis : " + izvodjac.getOpis());
         labelaTipa.setText("Tip izvodjaca : " + izvodjac.getTipIzvodjaca());
 
+        if (izvodjac.getOpis() == null) {
+            labelaOpisa.setText("Opis : Nema opisa");
+        } else {
+            labelaOpisa.setText("Opis : " + izvodjac.getOpis());
+        }
+
         if (izvodjac.getPripadaGrupi() == null) {
             labelaPripada.setText("Pripada izvodjacu : Ne pripada");
         } else {
@@ -104,14 +110,13 @@ public class PrikaziIzvodjaca extends JDialog {
         });
 
 
-
     }
 
     public static String[] getNizIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
         String[] itemsArray = new String[listaIzvodjenja.size()];
         int index = 0;
         for (Izvodjenje izvodjenje : listaIzvodjenja) {
-            itemsArray[index] = ElementIzvodjenja.generateNazivIzvodjenja(izvodjenje);
+            itemsArray[index] = ElementIzvodjenja.generisiNazivIzvodjaca(izvodjenje);
             index++;
         }
         return itemsArray;

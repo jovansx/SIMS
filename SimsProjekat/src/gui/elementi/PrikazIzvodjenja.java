@@ -67,7 +67,7 @@ public class PrikazIzvodjenja extends JDialog {
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         String separator = System.getProperty("file.separator");
         panelGlavni = new JPanel();
-        nazivDelaLabela = new JLabel("<html><p style=\"font-size:13px\">Naziv dela : " + ElementIzvodjenja.generateNazivIzvodjenja(iz) + "</p></html>");
+        nazivDelaLabela = new JLabel("<html><p style=\"font-size:13px\">Naziv dela : " + ElementIzvodjenja.generisiNazivIzvodjaca(iz) + "</p></html>");
 
         vremeIzvodjenjaLabela = new JLabel("Vreme izvodjenja : " + iz.getVremeIzvodjenja().toString());
 
@@ -91,12 +91,12 @@ public class PrikazIzvodjenja extends JDialog {
         comboBoxIzvodjaca = new JComboBox<String>(getNizIzvodjaca(iz.getListaIzvodjaca()));
         comboBoxIzvodjaca.setBackground(new Color(186, 186, 178));
         //panelGlavni.add(comboBoxIzvodjaca);
-        panelGlavni.setBackground(new Color(105,135,139));
+        panelGlavni.setBackground(new Color(105, 135, 139));
         comboBoxMuzickihDela = new JComboBox<String>(getNizMuzickihDela(iz.getListaMuzickihDela()));
         comboBoxMuzickihDela.setBackground(new Color(186, 186, 178));
         //panelGlavni.add(comboBoxMuzickihDela);
         panelSkrola = new JPanel();
-        panelSkrola.setBackground(new Color(153,179,185));
+        panelSkrola.setBackground(new Color(153, 179, 185));
         panelSkrola.setLayout(new BoxLayout(panelSkrola, BoxLayout.Y_AXIS));
 
         skrolPaneRecenzija = new JScrollPane(panelSkrola);
@@ -229,12 +229,12 @@ public class PrikazIzvodjenja extends JDialog {
             panelSkrola.add(el);
         }
 
-        gp.refreshComponent(skrolPaneRecenzija);
+        gp.osveziKomponentu(skrolPaneRecenzija);
     }
 
     private void resetRecenzije(GlavniProzor gp) {
         panelSkrola.removeAll();
-        gp.refreshComponent(panelSkrola);
+        gp.osveziKomponentu(panelSkrola);
     }
 
     public static String[] getNizIzvodjaca(List<Izvodjac> listaIzvodjaca) {

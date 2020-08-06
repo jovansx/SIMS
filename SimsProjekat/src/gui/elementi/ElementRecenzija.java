@@ -1,5 +1,6 @@
 package gui.elementi;
 
+import dao.RegistrovaniKorisnikDAO;
 import model.Recenzija;
 
 import javax.swing.*;
@@ -17,7 +18,6 @@ public class ElementRecenzija extends JPanel {
     public ElementRecenzija(Recenzija recenzija) {
         super();
 
-
         inicijalizuj(recenzija);
 
         add(panelGlavni);
@@ -33,7 +33,7 @@ public class ElementRecenzija extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PrikaziKorisnika pk = null;
-                if (recenzija.getAutorRecenzije()!=null)
+                if (recenzija.getAutorRecenzije() != null)
                     pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
                 else
                     pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
@@ -49,14 +49,22 @@ public class ElementRecenzija extends JPanel {
         //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
         panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30, dimension.height / 15));
 
-        if(recenzija.getAutorRecenzije() != null) {
+        if (recenzija.getAutorRecenzije() != null) {
             prikaziPodatkeAutoraButton.setText("Prikazi korisnika");
             labelaAutora.setText(recenzija.getAutorRecenzije().toString());
-        }else {
+        } else {
             prikaziPodatkeAutoraButton.setText("Prikazi urednika");
             labelaAutora.setText(recenzija.getUrednik().toString());
         }
         labelaOpisa.setText(recenzija.getKomentar());
         labelaOcene.setText(recenzija.getOcena() + "");
+
+        boolean proveraJavnosti = true;
+        if (recenzija.getAutorRecenzije() != null)
+            proveraJavnosti = RegistrovaniKorisnikDAO.proveraVidljivostiKorisnika(recenzija.getAutorRecenzije());
+
+        //prikaziPodatkeAutoraButton.setEnabled(proveraJavnosti);
+
+
     }
 }
