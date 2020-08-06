@@ -45,7 +45,13 @@ public class ElementRecenzija extends JPanel {
         //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
         panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30, dimension.height / 15));
 
-        labelaAutora.setText(recenzija.getAutorRecenzije().toString());
+        if(recenzija.getAutorRecenzije() != null) {
+            prikaziPodatkeAutoraButton.setText("Prikazi korisnika");
+            labelaAutora.setText(recenzija.getAutorRecenzije().toString());
+        }else {
+            prikaziPodatkeAutoraButton.setText("Prikazi urednika");
+            labelaAutora.setText(recenzija.getUrednik().toString());
+        }
         labelaOpisa.setText(recenzija.getKomentar());
         labelaOcene.setText(recenzija.getOcena() + "");
     }

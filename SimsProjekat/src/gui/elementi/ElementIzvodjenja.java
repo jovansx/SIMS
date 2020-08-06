@@ -51,8 +51,10 @@ public class ElementIzvodjenja extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                PrikazElementa pe = new PrikazElementa(iz, gp);
-                pe.setVisible(true);
+                //PrikazElementa pe = new PrikazElementa(iz, gp);
+                //pe.setVisible(true);
+                PrikazIzvodjenja pi = new PrikazIzvodjenja(iz, gp);
+                pi.setVisible(true);
             }
         });
 

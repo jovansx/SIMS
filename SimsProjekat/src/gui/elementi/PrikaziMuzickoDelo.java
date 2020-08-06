@@ -16,7 +16,7 @@ public class PrikaziMuzickoDelo extends JDialog {
     private JLabel labelaAlbum;
     private Dimension dimension;
 
-    public PrikaziMuzickoDelo(MuzickoDelo muzickoDelo, PrikazElementa pe) {
+    public PrikaziMuzickoDelo(MuzickoDelo muzickoDelo, PrikazIzvodjenja pe) {
         super();
         setModal(true);
         setTitle("Prikaz informacija izvodjaca");
