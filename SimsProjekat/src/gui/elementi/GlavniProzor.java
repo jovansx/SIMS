@@ -119,15 +119,15 @@ public class GlavniProzor extends JFrame implements ActionListener{
             ucitajIzvodjenjaZaPocetnuStranu();
         }
         else if (button == pocetnaStranicaButton) {
-            pocetnaStranicaButton.setBackground(Color.GREEN);
-            popularnoButton.setBackground(new Color(81,110,114));
+            pocetnaStranicaButton.setBackground(new Color(188, 204, 111));
+            popularnoButton.setBackground(new Color(153,179,185));
             podigniSkrol();
             podesiParametreZaPocetnuStranu(false, false);
             ucitajIzvodjenjaZaPocetnuStranu();
         }
         else if (button == popularnoButton) {
-            popularnoButton.setBackground(Color.GREEN);
-            pocetnaStranicaButton.setBackground(new Color(81,110,114));
+            popularnoButton.setBackground(new Color(188, 204, 111));
+            pocetnaStranicaButton.setBackground(new Color(153,179,185));
             podigniSkrol();
             podesiParametreZaPocetnuStranu(true, false);
             ucitajIzvodjenjaZaPocetnuStranu();
