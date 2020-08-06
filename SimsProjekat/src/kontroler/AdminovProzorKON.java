@@ -82,8 +82,11 @@ public class AdminovProzorKON {
         if(a.getLozinka().equals(l) && !n.equals(n1)){
             retVal = 1;
         }
-        if(!a.equals(l) && n.equals(n1)){
+        if(!a.getLozinka().equals(l) && n.equals(n1)){
             retVal = 2;
+        }
+        if(!a.getLozinka().equals(l) && !n.equals(n1)){
+            retVal=3;
         }
         return retVal;
     }

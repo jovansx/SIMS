@@ -81,6 +81,12 @@ public class PanelPromjeneLoznikeAdmin extends JPanel {
                     nova1T.setText("");
 
                 }
+                else if(retVal==3){
+                    JOptionPane.showMessageDialog(null,"Molimo unesite sve podatke ponovo");
+                    staraT.setText("");
+                    nova1T.setText("");
+                    novaT.setText("");
+                }
                 else if(retVal==0){
                     Administrator a= AdministratorDAO.getAdministrator(admin.getId());
                     String sifra = new String(novaT.getPassword());
