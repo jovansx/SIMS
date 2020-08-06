@@ -25,19 +25,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Izmjenjena skripta sto se tice recenzije, jer recenzija moze biti vezana ili za muzicko dijelo ili za izvodjenje ili za korisnika ili urednika a ne za sve zajedno.">
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima">
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPromjeneLoznikeAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPromjeneLoznikeAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/MuzickoDeloDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/MuzickoDeloDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/UcesnikDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/UcesnikDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/ZanrDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/ZanrDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/KorisnickiNalogDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementRecenzija.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementRecenzija.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/kontroler/AdminovProzorKON.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/kontroler/AdminovProzorKON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Zadatak.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Zadatak.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -211,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596710383253</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima">
+      <created>1596733886449</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596733886449</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,7 +248,8 @@
     <MESSAGE value="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora." />
     <MESSAGE value="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina" />
     <MESSAGE value="Izmjenjena skripta sto se tice recenzije, jer recenzija moze biti vezana ili za muzicko dijelo ili za izvodjenje ili za korisnika ili urednika a ne za sve zajedno." />
-    <option name="LAST_COMMIT_MESSAGE" value="Izmjenjena skripta sto se tice recenzije, jer recenzija moze biti vezana ili za muzicko dijelo ili za izvodjenje ili za korisnika ili urednika a ne za sve zajedno." />
+    <MESSAGE value="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
@@ -260,34 +264,34 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596708183822" />
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1596733221501">
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1596739468127">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596733221501" />
-    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1596733221501">
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596739468127" />
+    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1596739468127">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596733221501" />
-    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1596733221501">
+    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596739468127" />
+    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1596739468127">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596733221501" />
-    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1596733221501">
+    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596739468127" />
+    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1596739468127">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596733221501" />
-    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1596127121373">
+    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596739468127" />
+    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1596733911126">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1596127121373" />
+    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1596733911126" />
     <state x="277" y="0" key="SettingsEditor" timestamp="1596708191352">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596708191352" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596710389645">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596733996997">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596710389645" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596733996997" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596709045234">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -296,10 +300,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1596709018408" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1596548863261">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1596739830656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596548863261" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596739830656" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
