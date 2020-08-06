@@ -47,7 +47,22 @@ public class ZanrDAO {
         }
         return zanrovi;
     }
-
+    public static List<Zanr> getNedovrseneZanrove() {
+        List<Zanr> zanrovi = new ArrayList<Zanr>();
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select * from muzicki_sistem.Zanr where opis is null");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                zanrovi.add(new Zanr(rs.getString(1), rs.getString(3), rs.getDate(2)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return zanrovi;
+    }
     public static List<MuzickoDelo> getMuzickaDelaPoZanru(Zanr zanr){
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
         try {

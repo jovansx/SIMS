@@ -17,7 +17,39 @@ public class Zadatak {
         this.ucesnik = ucesnik;
         this.izvodjac = izvodjac;
     }
+    public Zadatak(MuzickoDelo delo){
+        this.id=-1;
+        this.text="";
+        this.delo=delo;
+        this.izvodjac=null;
+        this.zanr=null;
+        this.ucesnik=null;
+    }
 
+    public Zadatak(Izvodjac izvodjac){
+        this.id=-1;
+        this.text="";
+        this.delo=null;
+        this.izvodjac=izvodjac;
+        this.zanr=null;
+        this.ucesnik=null;
+    }
+    public Zadatak(Zanr zanr){
+        this.id=-1;
+        this.text="";
+        this.delo=null;
+        this.izvodjac=null;
+        this.zanr=zanr;
+        this.ucesnik=null;
+    }
+    public Zadatak(Ucesnik ucesnik){
+        this.id=-1;
+        this.text="";
+        this.delo=null;
+        this.izvodjac=null;
+        this.zanr=null;
+        this.ucesnik=ucesnik;
+    }
     public int getId() {
         return id;
     }
