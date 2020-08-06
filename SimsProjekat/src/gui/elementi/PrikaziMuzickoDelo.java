@@ -1,12 +1,9 @@
 package gui.elementi;
 
-import model.Izvodjac;
 import model.MuzickoDelo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PrikaziMuzickoDelo extends JDialog {
     private JPanel panelGlavni;
@@ -17,17 +14,16 @@ public class PrikaziMuzickoDelo extends JDialog {
     private JLabel labelaVremeNastanka;
     private JLabel labelaProsecnaOcena;
     private JLabel labelaAlbum;
-    public PrikaziMuzickoDelo(MuzickoDelo muzickoDelo, PrikazElementa pe) {
+    private Dimension dimension;
+
+    public PrikaziMuzickoDelo(MuzickoDelo muzickoDelo, PrikazIzvodjenja pe) {
         super();
         setModal(true);
         setTitle("Prikaz informacija izvodjaca");
 
         //popuniIzvodjaca(muzickoDelo);
 
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
-
-        podesiKomponente(muzickoDelo, dimension, pe);
+        inicijalizuj(muzickoDelo);
 
         add(panelGlavni);
 
@@ -37,18 +33,21 @@ public class PrikaziMuzickoDelo extends JDialog {
         setLocationRelativeTo(pe);
     }
 
-    private void podesiKomponente(MuzickoDelo muzickoDelo, Dimension dim, PrikazElementa pe){
-        labelaNaziva.setText("Naziv : "+muzickoDelo.getNazivDela());
-        labelaOpis.setText("Opis : "+muzickoDelo.getOpis());
-        labelaSadrzaj.setText("Sadrzaj : "+muzickoDelo.getSadrzaj());
-        labelaProsecnaOcena.setText("Prosecna ocena : "+muzickoDelo.getProsecnaOcena());
-        labelaDatumPostavljanja.setText("Datum postavljanja : "+muzickoDelo.getDatumPostavljanja());
-        labelaVremeNastanka.setText("Vreme nastanka : "+muzickoDelo.getVremeNastanka());
+    private void inicijalizuj(MuzickoDelo muzickoDelo) {
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        dimension = tool.getScreenSize();
 
-        if (muzickoDelo.getAlbumKomPripada()==null){
+        labelaNaziva.setText("Naziv : " + muzickoDelo.getNazivDela());
+        labelaOpis.setText("Opis : " + muzickoDelo.getOpis());
+        labelaSadrzaj.setText("Sadrzaj : " + muzickoDelo.getSadrzaj());
+        labelaProsecnaOcena.setText("Prosecna ocena : " + muzickoDelo.getProsecnaOcena());
+        labelaDatumPostavljanja.setText("Datum postavljanja : " + muzickoDelo.getDatumPostavljanja());
+        labelaVremeNastanka.setText("Vreme nastanka : " + muzickoDelo.getVremeNastanka());
+
+        if (muzickoDelo.getAlbumKomPripada() == null) {
             labelaAlbum.setText("Pripada albumu : Ne pripada");
         } else {
-            labelaAlbum.setText("Pripada albumu : "+muzickoDelo.getAlbumKomPripada().getNazivDela());
+            labelaAlbum.setText("Pripada albumu : " + muzickoDelo.getAlbumKomPripada().getNazivDela());
         }
 
         /*
@@ -76,5 +75,6 @@ public class PrikaziMuzickoDelo extends JDialog {
          */
 
     }
+
 
 }

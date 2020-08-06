@@ -1,7 +1,6 @@
-package tables;
+package gui.tables;
 
 import model.Recenzija;
-import model.Urednik;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

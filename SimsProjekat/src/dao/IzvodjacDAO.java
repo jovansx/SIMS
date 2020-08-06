@@ -271,6 +271,27 @@ public class IzvodjacDAO {
         return result;
     }
 
+    public static List<Izvodjac> popuniListeIzvodjenja(Izvodjenje iz) {
+        List<Izvodjac> izvodjaci=new ArrayList<Izvodjac>();
+        Izvodjac izvodjac = null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select * from IzvodjacIzvodi where obrisano=false and idIzvodjenja = ?");
+            ps.setInt(1, iz.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjac=getIzvodjac(rs.getInt(1));
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjaci;
+    }
+
 }
 
 

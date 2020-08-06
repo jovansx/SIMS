@@ -102,6 +102,6 @@ public class RegistrovaniKorisnik extends Korisnik {
 
     @Override
     public String toString() {
-        return "RegKorisnik "+getIme()+" "+getPrezime();
+        return getIme()+" "+getPrezime();
     }
 }

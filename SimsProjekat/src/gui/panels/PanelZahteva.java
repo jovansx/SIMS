@@ -2,7 +2,7 @@ package gui.panels;
 
 import gui.dialogs.DialogZahteva;
 import model.Zahtev;
-import tables.TabelaZahteva;
+import gui.tables.TabelaZahteva;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

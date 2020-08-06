@@ -2,8 +2,7 @@ package gui.panels;
 
 import gui.dialogs.DialogAdminovihRecenzija;
 import model.Recenzija;
-import tables.TabelaRecenzijaUrednika;
-import tables.TabelaZahteva;
+import gui.tables.TabelaRecenzijaUrednika;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

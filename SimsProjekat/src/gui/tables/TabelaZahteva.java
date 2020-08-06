@@ -1,25 +1,25 @@
-package tables;
+package gui.tables;
 
-import model.Urednik;
 import model.Zahtev;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
-public class TabelaUrednika extends AbstractTableModel {
+public class TabelaZahteva extends AbstractTableModel {
+
     private static final long serialVersionUID = 1L;
-    private String[] columnNames = { "Id","Ime", "Prezime","Email","Telefon","Korisnicko Ime", "Broj Recenzija"};
+    private String[] columnNames = { "Id", "Naziv","Korisnik","Odobren","Obradjen"};
 
-    private ArrayList<Urednik> listaUrednika;
+    private ArrayList<Zahtev> listaZahteva;
 
-    public TabelaUrednika(ArrayList<Urednik> urednici){
+    public TabelaZahteva(ArrayList<Zahtev> zahtevi){
         super();
-        this.listaUrednika=urednici;
+        this.listaZahteva = zahtevi;
     }
 
     @Override
     public int getRowCount() {
-        return listaUrednika.size();
+        return listaZahteva.size();
     }
 
     @Override
@@ -30,23 +30,20 @@ public class TabelaUrednika extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        Urednik u = listaUrednika.get(rowIndex);
+        Zahtev z = listaZahteva.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                return u.getId();
+                return z.getId();
             case 1:
-                return u.getIme();
+                return z.getNaziv();
             case 2:
-                return u.getPrezime();
+                return z.getPodnosilacZahteva().getNalog().getKorisnickoIme();
             case 3:
-                return u.getEmail();
+                return z.isJeOdobren();
             case 4:
-                return u.getKontaktTelefon();
-            case 5:
-                return u.getNalog().getKorisnickoIme();
-            case 6:
-                return u.getListaRecenzija().size();
+                return z.isJeObradjen();
+
             default:
                 break;
         }
@@ -61,4 +58,5 @@ public class TabelaUrednika extends AbstractTableModel {
     public Class<?> getColumnClass(int c) {
         return getValueAt(0, c).getClass();
     }
+
 }

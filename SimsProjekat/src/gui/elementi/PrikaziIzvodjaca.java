@@ -7,7 +7,8 @@ import model.Izvodjenje;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PrikaziIzvodjaca extends JDialog {
@@ -17,78 +18,101 @@ public class PrikaziIzvodjaca extends JDialog {
     private JLabel labelaTipa;
     private JLabel labelaPripada;
     private JButton buttonPrikaziIzvodjaca;
-    private JButton prikaziMuzickoDeloButton;
+    private JButton buttonPrikaziIzvodjenje;
     private JComboBox comboBoxClanova;
     private JComboBox comboBoxIzvodjenja;
+    private Dimension dimension;
 
-    public PrikaziIzvodjaca(Izvodjac izvodjac, PrikazElementa pe) {
+    public PrikaziIzvodjaca(Izvodjac izvodjac, GlavniProzor gp) {
         super();
         setModal(true);
         setTitle("Prikaz informacija izvodjaca");
 
         popuniIzvodjaca(izvodjac);
 
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
+        inizijalizuj(izvodjac);
 
-        podesiKomponente(izvodjac, dimension, pe);
+        podesiAkcije(izvodjac, gp);
 
         add(panelGlavni);
 
         setSize(dimension.width / 4, dimension.height / 4);
 
         setResizable(false);
-        setLocationRelativeTo(pe);
+        setLocationRelativeTo(gp);
+    }
 
+    private void inizijalizuj(Izvodjac izvodjac) {
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        dimension = tool.getScreenSize();
+
+        labelaNaziva.setText("Naziv izvodjaca : " + izvodjac.getNazivIzvodjaca());
+        labelaOpisa.setText("Opis : " + izvodjac.getOpis());
+        labelaTipa.setText("Tip izvodjaca : " + izvodjac.getTipIzvodjaca());
+
+        if (izvodjac.getPripadaGrupi() == null) {
+            labelaPripada.setText("Pripada izvodjacu : Ne pripada");
+        } else {
+            labelaPripada.setText("Pripada izvodjacu : " + izvodjac.getPripadaGrupi().toString());
+        }
+
+        comboBoxClanova = new JComboBox<String>(PrikazElementa.getNizIzvodjaca(izvodjac.getImaClanove()));
+        comboBoxClanova.setBackground(new Color(186, 186, 178));
+        panelGlavni.add(comboBoxClanova);
+
+        comboBoxIzvodjenja = new JComboBox<String>(getNizIzvodjenja(izvodjac.getListaIzvodjenja()));
+        comboBoxIzvodjenja.setBackground(new Color(186, 186, 178));
+        panelGlavni.add(comboBoxIzvodjenja);
     }
 
     private void popuniIzvodjaca(Izvodjac izvodjac) {
         izvodjac.setListaIzvodjenja(IzvodjenjeDAO.popuniListeIzvodjaca(izvodjac));
-        for(Izvodjenje izvodjenje : izvodjac.getListaIzvodjenja()){
+
+        for (Izvodjenje izvodjenje : izvodjac.getListaIzvodjenja()) {
             izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(izvodjenje.getId()));
         }
+
+
     }
 
-    private void podesiKomponente(Izvodjac izvodjac, Dimension dim, PrikazElementa pe){
-        labelaNaziva.setText("Naziv izvodjaca : "+izvodjac.getNazivIzvodjaca());
-        labelaOpisa.setText("Opis : "+izvodjac.getOpis());
-        labelaTipa.setText("Tip izvodjaca : "+izvodjac.getTipIzvodjaca());
-        if (izvodjac.getPripadaGrupi()==null){
-            labelaPripada.setText("Pripada izvodjacu : Ne pripada");
-        } else {
-            labelaPripada.setText("Pripada izvodjacu : "+izvodjac.getPripadaGrupi().toString());
-        }
-
-        comboBoxClanova = new JComboBox<String>(PrikazElementa.getNizIzvodjaca(izvodjac.getImaClanove()));
-        comboBoxClanova.setBackground(new Color(186,186,178));
-        panelGlavni.add(comboBoxClanova);
-
-        comboBoxIzvodjenja = new JComboBox<String>(getNizIzvodjenja(izvodjac.getListaIzvodjenja()));
-        comboBoxIzvodjenja.setBackground(new Color(186,186,178));
-        panelGlavni.add(comboBoxIzvodjenja);
+    private void podesiAkcije(Izvodjac izvodjac, GlavniProzor gp) {
 
         buttonPrikaziIzvodjaca.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = comboBoxClanova.getSelectedIndex();
-                if (index < 0){
+                if (index < 0) {
                     JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjac");
                 } else {
-                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(izvodjac.getImaClanove().get(index), pe);
+                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(izvodjac.getImaClanove().get(index), gp);
                     pi.setVisible(true);
                 }
             }
         });
+
+        buttonPrikaziIzvodjenje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = comboBoxIzvodjenja.getSelectedIndex();
+                if (index < 0) {
+                    JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjenje");
+                } else {
+                    PrikazElementa pi = new PrikazElementa(izvodjac.getListaIzvodjenja().get(index), gp);
+                    pi.setVisible(true);
+                }
+            }
+        });
+
+
 
     }
 
     public static String[] getNizIzvodjenja(List<Izvodjenje> listaIzvodjenja) {
         String[] itemsArray = new String[listaIzvodjenja.size()];
         int index = 0;
-        for(Izvodjenje izvodjenje : listaIzvodjenja){
-            itemsArray[index] = Element.generateNazivIzvodjenja(izvodjenje);
+        for (Izvodjenje izvodjenje : listaIzvodjenja) {
+            itemsArray[index] = ElementIzvodjenja.generateNazivIzvodjenja(izvodjenje);
             index++;
-
         }
         return itemsArray;
     }

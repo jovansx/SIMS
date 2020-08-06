@@ -1,17 +1,11 @@
 package gui.elementi;
 
-import dao.IzvodjenjeDAO;
-import model.Izvodjac;
-import model.Korisnik;
-import model.MuzickoDelo;
 import model.Recenzija;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ElementRecenzija extends JPanel {
     private JLabel labelaOpisa;
@@ -20,41 +14,45 @@ public class ElementRecenzija extends JPanel {
     private JButton prikaziPodatkeAutoraButton;
     private JPanel panelGlavni;
 
-    public ElementRecenzija(Recenzija recenzija){
+    public ElementRecenzija(Recenzija recenzija) {
         super();
 
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        Dimension dimension = tool.getScreenSize();
 
-        //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
-        panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30 , dimension.height / 15));
+        inicijalizuj(recenzija);
+
         add(panelGlavni);
 
-        if(recenzija.getUrednik()==null){
-            labelaAutora.setText(recenzija.getAutorRecenzije().toString());
-        }
-        else{
-            labelaAutora.setText(recenzija.getUrednik().toString());
-        }
+        podesiAkcije(recenzija);
 
-        labelaOpisa.setText(recenzija.getKomentar());
-        labelaOcene.setText(recenzija.getOcena()+"");
+        add(panelGlavni);
+    }
 
-
+    private void podesiAkcije(Recenzija recenzija) {
 
         prikaziPodatkeAutoraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(recenzija.getUrednik()==null){
-                    PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
-                    pk.setVisible(true);
-                }
-                else{
-                    PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
-                    pk.setVisible(true);
-                }
-
+                PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+                pk.setVisible(true);
             }
         });
+    }
+
+    private void inicijalizuj(Recenzija recenzija) {
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Dimension dimension = tool.getScreenSize();
+
+        //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
+        panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30, dimension.height / 15));
+
+        if(recenzija.getAutorRecenzije() != null) {
+            prikaziPodatkeAutoraButton.setText("Prikazi korisnika");
+            labelaAutora.setText(recenzija.getAutorRecenzije().toString());
+        }else {
+            prikaziPodatkeAutoraButton.setText("Prikazi urednika");
+            labelaAutora.setText(recenzija.getUrednik().toString());
+        }
+        labelaOpisa.setText(recenzija.getKomentar());
+        labelaOcene.setText(recenzija.getOcena() + "");
     }
 }

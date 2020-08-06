@@ -2,7 +2,7 @@ package gui.panels;
 
 import gui.dialogs.DialogOdobravanje;
 import model.Recenzija;
-import tables.TabelaOdobravanje;
+import gui.tables.TabelaOdobravanje;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

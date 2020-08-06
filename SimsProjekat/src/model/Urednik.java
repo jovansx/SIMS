@@ -90,9 +90,6 @@ public class Urednik extends Korisnik {
 
     @Override
     public String toString() {
-        return "Urednik{" +
-                "listaZadataka=" + listaZadataka +
-                ", listaZanrova=" + listaZanrova +
-                '}';
+        return getIme() + " " + getPrezime();
     }
 }
