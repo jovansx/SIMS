@@ -54,13 +54,13 @@
           <text value="PrikaziClana"/>
         </properties>
       </component>
-      <component id="1fd63" class="javax.swing.JButton" binding="prikaziMuzickoDeloButton" default-binding="true">
+      <component id="1fd63" class="javax.swing.JButton" binding="buttonPrikaziIzvodjenje">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value="PrikaziMuzickoDelo"/>
+          <text value="PrikaziIzvodjenje"/>
         </properties>
       </component>
     </children>

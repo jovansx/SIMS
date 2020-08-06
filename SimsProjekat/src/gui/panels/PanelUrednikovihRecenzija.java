@@ -2,10 +2,8 @@ package gui.panels;
 
 import gui.dialogs.DialogUrednikovihRecenzija;
 import model.Recenzija;
-import tables.TabelaAktivnosti;
-import tables.TabelaZahteva;
+import gui.tables.TabelaAktivnosti;
 
-import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;

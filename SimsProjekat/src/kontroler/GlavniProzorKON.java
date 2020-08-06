@@ -15,7 +15,6 @@ public class GlavniProzorKON {
 
     public static List<Izvodjenje> dobaviIzvodjenja(String parametar, int brojElemenata) throws SQLException {
 
-        System.out.println(parametar);
         return IzvodjenjeDAO.getIzvodjenjaZaPocetnuStranicu(brojElemenata, parametar);
     }
 }

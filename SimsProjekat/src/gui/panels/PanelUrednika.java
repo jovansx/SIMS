@@ -1,22 +1,18 @@
 package gui.panels;
 
 import dao.RecenzijaDAO;
-import dao.UrednikDAO;
 import gui.dialogs.DialogUrednika;
 import gui.dialogs.DialogUrednikovihRecenzija;
 import kontroler.AdminovProzorKON;
 import model.Recenzija;
 import model.Urednik;
-import tables.TabelaAktivnosti;
-import tables.TabelaUrednika;
+import gui.tables.TabelaUrednika;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;

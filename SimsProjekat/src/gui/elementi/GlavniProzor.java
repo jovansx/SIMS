@@ -134,13 +134,13 @@ public class GlavniProzor extends JFrame implements ActionListener{
         }
     }
 
-    public void podesiParametreZaPocetnuStranu(boolean popularno, boolean pretrazi) {
+    private void podesiParametreZaPocetnuStranu(boolean popularno, boolean pretrazi) {
         brojElemenataIzvodjenja = 5;
         popularnoTrenutno = popularno;
         pretraziTrenutno = pretrazi;
     }
 
-    public void ucitajIzvodjenjaZaPocetnuStranu() {
+    private void ucitajIzvodjenjaZaPocetnuStranu() {
         resetElemente();
 
         String parametar;
@@ -173,7 +173,7 @@ public class GlavniProzor extends JFrame implements ActionListener{
         refreshComponent(panelOdSkrola);
     }
 
-    public void ucitajReklamu() {
+    private void ucitajReklamu() {
 
         java.sql.Date danasnjiDatum = new java.sql.Date(System.currentTimeMillis());
 
