@@ -4,6 +4,7 @@ import dao.RecenzijaDAO;
 import dao.UrednikDAO;
 import dao.ZahtevDAO;
 import gui.dialogs.*;
+import kontroler.AdminovProzorKON;
 import model.*;
 
 import javax.swing.*;
@@ -22,7 +23,13 @@ public class AdminovProzor extends GlavniProzor{
         inicijalizuj();
     }
 
-    public AdminovProzor(){
+    public AdminovProzor(){}
+
+    private void inicijalizuj() {
+
+        panelOperacija.remove(prijavaButton);
+        panelOperacija.remove(registracijaButton);
+        odjavaButton.setVisible(true);
 
         panelAkcija.setLayout(new BoxLayout(panelAkcija,BoxLayout.PAGE_AXIS));
         profil = new JButton("Profil");
@@ -90,7 +97,7 @@ public class AdminovProzor extends GlavniProzor{
         odobravanje.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogAdminovihRecenzija dar = new DialogAdminovihRecenzija(null);
+                DialogAdminovihRecenzija dar = new DialogAdminovihRecenzija((ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeKojeJeUrednikKreirao());
                 dar.setVisible(true);
             }
         });
@@ -101,27 +108,11 @@ public class AdminovProzor extends GlavniProzor{
         pregled.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogUrednika du = new DialogUrednika(getUrednici());
+                DialogUrednika du = new DialogUrednika(AdminovProzorKON.getUrednici());
                 du.setVisible(true);
             }
         });
         panelAkcija.add(pregled);
-    }
-
-    //Ovo cu u kontroler prebaciti, za sad samo da imam testirati
-    public ArrayList<Urednik> getUrednici(){
-        ArrayList<Urednik> urednici= (ArrayList<Urednik>) UrednikDAO.getUrednike();
-        for(Urednik u: urednici){
-            //u.setListaRecenzija((ArrayList<Recenzija>) UrednikDAO.getRecenzijeUrednika(u.getId()));
-        }
-        return urednici;
-    }
-
-    private void inicijalizuj() {
-
-        panelOperacija.remove(prijavaButton);
-        panelOperacija.remove(registracijaButton);
-        odjavaButton.setVisible(true);
     }
 
 }
