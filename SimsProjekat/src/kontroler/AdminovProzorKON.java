@@ -1,11 +1,7 @@
 package kontroler;
 
-import dao.RecenzijaDAO;
-import dao.UrednikDAO;
-import dao.ZadatakDAO;
-import model.Recenzija;
-import model.Urednik;
-import model.Zadatak;
+import dao.*;
+import model.*;
 
 import java.lang.reflect.GenericArrayType;
 import java.sql.SQLException;
@@ -75,4 +71,24 @@ public class AdminovProzorKON {
         }
         return listaUrednika;
     }
+
+    public static int provjeriLozinku(Administrator ad, String l, String n, String n1){
+        int retVal = -1;
+        KorisnickiNalog a=KorisnickiNalogDAO.getNalogAdmina(ad.getId());
+
+        if(a.getLozinka().equals(l) && n.equals(n1)){
+            retVal = 0;
+        }
+        if(a.getLozinka().equals(l) && !n.equals(n1)){
+            retVal = 1;
+        }
+        if(!a.getLozinka().equals(l) && n.equals(n1)){
+            retVal = 2;
+        }
+        if(!a.getLozinka().equals(l) && !n.equals(n1)){
+            retVal=3;
+        }
+        return retVal;
+    }
+
 }

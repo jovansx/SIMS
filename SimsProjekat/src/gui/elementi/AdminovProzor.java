@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 public class AdminovProzor extends GlavniProzor{
     JButton profil,inbox,zadaci,promenaLozinke,odobravanje, sadrzaj, pregled;
-
+    Administrator admin;
 
     public AdminovProzor(Administrator administrator) {
         super();
+        this.admin=administrator;
         inicijalizuj();
     }
 
@@ -87,7 +88,8 @@ public class AdminovProzor extends GlavniProzor{
         promenaLozinke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ;
+                DialogPromjeneLoznikeAdmin dz = new DialogPromjeneLoznikeAdmin(admin);
+                dz.setVisible(true);
             }
         });
 

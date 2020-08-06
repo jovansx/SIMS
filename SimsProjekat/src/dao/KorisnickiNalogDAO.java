@@ -113,6 +113,31 @@ public class KorisnickiNalogDAO {
 
         return admin;
     }
+
+    //Nadji Nalog Admina
+    public static KorisnickiNalog getNalogAdmina(Integer id){
+        KorisnickiNalog nalog=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select k.id, k.korisnickoIme, k.lozinka, k.tipKorisnika from korisnickinalog k, " +
+                            "administrator a where a.idNaloga=k.id and a.id=?;");
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                nalog = new KorisnickiNalog();
+                nalog.setId(rs.getInt(1));
+                nalog.setKorisnickoIme(rs.getString(2));
+                nalog.setLozinka(rs.getString(3));
+                nalog.setKorisnik(TipKorisnika.valueOf(rs.getString(4)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nalog;
+
+    }
     //Nadji urednika
     public static Urednik getUrednik(int id){
         Urednik urednik = null;
