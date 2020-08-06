@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws SQLException {
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
+
         String sep = System.getProperty("file.separator");
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"klinka.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"zareGoci.jpg");

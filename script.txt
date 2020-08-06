@@ -7,15 +7,15 @@ nazivMesta VARCHAR(30),
 drzava VARCHAR(30)
 );
 
-INSERT INTO 
+INSERT INTO
 MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
 VALUES('Novi Sad', 21000, 'Srbija');
 
-INSERT INTO 
+INSERT INTO
 MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
 VALUES('London', 32452, 'Engleska');
 
-INSERT INTO 
+INSERT INTO
 MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
 VALUES('Pariz', 43560, 'Francuska');
 
@@ -25,15 +25,15 @@ datumGlasanja DATE,
 obrisano BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO 
+INSERT INTO
 TopLista(datumGlasanja)
 VALUES('2020.01.01.');
 
-INSERT INTO 
+INSERT INTO
 TopLista(datumGlasanja)
 VALUES('2020.02.01.');
 
-INSERT INTO 
+INSERT INTO
 TopLista(datumGlasanja)
 VALUES('2020.03.01.');
 
@@ -50,47 +50,47 @@ pttBrojMesta INT UNSIGNED,
 slika BLOB,
 CONSTRAINT FK_MESTO FOREIGN KEY (pttBrojMesta) REFERENCES MestoIzvodjenja(pttBroj)
 );
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2018.10.05.', 10, 'AUDIO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2020.02.19.', 20, 'AUDIO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2016.03.23.', 100, 'ZAPIS', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2018.11.24.', 60, 'VIDEO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2017.03.14.', 45, 'ZAPIS', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('1999.01.01.', 160, 'ZAPIS', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2017.03.14.', 4, 'VIDEO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2018.01.14.', 5, 'VIDEO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2020.02.19.', 120, 'VIDEO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2019.03.14.', 4, 'VIDEO', 21000);
 
-INSERT INTO 
+INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2018.02.14.', 5, 'ZAPIS', 21000);
 
@@ -103,15 +103,15 @@ CONSTRAINT FK_TOP_LISTA FOREIGN KEY (idTopListe) REFERENCES TopLista(id),
 PRIMARY KEY (idIzvodjenja, idTopListe)
 );
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
 VALUES(1, 2);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
 VALUES(3, 1);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
 VALUES(2, 3);
 
@@ -124,15 +124,15 @@ pripadaGrupi INT UNSIGNED,
 CONSTRAINT FK_PRIPADA FOREIGN KEY (pripadaGrupi) REFERENCES Izvodjac(id)
 );
 
-INSERT INTO 
+INSERT INTO
 Izvodjac(nazivIzvodjaca, tip)
 VALUES('Hurricane', 'BEND');
 
-INSERT INTO 
+INSERT INTO
 Izvodjac(nazivIzvodjaca, tip, pripadaGrupi)
 VALUES('Ksenija Knezevic', 'CLAN_GRUPE', 1);
 
-INSERT INTO 
+INSERT INTO
 Izvodjac(nazivIzvodjaca, tip)
 VALUES('Jovan Perisic', 'SOLISTA');
 
@@ -145,15 +145,15 @@ CONSTRAINT FK_IZVODJAC FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
 PRIMARY KEY (idIzvodjenja, idIzvodjaca)
 );
 
-INSERT INTO 
+INSERT INTO
 IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
 VALUES(1, 1);
 
-INSERT INTO 
+INSERT INTO
 IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
 VALUES(2, 2);
 
-INSERT INTO 
+INSERT INTO
 IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
 VALUES(3, 3);
 
@@ -163,15 +163,15 @@ datumNastanka DATE,
 opis VARCHAR(100)
 );
 
-INSERT INTO 
+INSERT INTO
 Zanr(nazivZanra, datumNastanka)
 VALUES('Krajiska', '1991.02.02.');
 
-INSERT INTO 
+INSERT INTO
 Zanr(nazivZanra, datumNastanka)
 VALUES('Pop', '2005.11.14.');
 
-INSERT INTO 
+INSERT INTO
 Zanr(nazivZanra, datumNastanka)
 VALUES('Rok', '1987.04.18.');
 
@@ -182,15 +182,15 @@ tip VARCHAR(30),
 opis VARCHAR(200)
 );
 
-INSERT INTO 
+INSERT INTO
 Ucesnik(nazivUcesnika, tip)
 VALUES('Grand', 'MUZICKA_PRODUKCIJA');
 
-INSERT INTO 
+INSERT INTO
 Ucesnik(nazivUcesnika, tip)
 VALUES('Baja Mali Knindza', 'TEKSTOPISAC');
 
-INSERT INTO 
+INSERT INTO
 Ucesnik(nazivUcesnika, tip)
 VALUES('Stevan Stojanovic Mokranjac', 'KOMPOZITOR');
 
@@ -208,15 +208,15 @@ pripadaAlbumu INT UNSIGNED,
 CONSTRAINT FK_ALBUM FOREIGN KEY (pripadaAlbumu) REFERENCES MuzickoDelo(id)
 );
 
-INSERT INTO 
+INSERT INTO
 MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka, tipAlbuma)
 VALUES('Sama pala, sama ubila se', '2017.11.19', '2010.11.18', 'CD');
 
-INSERT INTO 
+INSERT INTO
 MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka, pripadaAlbumu)
 VALUES('Kosibaso', '2017.11.19', '2010.11.18', 1);
 
-INSERT INTO 
+INSERT INTO
 MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
 VALUES('Za Elizu', '2018.09.14.', '1889.02.05');
 
@@ -229,15 +229,15 @@ CONSTRAINT FK_MUZICKO_DELO FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(i
 PRIMARY KEY (nazivZanra, idMuzickogDela)
 );
 
-INSERT INTO 
+INSERT INTO
 ZanrMuzickogDela(nazivZanra, idMuzickogDela)
 VALUES('Krajiska', 1);
 
-INSERT INTO 
+INSERT INTO
 ZanrMuzickogDela(nazivZanra, idMuzickogDela)
 VALUES('Pop', 2);
 
-INSERT INTO 
+INSERT INTO
 ZanrMuzickogDela(nazivZanra, idMuzickogDela)
 VALUES('Rok', 3);
 
@@ -250,15 +250,15 @@ CONSTRAINT FK_MUZICKO_DELO2 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(
 PRIMARY KEY (idUcesnika, idMuzickogDela)
 );
 
-INSERT INTO 
+INSERT INTO
 UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
 VALUES(1, 1);
 
-INSERT INTO 
+INSERT INTO
 UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
 VALUES(2, 2);
 
-INSERT INTO 
+INSERT INTO
 UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
 VALUES(3, 3);
 
@@ -270,47 +270,47 @@ CONSTRAINT FK_MUZICKO_DELO3 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(
 PRIMARY KEY (idIzvodjenja, idMuzickogDela)
 );
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(1, 1);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(2, 2);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(3, 3);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(4, 1);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(5, 2);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(6, 3);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(7, 1);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(8, 2);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(9, 3);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(10, 3);
 
-INSERT INTO 
+INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(11, 2);
 
@@ -323,51 +323,51 @@ lozinka VARCHAR(30),
 tipKorisnika VARCHAR(15)
 );
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('coca', 'coca', 'UREDNIK');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('acab', 'acab', 'UREDNIK');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('nina', 'nina', 'UREDNIK');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('dada', 'dada', 'UREDNIK');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('coca2', 'coca2', 'ADMINISTRATOR');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('acab2', 'acab2', 'ADMINISTRATOR');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('nina2', 'nina2', 'ADMINISTRATOR');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('dada2', 'dada2', 'ADMINISTRATOR');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('coca3', 'coca3', 'REGISTROVANI');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('acab3', 'acab3', 'REGISTROVANI');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('nina3', 'nina3', 'REGISTROVANI');
 
-INSERT INTO 
+INSERT INTO
 KorisnickiNalog(korisnickoIme, lozinka, tipKorisnika)
 VALUES('dada3', 'dada3', 'REGISTROVANI');
 
@@ -383,19 +383,19 @@ idNaloga INT UNSIGNED,
 CONSTRAINT FK_NALOG FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 );
 
-INSERT INTO 
+INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 6);
 
-INSERT INTO 
+INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 5);
 
-INSERT INTO 
+INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 7);
 
-INSERT INTO 
+INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 8);
 
@@ -411,19 +411,19 @@ idNaloga INT UNSIGNED,
 CONSTRAINT FK_NALOG2 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 );
 
-INSERT INTO 
+INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 2);
 
-INSERT INTO 
+INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 1);
 
-INSERT INTO 
+INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 3);
 
-INSERT INTO 
+INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 4);
 
@@ -435,15 +435,15 @@ CONSTRAINT FK_ZANR5 FOREIGN KEY (nazivZanra) REFERENCES Zanr(nazivZanra),
 PRIMARY KEY (nazivZanra, idUrednika)
 );
 
-INSERT INTO 
+INSERT INTO
 UrednikPoznajeZanrove(idUrednika, nazivZanra)
 VALUES(1, 'Krajiska');
 
-INSERT INTO 
+INSERT INTO
 UrednikPoznajeZanrove(idUrednika, nazivZanra)
 VALUES(2, 'Pop');
 
-INSERT INTO 
+INSERT INTO
 UrednikPoznajeZanrove(idUrednika, nazivZanra)
 VALUES(3, 'Rok');
 
@@ -460,19 +460,19 @@ jeVidljiv BOOLEAN DEFAULT FALSE,
 CONSTRAINT FK_NALOG3 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 );
 
-INSERT INTO 
+INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 10);
 
-INSERT INTO 
+INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 9);
 
-INSERT INTO 
+INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 11);
 
-INSERT INTO 
+INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
 VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 12);
 
@@ -494,7 +494,7 @@ INSERT INTO
 Reklama(naziv, textReklame, cena, datumIsteka, idAdmina, url)
 VALUES('Coca cola', 'Osvezavajuce !', 100000, '2020.12.31.', 3, 'https://www.coca-cola.rs/pocetna-strana');
 
-INSERT INTO 
+INSERT INTO
 Reklama(naziv, textReklame, cena, datumIsteka, idAdmina, url)
 VALUES('Nike', 'Najbolji kvalitet', 50000, '2020.11.30.', 3, 'https://www.nike.com/');
 
@@ -516,15 +516,15 @@ idKorisnika INT UNSIGNED,
 CONSTRAINT FK_PLAY_LISTA FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id)
 );
 
-INSERT INTO 
+INSERT INTO
 PlayLista(naziv, idKorisnika)
 VALUES('Krajiski sokolovi', 1);
 
-INSERT INTO 
+INSERT INTO
 PlayLista(naziv, idKorisnika)
 VALUES('Elitni odredi lista', 2);
 
-INSERT INTO 
+INSERT INTO
 PlayLista(naziv, idKorisnika)
 VALUES('MIX pesama', 4);
 
@@ -537,15 +537,15 @@ CONSTRAINT FK_MUZICKO_DELO4 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(
 PRIMARY KEY (idPlayListe, idMuzickogDela)
 );
 
-INSERT INTO 
+INSERT INTO
 MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
 VALUES(1, 1);
 
-INSERT INTO 
+INSERT INTO
 MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
 VALUES(2, 2);
 
-INSERT INTO 
+INSERT INTO
 MuzickaDelaPlayListi(idPlayListe, idMuzickogDela)
 VALUES(3, 3);
 
@@ -565,15 +565,15 @@ CONSTRAINT FK_IZVODJAC2 FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
 CONSTRAINT FK_UREDNIK FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
 );
 
-INSERT INTO 
+INSERT INTO
 Zadatak(idMuzickogDela, textZadatka, idUrednika)
 VALUES(1, 'Uradi mi ovo do ponedeljka!', 1);
 
-INSERT INTO 
+INSERT INTO
 Zadatak(nazivZanra, textZadatka, idUrednika)
 VALUES('Krajiska', 'Ako ovo ne uradis za pola sata dobijas otkaz !', 2);
 
-INSERT INTO 
+INSERT INTO
 Zadatak(idUcesnika, textZadatka, idUrednika, idIzvodjaca)
 VALUES(3, 'Kad stignes..', 3, 1);
 
@@ -583,10 +583,10 @@ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
 ocena INT,
 komentar VARCHAR(200),
-idMuzickogDela INT UNSIGNED,
-idIzvodjenja INT UNSIGNED,
-idKorisnika INT UNSIGNED,
-idUrednika INT UNSIGNED,
+idMuzickogDela INT UNSIGNED DEFAULT NULL,
+idIzvodjenja INT UNSIGNED DEFAULT NULL,
+idKorisnika INT UNSIGNED DEFAULT NULL,
+idUrednika INT UNSIGNED DEFAULT NULL,
 odobreno BOOLEAN DEFAULT FALSE,
 CONSTRAINT FK_MUZICKO_DELO6 FOREIGN KEY (idMuzickogDela) REFERENCES MuzickoDelo(id),
 CONSTRAINT FK_IZVODJENJE4 FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
@@ -594,17 +594,34 @@ CONSTRAINT FK_KORISNIK FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik
 CONSTRAINT FK_UREDNIK2 FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
 );
 
-INSERT INTO 
-Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
-VALUES(4, 'Mogu ponovo recenzirati ?', 1, 1, 1, 1);
+INSERT INTO
+Recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+VALUES(2, 'Ne svidja mi se', 1, 1);
 
-INSERT INTO 
-Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
-VALUES(5, 'Samo jako!', 2, 2, 2, 2);
+INSERT INTO
+Recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+VALUES(5, 'Samo jako!', 2, 2);
 
-INSERT INTO 
-Recenzija(ocena, komentar, idMuzickogDela, idIzvodjenja, idKorisnika, idUrednika)
-VALUES(1, 'Uzas...', 3, 3, 3, 3);
+INSERT INTO
+Recenzija(ocena, komentar, idIzvodjenja, idKorisnika)
+VALUES(1, 'Uzas...', 3, 3);
+
+INSERT INTO
+Recenzija(ocena, komentar, idMuzickogDela, idUrednika)
+VALUES(4, 'Moze bolje', 2, 2);
+
+INSERT INTO
+Recenzija(ocena, komentar, idIzvodjenja, idUrednika)
+VALUES(3, 'Lose osmisljeno', 3, 2);
+
+INSERT INTO
+Recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+VALUES(5,'Odlicno!!', 2, 1);
+
+INSERT INTO
+Recenzija(ocena, komentar, idIzvodjenja, idUrednika)
+VALUES(4, 'Izvedba je bila odlicna, ali je lose ozvuceno',3,4);
+
 
 CREATE TABLE Zahtev (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -621,15 +638,15 @@ CONSTRAINT FK_KORISNIK2 FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisni
 CONSTRAINT FK_RECENZIJA FOREIGN KEY (idRecenzije) REFERENCES Recenzija(id)
 );
 
-INSERT INTO 
+INSERT INTO
 Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
 VALUES('Pitanje u vezi recenzije', 'Nezadovoljan sam prethodnom recenzijom, moze opet :D ?', 1, 1, 1);
 
-INSERT INTO 
+INSERT INTO
 Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
 VALUES('Pitanje', 'Moze opet :D ?', 2, 2, 2);
 
-INSERT INTO 
+INSERT INTO
 Zahtev(naziv, opis, idAdmina, idKorisnika, idRecenzije)
 VALUES('...', 'Nezadovoljan sam prethodnom recenzijom :( ?', 3, 3, 3);
 
@@ -642,14 +659,14 @@ CONSTRAINT FK_IZVODJENJE5 FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
 PRIMARY KEY (idKorisnika, idIzvodjenja)
 );
 
-INSERT INTO 
+INSERT INTO
 OmiljenaIzvodjenjaKorisnika(idKorisnika, idIzvodjenja)
 VALUES(1, 1);
 
-INSERT INTO 
+INSERT INTO
 OmiljenaIzvodjenjaKorisnika(idKorisnika, idIzvodjenja)
 VALUES(2, 2);
 
-INSERT INTO 
+INSERT INTO
 OmiljenaIzvodjenjaKorisnika(idKorisnika, idIzvodjenja)
 VALUES(3, 3);
