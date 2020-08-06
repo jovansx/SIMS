@@ -59,7 +59,6 @@ public class GlavniProzor extends JFrame implements ActionListener {
     }
 
     private void inicijalizuj() {
-
         brojElemenataIzvodjenja = 5;
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         separator = System.getProperty("file.separator");

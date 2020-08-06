@@ -1,6 +1,8 @@
 package gui.elementi;
 
+import dao.IzvodjenjeDAO;
 import dao.ReklamaDAO;
+import model.Izvodjenje;
 import model.Reklama;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 
 public class ElementReklame extends JPanel {
     private JPanel panelReklame;
@@ -58,10 +61,23 @@ public class ElementReklame extends JPanel {
                 } catch (IOException | URISyntaxException ex) {
                     ex.printStackTrace();
                 }
+
+                dodajPristup(r);
+
                 gp.obrisiReklamu(ElementReklame.this);
             }
         });
 
+    }
+
+    private void dodajPristup(Reklama r) {
+        r.setBrojPristupa(r.getBrojPristupa() + 1);
+
+        try {
+            ReklamaDAO.updatePristup(r);
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
 }
