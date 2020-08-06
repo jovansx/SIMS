@@ -52,7 +52,7 @@ public class ElementReklame extends JPanel{
                 } catch (IOException | URISyntaxException ex) {
                     ex.printStackTrace();
                 }
-                gp.obrisiReklamu(r, ElementReklame.this);
+                gp.obrisiReklamu(ElementReklame.this);
             }
         });
     }
