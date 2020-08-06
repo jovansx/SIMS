@@ -8,12 +8,12 @@
       <background color="-9861237"/>
       <enabled value="false"/>
     </properties>
-    <border type="none"/>
+    <border type="etched"/>
     <children>
       <component id="c7965" class="javax.swing.JLabel" binding="labelaIkone">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag top="3" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-9861237"/>
@@ -24,7 +24,7 @@
       <component id="283d9" class="javax.swing.JLabel" binding="labelaNaziva">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
+          <gridbag top="0" left="0" bottom="2" right="0" weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Joy"/>
@@ -33,7 +33,7 @@
       <component id="479d8" class="javax.swing.JLabel" binding="labelaOpisa">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="2.0" ipady="2"/>
+          <gridbag top="2" left="0" bottom="2" right="0" weightx="0.0" weighty="2.0" ipady="2"/>
         </constraints>
         <properties>
           <horizontalTextPosition value="2"/>

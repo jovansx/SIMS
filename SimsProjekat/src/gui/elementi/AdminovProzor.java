@@ -112,7 +112,7 @@ public class AdminovProzor extends GlavniProzor{
     public ArrayList<Urednik> getUrednici(){
         ArrayList<Urednik> urednici= (ArrayList<Urednik>) UrednikDAO.getUrednike();
         for(Urednik u: urednici){
-            u.setListaRecenzija((ArrayList<Recenzija>) UrednikDAO.getRecenzijeUrednika(u.getId()));
+            //u.setListaRecenzija((ArrayList<Recenzija>) UrednikDAO.getRecenzijeUrednika(u.getId()));
         }
         return urednici;
     }

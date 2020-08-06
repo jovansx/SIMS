@@ -74,15 +74,7 @@ GlavniProzor extends JFrame implements ActionListener{
         setSize(dimension.width / 4 * 3, dimension.height / 4 * 3);
         panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
         panelReklama.setLayout(new BoxLayout(panelReklama, BoxLayout.Y_AXIS));
-        /*Reklama r = new Reklama();
-        reklame.add(new ElementReklame(r, this));
-        reklame.add(new ElementReklame(r, this));
-        reklame.add(new ElementReklame(r, this));
-        for(ElementReklame el: reklame) {
-            panelReklama.add(el);
-        }
-        panelReklama.validate();
-        panelReklama.repaint();*/
+
         ucitajReklamu();
         ucitajPocetnuStranu();
         podesiAkcije();

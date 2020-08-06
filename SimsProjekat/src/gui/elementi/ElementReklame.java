@@ -1,10 +1,6 @@
 package gui.elementi;
 
-import dao.IzvodjenjeDAO;
 import dao.ReklamaDAO;
-import model.Izvodjac;
-import model.Izvodjenje;
-import model.MuzickoDelo;
 import model.Reklama;
 
 import javax.swing.*;
@@ -30,8 +26,8 @@ public class ElementReklame extends JPanel{
         dimension = tool.getScreenSize();
 
         panelReklame.setPreferredSize(
-                new Dimension(dimension.width/24*3, dimension.height/16*3));
-        labelaIkone.setSize(dimension.width/25*3, dimension.height/13*3);
+                new Dimension(dimension.width/24*3 + 30, dimension.height/16*3 + 10));
+        labelaIkone.setSize(dimension.width/24*3 + 10, dimension.height/16*3-25);
 
         add(panelReklame);
 
@@ -41,10 +37,10 @@ public class ElementReklame extends JPanel{
         String separator = System.getProperty("file.separator");
 
         ImageIcon retImageIcon = ReklamaDAO.getSliku(r, separator);
-        //Image im = retImageIcon.getImage();
-        //Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
-        //ImageIcon newImage = new ImageIcon(myImg);
-        labelaIkone.setIcon(retImageIcon);
+        Image im = retImageIcon.getImage();
+        Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImage = new ImageIcon(myImg);
+        labelaIkone.setIcon(newImage);
 
         panelReklame.addMouseListener(new MouseAdapter() {
             @Override
