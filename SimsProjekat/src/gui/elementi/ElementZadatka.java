@@ -94,12 +94,16 @@ public class ElementZadatka extends JPanel {
         posalji.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ;
+                zadatak.setText(komentar1.getText());
+                AdminovProzorKON.dodajZadatak(zadatak, getIdUrednika(urednici.getSelectedItem().toString()));
             }
         });
         add(posalji);
 
     }
-
+    public int getIdUrednika(String s){
+        String[] dijelovi=s.split(" ");
+        return Integer.parseInt(dijelovi[0]);
+    }
 
 }
