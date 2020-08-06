@@ -65,6 +65,10 @@ public class Ucesnik {
         listaMuzickihDela.add(muzickoDelo);
     }
 
+    public void setListaMuzickihDela(List<MuzickoDelo> listaMuzickihDela) {
+        this.listaMuzickihDela = listaMuzickihDela;
+    }
+
     public boolean obrisiMuzickoDelo(MuzickoDelo muzickoDelo) {
         if (listaMuzickihDela == null) {
             return false;

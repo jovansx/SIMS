@@ -182,4 +182,24 @@ public class MuzickoDeloDAO {
         return result;
     }
 
+    public static List<MuzickoDelo> getMuzickaDelaUcesnika(Ucesnik ucesnik) {
+        List<MuzickoDelo> dela = new ArrayList<MuzickoDelo>();
+        MuzickoDelo delo = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select * from UcesnikMuzickogDela where obrisano = false and idUcesnika=?");
+            ps.setInt(1, ucesnik.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                delo = MuzickoDeloDAO.getMuzickoDelo(rs.getInt(2));
+                dela.add(delo);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dela;
+    }
 }

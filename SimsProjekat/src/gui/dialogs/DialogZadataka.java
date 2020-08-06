@@ -5,7 +5,6 @@ import dao.MuzickoDeloDAO;
 import dao.UcesnikDAO;
 import dao.ZanrDAO;
 import gui.elementi.AdminovProzor;
-import gui.elementi.Element;
 import gui.elementi.ElementZadatka;
 import kontroler.AdminovProzorKON;
 import model.*;

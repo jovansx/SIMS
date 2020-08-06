@@ -126,4 +126,23 @@ public class RegistrovaniKorisnikDAO {
         }
         return result;
     }
+
+    public static boolean proveraVidljivostiKorisnika(RegistrovaniKorisnik autorRecenzije) {
+        boolean retVal = true;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select * from RegistrovaniKorisnik where id=? and obrisano=false");
+            ps.setInt(1, autorRecenzije.getId());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                retVal = rs.getBoolean(9);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return retVal;
+    }
 }

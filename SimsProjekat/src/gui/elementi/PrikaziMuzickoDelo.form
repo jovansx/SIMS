@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.elementi.PrikaziMuzickoDelo">
   <grid id="27dc6" binding="panelGlavni" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="555" height="580"/>
     </constraints>
     <properties>
       <background color="-9861237"/>
@@ -84,6 +84,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-6704199"/>
           <text value="PrikaziIzvodjenja"/>
         </properties>
       </component>
@@ -93,9 +94,31 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-6704199"/>
           <text value="PrikaziUcesnike"/>
         </properties>
       </component>
+      <scrollpane id="b27a" binding="skrol">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-6704199"/>
+          <horizontalScrollBarPolicy value="31"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="252e1" binding="panelSkrola" layout-manager="GridBagLayout">
+            <constraints/>
+            <properties>
+              <background color="-6704199"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

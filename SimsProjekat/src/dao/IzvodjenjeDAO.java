@@ -259,6 +259,15 @@ public class IzvodjenjeDAO {
         ps.executeUpdate();
         ps.close();
     }
+
+    public static void updatePristup(Izvodjenje izvodjenje) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("update Izvodjenje set brojPristupa=? where id=?");
+        ps.setInt(2, izvodjenje.getId());
+        ps.setInt(1, izvodjenje.getBrPristupa());
+        ps.executeUpdate();
+        ps.close();
+    }
     //Delete
     public static void delete(Izvodjenje izvodjenje) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
