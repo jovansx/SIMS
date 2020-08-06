@@ -131,6 +131,30 @@ public class IzvodjacDAO {
         return izvodjaci;
     }
 
+    public static List<Izvodjac> getNedovrseneIzvodjace(){
+        Izvodjac izvodjac=null;
+        List<Izvodjac> izvodjaci = new ArrayList<>();
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where opis is null");
+
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(1));
+                izvodjac.setNazivIzvodjaca(rs.getString(2));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+                izvodjac.setPripadaGrupi(getIzvodjac(rs.getInt(1)));
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjaci;
+    }
     public static List<Izvodjac> getIzvodjaciIzvodjenja(int idIzvodjenja) {
         List<Izvodjac> izvodjaci = new ArrayList<Izvodjac>();
         Izvodjac izvodjac = null;

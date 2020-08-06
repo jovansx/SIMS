@@ -52,7 +52,8 @@ public class AdminovProzor extends GlavniProzor{
         zadaci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ;
+               DialogZadataka dz = new DialogZadataka();
+               dz.setVisible(true);
             }
         });
         panelAkcija.add(zadaci);

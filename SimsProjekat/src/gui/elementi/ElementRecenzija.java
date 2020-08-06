@@ -30,7 +30,13 @@ public class ElementRecenzija extends JPanel {
         panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30 , dimension.height / 15));
         add(panelGlavni);
 
-        labelaAutora.setText(recenzija.getAutorRecenzije().toString());
+        if(recenzija.getUrednik()==null){
+            labelaAutora.setText(recenzija.getAutorRecenzije().toString());
+        }
+        else{
+            labelaAutora.setText(recenzija.getUrednik().toString());
+        }
+
         labelaOpisa.setText(recenzija.getKomentar());
         labelaOcene.setText(recenzija.getOcena()+"");
 
@@ -39,8 +45,15 @@ public class ElementRecenzija extends JPanel {
         prikaziPodatkeAutoraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
-                pk.setVisible(true);
+                if(recenzija.getUrednik()==null){
+                    PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+                    pk.setVisible(true);
+                }
+                else{
+                    PrikaziKorisnika pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
+                    pk.setVisible(true);
+                }
+
             }
         });
     }

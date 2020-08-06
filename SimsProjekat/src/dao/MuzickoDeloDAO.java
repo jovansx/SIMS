@@ -14,7 +14,8 @@ public class MuzickoDeloDAO {
     public static MuzickoDelo getMuzickoDelo(int id){
         MuzickoDelo delo = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis,sadrzaj,pripadaAlbumu from MuzickoDelo where id=?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,nazivDela," +
+                    "datumPostavljanja,vremeNastanka,prosecnaOcena,opis,sadrzaj,pripadaAlbumu from MuzickoDelo where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
@@ -49,7 +50,8 @@ public class MuzickoDeloDAO {
         MuzickoDelo delo = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis,sadrzaj,pripadaAlbumu from MuzickoDelo where id=? and where obrisano = false");
+                    .prepareStatement("select id,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis," +
+                            "sadrzaj,pripadaAlbumu from MuzickoDelo where obrisano = false");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 delo = new MuzickoDelo();
@@ -76,6 +78,39 @@ public class MuzickoDeloDAO {
         return dela;
     }
 
+    //Lista djela koja jos nisu zavrsena
+    public static List<MuzickoDelo> getNedovrsenaMuzickaDela() {
+        List<MuzickoDelo> dela = new ArrayList<MuzickoDelo>();
+        MuzickoDelo delo = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis," +
+                            "sadrzaj,pripadaAlbumu from MuzickoDelo where opis is null and obrisano = false");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                delo = new MuzickoDelo();
+                delo.setId(rs.getInt(1));
+                delo.setNazivDela(rs.getString(2));
+                delo.setDatumPostavljanja(rs.getDate(3));
+                delo.setVremeNastanka(rs.getDate(4));
+                delo.setProsecnaOcena(rs.getDouble(5));
+                delo.setOpis(rs.getString(6));
+                delo.setSadrzaj(rs.getString(7));
+                if(rs.getInt(8) > 0){
+                    delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(8)));
+                }else {
+                    delo.setAlbumKomPripada(null);
+                }
+                dela.add(delo);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dela;
+    }
     public static List<MuzickoDelo> getMuzickaDelaIzvodjenja(int idIzvodjenja) {
         List<MuzickoDelo> dela = new ArrayList<MuzickoDelo>();
         MuzickoDelo delo = null;

@@ -35,6 +35,27 @@ public class UcesnikDAO {
         return ucesnici;
     }
 
+    public static List<Ucesnik> getNedovrseneUceniske() {
+        List<Ucesnik> ucesnici = new ArrayList<Ucesnik>();
+        Ucesnik ucesnik = null;
+        int idUcesnika = -1;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id from Ucesnik where opis is null");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idUcesnika = rs.getInt(1);
+                ucesnik = UcesnikDAO.getUcesnik(idUcesnika);
+                ucesnici.add(ucesnik);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ucesnici;
+    }
     //Prosledio sam muzicko delo kao parametar a moze i samo njegov id
     public static List<Ucesnik> getUcesniciMuzickogDela(MuzickoDelo muzickoDelo) throws SQLException {
         List<Ucesnik> ucesnici = new ArrayList<Ucesnik>();
@@ -61,7 +82,8 @@ public class UcesnikDAO {
         Ucesnik ucesnik = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where obrisano=false");
+                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where id=?");
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ucesnik = new Ucesnik();
