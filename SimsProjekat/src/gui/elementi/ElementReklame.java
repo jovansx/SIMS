@@ -1,8 +1,6 @@
 package gui.elementi;
 
-import dao.IzvodjenjeDAO;
 import dao.ReklamaDAO;
-import model.Izvodjenje;
 import model.Reklama;
 
 import javax.swing.*;
@@ -23,14 +21,14 @@ public class ElementReklame extends JPanel {
     public ElementReklame(Reklama r, GlavniProzor gp) {
         super();
 
-        inicijalizuj(r, gp);
+        inicijalizuj(r);
 
         add(panelReklame);
 
         podesiAkcije(r, gp);
     }
 
-    private void inicijalizuj(Reklama r, GlavniProzor gp) {
+    private void inicijalizuj(Reklama r) {
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension dimension = tool.getScreenSize();
         String separator = System.getProperty("file.separator");

@@ -10,10 +10,6 @@ import model.Recenzija;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.util.List;
 
 public class PrikazIzvodjenja extends JDialog {
@@ -32,7 +28,6 @@ public class PrikazIzvodjenja extends JDialog {
     private JButton buttonPrikaziIzvodjaca;
     private JButton prikaziMuzickoDeloButton;
     private JLabel vremeIzvodjenjaLabela;
-    private Dimension dimension;
     private int brojElemenata;
 
     public PrikazIzvodjenja(Izvodjenje iz, GlavniProzor gp) {
@@ -64,7 +59,7 @@ public class PrikazIzvodjenja extends JDialog {
 
         buttonPrikaziIzvodjaca = new JButton("Prikazi izvodjaca");
         prikaziMuzickoDeloButton = new JButton("Prikazi muzicko delo");
-        dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         String separator = System.getProperty("file.separator");
         panelGlavni = new JPanel();
         nazivDelaLabela = new JLabel("<html><p style=\"font-size:13px\">Naziv dela : " + ElementIzvodjenja.generisiNazivIzvodjaca(iz) + "</p></html>");
@@ -88,11 +83,11 @@ public class PrikazIzvodjenja extends JDialog {
         labelaIkone.setIcon(newImage);
         iz.setImage(newImage);
 
-        comboBoxIzvodjaca = new JComboBox<String>(getNizIzvodjaca(iz.getListaIzvodjaca()));
+        comboBoxIzvodjaca = new JComboBox<>(getNizIzvodjaca(iz.getListaIzvodjaca()));
         comboBoxIzvodjaca.setBackground(new Color(186, 186, 178));
         //panelGlavni.add(comboBoxIzvodjaca);
         panelGlavni.setBackground(new Color(105, 135, 139));
-        comboBoxMuzickihDela = new JComboBox<String>(getNizMuzickihDela(iz.getListaMuzickihDela()));
+        comboBoxMuzickihDela = new JComboBox<>(getNizMuzickihDela(iz.getListaMuzickihDela()));
         comboBoxMuzickihDela.setBackground(new Color(186, 186, 178));
         //panelGlavni.add(comboBoxMuzickihDela);
         panelSkrola = new JPanel();
@@ -176,43 +171,33 @@ public class PrikazIzvodjenja extends JDialog {
 
     private void podesiAkcije(Izvodjenje iz, GlavniProzor gp) {
 
-        skrolPaneRecenzija.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-
-            @Override
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                JViewport vp = skrolPaneRecenzija.getViewport();
-                if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
-                    brojElemenata += 1;
-                    ucitajRecenzije(iz, gp);
-                }
+        skrolPaneRecenzija.getVerticalScrollBar().addAdjustmentListener(e -> {
+            JViewport vp = skrolPaneRecenzija.getViewport();
+            if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
+                brojElemenata += 1;
+                ucitajRecenzije(iz, gp);
             }
         });
 
-        buttonPrikaziIzvodjaca.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = comboBoxIzvodjaca.getSelectedIndex();
-                if (index < 0) {
-                    JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji izvodjac");
-                } else {
-                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(iz.getListaIzvodjaca().get(index), gp);
-                    PrikazIzvodjenja.this.dispose();
-                    pi.setVisible(true);
-                }
+        buttonPrikaziIzvodjaca.addActionListener(e -> {
+            int index = comboBoxIzvodjaca.getSelectedIndex();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji izvodjac");
+            } else {
+                PrikaziIzvodjaca pi = new PrikaziIzvodjaca(iz.getListaIzvodjaca().get(index), gp);
+                PrikazIzvodjenja.this.dispose();
+                pi.setVisible(true);
             }
         });
-        prikaziMuzickoDeloButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = comboBoxMuzickihDela.getSelectedIndex();
-                if (index < 0) {
-                    JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji muzicko delo");
-                } else {
-                    PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), gp);
-                    PrikazIzvodjenja.this.dispose();
-                    pi.setVisible(true);
+        prikaziMuzickoDeloButton.addActionListener(e -> {
+            int index = comboBoxMuzickihDela.getSelectedIndex();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji muzicko delo");
+            } else {
+                PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), gp);
+                PrikazIzvodjenja.this.dispose();
+                pi.setVisible(true);
 
-                }
             }
         });
 
