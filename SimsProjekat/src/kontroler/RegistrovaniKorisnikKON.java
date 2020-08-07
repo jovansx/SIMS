@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class RegistrovaniKorisnikKON {
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     public static Korisnik proslediPodatkePrijave(String korIme, String sifra) throws Exception {
 

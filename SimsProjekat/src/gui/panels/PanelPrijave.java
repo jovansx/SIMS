@@ -115,7 +115,10 @@ public class PanelPrijave extends JPanel implements ActionListener {
         Korisnik korisnik;
         try {
             korisnik = RegistrovaniKorisnikKON.proslediPodatkePrijave(korIme, sifra);
-            if(korisnik == null) return;
+            if(korisnik == null) {
+                JOptionPane.showMessageDialog(this, "Ne postoji takav nalog");
+                return;
+            }
         } catch (Exception ex) {
             String tipIzuzetka = ex.getMessage();
             if (tipIzuzetka.equals("1")) {
