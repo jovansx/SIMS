@@ -25,7 +25,7 @@ public class PrijavaKON {
         return !korIme.equals("");
     }
 
-    public static boolean posaljiMailPovratkaLozinke(String korIme){
+    public static boolean posaljiMailPovratkaLozinke(String korIme) throws Exception {
 
         KorisnickiNalog nalog = KorisnickiNalogDAO.getNalogPoKorisnickomImenu(korIme);
         Korisnik korisnik = null;
@@ -38,20 +38,18 @@ public class PrijavaKON {
         else if(nalog.getKorisnik().equals(TipKorisnika.ADMINISTRATOR))
             korisnik = AdministratorDAO.getPoIdNaloga(nalog);
 
-        boolean uspesnoSlanje = posaljiMailKorisniku(korisnik);
-
-        return uspesnoSlanje;
+        return posaljiMailKorisniku(korisnik);
     }
 
-    private static boolean posaljiMailKorisniku(Korisnik korisnik) {
+    private static boolean posaljiMailKorisniku(Korisnik korisnik) throws Exception{
         Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccount = "email";
-        String password = "password";
+        String myAccount = "jovansimic995@gmail.com";
+        String password = "Simares*99";
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -71,7 +69,7 @@ public class PrijavaKON {
         } catch (Exception ex) {
             korisnik.getNalog().setLozinka(proslaLozinka);
             KorisnickiNalogDAO.updateLozinka(korisnik.getNalog().getId(), korisnik.getNalog().getLozinka());
-            System.out.println("neuspeh");
+            throw new Exception("neuspeh");
         }
 
         return true;

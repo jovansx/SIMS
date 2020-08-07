@@ -21,7 +21,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
     private DialogPrijave dialog;
     private String separator;
-    private JLabel name, lastName, labela, upozorenja, slikaL, promenaLozinkeL;
+    private JLabel name, lastName, labela, upozorenja, promenaLozinkeL;
     private JTextField nameField;
     private JPasswordField lastNameField;
     private JButton prijavaButton;
@@ -60,32 +60,47 @@ public class PanelPrijave extends JPanel implements ActionListener {
                 }
             }
         });
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 final int x = e.getX();
                 final int y = e.getY();
-                // only display a hand if the cursor is over the items
                 final Rectangle cellBounds = promenaLozinkeL.getBounds();
-                if (cellBounds != null && cellBounds.contains(x, y)) {
-                    boolean retVal = PrijavaKON.proveriKorisnickoIme(nameField.getText());
-                    if(!retVal) {
-                        Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "warning.jpg");
-                        JOptionPane.showMessageDialog(dialog, "Morate uneti korisnicko ime !", "Povratak lozninke zahtev", JOptionPane.WARNING_MESSAGE, icon);
+
+                if(cellBounds != null && ! cellBounds.contains(x, y)) return;
+
+                boolean retVal = PrijavaKON.proveriKorisnickoIme(nameField.getText());
+                Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "warning.jpg");
+
+                if(!retVal) {
+                    JOptionPane.showMessageDialog(dialog, "Morate uneti korisnicko ime !", "Povratak lozninke zahtev", JOptionPane.WARNING_MESSAGE, icon);
+                    return; }
+
+                try {
+                    retVal = PrijavaKON.posaljiMailPovratkaLozinke(nameField.getText());
+                } catch (Exception ex) {
+                    if(ex.getMessage().equals("neuspeh")) {
+                        JOptionPane.showMessageDialog(dialog,
+                                """
+                                        Korisnicka strana:
+                                        1 - Proverite Vasu internet konekciju.
+                                        Sistemska strana:
+                                        2 - Proverite da li ste iskljucili bezbednost:
+                                        https://myaccount.google.com/lesssecureapps
+                                        3 - Proverite da li ste podesili username i password,sa implementacione strane !""",
+                                  "Problemi sa konekcijom", JOptionPane.WARNING_MESSAGE, icon);
                         return;
                     }
-                    boolean uspesnoSlanje = PrijavaKON.posaljiMailPovratkaLozinke(nameField.getText());
+                }
 
-                    if(!uspesnoSlanje) {
-                        Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "warning.jpg");
-                        JOptionPane.showMessageDialog(dialog, "Nepostojece korisnicko ime !", "Nema vas u bazi", JOptionPane.WARNING_MESSAGE, icon);
-                    }else {
-                        dialog.dispose();
-                        JOptionPane.showMessageDialog(dialog, "Uspesna promena lozinke !\n" +
-                                "Sada mozete da se prijavite sa novom lozinkom.", "Bravo", JOptionPane.INFORMATION_MESSAGE);
-                    }
-
+                if(!retVal) {
+                    JOptionPane.showMessageDialog(dialog, "Nepostojece korisnicko ime !", "Nema vas u bazi", JOptionPane.WARNING_MESSAGE, icon);
+                }else {
+                    dialog.dispose();
+                    JOptionPane.showMessageDialog(dialog, "Uspesna promena lozinke !\n" +
+                            "Sada mozete da se prijavite sa novom lozinkom.", "Bravo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -106,9 +121,6 @@ public class PanelPrijave extends JPanel implements ActionListener {
         prijavaButton.addActionListener(this);
         Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "ikona.png");
         labela = new JLabel(icon);
-        slikaL = new JLabel();
-        slikaL.setSize(200, 100);
-        slikaL.setPreferredSize(new Dimension(200, 100));
 
     }
 
