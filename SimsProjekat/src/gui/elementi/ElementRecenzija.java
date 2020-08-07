@@ -5,8 +5,6 @@ import model.Recenzija;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ElementRecenzija extends JPanel {
     private JLabel labelaOpisa;
@@ -29,16 +27,13 @@ public class ElementRecenzija extends JPanel {
 
     private void podesiAkcije(Recenzija recenzija) {
 
-        prikaziPodatkeAutoraButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                PrikaziKorisnika pk = null;
-                if (recenzija.getAutorRecenzije() != null)
-                    pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
-                else
-                    pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
-                pk.setVisible(true);
-            }
+        prikaziPodatkeAutoraButton.addActionListener(e -> {
+            PrikaziKorisnika pk;
+            if (recenzija.getAutorRecenzije() != null)
+                pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+            else
+                pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
+            pk.setVisible(true);
         });
     }
 

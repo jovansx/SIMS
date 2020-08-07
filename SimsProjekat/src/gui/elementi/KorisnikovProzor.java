@@ -14,7 +14,6 @@ public class KorisnikovProzor extends GlavniProzor {
     }
 
     private void inicijalizuj() {
-
         panelOperacija.remove(prijavaButton);
         panelOperacija.remove(registracijaButton);
         odjavaButton.setVisible(true);

@@ -1,5 +1,6 @@
 package kontroler;
 
+
 import dao.KorisnickiNalogDAO;
 import dao.RegistrovaniKorisnikDAO;
 import model.KorisnickiNalog;
@@ -21,16 +22,16 @@ public class RegistrovaniKorisnikKON {
         return KorisnickiNalogDAO.getPrijavljeniKorisnik(korIme, sifra);
     }
 
-    /**Prima podatke, proverava ih i kreira nalog i registrovanog korisnika
-     *
-     *param: ime, prezime, email, telefon, godina rodjenja, korisnicko ime, lozinka
+    /**
+     * Prima podatke, proverava ih i kreira nalog i registrovanog korisnika
+     * <p>
+     * param: ime, prezime, email, telefon, godina rodjenja, korisnicko ime, lozinka
      * return: true - Ako je uspesan upis
-     *
      */
     public static boolean proslediPodatkeRegistarcije(String ime, String prezime, String email,
-                                          String telefon, String godina, String korIme, String sifra) throws Exception {
+                                                      String telefon, String godina, String korIme, String sifra) throws Exception {
         //Ukoliko je nesto od polja prazno
-        if(ime.equals("") || prezime.equals("") || email.equals("") ||
+        if (ime.equals("") || prezime.equals("") || email.equals("") ||
                 telefon.equals("") || godina.equals("") || korIme.equals("") || sifra.equals(""))
             throw new Exception(String.valueOf(1));
 
@@ -46,7 +47,7 @@ public class RegistrovaniKorisnikKON {
         KorisnickiNalog nalog = null;
         try {
             nalog = KorisnickiNalogDAO.insertValues(korIme, sifra, TipKorisnika.REGISTROVANI);
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             throw new Exception(String.valueOf(3));
         }
 

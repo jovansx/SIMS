@@ -11,8 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,6 +28,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     private JPanel panelOdSkrola;
     private JButton pocetnaStranicaButton;
     protected JButton odjavaButton;
+    private JButton izaberiFilterButton;
     private boolean popularnoTrenutno;
     private boolean pretraziTrenutno;
     private JLabel nothingFoundL;
@@ -39,6 +38,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     private int brojElemenataIzvodjenja;
     private boolean naknadnoUcitajReklamu;
     private int maxIdReklame;
+    protected String filter;
 
     public GlavniProzor() {
         super("Muzicki sistem");
@@ -59,7 +59,6 @@ public class GlavniProzor extends JFrame implements ActionListener {
     }
 
     private void inicijalizuj() {
-
         brojElemenataIzvodjenja = 5;
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         separator = System.getProperty("file.separator");
@@ -69,6 +68,8 @@ public class GlavniProzor extends JFrame implements ActionListener {
         skrol.getVerticalScrollBar().setUnitIncrement(16);
         panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
         panelReklama.setLayout(new BoxLayout(panelReklama, BoxLayout.Y_AXIS));
+
+        filter = "vremeIzvodjenja desc";
     }
 
     private void podesiAkcije() {
@@ -79,15 +80,17 @@ public class GlavniProzor extends JFrame implements ActionListener {
         popularnoButton.addActionListener(this);
         pretraziButton.addActionListener(this);
 
-        skrol.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-            @Override
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                JViewport vp = skrol.getViewport();
-                if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
-                    brojElemenataIzvodjenja += 1;
-                    ucitajIzvodjenjaZaPocetnuStranu();
-                }
+        skrol.getVerticalScrollBar().addAdjustmentListener(e -> {
+            JViewport vp = skrol.getViewport();
+            if (vp.getView().getHeight() <= vp.getHeight() + vp.getViewPosition().y) {
+                brojElemenataIzvodjenja += 1;
+                ucitajIzvodjenjaZaPocetnuStranu();
             }
+        });
+
+        izaberiFilterButton.addActionListener(e -> {
+            PrikazFiltera pf = new PrikazFiltera(GlavniProzor.this);
+            pf.setVisible(true);
         });
     }
 
@@ -148,17 +151,19 @@ public class GlavniProzor extends JFrame implements ActionListener {
 
         try {
             if (pretraziTrenutno)
-                izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenataIzvodjenja);
+                izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenataIzvodjenja, filter);
             else
                 izvodjenja = GlavniProzorKON.dobaviIzvodjenja(parametar, brojElemenataIzvodjenja);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if (izvodjenja.size() == 0) panelOdSkrola.add(nothingFoundL);
+        if (izvodjenja != null && izvodjenja.size() == 0) panelOdSkrola.add(nothingFoundL);
 
-        for (Izvodjenje iz : izvodjenja)
-            panelOdSkrola.add(new ElementIzvodjenja(iz, this));
+        if (izvodjenja != null) {
+            for (Izvodjenje iz : izvodjenja)
+                panelOdSkrola.add(new ElementIzvodjenja(iz, this));
+        }
 
         osveziKomponentu(panelOdSkrola);
         osveziKomponentu(skrol);

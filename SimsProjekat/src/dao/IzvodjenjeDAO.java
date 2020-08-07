@@ -117,13 +117,13 @@ public class IzvodjenjeDAO {
         return izvodjenja;
     }
 
-    public static List<Izvodjenje> getIzvodjenjaPretrage(String textPretrage, int brojElemenata) throws SQLException {
+    public static List<Izvodjenje> getIzvodjenjaPretrage(String textPretrage, int brojElemenata, String filter) throws SQLException {
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
         Izvodjenje izvodjenje = null;
         PreparedStatement ps= FConnection.getInstance()
                 .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false and " +
                         "id in(select distinct idIzvodjenja from IzvodjenjaMuzickogDela where idMuzickogDela in" +
-                        "(select id from MuzickoDelo where lower(nazivDela) like '%"+ textPretrage + "%')) limit ?");
+                        "(select id from MuzickoDelo where lower(nazivDela) like '%"+ textPretrage + "%')) order by " + filter + " limit ?");
         ps.setInt(1, brojElemenata);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){

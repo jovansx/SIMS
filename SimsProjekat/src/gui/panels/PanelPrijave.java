@@ -112,7 +112,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
         String korIme = nameField.getText();
         String sifra = new String(lastNameField.getPassword());
 
-        Korisnik korisnik = null;
+        Korisnik korisnik;
         try {
             korisnik = RegistrovaniKorisnikKON.proslediPodatkePrijave(korIme, sifra);
             if(korisnik == null) return;
@@ -126,7 +126,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         dialog.dispose();       //Ugasi dialog prijave
         glavniProzor.dispose();     //Ugasi pocetni prozor
-        GlavniProzor prozorPrijavljenog = null;
+        GlavniProzor prozorPrijavljenog;
         if(korisnik instanceof RegistrovaniKorisnik)
             prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
         else if(korisnik instanceof Urednik)

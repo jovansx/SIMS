@@ -185,4 +185,14 @@ public class ReklamaDAO {
         }
         return result;
     }
+
+
+    public static void updatePristup(Reklama r)  throws SQLException {
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("update Reklama set brojPristupa=? where id=?");
+        ps.setInt(2, r.getId());
+        ps.setInt(1, r.getBrojPristupa());
+        ps.executeUpdate();
+        ps.close();
+    }
 }

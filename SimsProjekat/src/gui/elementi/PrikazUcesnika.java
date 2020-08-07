@@ -5,8 +5,6 @@ import model.Ucesnik;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PrikazUcesnika extends JDialog {
 
@@ -44,17 +42,14 @@ public class PrikazUcesnika extends JDialog {
 
     private void podesiAkcije(Ucesnik ucesnik, GlavniProzor gp) {
 
-        prikaziMuzickoDeloButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = comboBoxMuzickihDela.getSelectedIndex();
-                if (index < 0) {
-                    JOptionPane.showMessageDialog(PrikazUcesnika.this, "Ne postoji ucesnik");
-                } else {
-                    PrikaziMuzickoDelo md = new PrikaziMuzickoDelo(ucesnik.getListaMuzickihDela().get(index), gp);
-                    PrikazUcesnika.this.dispose();
-                    md.setVisible(true);
-                }
+        prikaziMuzickoDeloButton.addActionListener(e -> {
+            int index = comboBoxMuzickihDela.getSelectedIndex();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(PrikazUcesnika.this, "Ne postoji ucesnik");
+            } else {
+                PrikaziMuzickoDelo md = new PrikaziMuzickoDelo(ucesnik.getListaMuzickihDela().get(index), gp);
+                PrikazUcesnika.this.dispose();
+                md.setVisible(true);
             }
         });
 
@@ -73,7 +68,7 @@ public class PrikazUcesnika extends JDialog {
             labelaOpisa.setText("Opis : " + ucesnik.getOpis());
         }
 
-        comboBoxMuzickihDela = new JComboBox<String>(PrikazIzvodjenja.getNizMuzickihDela(ucesnik.getListaMuzickihDela()));
+        comboBoxMuzickihDela = new JComboBox<>(PrikazIzvodjenja.getNizMuzickihDela(ucesnik.getListaMuzickihDela()));
         comboBoxMuzickihDela.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxMuzickihDela);
     }

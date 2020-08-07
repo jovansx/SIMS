@@ -7,8 +7,6 @@ import model.Izvodjenje;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PrikaziIzvodjaca extends JDialog {
@@ -62,11 +60,11 @@ public class PrikaziIzvodjaca extends JDialog {
             labelaPripada.setText("Pripada izvodjacu : " + izvodjac.getPripadaGrupi().toString());
         }
 
-        comboBoxClanova = new JComboBox<String>(PrikazIzvodjenja.getNizIzvodjaca(izvodjac.getImaClanove()));
+        comboBoxClanova = new JComboBox<>(PrikazIzvodjenja.getNizIzvodjaca(izvodjac.getImaClanove()));
         comboBoxClanova.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxClanova);
 
-        comboBoxIzvodjenja = new JComboBox<String>(getNizIzvodjenja(izvodjac.getListaIzvodjenja()));
+        comboBoxIzvodjenja = new JComboBox<>(getNizIzvodjenja(izvodjac.getListaIzvodjenja()));
         comboBoxIzvodjenja.setBackground(new Color(186, 186, 178));
         panelGlavni.add(comboBoxIzvodjenja);
     }
@@ -81,31 +79,25 @@ public class PrikaziIzvodjaca extends JDialog {
 
     private void podesiAkcije(Izvodjac izvodjac, GlavniProzor gp) {
 
-        buttonPrikaziIzvodjaca.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = comboBoxClanova.getSelectedIndex();
-                if (index < 0) {
-                    JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjac");
-                } else {
-                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(izvodjac.getImaClanove().get(index), gp);
-                    PrikaziIzvodjaca.this.dispose();
-                    pi.setVisible(true);
-                }
+        buttonPrikaziIzvodjaca.addActionListener(e -> {
+            int index = comboBoxClanova.getSelectedIndex();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjac");
+            } else {
+                PrikaziIzvodjaca pi = new PrikaziIzvodjaca(izvodjac.getImaClanove().get(index), gp);
+                PrikaziIzvodjaca.this.dispose();
+                pi.setVisible(true);
             }
         });
 
-        buttonPrikaziIzvodjenje.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = comboBoxIzvodjenja.getSelectedIndex();
-                if (index < 0) {
-                    JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjenje");
-                } else {
-                    PrikazIzvodjenja pi = new PrikazIzvodjenja(izvodjac.getListaIzvodjenja().get(index), gp);
-                    PrikaziIzvodjaca.this.dispose();
-                    pi.setVisible(true);
-                }
+        buttonPrikaziIzvodjenje.addActionListener(e -> {
+            int index = comboBoxIzvodjenja.getSelectedIndex();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(PrikaziIzvodjaca.this, "Ne postoji izvodjenje");
+            } else {
+                PrikazIzvodjenja pi = new PrikazIzvodjenja(izvodjac.getListaIzvodjenja().get(index), gp);
+                PrikaziIzvodjaca.this.dispose();
+                pi.setVisible(true);
             }
         });
 
