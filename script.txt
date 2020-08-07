@@ -385,19 +385,19 @@ CONSTRAINT FK_NALOG FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 
 INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 6);
+VALUES('Aleksandar', 'Buljevic', 'abuljevic8@gmail.com', '069783942', '1999.10.15.', 6);
 
 INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 5);
+VALUES('Jovan', 'Simic', 'jovansimic995@gmail.com', '069783945', '1999.01.30.', 5);
 
 INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 7);
+VALUES('Nikolina', 'Tosic', 'nikolinatosic999@gmail.com', '069783941', '1999.03.15.', 7);
 
 INSERT INTO
 Administrator(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 8);
+VALUES('Dragana', 'Filipovic', 'filipovic.dada@gmail.com', '069783940', '1998.02.11.', 8);
 
 CREATE TABLE Urednik (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -413,19 +413,19 @@ CONSTRAINT FK_NALOG2 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 
 INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 2);
+VALUES('Aleksandar', 'Buljevic', 'abuljevic8@gmail.com', '069783942', '1999.10.15.', 2);
 
 INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 1);
+VALUES('Jovan', 'Simic', 'jovansimic995@gmail.com', '069783945', '1999.01.30.', 1);
 
 INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 3);
+VALUES('Nikolina', 'Tosic', 'nikolinatosic999@gmail.com', '069783941', '1999.03.15.', 3);
 
 INSERT INTO
 Urednik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 4);
+VALUES('Dragana', 'Filipovic', 'filipovic.dada@gmail.com', '069783940', '1998.02.11.', 4);
 
 CREATE TABLE UrednikPoznajeZanrove(
 idUrednika INT UNSIGNED,
@@ -462,19 +462,19 @@ CONSTRAINT FK_NALOG3 FOREIGN KEY (idNaloga) REFERENCES KorisnickiNalog(id)
 
 INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Aleksandar', 'Buljevic', 'aleksandar@yahoo.com', '069783942', '1999.10.15.', 10);
+VALUES('Aleksandar', 'Buljevic', 'abuljevic8@gmail.com', '069783942', '1999.10.15.', 10);
 
 INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Jovan', 'Simic', 'jovansx@yahoo.com', '069783945', '1999.01.30.', 9);
+VALUES('Jovan', 'Simic', 'jovansimic995@gmail.com', '069783945', '1999.01.30.', 9);
 
 INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Nikolina', 'Tosic', 'nikolina@yahoo.com', '069783941', '1999.03.15.', 11);
+VALUES('Nikolina', 'Tosic', 'nikolinatosic999@gmail.com', '069783941', '1999.03.15.', 11);
 
 INSERT INTO
 RegistrovaniKorisnik(ime, prezime, email, kontaktTelefon, godinaRodjenja, idNaloga)
-VALUES('Dragana', 'Filipovic', 'dada@yahoo.com', '069783940', '1998.02.11.', 12);
+VALUES('Dragana', 'Filipovic', 'filipovic.dada@gmail.com', '069783940', '1998.02.11.', 12);
 
 CREATE TABLE Reklama (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
