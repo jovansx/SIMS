@@ -12,6 +12,14 @@ import java.util.Map;
 public class AdminovProzorKON {
     private static HashMap<Zadatak, Integer> zadaci;
 
+    public static HashMap<Zadatak, Integer> getZadaci(){
+        return zadaci;
+    }
+
+    public static void resetZadatke(){
+        zadaci=new HashMap<Zadatak, Integer>();
+    }
+
     public static void dodajZadatak(Zadatak z, Integer s){
         if(zadaci.isEmpty()){
             zadaci=new HashMap<Zadatak, Integer>();
@@ -22,20 +30,13 @@ public class AdminovProzorKON {
         }
     }
 
-    public static HashMap<Zadatak, Integer> getZadaci(){
-        return zadaci;
-    }
-
-    public static void resetZadatke(){
-        zadaci=new HashMap<Zadatak, Integer>();
-    }
-
+    /** Upisuje zadatke u bazu */
     public static void upisiZadatke() throws SQLException {
         for(Map.Entry<Zadatak, Integer> entry: zadaci.entrySet()){
             ZadatakDAO.insert(entry.getKey(), entry.getValue());
         }
     }
-
+    /** Dodjeljuje urednicima njihove recenzije */
     public static ArrayList<Urednik> getUrednici(){
         ArrayList<Urednik> urednici= (ArrayList<Urednik>) UrednikDAO.getUrednike();
         for(Urednik u: urednici){
@@ -43,7 +44,7 @@ public class AdminovProzorKON {
         }
         return urednici;
     }
-
+    /** Dobavljanje prosjecne ocjene za svako djelo i izvodjenje koje je urednik recenzirao*/
     public static HashMap<Recenzija, Double> getProsjecneOcjeneKorisnika(ArrayList<Recenzija> recenzije){
         Double d=0.0;
         HashMap<Recenzija, Double> prosjecneOcjene=new HashMap<>();
@@ -59,6 +60,7 @@ public class AdminovProzorKON {
 
         return prosjecneOcjene;
     }
+
     public static String[] getNaziviUrednika(){
         ArrayList<Urednik> urednici= (ArrayList<Urednik>) UrednikDAO.getUrednike();
         String naziv="";

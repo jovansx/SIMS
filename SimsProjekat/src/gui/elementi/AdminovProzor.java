@@ -39,7 +39,7 @@ public class AdminovProzor extends GlavniProzor{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                DialogProfilAdmin dp = new DialogProfilAdmin();
+                DialogProfilAdmin dp = new DialogProfilAdmin(admin);
                 dp.setVisible(true);
 
             }

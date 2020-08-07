@@ -4,7 +4,6 @@ import dao.IzvodjacDAO;
 import dao.MuzickoDeloDAO;
 import dao.UcesnikDAO;
 import dao.ZanrDAO;
-import gui.elementi.AdminovProzor;
 import gui.elementi.ElementZadatka;
 import kontroler.AdminovProzorKON;
 import model.*;
@@ -13,8 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,17 +25,13 @@ public class DialogZadataka extends JDialog {
     private List<Ucesnik> ucesnici;
     private List<Izvodjac> izvodjaci;
     private List<MuzickoDelo> djela;
-    private int brojElemenata;
 
     public DialogZadataka(){
         this.djela= MuzickoDeloDAO.getNedovrsenaMuzickaDela();
         this.izvodjaci= IzvodjacDAO.getNedovrseneIzvodjace();
         this.ucesnici= UcesnikDAO.getNedovrseneUceniske();
         this.zanrovi= ZanrDAO.getNedovrseneZanrove();
-        this.brojElemenata=4;
         this.zadaci=new ArrayList<>();
-
-        AdminovProzorKON.resetZadatke();
 
         setTitle("Zadaci");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -46,19 +39,23 @@ public class DialogZadataka extends JDialog {
         setSize(400, 710);
         setLocationRelativeTo(null);
 
+        AdminovProzorKON.resetZadatke();
+
         skrol=new JScrollPane();
         skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         skrolPanel=new JPanel();
         skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
         ucitajSkrol();
-        skrol.setViewportView(skrolPanel);
-        skrol.setPreferredSize(new Dimension(400, 540));
-        add(skrol,BorderLayout.CENTER);
+        ucitajDugmad();
 
+    }
+
+    private void ucitajDugmad() {
 
         panel = new JPanel();
         panel.setBackground(new Color(0, 77, 102));
+
         posalji=new JButton("U redu");
         posalji.setBackground(new Color(153, 204, 255));
         posalji.setForeground(Color.white);
@@ -83,7 +80,6 @@ public class DialogZadataka extends JDialog {
         panel.add(otkazi);
         panel.setPreferredSize(new Dimension(400, 70));
         add(panel,BorderLayout.SOUTH);
-
     }
 
     private void ucitajSkrol() {
@@ -132,6 +128,10 @@ public class DialogZadataka extends JDialog {
 
         skrol.validate();
         skrol.repaint();
+
+        skrol.setViewportView(skrolPanel);
+        skrol.setPreferredSize(new Dimension(400, 540));
+        add(skrol,BorderLayout.CENTER);
     }
 
     private void resetElemente(){

@@ -30,28 +30,28 @@ public class PanelSadrzaja extends JPanel {
 
         ImageIcon icon =new ImageIcon("SimsProjekat" + separator+"src"+separator +"gui"+separator+ "icons" + separator + "content.png");
         slika = new JLabel(icon);
-        slika.setBounds(125, 20, 250, 200);
+        slika.setBounds(123, 10, 250, 200);
         add(slika);
 
         JLabel tip = new JLabel("Tip sadrzaja");
-        tip.setBounds(72, 200, 100, 30);
+        tip.setBounds(72, 190, 100, 30);
         add(tip);
 
         String[] izborSadrzaja = { "Zanr", "Ucesnik", "Izvodjac", "Muzicko delo"};
         JComboBox<String> medija= new JComboBox<String>(izborSadrzaja);
-        medija.setBounds(70, 240, 120, 30);
+        medija.setBounds(70, 230, 120, 30);
         add(medija);
 
         JLabel unos=new JLabel("Naziv:");
-        unos.setBounds(300, 200, 140, 30);
+        unos.setBounds(300, 190, 140, 30);
         add(unos);
 
         JTextField naziv= new JTextField();
-        naziv.setBounds(300, 240, 140, 30);
+        naziv.setBounds(300, 230, 140, 30);
         add(naziv);
 
         otkazi=new JButton("Otkazi");
-        otkazi.setBounds(260, 310, 100, 40);
+        otkazi.setBounds(260, 300, 100, 40);
         otkazi.setBackground(new Color(0, 122, 153));
         otkazi.addActionListener(new ActionListener() {
             @Override
@@ -62,7 +62,7 @@ public class PanelSadrzaja extends JPanel {
         add(otkazi);
 
         dodaj=new JButton("Dodaj");
-        dodaj.setBounds(140, 310, 100, 40);
+        dodaj.setBounds(140, 300, 100, 40);
         dodaj.setBackground(new Color(0, 122, 153));
         dodaj.addActionListener(new ActionListener() {
             @Override
