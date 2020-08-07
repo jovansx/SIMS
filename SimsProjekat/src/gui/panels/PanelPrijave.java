@@ -5,6 +5,7 @@ import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
 import gui.elementi.KorisnikovProzor;
 import gui.elementi.UrednikovProzor;
+import kontroler.PrijavaKON;
 import kontroler.RegistrovaniKorisnikKON;
 import model.*;
 
@@ -13,12 +14,14 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelPrijave extends JPanel implements ActionListener {
 
     private DialogPrijave dialog;
     private String separator;
-    private JLabel name, lastName, labela, upozorenja, slikaL;
+    private JLabel name, lastName, labela, upozorenja, slikaL, promenaLozinkeL;
     private JTextField nameField;
     private JPasswordField lastNameField;
     private JButton prijavaButton;
@@ -34,7 +37,58 @@ public class PanelPrijave extends JPanel implements ActionListener {
         podesiKomponente();
         setPanel();
         podesiLayout();
+        dodajOsluskivaceMisa();
+    }
 
+    private void dodajOsluskivaceMisa() {
+
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                final int x = e.getX();
+                final int y = e.getY();
+                // only display a hand if the cursor is over the items
+                final Rectangle cellBounds = promenaLozinkeL.getBounds();
+                if (cellBounds != null && cellBounds.contains(x, y)) {
+                    promenaLozinkeL.setForeground(Color.red);
+                    promenaLozinkeL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                } else {
+                    dialog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    promenaLozinkeL.setForeground(Color.black);
+                }
+            }
+        });
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                final int x = e.getX();
+                final int y = e.getY();
+                // only display a hand if the cursor is over the items
+                final Rectangle cellBounds = promenaLozinkeL.getBounds();
+                if (cellBounds != null && cellBounds.contains(x, y)) {
+                    boolean retVal = PrijavaKON.proveriKorisnickoIme(nameField.getText());
+                    if(!retVal) {
+                        Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "warning.jpg");
+                        JOptionPane.showMessageDialog(dialog, "Morate uneti korisnicko ime !", "Povratak lozninke zahtev", JOptionPane.WARNING_MESSAGE, icon);
+                        return;
+                    }
+                    boolean uspesnoSlanje = PrijavaKON.posaljiMailPovratkaLozinke(nameField.getText());
+
+                    if(!uspesnoSlanje) {
+                        Icon icon = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "warning.jpg");
+                        JOptionPane.showMessageDialog(dialog, "Nepostojece korisnicko ime !", "Nema vas u bazi", JOptionPane.WARNING_MESSAGE, icon);
+                    }else {
+                        dialog.dispose();
+                        JOptionPane.showMessageDialog(dialog, "Uspesna promena lozinke !\n" +
+                                "Sada mozete da se prijavite sa novom lozinkom.", "Bravo", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                }
+            }
+        });
     }
 
     private void podesiKomponente() {
@@ -42,6 +96,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
         name = new JLabel("Korisnicko ime:");
         lastName = new JLabel("Sifra:");
         upozorenja = new JLabel("Unesite validne podatke");
+        promenaLozinkeL = new JLabel("Zaboravili ste lozinku ?");
         upozorenja.setForeground(new Color(62, 100, 103));
         nameField = new JTextField(15);
         lastNameField = new JPasswordField(15);
@@ -89,6 +144,9 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         con.gridx = 1;
         con.gridy = 3;
+        add(promenaLozinkeL, con);
+
+        con.gridy = 4;
         add(prijavaButton, con);
 
         con.gridy = 1;

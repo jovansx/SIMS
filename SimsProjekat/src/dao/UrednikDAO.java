@@ -34,6 +34,32 @@ public class UrednikDAO {
         return urednik;
     }
 
+    public static Urednik getPoIdNaloga(KorisnickiNalog nalog) {
+        Urednik korisnik = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,ime,prezime,email,kontaktTelefon,godinaRodjenja from Urednik where idNaloga=? and obrisano=false");
+            ps.setInt(1, nalog.getId());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                korisnik=new Urednik();
+                korisnik.setId(rs.getInt(1));
+                korisnik.setIme(rs.getString(2));
+                korisnik.setPrezime(rs.getString(3));
+                korisnik.setEmail(rs.getString(4));
+                korisnik.setKontaktTelefon(rs.getString(5));
+                korisnik.setGodinaRodjenja(rs.getDate(6));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(korisnik!=null) {korisnik.setNalog(nalog);}
+
+        return korisnik;
+    }
+
     public static Urednik getUrednikZadatka(Zadatak zadatak) {
         Urednik urednik = null;
         try {

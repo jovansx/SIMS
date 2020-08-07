@@ -4,9 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Administrator;
-import model.Reklama;
-import model.Zahtev;
+import model.*;
 import util.FConnection;
 
 public class AdministratorDAO {
@@ -68,6 +66,32 @@ public class AdministratorDAO {
             e.printStackTrace();
         }
         return reklame;
+    }
+
+    public static Administrator getPoIdNaloga(KorisnickiNalog nalog) {
+        Administrator korisnik = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,ime,prezime,email,kontaktTelefon,godinaRodjenja from Administrator where idNaloga=? and obrisano=false");
+            ps.setInt(1, nalog.getId());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                korisnik=new Administrator();
+                korisnik.setId(rs.getInt(1));
+                korisnik.setIme(rs.getString(2));
+                korisnik.setPrezime(rs.getString(3));
+                korisnik.setEmail(rs.getString(4));
+                korisnik.setKontaktTelefon(rs.getString(5));
+                korisnik.setGodinaRodjenja(rs.getDate(6));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(korisnik!=null) {korisnik.setNalog(nalog);}
+
+        return korisnik;
     }
 
     public static List<Zahtev> getZahteve(Integer id){

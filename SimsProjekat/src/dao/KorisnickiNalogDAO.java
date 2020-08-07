@@ -44,7 +44,7 @@ public class KorisnickiNalogDAO {
         KorisnickiNalog nalog=null;
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id,korisnickoIme,lozinka,tipKorisnika from KorisnickiNalog where korisnickoIme=?");
+                    .prepareStatement("select id,korisnickoIme,lozinka,tipKorisnika from KorisnickiNalog where korisnickoIme=? and obrisano=false");
             ps.setString(1, korIme);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
@@ -274,6 +274,21 @@ public class KorisnickiNalogDAO {
         ps.executeUpdate();
         ps.close();
     }
+
+    public static void updateLozinka(int id, String lozinka){
+        PreparedStatement ps= null;
+        try {
+            ps = FConnection.getInstance()
+                    .prepareStatement("update KorisnickiNalog set lozinka=? where id=?");
+            ps.setString(1, lozinka);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     //ToTable
     public static String[][] toTableData(List<KorisnickiNalog> nalozi){
         String[][] result=new String[nalozi.size()][4];
