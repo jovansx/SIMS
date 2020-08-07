@@ -188,7 +188,7 @@ public class PrikaziMuzickoDelo extends JDialog {
         return itemsArray;
     }
 
-    private static String[] getNizZanrova(List<Zanr> listaZanrova) {
+    public static String[] getNizZanrova(List<Zanr> listaZanrova) {
         String[] itemsArray = new String[listaZanrova.size()];
         int index = 0;
         for (Zanr zanr : listaZanrova) {

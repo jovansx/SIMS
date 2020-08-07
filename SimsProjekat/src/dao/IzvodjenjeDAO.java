@@ -117,7 +117,8 @@ public class IzvodjenjeDAO {
         return izvodjenja;
     }
 
-    public static List<Izvodjenje> getIzvodjenjaPretrage(String textPretrage, int brojElemenata, String filter) throws SQLException {
+    /*
+    public static List<Izvodjenje> getIzvodjenjaPretrage(String textPretrage, int brojElemenata, String filter, String filterZanra) throws SQLException {
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
         Izvodjenje izvodjenje = null;
         PreparedStatement ps= FConnection.getInstance()
@@ -144,6 +145,46 @@ public class IzvodjenjeDAO {
         rs.close();
         ps.close();
         
+        return izvodjenja;
+    }
+
+     */
+
+    public static List<Izvodjenje> getIzvodjenjaPretrage(String textPretrage, int brojElemenata, String filter, String filterZanra) throws SQLException {
+        List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
+        Izvodjenje izvodjenje = null;
+        String dodatakUpituUSlucajuFilteraZanra = "";
+        if (!filterZanra.equals("svi")){
+            dodatakUpituUSlucajuFilteraZanra = " and id in (SELECT idIzvodjenja FROM muzicki_sistem.zanrmuzickogdela as zmd" +
+                    " inner join muzicki_sistem.muzickodelo as md inner join muzicki_sistem.izvodjenjamuzickogdela as imd" +
+                    " where zmd.idMuzickogDela = md.id and md.id = imd.idMuzickogDela and zmd.nazivZanra = '" +filterZanra+ "')";
+        }
+
+        PreparedStatement ps= FConnection.getInstance()
+                .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja,brojPristupa,brojGlasova,ukupnoPristupa,pttBrojMesta from Izvodjenje where obrisano=false and " +
+                        "id in(select distinct idIzvodjenja from IzvodjenjaMuzickogDela where idMuzickogDela in" +
+                        "(select id from MuzickoDelo where lower(nazivDela) like '%"+ textPretrage + "%'))" +dodatakUpituUSlucajuFilteraZanra
+                        + " order by " + filter + " limit ?");
+        ps.setInt(1, brojElemenata);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            izvodjenje=new Izvodjenje();
+            izvodjenje.setId(rs.getInt(1));
+            izvodjenje.setVremeIzvodjenja(rs.getDate(2));
+            izvodjenje.setTrajanje(rs.getInt(3));
+            izvodjenje.setTipIzvodjenja(TipIzvodjenja.valueOf(rs.getString(4)));
+            izvodjenje.setBrPristupa(rs.getInt(5));
+            izvodjenje.setBrGlasova(rs.getInt(6));
+            izvodjenje.setUkupnoPrisupa(rs.getInt(7));
+            izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+            izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
+            izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
+            izvodjenje.setImage(null);
+            izvodjenja.add(izvodjenje);
+        }
+        rs.close();
+        ps.close();
+
         return izvodjenja;
     }
 

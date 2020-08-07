@@ -39,6 +39,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     private boolean naknadnoUcitajReklamu;
     private int maxIdReklame;
     protected String filter;
+    protected String filterZanra;
 
     public GlavniProzor() {
         super("Muzicki sistem");
@@ -70,6 +71,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
         panelReklama.setLayout(new BoxLayout(panelReklama, BoxLayout.Y_AXIS));
 
         filter = "vremeIzvodjenja desc";
+        filterZanra = "svi";
     }
 
     private void podesiAkcije() {
@@ -151,7 +153,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
 
         try {
             if (pretraziTrenutno)
-                izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenataIzvodjenja, filter);
+                izvodjenja = GlavniProzorKON.pretrazi(pretraziF.getText(), brojElemenataIzvodjenja, filter, filterZanra);
             else
                 izvodjenja = GlavniProzorKON.dobaviIzvodjenja(parametar, brojElemenataIzvodjenja);
         } catch (SQLException e) {

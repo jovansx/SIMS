@@ -1,7 +1,11 @@
 package gui.elementi;
 
+import dao.ZanrDAO;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PrikazFiltera extends JDialog {
     private JPanel panelGlavni;
@@ -14,6 +18,10 @@ public class PrikazFiltera extends JDialog {
     private JRadioButton brojPristupaRadioButton;
     private JRadioButton rastuceRadioButton;
     private JRadioButton opadajuceRadioButton;
+    private JPanel panelZaCombo;
+    private JButton izaberiZanrButton;
+    private JButton sviZanroviButton;
+    private JComboBox comboBoxZanrova;
     private Dimension dimension;
 
     public PrikazFiltera(GlavniProzor gp) {
@@ -45,6 +53,11 @@ public class PrikazFiltera extends JDialog {
         buttonGroup2.add(rastuceRadioButton);
         buttonGroup2.add(opadajuceRadioButton);
 
+        comboBoxZanrova = new JComboBox<>(PrikaziMuzickoDelo.getNizZanrova(ZanrDAO.getZanrove()));
+        comboBoxZanrova.setBackground(new Color(186, 186, 178));
+        comboBoxZanrova.setEnabled(false);
+        panelZaCombo.add(comboBoxZanrova);
+
         podesiAktivnoDugme(gp);
     }
 
@@ -61,6 +74,18 @@ public class PrikazFiltera extends JDialog {
             case "desc" -> opadajuceRadioButton.setSelected(true);
             case "asc" -> rastuceRadioButton.setSelected(true);
         }
+
+        if ("svi".equals(gp.filterZanra)) {
+            comboBoxZanrova.setEnabled(false);
+            izaberiZanrButton.setEnabled(true);
+            sviZanroviButton.setEnabled(false);
+        } else {
+            comboBoxZanrova.setEnabled(true);
+            comboBoxZanrova.setSelectedItem(gp.filterZanra);
+            izaberiZanrButton.setEnabled(false);
+            sviZanroviButton.setEnabled(true);
+        }
+
     }
 
     private void podesiAkcije(GlavniProzor gp) {
@@ -68,6 +93,27 @@ public class PrikazFiltera extends JDialog {
         buttonOK.addActionListener(e -> onOK(gp));
 
         buttonCancel.addActionListener(e -> onCancel());
+
+        izaberiZanrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comboBoxZanrova.setEnabled(true);
+                izaberiZanrButton.setEnabled(false);
+                sviZanroviButton.setEnabled(true);
+            }
+        });
+
+
+        sviZanroviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comboBoxZanrova.setEnabled(false);
+                izaberiZanrButton.setEnabled(true);
+                sviZanroviButton.setEnabled(false);
+                gp.filterZanra = "svi";
+            }
+        });
+
 
     }
 
@@ -85,6 +131,9 @@ public class PrikazFiltera extends JDialog {
             gp.filter = "brojPristupa " + redosled;
         else if (trajanjeRadioButton.isSelected())
             gp.filter = "trajanje " + redosled;
+
+        if (comboBoxZanrova.isEnabled())
+            gp.filterZanra = comboBoxZanrova.getSelectedItem().toString();
 
         dispose();
     }

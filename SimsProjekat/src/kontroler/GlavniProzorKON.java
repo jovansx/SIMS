@@ -8,9 +8,9 @@ import java.util.List;
 
 public class GlavniProzorKON {
 
-    public static List<Izvodjenje> pretrazi(String textPretrage, int brojElemenata, String filter) throws SQLException {
+    public static List<Izvodjenje> pretrazi(String textPretrage, int brojElemenata, String filter, String filterZanra) throws SQLException {
 
-        return IzvodjenjeDAO.getIzvodjenjaPretrage(textPretrage, brojElemenata, filter);
+        return IzvodjenjeDAO.getIzvodjenjaPretrage(textPretrage, brojElemenata, filter, filterZanra);
     }
 
     public static List<Izvodjenje> dobaviIzvodjenja(String parametar, int brojElemenata) throws SQLException {
