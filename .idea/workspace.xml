@@ -25,16 +25,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Preradjena funkcionalnost Obrada Zahteva kod administratora">
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZahteva.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZahteva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZahtjeva.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZahtjeva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelAdminovihRecenzija.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelZahteva.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/tables/TabelaZahteva.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596799512331</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene">
+      <created>1596802821983</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1596802821983</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,7 +292,8 @@
     <MESSAGE value="Izmjene sto se tice obrade zahtjeva" />
     <MESSAGE value="Neke sitnice doradjenje" />
     <MESSAGE value="Preradjena funkcionalnost Obrada Zahteva kod administratora" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preradjena funkcionalnost Obrada Zahteva kod administratora" />
+    <MESSAGE value="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene" />
+    <option name="LAST_COMMIT_MESSAGE" value="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
@@ -305,22 +308,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596708183822" />
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1596802551902">
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1596803961739">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596802551902" />
-    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1596802551902">
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596803961739" />
+    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1596803961738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596802551902" />
-    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1596802551902">
+    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596803961738" />
+    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1596803961738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596802551902" />
-    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1596802551902">
+    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596803961738" />
+    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1596803961738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596802551902" />
+    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596803961738" />
     <state x="147" y="65" key="MergeDialog" timestamp="1596792051926">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -333,10 +336,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596708191352" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596799516407">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596802826948">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596799516407" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596802826948" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596799824308">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

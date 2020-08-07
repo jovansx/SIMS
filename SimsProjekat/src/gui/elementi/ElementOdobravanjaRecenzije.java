@@ -31,22 +31,22 @@ public class ElementOdobravanjaRecenzije extends JPanel {
 
     private void namesti() {
         id=new JLabel("Id recenzije: ");
-        id.setBounds(20, 20, 100, 20);
+        id.setBounds(20, 20, 90, 20);
         id.setFont(new Font("Courier", Font.BOLD, 12));
         add(id);
 
-        id1=new JLabel(String.valueOf(recenzija.getId()));
-        id1.setBounds(120, 20, 40, 20);
-        add(id);
+        id1=new JLabel(""+recenzija.getId());
+        id1.setBounds(100, 20, 40, 20);
+        add(id1);
 
         ocjena=new JLabel("Ocena: ");
         ocjena.setBounds(20, 40, 70, 20);
         ocjena.setFont(new Font("Courier", Font.BOLD, 12));
         add(ocjena);
 
-        ocjena1=new JLabel(String.valueOf(recenzija.getOcena()));
-        ocjena1.setBounds(90, 40, 100, 20);
-        add(ocjena);
+        ocjena1=new JLabel(""+recenzija.getOcena());
+        ocjena1.setBounds(100, 40, 100, 20);
+        add(ocjena1);
 
         komentar=new JLabel("Komentar: ");
         komentar.setBounds(20, 60, 80, 20);
@@ -63,7 +63,7 @@ public class ElementOdobravanjaRecenzije extends JPanel {
         add(autor);
 
         autor1=new JLabel(recenzija.getUrednik().getIme()+" "+ recenzija.getUrednik().getPrezime());
-        autor1.setBounds(90, 80, 200, 20);
+        autor1.setBounds(100, 80, 200, 20);
         add(autor1);
 
         odobri=new JButton("Odobri");
