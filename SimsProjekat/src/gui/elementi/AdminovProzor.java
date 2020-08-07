@@ -27,13 +27,12 @@ public class AdminovProzor extends GlavniProzor{
     public AdminovProzor(){}
 
     private void inicijalizuj() {
-
         panelOperacija.remove(prijavaButton);
         panelOperacija.remove(registracijaButton);
         odjavaButton.setVisible(true);
 
         panelAkcija.setLayout(new BoxLayout(panelAkcija,BoxLayout.PAGE_AXIS));
-        profil = new JButton("Profil");
+        profil = new JButton("         Profil        ");
         profil.setPreferredSize(new Dimension(100,40));
         profil.addActionListener(new ActionListener(){
 
@@ -48,7 +47,7 @@ public class AdminovProzor extends GlavniProzor{
 
         panelAkcija.add(profil);
 
-        zadaci=new JButton("Zadaci");
+        zadaci=new JButton("       Zadaci        ");
         zadaci.setPreferredSize(new Dimension(100,40));
         zadaci.addActionListener(new ActionListener() {
             @Override
@@ -59,7 +58,7 @@ public class AdminovProzor extends GlavniProzor{
         });
         panelAkcija.add(zadaci);
 
-        sadrzaj=new JButton("Dodaj sadrzaj");
+        sadrzaj=new JButton("  Dodaj sadrzaj  ");
         sadrzaj.setPreferredSize(new Dimension(100,40));
         sadrzaj.addActionListener(new ActionListener() {
             @Override
@@ -71,7 +70,7 @@ public class AdminovProzor extends GlavniProzor{
 
         panelAkcija.add(sadrzaj);
 
-        inbox=new JButton("Obrada zahteva");
+        inbox=new JButton(" Obrada zahteva");
         inbox.setPreferredSize(new Dimension(100,40));
         inbox.addActionListener(new ActionListener(){
             @Override

@@ -1,8 +1,6 @@
 package gui.dialogs;
 
-import gui.elementi.ElementZadatka;
 import gui.elementi.ElementZahtjeva;
-import gui.panels.PanelZahteva;
 import model.*;
 
 import javax.swing.*;
