@@ -12,11 +12,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UrednikovProzor extends GlavniProzor{
+    public int idUrednika;
     JButton profil,odobravanje,glasanje,zadaci;
     ArrayList<Recenzija> lista;
 
     public UrednikovProzor(Urednik urednik) {
         super();
+        idUrednika = urednik.getId();
         inicijalizuj();
     }
 

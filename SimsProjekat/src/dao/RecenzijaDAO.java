@@ -1,5 +1,6 @@
 package dao;
 
+import gui.enums.TipRecenzije;
 import model.PlejLista;
 import model.Recenzija;
 import util.FConnection;
@@ -39,6 +40,50 @@ public class RecenzijaDAO {
         }
         return recenzija;
     }
+
+    public static void napraviRecenziju(int ocena, String komentar, int idSadrzaja, int idAutora, TipRecenzije tip) {
+
+        String upit = switch (tip) {
+            case IZVODJENJE_REGISTROVANI -> "insert into Recenzija (ocena,komentar,idIzvodjenja,idKorisnika) values (?,?,?,?)";
+            case IZVODJENJE_UREDNIK -> "insert into Recenzija (ocena,komentar,idIzvodjenja,idUrednika) values (?,?,?,?)";
+            case MUZICKO_DELO_REGISTROVANI -> "insert into Recenzija (ocena,komentar,idMuzickogDela,idKorisnika) values (?,?,?,?)";
+            case MUZICKO_DELO_UREDNIK -> "insert into Recenzija (ocena,komentar,idMuzickogDela,idUrednika) values (?,?,?,?)";
+        };
+
+        try {
+            PreparedStatement ps = FConnection.getInstance().prepareStatement(upit);
+            ps.setInt(1, ocena);
+            ps.setString(2, komentar);
+            ps.setInt(3, idSadrzaja);
+            ps.setInt(4, idAutora);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException throwables) {throwables.printStackTrace(); }
+    }
+
+    public static boolean dalJeRecenzirao(int idSadrzaja, int idAutoraSadrzaja, TipRecenzije tipRecenzije){
+
+        String upit = switch (tipRecenzije) {
+            case IZVODJENJE_REGISTROVANI -> "select count(*) from Recenzija where idIzvodjenja=? and idKorisnika=? and obrisano = false";
+            case IZVODJENJE_UREDNIK -> "select count(*) from Recenzija where idIzvodjenja=? and idUrednika=? and obrisano = false";
+            case MUZICKO_DELO_REGISTROVANI -> "select count(*) from Recenzija where idMuzickogDela=? and idKorisnika=? and obrisano = false";
+            case MUZICKO_DELO_UREDNIK -> "select count(*) from Recenzija where idMuzickogDela=? and idUrednika=? and obrisano = false";
+        };
+
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement(upit);
+            ps.setInt(1, idSadrzaja);
+            ps.setInt(2, idAutoraSadrzaja);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next())
+                if(rs.getInt(1) != 0) return true;
+            rs.close();
+            ps.close();
+        } catch (SQLException e) { e.printStackTrace(); }
+
+        return false;
+    }
+
     public static List<Recenzija> getRecenzijeKojeJeUrednikKreirao(){
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
         Recenzija recenzija=null;

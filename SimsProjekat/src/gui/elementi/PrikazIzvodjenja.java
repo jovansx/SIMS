@@ -3,10 +3,9 @@ package gui.elementi;
 import dao.IzvodjacDAO;
 import dao.IzvodjenjeDAO;
 import dao.RecenzijaDAO;
-import model.Izvodjac;
-import model.Izvodjenje;
-import model.MuzickoDelo;
-import model.Recenzija;
+import gui.dialogs.DialogRecenzije;
+import gui.enums.TipRecenzije;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,31 +17,38 @@ import java.util.List;
 
 public class PrikazIzvodjenja extends JDialog {
 
-    private JPanel panelGlavni;
-    private JComboBox comboBoxIzvodjaca;
+    public GlavniProzor glavniProzor;
+    public JPanel panelGlavni;
+    private JPanel panelSkrola;
+    private JScrollPane skrolPaneRecenzija;
     private JLabel brojPristupaLabela;
     private JLabel trajanjeLabela;
     private JLabel tipIzvodjenjaLabela;
     private JLabel mestoIzvodjenjaLabela;
     private JLabel labelaIkone;
-    private JScrollPane skrolPaneRecenzija;
-    private JPanel panelSkrola;
-    private JComboBox comboBoxMuzickihDela;
     private JLabel nazivDelaLabela;
+    private JLabel vremeIzvodjenjaLabela;
+    private JComboBox comboBoxIzvodjaca;
+    private JComboBox comboBoxMuzickihDela;
     private JButton buttonPrikaziIzvodjaca;
     private JButton prikaziMuzickoDeloButton;
-    private JLabel vremeIzvodjenjaLabela;
+    public JButton dodajRecenzijuButton;
     private Dimension dimension;
     private int brojElemenata;
+    public int idIzvodjenja;
 
     public PrikazIzvodjenja(Izvodjenje iz, GlavniProzor gp) {
         super();
+        idIzvodjenja = iz.getId();
+        glavniProzor = gp;
         setModal(true);
         setTitle("Prikaz informacija izvodjenja");
 
         popuniIzvodjenje(iz);
 
         inizijalizuj(iz);
+        onemoguciDodavanjeRecenzije(iz.getId(), gp);
+
         dodajNaGlavniPanel();
         podesiAkcije(iz, gp);
 
@@ -50,10 +56,24 @@ public class PrikazIzvodjenja extends JDialog {
 
         add(panelGlavni);
         pack();
-        //setSize(dimension.width / 4 + dimension.width / 17, dimension.height / 2);
 
         setResizable(false);
         setLocationRelativeTo(gp);
+    }
+
+    private void onemoguciDodavanjeRecenzije(int idIzvodjenja, GlavniProzor gp) {
+        if(gp instanceof KorisnikovProzor) {
+            dodajRecenzijuButton.setVisible(true);
+            dalJeRecenziranSadrzaj(idIzvodjenja, ((KorisnikovProzor) gp).idKorisnika, TipRecenzije.IZVODJENJE_REGISTROVANI);
+        }else if(gp instanceof UrednikovProzor){
+            dodajRecenzijuButton.setVisible(true);
+            dalJeRecenziranSadrzaj(idIzvodjenja, ((UrednikovProzor) gp).idUrednika, TipRecenzije.IZVODJENJE_UREDNIK);
+        }
+    }
+
+    private void dalJeRecenziranSadrzaj(int idSadrzaja, int idAutoraSadrazaja, TipRecenzije tipRecenzije) {
+        boolean retVal = RecenzijaDAO.dalJeRecenzirao(idSadrzaja, idAutoraSadrazaja, tipRecenzije);
+        dodajRecenzijuButton.setEnabled(!retVal);
     }
 
     private void popuniIzvodjenje(Izvodjenje iz) {
@@ -64,8 +84,9 @@ public class PrikazIzvodjenja extends JDialog {
 
         buttonPrikaziIzvodjaca = new JButton("Prikazi izvodjaca");
         prikaziMuzickoDeloButton = new JButton("Prikazi muzicko delo");
+        dodajRecenzijuButton = new JButton("Dodaj");
+        dodajRecenzijuButton.setVisible(false);
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        String separator = System.getProperty("file.separator");
         panelGlavni = new JPanel();
         nazivDelaLabela = new JLabel("<html><p style=\"font-size:13px\">Naziv dela : " + ElementIzvodjenja.generisiNazivIzvodjaca(iz) + "</p></html>");
 
@@ -81,6 +102,7 @@ public class PrikazIzvodjenja extends JDialog {
 
         labelaIkone = new JLabel();
         labelaIkone.setSize(200, dimension.height / 20 * 3 - 10);
+        String separator = System.getProperty("file.separator");
         ImageIcon retImageIcon = IzvodjenjeDAO.getSlikuIzvodjenja(iz, separator);
         Image im = retImageIcon.getImage();
         Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
@@ -90,11 +112,9 @@ public class PrikazIzvodjenja extends JDialog {
 
         comboBoxIzvodjaca = new JComboBox<String>(getNizIzvodjaca(iz.getListaIzvodjaca()));
         comboBoxIzvodjaca.setBackground(new Color(186, 186, 178));
-        //panelGlavni.add(comboBoxIzvodjaca);
         panelGlavni.setBackground(new Color(105, 135, 139));
         comboBoxMuzickihDela = new JComboBox<String>(getNizMuzickihDela(iz.getListaMuzickihDela()));
         comboBoxMuzickihDela.setBackground(new Color(186, 186, 178));
-        //panelGlavni.add(comboBoxMuzickihDela);
         panelSkrola = new JPanel();
         panelSkrola.setBackground(new Color(153, 179, 185));
         panelSkrola.setLayout(new BoxLayout(panelSkrola, BoxLayout.Y_AXIS));
@@ -144,11 +164,13 @@ public class PrikazIzvodjenja extends JDialog {
         con.gridy = 7;
         con.gridwidth = 1;
         con.anchor = GridBagConstraints.LINE_END;
+        con.fill = GridBagConstraints.NONE;
         con.insets = new Insets(5, 20, 5, 2);
         panelGlavni.add(comboBoxIzvodjaca, con);
 
         con.gridx = 1;
         con.anchor = GridBagConstraints.LINE_START;
+        con.fill = GridBagConstraints.NONE;
         con.insets = new Insets(5, 3, 5, 20);
 
         panelGlavni.add(buttonPrikaziIzvodjaca, con);
@@ -156,12 +178,14 @@ public class PrikazIzvodjenja extends JDialog {
         con.gridy = 8;
         con.gridx = 0;
         con.anchor = GridBagConstraints.LINE_END;
+        con.fill = GridBagConstraints.NONE;
         con.insets = new Insets(5, 20, 5, 2);
 
         panelGlavni.add(comboBoxMuzickihDela, con);
 
         con.gridx = 1;
         con.anchor = GridBagConstraints.LINE_START;
+        con.fill = GridBagConstraints.NONE;
         con.insets = new Insets(5, 3, 5, 20);
         panelGlavni.add(prikaziMuzickoDeloButton, con);
 
@@ -172,6 +196,14 @@ public class PrikazIzvodjenja extends JDialog {
         con.anchor = GridBagConstraints.CENTER;
         con.gridwidth = 2;
         panelGlavni.add(skrolPaneRecenzija, con);
+
+        con.gridy = 11;
+        con.gridx = 1;
+        con.fill = GridBagConstraints.NONE;
+        con.insets = new Insets(5, 0, 10, 10);
+        con.anchor = GridBagConstraints.LINE_END;
+        con.gridwidth = 1;
+        panelGlavni.add(dodajRecenzijuButton, con);
     }
 
     private void podesiAkcije(Izvodjenje iz, GlavniProzor gp) {
@@ -201,6 +233,15 @@ public class PrikazIzvodjenja extends JDialog {
                 }
             }
         });
+
+        dodajRecenzijuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogRecenzije dr = new DialogRecenzije(PrikazIzvodjenja.this);
+                dr.setVisible(true);
+            }
+        });
+
         prikaziMuzickoDeloButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -215,12 +256,9 @@ public class PrikazIzvodjenja extends JDialog {
                 }
             }
         });
-
-
     }
 
-
-    private void ucitajRecenzije(Izvodjenje iz, GlavniProzor gp) {
+    public void ucitajRecenzije(Izvodjenje iz, GlavniProzor gp) {
         resetRecenzije(gp);
 
         List<Recenzija> recenzije = RecenzijaDAO.getRecenzijeIzvodjenja(iz.getId(), brojElemenata);

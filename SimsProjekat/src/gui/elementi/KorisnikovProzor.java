@@ -4,9 +4,11 @@ import model.RegistrovaniKorisnik;
 
 public class KorisnikovProzor extends GlavniProzor {
     //JButton profil,odobravanje,glasanje,zadaci;
+    public int idKorisnika;
 
     public KorisnikovProzor(RegistrovaniKorisnik korisnik) {
         super();
+        idKorisnika = korisnik.getId();
         inicijalizuj();
 
     }
