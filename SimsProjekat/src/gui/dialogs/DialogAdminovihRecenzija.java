@@ -1,25 +1,64 @@
 package gui.dialogs;
 
-import gui.panels.PanelAdminovihRecenzija;
+import gui.elementi.ElementOdobravanjaRecenzije;
 import model.Recenzija;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class DialogAdminovihRecenzija extends JDialog{
-    public PanelAdminovihRecenzija panel;
     public ArrayList<Recenzija> recenzije;
+    private ArrayList<ElementOdobravanjaRecenzije> elementiRecenzije;
+    private JPanel skrolPanel;
+    private JScrollPane skrol;
 
     public DialogAdminovihRecenzija(ArrayList<Recenzija> recenzije){
         this.recenzije=recenzije;
-        panel=new PanelAdminovihRecenzija(this, recenzije);
+        this.elementiRecenzije=new ArrayList<>();
 
         setTitle("Odobravanje recenzija");
-        setSize(700, 650);
+        setSize(500, 650);
         setResizable(false);
-        setContentPane(panel);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        skrol=new JScrollPane();
+        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        skrolPanel=new JPanel();
+        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
+        ucitajSkrol();
+
+    }
+
+    private void ucitajSkrol() {
+        resetElemente();
+
+        for(Recenzija r: recenzije){
+            ElementOdobravanjaRecenzije ez= new ElementOdobravanjaRecenzije(this, r);
+            elementiRecenzije.add(ez);
+            skrolPanel.add(ez);
+            JLabel labela = new JLabel("                                        ");
+            labela.setForeground(new Color(153, 204, 255));
+            skrolPanel.add(labela);
+        }
+
+        skrolPanel.validate();
+        skrolPanel.repaint();
+
+        skrol.validate();
+        skrol.repaint();
+
+        skrol.setViewportView(skrolPanel);
+        skrol.setPreferredSize(new Dimension(400, 540));
+        add(skrol,BorderLayout.CENTER);
+    }
+
+    private void resetElemente() {
+        elementiRecenzije.clear();
+        skrolPanel.removeAll();
+        skrolPanel.validate();
+        skrolPanel.repaint();
     }
 }

@@ -7,6 +7,7 @@ import model.MuzickoDelo;
 import model.Zahtev;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,10 +24,12 @@ public class ElementZahtjeva extends JPanel {
         setBackground(new Color(229, 255, 204));
         setPreferredSize(new Dimension(400, 340));
         setLayout(null);
+        setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         namesti();
     }
 
     private void namesti() {
+
         korisnik=new JLabel("Korisnik: ");
         korisnik.setBounds(20, 20, 70, 30);
         korisnik.setFont(new Font("Courier", Font.BOLD,14));
