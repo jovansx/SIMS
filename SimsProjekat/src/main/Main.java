@@ -14,18 +14,21 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.AuthProvider;
 import java.sql.Connection;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
 
-        String sep = System.getProperty("file.separator");
+        /*String sep = System.getProperty("file.separator");
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"klinka.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"zareGoci.jpg");
         IzvodjenjeDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"rasta.jpg");
@@ -39,7 +42,7 @@ public class Main {
         ReklamaDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"coca.jpg");
         ReklamaDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"nike.jpg");
         ReklamaDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"mc.jpg");
-        ReklamaDAO.updateSliku(4, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"instagram.jpg");
+        ReklamaDAO.updateSliku(4, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"instagram.jpg");*/
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
