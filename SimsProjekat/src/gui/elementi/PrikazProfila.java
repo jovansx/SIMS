@@ -30,12 +30,13 @@ public class PrikazProfila extends JDialog {
     private JButton izmeniButton;
     private JCheckBox javanCheckBox;
     private JLabel labelaJavan;
-    private Dimension dimension;
 
     public PrikazProfila(KorisnikovProzor kp, RegistrovaniKorisnik korisnik) {
         super();
         setTitle("Moj profil");
         setModal(true);
+
+        popuniKorisnika(korisnik);
 
         inizijalizuj(kp, korisnik);
 
@@ -43,22 +44,25 @@ public class PrikazProfila extends JDialog {
 
         podesiAkcije(kp, korisnik);
 
-        setSize(dimension.width / 3, dimension.height / 3);
+        //setSize(dimension.width / 3, dimension.height / 3);
+        pack();
         setResizable(false);
         setLocationRelativeTo(kp);
 
     }
 
-    private void inizijalizuj(KorisnikovProzor kp, RegistrovaniKorisnik korisnik) {
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        dimension = tool.getScreenSize();
+    private void popuniKorisnika(RegistrovaniKorisnik korisnik) {
+        RegistrovaniKorisnikDAO.popuniNalogKorisniku(korisnik);
+    }
 
+    private void inizijalizuj(KorisnikovProzor kp, RegistrovaniKorisnik korisnik) {
         textFieldImena.setText(korisnik.getIme());
         textFieldPrezimena.setText(korisnik.getPrezime());
         textFieldEmaila.setText(korisnik.getEmail());
         textFieldKontaktTelefona.setText(korisnik.getKontaktTelefon());
-        textFieldRodjenja.setText(korisnik.getGodinaRodjenja().toString());
-        //textFieldSifre.setText(korisnik.getNalog().getLozinka());
+        textFieldRodjenja.setText(RegistrovaniKorisnikKON.sdf.format(korisnik.getGodinaRodjenja()));
+
+        textFieldSifre.setText(korisnik.getNalog().getLozinka());
         if (korisnik.isJeVidljiv())
             javanCheckBox.setSelected(true);
         else
@@ -76,14 +80,13 @@ public class PrikazProfila extends JDialog {
     private void podesiAkcije(KorisnikovProzor kp, RegistrovaniKorisnik korisnik) {
 
         buttonOK.addActionListener(e -> onOK(korisnik));
-
         buttonCancel.addActionListener(e -> onCancel());
-
         izmeniButton.addActionListener(e -> onIzmeni());
 
     }
 
     private void onIzmeni() {
+
         textFieldImena.setEnabled(true);
         textFieldPrezimena.setEnabled(true);
         textFieldEmaila.setEnabled(true);
@@ -96,14 +99,14 @@ public class PrikazProfila extends JDialog {
 
     private void onOK(RegistrovaniKorisnik korisnik)  {
 
-        proveriIzmene(korisnik);
-
+        if (!proveriIzmene()) {
+            return;
+        }
         korisnik.setIme(textFieldImena.getText());
         korisnik.setPrezime(textFieldPrezimena.getText());
         korisnik.setEmail(textFieldEmaila.getText());
         korisnik.setKontaktTelefon(textFieldKontaktTelefona.getText());
-
-        //korisnik.getNalog().setLozinka(textFieldSifre.getText());
+        korisnik.getNalog().setLozinka(textFieldSifre.getText());
 
         try {
             korisnik.setGodinaRodjenja(RegistrovaniKorisnikKON.sdf.parse(textFieldRodjenja.getText()));
@@ -118,9 +121,20 @@ public class PrikazProfila extends JDialog {
         dispose();
     }
 
-    private void proveriIzmene(RegistrovaniKorisnik korisnik) {
-        //TODO proveriti podatke unete za izmene
-        System.out.println("Proverio");
+    private boolean proveriIzmene() {
+        if (textFieldImena.getText().equals("") || textFieldPrezimena.getText().equals("") || textFieldKontaktTelefona.getText().equals("") ||
+                textFieldEmaila.getText().equals("") || textFieldRodjenja.getText().equals("") || textFieldSifre.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena");
+        return false;
+        }
+        Date godinaRodjenja = null;
+        try {
+            godinaRodjenja = RegistrovaniKorisnikKON.sdf.parse(textFieldRodjenja.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Nije dobar format datuma. Tacan format je dd-MM-yyyy");
+            return false;
+        }
+        return true;
     }
 
     private void onCancel() {

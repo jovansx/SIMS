@@ -68,6 +68,17 @@ public class ZahtevDAO {
         ps.close();
     }
 
+    public static void insertBezAdmina(Zahtev zahtev) throws SQLException {
+        PreparedStatement ps = FConnection.getInstance()
+                .prepareStatement("insert into muzicki_sistem.Zahtev (naziv,opis,idKorisnika,idRecenzije) values (?,?,?,?)");
+        ps.setString(1, zahtev.getNaziv());
+        ps.setString(2, zahtev.getOpis());
+        ps.setInt(3, zahtev.getPodnosilacZahteva().getId());
+        ps.setInt(4, zahtev.getRecenzija().getId());
+        ps.executeUpdate();
+        ps.close();
+    }
+
     public static void update(Zahtev zahtev) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("update muzicki_sistem.Zahtev set naziv=?,opis=?,jeOdobren=?,jeObradje?,idKorisnika=?,idRecenzije=? where id=? and obrisano=false");

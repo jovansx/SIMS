@@ -22,7 +22,6 @@ public class PrikazFiltera extends JDialog {
     private JButton izaberiZanrButton;
     private JButton sviZanroviButton;
     private JComboBox comboBoxZanrova;
-    private Dimension dimension;
 
     public PrikazFiltera(GlavniProzor gp) {
         super();
@@ -35,15 +34,13 @@ public class PrikazFiltera extends JDialog {
 
         podesiAkcije(gp);
 
-        setSize(dimension.width / 4, dimension.height / 6);
+        //setSize(dimension.width / 4, dimension.height / 6);
+        pack();
         setResizable(false);
         setLocationRelativeTo(gp);
     }
 
     private void inizijalizuj(GlavniProzor gp) {
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        dimension = tool.getScreenSize();
-
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(vremeIzvodjenjaRadioButton);
         buttonGroup.add(trajanjeRadioButton);
