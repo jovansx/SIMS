@@ -53,7 +53,7 @@ public class PrikazFiltera extends JDialog {
         buttonGroup2.add(rastuceRadioButton);
         buttonGroup2.add(opadajuceRadioButton);
 
-        comboBoxZanrova = new JComboBox<>(PrikaziMuzickoDelo.getNizZanrova(ZanrDAO.getZanrove()));
+        comboBoxZanrova = new JComboBox<>(PrikazMuzickogDela.getNizZanrova(ZanrDAO.getZanrove()));
         comboBoxZanrova.setBackground(new Color(186, 186, 178));
         comboBoxZanrova.setEnabled(false);
         panelZaCombo.add(comboBoxZanrova);

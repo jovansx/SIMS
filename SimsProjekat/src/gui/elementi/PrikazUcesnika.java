@@ -47,7 +47,7 @@ public class PrikazUcesnika extends JDialog {
             if (index < 0) {
                 JOptionPane.showMessageDialog(PrikazUcesnika.this, "Ne postoji ucesnik");
             } else {
-                PrikaziMuzickoDelo md = new PrikaziMuzickoDelo(ucesnik.getListaMuzickihDela().get(index), gp);
+                PrikazMuzickogDela md = new PrikazMuzickogDela(ucesnik.getListaMuzickihDela().get(index), gp);
                 PrikazUcesnika.this.dispose();
                 md.setVisible(true);
             }

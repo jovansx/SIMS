@@ -30,7 +30,7 @@ public class PrikazIzvodjenja extends JDialog {
     private JLabel vremeIzvodjenjaLabela;
     private JComboBox comboBoxIzvodjaca;
     private JComboBox comboBoxMuzickihDela;
-    private JButton buttonPrikaziIzvodjaca;
+    private JButton buttonPrikazIzvodjaca;
     private JButton prikaziMuzickoDeloButton;
     public JButton dodajRecenzijuButton;
     private Dimension dimension;
@@ -82,7 +82,7 @@ public class PrikazIzvodjenja extends JDialog {
 
     private void inizijalizuj(Izvodjenje iz) {
 
-        buttonPrikaziIzvodjaca = new JButton("Prikazi izvodjaca");
+        buttonPrikazIzvodjaca = new JButton("Prikazi izvodjaca");
         prikaziMuzickoDeloButton = new JButton("Prikazi muzicko delo");
         dodajRecenzijuButton = new JButton("Dodaj");
         dodajRecenzijuButton.setVisible(false);
@@ -173,7 +173,7 @@ public class PrikazIzvodjenja extends JDialog {
         con.fill = GridBagConstraints.NONE;
         con.insets = new Insets(5, 3, 5, 20);
 
-        panelGlavni.add(buttonPrikaziIzvodjaca, con);
+        panelGlavni.add(buttonPrikazIzvodjaca, con);
 
         con.gridy = 8;
         con.gridx = 0;
@@ -220,14 +220,14 @@ public class PrikazIzvodjenja extends JDialog {
             }
         });
 
-        buttonPrikaziIzvodjaca.addActionListener(new ActionListener() {
+        buttonPrikazIzvodjaca.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = comboBoxIzvodjaca.getSelectedIndex();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji izvodjac");
                 } else {
-                    PrikaziIzvodjaca pi = new PrikaziIzvodjaca(iz.getListaIzvodjaca().get(index), gp);
+                    PrikazIzvodjaca pi = new PrikazIzvodjaca(iz.getListaIzvodjaca().get(index), gp);
                     PrikazIzvodjenja.this.dispose();
                     pi.setVisible(true);
                 }
@@ -237,7 +237,7 @@ public class PrikazIzvodjenja extends JDialog {
         dodajRecenzijuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogRecenzije dr = new DialogRecenzije(PrikazIzvodjenja.this);
+                DialogRecenzije dr = new DialogRecenzije(PrikazIzvodjenja.this, null);
                 dr.setVisible(true);
             }
         });
@@ -249,7 +249,7 @@ public class PrikazIzvodjenja extends JDialog {
                 if (index < 0) {
                     JOptionPane.showMessageDialog(PrikazIzvodjenja.this, "Ne postoji muzicko delo");
                 } else {
-                    PrikaziMuzickoDelo pi = new PrikaziMuzickoDelo(iz.getListaMuzickihDela().get(index), gp);
+                    PrikazMuzickogDela pi = new PrikazMuzickogDela(iz.getListaMuzickihDela().get(index), gp);
                     PrikazIzvodjenja.this.dispose();
                     pi.setVisible(true);
 
