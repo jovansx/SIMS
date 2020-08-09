@@ -82,8 +82,8 @@ public class PrikazIzvodjenja extends JDialog {
         Color zelena = new Color(188, 204, 111);
         SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy.");
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        player = new MP3Player(new File("AudioBaza" + sep + "audio.mp3"));
         sep = System.getProperty("file.separator");
+        player = new MP3Player(new File("AudioBaza" + sep + "audio.mp3"));
         brojRecenzija = 3;
 
         panelGlavni = new JPanel();
@@ -272,6 +272,7 @@ public class PrikazIzvodjenja extends JDialog {
                 PrikazIzvodjaca pi = new PrikazIzvodjaca(iz.getListaIzvodjaca().get(index), gp);
                 PrikazIzvodjenja.this.dispose();
                 pi.setVisible(true);
+                player.stop();
             }
         });
 
@@ -283,6 +284,7 @@ public class PrikazIzvodjenja extends JDialog {
                 PrikazMuzickogDela pi = new PrikazMuzickogDela(iz.getListaMuzickihDela().get(index), gp);
                 PrikazIzvodjenja.this.dispose();
                 pi.setVisible(true);
+                player.stop();
             }
         });
 
