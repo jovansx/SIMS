@@ -48,6 +48,7 @@ brojGlasova INT DEFAULT 0,
 ukupnoPristupa INT DEFAULT 0,
 pttBrojMesta INT UNSIGNED,
 slika BLOB,
+audio MEDIUMBLOB,
 CONSTRAINT FK_MESTO FOREIGN KEY (pttBrojMesta) REFERENCES MestoIzvodjenja(pttBroj)
 );
 INSERT INTO
