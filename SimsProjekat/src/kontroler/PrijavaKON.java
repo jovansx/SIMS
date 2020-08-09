@@ -48,8 +48,8 @@ public class PrijavaKON {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccount = "jovansimic995@gmail.com";
-        String password = "Simares*99";
+        String myAccount = "email";
+        String password = "password";
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {

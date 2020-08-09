@@ -158,7 +158,7 @@ public class PanelRecenzije extends JPanel implements ActionListener{
         if(idIzvodjenja != 0) {
             Izvodjenje iz = IzvodjenjeDAO.getIzvodjenje(idIzvodjenja);
             dialog.prikazIzvodjenja.ucitajRecenzije(iz, glavniProzor);
-            dialog.prikazIzvodjenja.dodajRecenzijuButton.setEnabled(false);
+            dialog.prikazIzvodjenja.dodajRecenzijuB.setEnabled(false);
             dialog.prikazIzvodjenja.panelGlavni.validate();
             dialog.prikazIzvodjenja.panelGlavni.repaint();
         }else {

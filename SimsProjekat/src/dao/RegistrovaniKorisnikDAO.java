@@ -121,8 +121,8 @@ public class RegistrovaniKorisnikDAO {
             if(korisnik.getPrezime()!=null) ps.setString(2, korisnik.getPrezime()); else ps.setNull(2, java.sql.Types.VARCHAR);
             if(korisnik.getEmail()!=null) ps.setString(3, korisnik.getEmail()); else ps.setNull(3, java.sql.Types.VARCHAR);
             if(korisnik.getKontaktTelefon()!=null) ps.setString(4, korisnik.getKontaktTelefon()); else ps.setNull(4, java.sql.Types.VARCHAR);
-            //TODO popravi ovaj cast Date
-            if(korisnik.getGodinaRodjenja()!=null) ps.setDate(5, (Date) korisnik.getGodinaRodjenja()); else ps.setNull(5, Types.DATE);
+            //TODO popravi ovaj cast Datecdx
+            if(korisnik.getGodinaRodjenja()!=null) ps.setDate(5, new java.sql.Date(korisnik.getGodinaRodjenja().getTime())); else ps.setNull(5, Types.DATE);
             ps.setBoolean(6, korisnik.isJeVidljiv());
             ps.setInt(7, korisnik.getId());
             ps.executeUpdate();
