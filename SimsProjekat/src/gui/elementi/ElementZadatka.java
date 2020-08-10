@@ -86,7 +86,6 @@ public class ElementZadatka extends JPanel {
         urednici.setBounds(90, 130, 200, 30);
         add(urednici);
 
-        //Trebalo bi dodati u Zadatak atribut idUrednika, da bi znali koji je zadatak kom Uredniku dodjeljen
         posalji= new JButton("Posalji");
         posalji.setBounds(220, 170, 70, 30);
         posalji.setBackground(new Color(0, 77, 102));
