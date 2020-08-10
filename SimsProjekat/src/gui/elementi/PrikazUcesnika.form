@@ -5,14 +5,16 @@
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties>
-      <background color="-9861237"/>
+      <background color="-4404113"/>
     </properties>
-    <border type="none"/>
+    <border type="line" title="Podaci ucesnika">
+      <color color="-9861237"/>
+    </border>
     <children>
       <component id="9e6e5" class="javax.swing.JLabel" binding="labelaNaziva">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
+          <gridbag top="20" left="15" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Label"/>
@@ -21,7 +23,7 @@
       <component id="17a34" class="javax.swing.JLabel" binding="labelaOpisa">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
+          <gridbag top="5" left="15" bottom="5" right="5" weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Label"/>
@@ -30,7 +32,7 @@
       <component id="3bad6" class="javax.swing.JLabel" binding="labelaTipUcesnika">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
+          <gridbag top="5" left="15" bottom="20" right="5" weightx="0.0" weighty="2.0"/>
         </constraints>
         <properties>
           <text value="Label"/>
@@ -38,20 +40,14 @@
       </component>
       <component id="d9268" class="javax.swing.JButton" binding="prikaziMuzickoDeloButton" default-binding="true">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="5" left="5" bottom="5" right="15" weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
-          <background color="-6704199"/>
-          <text value="PrikaziMuzickoDelo"/>
+          <background color="-9861237"/>
+          <text value="Prikazi muzicko delo"/>
         </properties>
       </component>
-      <hspacer id="47c49">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-      </hspacer>
     </children>
   </grid>
 </form>

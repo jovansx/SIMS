@@ -19,9 +19,7 @@ public class MuzickoDeloDAO {
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                if(rs.getBoolean(2)){
-                    return null;
-                }else{
+                if(!rs.getBoolean(2)){
                     delo = new MuzickoDelo();
                     delo.setId(rs.getInt(1));
                     delo.setNazivDela(rs.getString(3));

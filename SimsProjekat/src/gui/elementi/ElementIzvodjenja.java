@@ -43,7 +43,6 @@ public class ElementIzvodjenja extends JPanel {
         Image myImg = im.getScaledInstance(labelaIkone.getWidth(), labelaIkone.getHeight(), Image.SCALE_DEFAULT);
         ImageIcon newImage = new ImageIcon(myImg);
         labelaIkone.setIcon(newImage);
-        iz.setImage(newImage);
     }
 
     private void podesiAkcije(Izvodjenje iz, GlavniProzor gp) {

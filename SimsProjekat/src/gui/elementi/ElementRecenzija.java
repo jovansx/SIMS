@@ -21,8 +21,6 @@ public class ElementRecenzija extends JPanel {
         add(panelGlavni);
 
         podesiAkcije(recenzija);
-
-        add(panelGlavni);
     }
 
     private void podesiAkcije(Recenzija recenzija) {
@@ -30,9 +28,9 @@ public class ElementRecenzija extends JPanel {
         prikaziPodatkeAutoraButton.addActionListener(e -> {
             PrikaziKorisnika pk;
             if (recenzija.getAutorRecenzije() != null)
-                pk = new PrikaziKorisnika(recenzija.getAutorRecenzije(), ElementRecenzija.this);
+                pk = new PrikaziKorisnika(recenzija.getAutorRecenzije());
             else
-                pk = new PrikaziKorisnika(recenzija.getUrednik(), ElementRecenzija.this);
+                pk = new PrikaziKorisnika(recenzija.getUrednik());
             pk.setVisible(true);
         });
     }

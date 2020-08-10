@@ -13,7 +13,7 @@ public class PrikaziKorisnika extends JDialog {
     private JLabel labelaKontaktTelefon;
     private Dimension dimension;
 
-    public PrikaziKorisnika(Korisnik korisnik, ElementRecenzija el) {
+    public PrikaziKorisnika(Korisnik korisnik) {
         super();
         setTitle("Detalji korisnika");
         setModal(true);
@@ -22,10 +22,9 @@ public class PrikaziKorisnika extends JDialog {
 
         add(glavniPanel);
 
-        setSize(dimension.width / 8, dimension.height / 8);
-
+        pack();
         setResizable(false);
-        setLocationRelativeTo(el);
+        setLocationRelativeTo(null);
     }
 
     private void inicijalizuj(Korisnik korisnik) {

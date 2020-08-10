@@ -270,8 +270,8 @@ public class RecenzijaDAO {
                 recenzija.setId(rs.getInt(1));
                 recenzija.setOcena(rs.getInt(3));
                 recenzija.setKomentar(rs.getString(4));
-                recenzija.setMuzickoDelo(null);
-                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(6)));
+                recenzija.setMuzickoDelo(MuzickoDeloDAO.getMuzickoDelo(rs.getInt(6)));
+                recenzija.setIzvodnjenje(null);
                 if (rs.getInt(7) > 0){
                     recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
                 } else {

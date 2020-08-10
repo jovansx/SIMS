@@ -5,16 +5,58 @@ import model.*;
 import model.enums.TipIzvodjenja;
 import util.FConnection;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IzvodjenjeDAO {
+
+    public static File getAudioIzvodjenja(int id, String sep) {
+        File file = null;
+        Statement st = null;
+        try {
+            st = FConnection.getInstance().createStatement();
+            ResultSet rs = st.executeQuery("select audio from Izvodjenje where id=" + id);
+            file = new File("AudioBaza" + sep + "audio.mp3");
+            FileOutputStream output = new FileOutputStream(file);
+            if(rs.next()) {
+                InputStream input = rs.getBinaryStream("audio");
+                byte[] buffer = new byte[1024];
+                while(input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+        return file;
+    }
+
+    /**
+     Metoda za unos audia, jer nece direktno u bazi
+     */
+    public static void updateAudio(int id, String path) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("update Izvodjenje set audio=? where id=?");
+        File file = new File(path);
+        try {
+            FileInputStream input = new FileInputStream(file);
+            ps.setBinaryStream(1, input);
+            ps.setInt(2, id);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ps.executeUpdate();
+        ps.close();
+    }
 
     public static ImageIcon getSlikuIzvodjenja(Izvodjenje iz, String separator) {
         Statement st = null;
@@ -105,7 +147,6 @@ public class IzvodjenjeDAO {
                 izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
                 izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
                 izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
-                izvodjenje.setImage(null);
                 izvodjenja.add(izvodjenje);
             }
             rs.close();
@@ -179,7 +220,6 @@ public class IzvodjenjeDAO {
             izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
             izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
             izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
-            izvodjenje.setImage(null);
             izvodjenja.add(izvodjenje);
         }
         rs.close();

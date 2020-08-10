@@ -1,42 +1,48 @@
 package gui.panels;
 
+import dao.IzvodjenjeDAO;
+import dao.MuzickoDeloDAO;
 import gui.dialogs.DialogRecenzije;
 import gui.elementi.GlavniProzor;
 import gui.elementi.KorisnikovProzor;
 import gui.elementi.UrednikovProzor;
 import gui.enums.TipRecenzije;
 import kontroler.RecenzijaKON;
-import model.RegistrovaniKorisnik;
+import model.Izvodjenje;
+import model.MuzickoDelo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class PanelRecenzije extends JPanel implements ActionListener {
+public class PanelRecenzije extends JPanel implements ActionListener{
 
-    private GlavniProzor glavniProzor;
-    private DialogRecenzije dialog;
-    private String separator;
-    private JLabel komentarL, ocenaL, upozorenjeL;
-    private JTextArea komentarArea;
-    private JButton potvrdiButton, zvezdaB1, zvezdaB2, zvezdaB3, zvezdaB4, zvezdaB5;
-    private Icon zuta, bela;
+    private final GlavniProzor glavniProzor;
+    private final DialogRecenzije dialog;
+    private final String separator;
+    private final int idIzvodjenja;
+    private final int idMuzickogDela;
     private int ocena;
-    private int idIzvodjenja;
+    private JLabel komentarL, ocenaL, upozorenjeL;
+    private JLabel zvezdaL1, zvezdaL2, zvezdaL3, zvezdaL4, zvezdaL5;
+    private JTextArea komentarArea;
+    private Icon zuta, bela;
+    private JButton potvrdiButton;
 
-    public PanelRecenzije(DialogRecenzije dr, int id, GlavniProzor gp) {
+    public PanelRecenzije(DialogRecenzije dr, int idIzvodjenja, int idMuzickogDela, GlavniProzor gp) {
 
-        this.idIzvodjenja = id;
-        this.dialog = dr;
-        this.glavniProzor = gp;
+        this.idIzvodjenja = idIzvodjenja;
+        this.idMuzickogDela = idMuzickogDela;
+        dialog = dr;
+        glavniProzor = gp;
         separator = System.getProperty("file.separator");
 
         setBackground(new Color(188, 204, 111));
         podesiKomponente();
         setOkvir();
-        podesiLayout();
+        podesiOsluskivaceMisa();
+        dodajKomponente();
     }
 
     private void podesiKomponente() {
@@ -48,24 +54,12 @@ public class PanelRecenzije extends JPanel implements ActionListener {
 
         bela = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "whiteStar.jpg");
         zuta = new ImageIcon("SimsProjekat" + separator + "src" + separator + "gui" + separator + "icons" + separator + "yellowStar.jpg");
-        zvezdaB1 = new JButton(bela);
-        zvezdaB2 = new JButton(bela);
-        zvezdaB3 = new JButton(bela);
-        zvezdaB4 = new JButton(bela);
-        zvezdaB5 = new JButton(bela);
+        zvezdaL1 = new JLabel(bela);
+        zvezdaL2 = new JLabel(bela);
+        zvezdaL3 = new JLabel(bela);
+        zvezdaL4 = new JLabel(bela);
+        zvezdaL5 = new JLabel(bela);
         potvrdiButton = new JButton("Potvrdi");
-
-        zvezdaB1.addActionListener(this);
-        zvezdaB2.addActionListener(this);
-        zvezdaB3.addActionListener(this);
-        zvezdaB4.addActionListener(this);
-        zvezdaB5.addActionListener(this);
-
-        zvezdaB1.setBackground(new Color(188, 204, 111));
-        zvezdaB2.setBackground(new Color(188, 204, 111));
-        zvezdaB3.setBackground(new Color(188, 204, 111));
-        zvezdaB4.setBackground(new Color(188, 204, 111));
-        zvezdaB5.setBackground(new Color(188, 204, 111));
         potvrdiButton.addActionListener(this);
     }
 
@@ -77,7 +71,7 @@ public class PanelRecenzije extends JPanel implements ActionListener {
         setBorder(BorderFactory.createCompoundBorder(outBorder, inBorder));
     }
 
-    private void podesiLayout() {
+    private void dodajKomponente() {
 
         GridBagLayout bg = new GridBagLayout();
         GridBagConstraints con = new GridBagConstraints();
@@ -101,19 +95,20 @@ public class PanelRecenzije extends JPanel implements ActionListener {
         add(ocenaL, con);
 
         con.gridy = 4;
-        add(zvezdaB1, con);
+        con.insets = new Insets(5, 10, 5, 10);
+        add(zvezdaL1, con);
 
         con.gridx = 1;
-        add(zvezdaB2, con);
+        add(zvezdaL2, con);
 
         con.gridx = 2;
-        add(zvezdaB3, con);
+        add(zvezdaL3, con);
 
         con.gridx = 3;
-        add(zvezdaB4, con);
+        add(zvezdaL4, con);
 
         con.gridx = 4;
-        add(zvezdaB5, con);
+        add(zvezdaL5, con);
 
         con.gridx = 4;
         con.gridy = 5;
@@ -128,71 +123,137 @@ public class PanelRecenzije extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        JButton button = (JButton) e.getSource();
-
-        if(button == zvezdaB1) {
-            ocena = 1;
-            zvezdaB1.setIcon(zuta);
-            zvezdaB2.setIcon(bela);
-            zvezdaB3.setIcon(bela);
-            zvezdaB4.setIcon(bela);
-            zvezdaB5.setIcon(bela);
-        }else if(button == zvezdaB2) {
-            ocena = 2;
-            zvezdaB1.setIcon(zuta);
-            zvezdaB2.setIcon(zuta);
-            zvezdaB3.setIcon(bela);
-            zvezdaB4.setIcon(bela);
-            zvezdaB5.setIcon(bela);
-        }else if(button == zvezdaB3) {
-            ocena = 3;
-            zvezdaB1.setIcon(zuta);
-            zvezdaB2.setIcon(zuta);
-            zvezdaB3.setIcon(zuta);
-            zvezdaB4.setIcon(bela);
-            zvezdaB5.setIcon(bela);
-        }else if(button == zvezdaB4) {
-            ocena = 4;
-            zvezdaB1.setIcon(zuta);
-            zvezdaB2.setIcon(zuta);
-            zvezdaB3.setIcon(zuta);
-            zvezdaB4.setIcon(zuta);
-            zvezdaB5.setIcon(bela);
-        }else if(button == zvezdaB5) {
-            ocena = 5;
-            zvezdaB1.setIcon(zuta);
-            zvezdaB2.setIcon(zuta);
-            zvezdaB3.setIcon(zuta);
-            zvezdaB4.setIcon(zuta);
-            zvezdaB5.setIcon(zuta);
-        }else {
-            String text = komentarArea.getText();
-            TipRecenzije tipRecenzije;
-            int idAutora;
-            if(glavniProzor instanceof KorisnikovProzor) {
-                tipRecenzije = TipRecenzije.IZVODJENJE_REGISTROVANI;
-                idAutora = ((KorisnikovProzor) glavniProzor).idKorisnika;
-            } else {
-                tipRecenzije = TipRecenzije.IZVODJENJE_UREDNIK;
-                idAutora = ((UrednikovProzor) glavniProzor).idUrednika;
-            }
-            try {
-                RecenzijaKON.upisiPodatke(ocena, text, idIzvodjenja, idAutora, tipRecenzije);
-            } catch (Exception ex) {
-                if(ex.getMessage().equals("0")) {
-                    upozorenjeL.setText("Morate uneti ocenu !");
-                    return;
-                }else if(ex.getMessage().equals("prazno")) {
-                    upozorenjeL.setText("Morate uneti komentar !");
-                    return;
-                }
-            }
-            //dialog.prikazIzvodjenja.ucitajRecenzije(iz, glavniProzor);
-            dialog.prikazIzvodjenja.dodajRecenzijuButton.setEnabled(false);
-            dialog.prikazIzvodjenja.panelGlavni.validate();
-            dialog.prikazIzvodjenja.panelGlavni.repaint();
-            dialog.dispose();
+        String text = komentarArea.getText();
+        TipRecenzije tipRecenzije;
+        int idAutora;
+        if(glavniProzor instanceof KorisnikovProzor && idIzvodjenja != 0) {
+            tipRecenzije = TipRecenzije.IZVODJENJE_REGISTROVANI;
+            idAutora = ((KorisnikovProzor) glavniProzor).idKorisnika;
+        } else if(glavniProzor instanceof UrednikovProzor && idIzvodjenja != 0) {
+            tipRecenzije = TipRecenzije.IZVODJENJE_UREDNIK;
+            idAutora = ((UrednikovProzor) glavniProzor).idUrednika;
+        }else if(glavniProzor instanceof KorisnikovProzor && idMuzickogDela != 0) {
+            tipRecenzije = TipRecenzije.MUZICKO_DELO_REGISTROVANI;
+            idAutora = ((KorisnikovProzor) glavniProzor).idKorisnika;
+        } else {
+            tipRecenzije = TipRecenzije.MUZICKO_DELO_UREDNIK;
+            idAutora = ((UrednikovProzor) glavniProzor).idUrednika;
         }
 
+        try {
+            if(idIzvodjenja != 0)
+                RecenzijaKON.upisiPodatke(ocena, text, idIzvodjenja, idAutora, tipRecenzije);
+            else
+                RecenzijaKON.upisiPodatke(ocena, text, idMuzickogDela, idAutora, tipRecenzije);
+        } catch (Exception ex) {
+            if(ex.getMessage().equals("0")) {
+                upozorenjeL.setText("Morate uneti ocenu !");
+                return;
+            }else if(ex.getMessage().equals("prazno")) {
+                upozorenjeL.setText("Morate uneti komentar !");
+                return;
+            }
+        }
+
+        if(idIzvodjenja != 0) {
+            Izvodjenje iz = IzvodjenjeDAO.getIzvodjenje(idIzvodjenja);
+            dialog.prikazIzvodjenja.ucitajRecenzije(iz, glavniProzor);
+            dialog.prikazIzvodjenja.dodajRecenzijuB.setEnabled(false);
+            dialog.prikazIzvodjenja.panelGlavni.validate();
+            dialog.prikazIzvodjenja.panelGlavni.repaint();
+        }else {
+            MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(idMuzickogDela);
+            dialog.prikazMuzickogDela.ucitajRecenzije(md, glavniProzor);
+            dialog.prikazMuzickogDela.dodajRecenzijuButton.setEnabled(false);
+            dialog.prikazMuzickogDela.osveziLabeluProseka();
+            dialog.prikazMuzickogDela.panelGlavni.validate();
+            dialog.prikazMuzickogDela.panelGlavni.repaint();
+        }
+        dialog.dispose();
+    }
+    public void podesiOsluskivaceMisa() {
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                final int x = e.getX();
+                final int y = e.getY();
+                final Rectangle okvirZvezde1 = zvezdaL1.getBounds();
+                final Rectangle okvirZvezde2 = zvezdaL2.getBounds();
+                final Rectangle okvirZvezde3 = zvezdaL3.getBounds();
+                final Rectangle okvirZvezde4 = zvezdaL4.getBounds();
+                final Rectangle okvirZvezde5 = zvezdaL5.getBounds();
+
+                if (okvirZvezde1 != null && okvirZvezde1.contains(x, y)) {
+                    zvezdaL1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                }else if (okvirZvezde2 != null && okvirZvezde2.contains(x, y)) {
+                    zvezdaL2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                }else if (okvirZvezde3 != null && okvirZvezde3.contains(x, y)) {
+                    zvezdaL3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                }else if (okvirZvezde4 != null && okvirZvezde4.contains(x, y)) {
+                    zvezdaL4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                }else if (okvirZvezde5 != null && okvirZvezde5.contains(x, y)) {
+                    zvezdaL5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                }else {
+                    dialog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
+            }
+        });
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                final int x = e.getX();
+                final int y = e.getY();
+                final Rectangle okvirZvezde1 = zvezdaL1.getBounds();
+                final Rectangle okvirZvezde2 = zvezdaL2.getBounds();
+                final Rectangle okvirZvezde3 = zvezdaL3.getBounds();
+                final Rectangle okvirZvezde4 = zvezdaL4.getBounds();
+                final Rectangle okvirZvezde5 = zvezdaL5.getBounds();
+
+                if (okvirZvezde1 != null && okvirZvezde1.contains(x, y)) {
+                    ocena = 1;
+                    zvezdaL1.setIcon(zuta);
+                    zvezdaL2.setIcon(bela);
+                    zvezdaL3.setIcon(bela);
+                    zvezdaL4.setIcon(bela);
+                    zvezdaL5.setIcon(bela);
+                }else if (okvirZvezde2 != null && okvirZvezde2.contains(x, y)) {
+                    ocena = 2;
+                    zvezdaL1.setIcon(zuta);
+                    zvezdaL2.setIcon(zuta);
+                    zvezdaL3.setIcon(bela);
+                    zvezdaL4.setIcon(bela);
+                    zvezdaL5.setIcon(bela);
+                }else if (okvirZvezde3 != null && okvirZvezde3.contains(x, y)) {
+                    ocena = 3;
+                    zvezdaL1.setIcon(zuta);
+                    zvezdaL2.setIcon(zuta);
+                    zvezdaL3.setIcon(zuta);
+                    zvezdaL4.setIcon(bela);
+                    zvezdaL5.setIcon(bela);
+                }else if (okvirZvezde4 != null && okvirZvezde4.contains(x, y)) {
+                    ocena = 4;
+                    zvezdaL1.setIcon(zuta);
+                    zvezdaL2.setIcon(zuta);
+                    zvezdaL3.setIcon(zuta);
+                    zvezdaL4.setIcon(zuta);
+                    zvezdaL5.setIcon(bela);
+                }else if (okvirZvezde5 != null && okvirZvezde5.contains(x, y)) {
+                    ocena = 5;
+                    zvezdaL1.setIcon(zuta);
+                    zvezdaL2.setIcon(zuta);
+                    zvezdaL3.setIcon(zuta);
+                    zvezdaL4.setIcon(zuta);
+                    zvezdaL5.setIcon(zuta);
+                }
+            }
+        });
     }
 }
