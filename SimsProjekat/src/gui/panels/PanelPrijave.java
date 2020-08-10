@@ -82,6 +82,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
                     retVal = PrijavaKON.posaljiMailPovratkaLozinke(nameField.getText());
                 } catch (Exception ex) {
                     if(ex.getMessage().equals("neuspeh")) {
+                        /*
                         JOptionPane.showMessageDialog(dialog,
                                 """
                                         Korisnicka strana:
@@ -91,6 +92,8 @@ public class PanelPrijave extends JPanel implements ActionListener {
                                         https://myaccount.google.com/lesssecureapps
                                         3 - Proverite da li ste podesili username i password,sa implementacione strane !""",
                                   "Problemi sa konekcijom", JOptionPane.WARNING_MESSAGE, icon);
+
+                         */
                         return;
                     }
                 }

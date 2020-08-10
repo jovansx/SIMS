@@ -181,7 +181,7 @@ public class RecenzijaDAO {
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idIzvodjenja=? limit ?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and obradjeno = true and odobreno = true and idIzvodjenja=? limit ?");
             ps.setInt(1, idIzvodjenja);
             ps.setInt(2, limit);
             ResultSet rs=ps.executeQuery();
@@ -261,7 +261,7 @@ public class RecenzijaDAO {
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idMuzickogDela=? limit ?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and obradjeno = true and odobreno = true and idMuzickogDela=? limit ?");
             ps.setInt(1, idDela);
             ps.setInt(2, limit);
             ResultSet rs=ps.executeQuery();

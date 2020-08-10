@@ -141,10 +141,14 @@ public class PanelRecenzije extends JPanel implements ActionListener{
         }
 
         try {
-            if(idIzvodjenja != 0)
+            if(idIzvodjenja != 0) {
                 RecenzijaKON.upisiPodatke(ocena, text, idIzvodjenja, idAutora, tipRecenzije);
-            else
+                dialog.prikazIzvodjenja.dodajRecenzijuB.setEnabled(false);
+            }
+            else {
                 RecenzijaKON.upisiPodatke(ocena, text, idMuzickogDela, idAutora, tipRecenzije);
+                dialog.prikazMuzickogDela.dodajRecenzijuButton.setEnabled(false);
+            }
         } catch (Exception ex) {
             if(ex.getMessage().equals("0")) {
                 upozorenjeL.setText("Morate uneti ocenu !");
@@ -155,20 +159,6 @@ public class PanelRecenzije extends JPanel implements ActionListener{
             }
         }
 
-        if(idIzvodjenja != 0) {
-            Izvodjenje iz = IzvodjenjeDAO.getIzvodjenje(idIzvodjenja);
-            dialog.prikazIzvodjenja.ucitajRecenzije(iz, glavniProzor);
-            dialog.prikazIzvodjenja.dodajRecenzijuB.setEnabled(false);
-            dialog.prikazIzvodjenja.panelGlavni.validate();
-            dialog.prikazIzvodjenja.panelGlavni.repaint();
-        }else {
-            MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(idMuzickogDela);
-            dialog.prikazMuzickogDela.ucitajRecenzije(md, glavniProzor);
-            dialog.prikazMuzickogDela.dodajRecenzijuButton.setEnabled(false);
-            dialog.prikazMuzickogDela.osveziLabeluProseka();
-            dialog.prikazMuzickogDela.panelGlavni.validate();
-            dialog.prikazMuzickogDela.panelGlavni.repaint();
-        }
         dialog.dispose();
     }
     public void podesiOsluskivaceMisa() {
