@@ -56,7 +56,7 @@ public class ElementRecenzija extends JPanel {
         if (recenzija.getAutorRecenzije() != null)
             proveraJavnosti = RegistrovaniKorisnikDAO.proveraVidljivostiKorisnika(recenzija.getAutorRecenzije());
 
-        //prikaziPodatkeAutoraButton.setEnabled(proveraJavnosti);
+        prikaziPodatkeAutoraButton.setEnabled(proveraJavnosti);
 
 
     }

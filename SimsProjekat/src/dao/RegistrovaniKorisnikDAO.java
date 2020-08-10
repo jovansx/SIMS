@@ -8,8 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
-
 public class RegistrovaniKorisnikDAO {
 
     public static List<RegistrovaniKorisnik> getRegistrovaneKorisnike() {

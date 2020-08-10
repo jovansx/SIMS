@@ -196,8 +196,8 @@ public class IzvodjenjeDAO {
         Izvodjenje izvodjenje = null;
         String dodatakUpituUSlucajuFilteraZanra = "";
         if (!filterZanra.equals("svi")){
-            dodatakUpituUSlucajuFilteraZanra = " and id in (SELECT idIzvodjenja FROM muzicki_sistem.zanrmuzickogdela as zmd" +
-                    " inner join muzicki_sistem.muzickodelo as md inner join muzicki_sistem.izvodjenjamuzickogdela as imd" +
+            dodatakUpituUSlucajuFilteraZanra = " and id in (SELECT idIzvodjenja FROM muzicki_sistem.ZanrMuzickogDela as zmd" +
+                    " inner join muzicki_sistem.MuzickoDelo as md inner join muzicki_sistem.IzvodjenjaMuzickogDela as imd" +
                     " where zmd.idMuzickogDela = md.id and md.id = imd.idMuzickogDela and zmd.nazivZanra = '" +filterZanra+ "')";
         }
 
