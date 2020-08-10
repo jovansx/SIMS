@@ -764,6 +764,42 @@ CONSTRAINT FK_KORISNIK FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik
 CONSTRAINT FK_UREDNIK2 FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
 );
 
+insert into recenzija(ocena, komentar, idMuzickogDela, idUrednika)
+values(5, 'Tekst i melodija se poklapaju, jako fino odradjeno', 8, 4);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idUrednika)
+values(5, 'Bjelo Dugme kao i uvijek nije razocaralo, odlicno',9, 4);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idUrednika)
+values(2, 'Jako lose odradjeno', 3, 2);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idUrednika)
+values(3,  'Klise odradjeno, zarazno', 6,1);
+
+insert into recenzija(ocena, komentar, idIzvodjenja, idUrednika)
+values(2, 'Lose', 1, 3);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(4, 'Mislim da je moglo bolje', 8, 1);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(5, 'Rasturaju', 8, 2);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(5, 'Odlicno, obozavam ovu pjesmu', 9, 2);
+
+insert into recenzija(ocena, komentar, idIzvodjenja, idKorisnika)
+values(5, 'WOWWW', 1, 4);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(5, 'Toliko zarazno', 6, 1);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(1, 'Promasaj', 1, 2);
+
+insert into recenzija(ocena, komentar, idMuzickogDela, idKorisnika)
+values(2, 'Jako lose', 3, 4);
+
 CREATE TABLE Zahtev (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
