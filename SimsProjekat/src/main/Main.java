@@ -11,6 +11,7 @@ public class Main {
 
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
         String sep = System.getProperty("file.separator");
+        /*
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBuba.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaJala.jpg");
         IzvodjenjeDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBroj.jpg");
@@ -38,6 +39,8 @@ public class Main {
         IzvodjenjeDAO.updateAudio(9, "AudioBaza" + sep + "prljavoKazaliste.mp3");
         IzvodjenjeDAO.updateAudio(10, "AudioBaza" + sep + "tuNoc.mp3");
         IzvodjenjeDAO.updateAudio(11, "AudioBaza" + sep + "indigo.mp3");
+
+         */
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

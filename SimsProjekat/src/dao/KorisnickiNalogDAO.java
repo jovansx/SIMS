@@ -290,11 +290,8 @@ public class KorisnickiNalogDAO {
     //Update
     public static void update(KorisnickiNalog nalog) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("update KorisnickiNalog set id=?, korisnickoIme=?, lozinka=?, tipKorisnika=?");
+                .prepareStatement("update KorisnickiNalog  set lozinka='"+ nalog.getLozinka()+"' where id = ?");
         ps.setInt(1, nalog.getId());
-        if(nalog.getKorisnickoIme()!=null) ps.setString(2, nalog.getKorisnickoIme()); else ps.setNull(2, Types.VARCHAR);
-        if(nalog.getLozinka()!=null) ps.setString(3, nalog.getLozinka()); else ps.setNull(3, Types.VARCHAR);
-        if(nalog.getKorisnik()!=null) ps.setString(4, nalog.getKorisnik().toString()); else ps.setNull(4,Types.VARCHAR);
         ps.executeUpdate();
         ps.close();
     }

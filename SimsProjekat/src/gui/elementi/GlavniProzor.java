@@ -69,6 +69,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
         skrol.getVerticalScrollBar().setUnitIncrement(16);
         panelOdSkrola.setLayout(new BoxLayout(panelOdSkrola, BoxLayout.Y_AXIS));
         panelReklama.setLayout(new BoxLayout(panelReklama, BoxLayout.Y_AXIS));
+        panelAkcija.setLayout(new BoxLayout(panelAkcija, BoxLayout.Y_AXIS));
 
         filter = "vremeIzvodjenja desc";
         filterZanra = "svi";

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class KorisnikovProzor extends GlavniProzor {
-    JButton profilButton,odobravanje,glasanje,zadaci;
+    JButton profilButton,ponistiRecenzijuButton, odobravanje,glasanje,zadaci;
     public int idKorisnika;
 
     public KorisnikovProzor(RegistrovaniKorisnik korisnik) {
@@ -26,6 +26,11 @@ public class KorisnikovProzor extends GlavniProzor {
             pp.setVisible(true);
         });
 
+        ponistiRecenzijuButton.addActionListener(e -> {
+            PrikazRecenzija rp = new PrikazRecenzija(KorisnikovProzor.this, korisnik);
+            rp.setVisible(true);
+        });
+
     }
 
     private void inicijalizuj() {
@@ -36,6 +41,10 @@ public class KorisnikovProzor extends GlavniProzor {
         profilButton = new JButton("Moj profil");
         profilButton.setBackground(new Color(59, 86, 90));
         panelAkcija.add(profilButton);
+
+        ponistiRecenzijuButton = new JButton("Ponistavanje recenzije");
+        ponistiRecenzijuButton.setBackground(new Color(59, 86, 90));
+        panelAkcija.add(ponistiRecenzijuButton);
 
 
     }

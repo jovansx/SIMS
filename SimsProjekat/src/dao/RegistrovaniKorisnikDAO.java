@@ -121,12 +121,13 @@ public class RegistrovaniKorisnikDAO {
             if(korisnik.getPrezime()!=null) ps.setString(2, korisnik.getPrezime()); else ps.setNull(2, java.sql.Types.VARCHAR);
             if(korisnik.getEmail()!=null) ps.setString(3, korisnik.getEmail()); else ps.setNull(3, java.sql.Types.VARCHAR);
             if(korisnik.getKontaktTelefon()!=null) ps.setString(4, korisnik.getKontaktTelefon()); else ps.setNull(4, java.sql.Types.VARCHAR);
-            //TODO popravi ovaj cast Datecdx
             if(korisnik.getGodinaRodjenja()!=null) ps.setDate(5, new java.sql.Date(korisnik.getGodinaRodjenja().getTime())); else ps.setNull(5, Types.DATE);
             ps.setBoolean(6, korisnik.isJeVidljiv());
             ps.setInt(7, korisnik.getId());
             ps.executeUpdate();
             ps.close();
+
+            KorisnickiNalogDAO.update(korisnik.getNalog());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -177,5 +178,23 @@ public class RegistrovaniKorisnikDAO {
         }
 
         return retVal;
+    }
+
+    public static void popuniNalogKorisniku(RegistrovaniKorisnik korisnik) {
+
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select * from RegistrovaniKorisnik where id=? and obrisano=false");
+            ps.setInt(1, korisnik.getId());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                KorisnickiNalog nalog = KorisnickiNalogDAO.getNalog(rs.getInt(8));
+                korisnik.setNalog(nalog);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

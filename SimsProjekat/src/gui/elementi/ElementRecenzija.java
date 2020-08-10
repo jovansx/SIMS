@@ -39,7 +39,6 @@ public class ElementRecenzija extends JPanel {
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension dimension = tool.getScreenSize();
 
-        //panelGlavni.setPreferredSize( new Dimension(dimension.width/4*3, dimension.height/20*3));
         panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 + dimension.width / 30, dimension.height / 15));
 
         if (recenzija.getAutorRecenzije() != null) {
@@ -56,7 +55,7 @@ public class ElementRecenzija extends JPanel {
         if (recenzija.getAutorRecenzije() != null)
             proveraJavnosti = RegistrovaniKorisnikDAO.proveraVidljivostiKorisnika(recenzija.getAutorRecenzije());
 
-        //prikaziPodatkeAutoraButton.setEnabled(proveraJavnosti);
+        prikaziPodatkeAutoraButton.setEnabled(proveraJavnosti);
 
 
     }

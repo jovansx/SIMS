@@ -3,6 +3,7 @@ package dao;
 import gui.enums.TipRecenzije;
 import model.PlejLista;
 import model.Recenzija;
+import model.RegistrovaniKorisnik;
 import util.FConnection;
 
 import java.sql.PreparedStatement;
@@ -180,7 +181,7 @@ public class RecenzijaDAO {
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idIzvodjenja=? limit ?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and obradjeno = true and odobreno = true and idIzvodjenja=? limit ?");
             ps.setInt(1, idIzvodjenja);
             ps.setInt(2, limit);
             ResultSet rs=ps.executeQuery();
@@ -260,7 +261,7 @@ public class RecenzijaDAO {
         List<Recenzija> recenzije = new ArrayList<Recenzija>();
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idMuzickogDela=? limit ?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and obradjeno = true and odobreno = true and idMuzickogDela=? limit ?");
             ps.setInt(1, idDela);
             ps.setInt(2, limit);
             ResultSet rs=ps.executeQuery();
@@ -271,6 +272,35 @@ public class RecenzijaDAO {
                 recenzija.setKomentar(rs.getString(4));
                 recenzija.setMuzickoDelo(MuzickoDeloDAO.getMuzickoDelo(rs.getInt(6)));
                 recenzija.setIzvodnjenje(null);
+                if (rs.getInt(7) > 0){
+                    recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
+                } else {
+                    recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(8)));
+                }
+                recenzije.add(recenzija);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recenzije;
+    }
+
+    public static List<Recenzija> getRecenzijeKorisnika(RegistrovaniKorisnik korisnik) {
+        List<Recenzija> recenzije = new ArrayList<Recenzija>();
+        Recenzija recenzija = null;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select * from muzicki_sistem.Recenzija where obrisano = false and idKorisnika=?");
+            ps.setInt(1, korisnik.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                recenzija = new Recenzija();
+                recenzija.setId(rs.getInt(1));
+                recenzija.setOcena(rs.getInt(3));
+                recenzija.setKomentar(rs.getString(4));
+                recenzija.setMuzickoDelo(null);
+                recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(6)));
                 if (rs.getInt(7) > 0){
                     recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
                 } else {

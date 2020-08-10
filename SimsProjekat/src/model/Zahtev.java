@@ -19,6 +19,15 @@ public class Zahtev {
         this.recenzija = recenzija;
     }
 
+    public Zahtev(String naziv, String opis, boolean jeOdobren, boolean jeObradjen, RegistrovaniKorisnik podnosilacZahteva, Recenzija recenzija) {
+        this.naziv = naziv;
+        this.opis = opis;
+        this.jeOdobren = jeOdobren;
+        this.jeObradjen = jeObradjen;
+        this.podnosilacZahteva = podnosilacZahteva;
+        this.recenzija = recenzija;
+    }
+
     public int getId() {
         return id;
     }
