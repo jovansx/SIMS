@@ -9,8 +9,8 @@ public class Recenzija {
     private Urednik urednik;
     private MuzickoDelo delo;
     private boolean odobreno;
-
-    public Recenzija(int id, int ocena, String komentar, RegistrovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik,MuzickoDelo delo, boolean odobreno) {
+    private boolean obradjeno;
+    public Recenzija(int id, int ocena, String komentar, RegistrovaniKorisnik autorRecenzije, Izvodjenje izvodnjenje, Urednik urednik,MuzickoDelo delo, boolean odobreno,boolean obradjeno) {
         this.id = id;
         this.ocena = ocena;
         this.komentar = komentar;
@@ -18,7 +18,8 @@ public class Recenzija {
         this.izvodnjenje = izvodnjenje;
         this.urednik = urednik;
         this.delo = delo;
-        this.odobreno=odobreno;
+        this.odobreno = odobreno;
+        this.obradjeno = obradjeno;
     }
     public Recenzija(){}
 
@@ -82,6 +83,10 @@ public class Recenzija {
 
     public void setOdobreno(boolean odobreno){this.odobreno=odobreno;}
 
+    public boolean isObradjeno(){return this.obradjeno;}
+
+    public void setObradjeno(boolean obradjeno){this.obradjeno=obradjeno;}
+
     @Override
     public String toString() {
         return "Recenzija{" +
@@ -91,7 +96,7 @@ public class Recenzija {
                 ", autorRecenzije=" + autorRecenzije +
                 ", izvodnjenje=" + izvodnjenje +
                 ", delo="+ delo+
-                ", odobreno="+ odobreno+
+                ", odobreno="+ odobreno+", obradjeno="+obradjeno+
                 '}';
     }
 }

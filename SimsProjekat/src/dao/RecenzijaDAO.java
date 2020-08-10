@@ -6,17 +6,16 @@ import model.Recenzija;
 import model.RegistrovaniKorisnik;
 import util.FConnection;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RecenzijaDAO {
     public static Recenzija getRecenzija(int id){
         Recenzija recenzija = null;
         try{
-            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select id,obrisano,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno,obradjeno from Recenzija where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()) {
@@ -32,6 +31,7 @@ public class RecenzijaDAO {
                     recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(7)));
                     recenzija.setUrednik(UrednikDAO.getUrednikPoId(rs.getInt(8)));
                     recenzija.setOdobreno(rs.getBoolean(9));
+                    recenzija.setObradjeno(rs.getBoolean(10));
                 }
             }
             rs.close();
@@ -121,7 +121,7 @@ public class RecenzijaDAO {
         try {
             PreparedStatement ps = FConnection.getInstance()
                     .prepareStatement("select id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika," +
-                            "idUrednika,odobreno from Recenzija where idUrednika=? and obrisano=false");
+                            "idUrednika,odobreno,obradjeno from Recenzija where idUrednika=? and obrisano=false and obradjeno=false");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -133,7 +133,8 @@ public class RecenzijaDAO {
                 recenzija.setIzvodnjenje(IzvodjenjeDAO.getIzvodjenje(rs.getInt(5)));
                 recenzija.setAutorRecenzije(RegistrovaniKorisnikDAO.getRegistrovaniKorisnik(rs.getInt(6)));
                 recenzija.setOdobreno(rs.getBoolean(8));
-                recenzija.setUrednik(null);
+                recenzija.setObradjeno(rs.getBoolean(9));
+                recenzija.setUrednik(UrednikDAO.getUrednikPoId(id));
                 recenzije.add(recenzija);
             }
             rs.close();
@@ -211,7 +212,7 @@ public class RecenzijaDAO {
 
     public static void insert(Recenzija recenzija) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno from Recenzija where id=?");
+                .prepareStatement("insert into Recenzija (id,ocena,komentar,idMuzickogDela,idIzvodjenja,idKorisnika,idUrednika,odobreno,obradjeno from Recenzija where id=?");
         ps.setInt(2,recenzija.getOcena());
         ps.setString(3,recenzija.getKomentar());
         ps.setInt(4,recenzija.getMuzickoDelo().getId());
@@ -219,14 +220,22 @@ public class RecenzijaDAO {
         ps.setInt(6,recenzija.getAutorRecenzije().getId());
         ps.setInt(7,recenzija.getUrednik().getId());
         ps.setBoolean(8, recenzija.isOdobreno());
+        ps.setBoolean(9, recenzija.isObradjeno());
         ps.executeUpdate();
         ps.close();
     }
     public static void update(Recenzija recenzija) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("update Recenzija set ocena=?,komentar=? where id=?");
+                .prepareStatement("update Recenzija set ocena=?,komentar=?,idMuzickogDela=?,idIzvodjenja=?,idKorisnika=?,idUrednika=?,odobreno=?,obradjeno=? where id=?");
         ps.setInt(1,recenzija.getOcena());
-        ps.setString(2,recenzija.getKomentar());
+        if(recenzija.getKomentar()!=null) ps.setString(2, recenzija.getKomentar()); else ps.setNull(2,Types.VARCHAR);
+        if(Objects.isNull(recenzija.getMuzickoDelo())) ps.setNull(3,Types.INTEGER);else ps.setInt(3, recenzija.getMuzickoDelo().getId());
+        if(Objects.isNull(recenzija.getIzvodnjenje())) ps.setNull(4,Types.INTEGER);else ps.setInt(4,recenzija.getIzvodnjenje().getId());
+        if(Objects.isNull(recenzija.getAutorRecenzije())) ps.setNull(5,Types.INTEGER);else ps.setInt(5,recenzija.getAutorRecenzije().getId());
+        if(Objects.isNull(recenzija.getUrednik())) ps.setNull(6,Types.INTEGER);else ps.setInt(6,recenzija.getUrednik().getId());
+        ps.setBoolean(7,recenzija.isOdobreno());
+        ps.setBoolean(8,recenzija.isObradjeno());
+        ps.setInt(9,recenzija.getId());
         ps.executeUpdate();
         ps.close();
     }
@@ -239,7 +248,7 @@ public class RecenzijaDAO {
         ps.close();
     }
     public static String[] columns(){
-        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika","Odobreno"};
+        return new String[]{"ID", "Ocena","Komentar","IdMuzickogDela","IdKorisnika","IdIzvodjenja","IdUrednika","Odobreno","Obradjeno"};
     }
 
     public static String[][] toTableData(List<Recenzija> recenzije){
@@ -253,6 +262,7 @@ public class RecenzijaDAO {
             result[i][5] = String.valueOf(recenzije.get(i).getIzvodnjenje());
             result[i][6] = String.valueOf(recenzije.get(i).getUrednik());
             result[i][7] = String.valueOf(recenzije.get(i).isOdobreno());
+            result[i][8] = String.valueOf(recenzije.get(i).isObradjeno());
         }
         return result;
     }

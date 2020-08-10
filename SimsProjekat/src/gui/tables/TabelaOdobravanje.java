@@ -4,6 +4,7 @@ import model.Recenzija;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class TabelaOdobravanje extends AbstractTableModel {
@@ -36,13 +37,31 @@ public class TabelaOdobravanje extends AbstractTableModel {
             case 0:
                 return r.getId();
             case 1:
-                return r.getMuzickoDelo().getNazivDela();
+                if(Objects.isNull(r.getMuzickoDelo())){
+                    return '/';
+                }else{
+                    return r.getMuzickoDelo().getNazivDela();
+                }
             case 2:
-                return r.getIzvodnjenje().getId();
+                if(Objects.isNull(r.getIzvodnjenje())){
+                    return '/';
+                }else{
+                    return r.getIzvodnjenje().getId();
+                }
+
             case 3:
-                return r.getAutorRecenzije().getId();
+                if(Objects.isNull(r.getAutorRecenzije())){
+                    return '/';
+                }else{
+                    return r.getAutorRecenzije().getId();
+                }
+
             case 4:
-                return r.getUrednik().getId();
+                if(Objects.isNull(r.getUrednik())){
+                    return '/';
+                }else{
+                    return r.getUrednik().getId();
+                }
             case 5:
                 return r.getOcena();
             case 6:

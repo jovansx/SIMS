@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Urednik extends Korisnik {
-
     private List<Zadatak> listaZadataka;
     private List<Zanr> listaZanrova;
     private List<Recenzija> listaRecenzija;

@@ -1,9 +1,14 @@
 package gui.elementi;
 
+import dao.RecenzijaDAO;
+import dao.UrednikDAO;
+import dao.ZadatakDAO;
 import gui.dialogs.DialogOdobravanje;
 import gui.dialogs.DialogProfil;
+import gui.dialogs.DialogZadaci;
 import model.Recenzija;
 import model.Urednik;
+import model.Zadatak;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,23 +20,28 @@ public class UrednikovProzor extends GlavniProzor{
     public int idUrednika;
     JButton profil,odobravanje,glasanje,zadaci;
     ArrayList<Recenzija> lista;
+    ArrayList<Zadatak> lista1;
 
     public UrednikovProzor(Urednik urednik) {
         super();
         idUrednika = urednik.getId();
+        lista = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(idUrednika);
+        lista1 = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(idUrednika));
         inicijalizuj();
     }
+    private void inicijalizuj() {
 
-    public UrednikovProzor(ArrayList<Recenzija> listaRecenzija){
-        super();
-        this.lista = listaRecenzija;
+        panelOperacija.remove(prijavaButton);
+        panelOperacija.remove(registracijaButton);
+        odjavaButton.setVisible(true);
+
         panelAkcija.setLayout(new BoxLayout(panelAkcija,BoxLayout.PAGE_AXIS));
         profil = new JButton("Profil");
         profil.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                DialogProfil dp = new DialogProfil();
+                DialogProfil dp = new DialogProfil(idUrednika);
                 dp.setVisible(true);
 
             }
@@ -57,19 +67,12 @@ public class UrednikovProzor extends GlavniProzor{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                ;
+                DialogZadaci dz = new DialogZadaci(lista1);
+                dz.setVisible(true);
 
             }
 
         });
         panelAkcija.add(zadaci);
-
-    }
-
-    private void inicijalizuj() {
-
-        panelOperacija.remove(prijavaButton);
-        panelOperacija.remove(registracijaButton);
-        odjavaButton.setVisible(true);
     }
 }

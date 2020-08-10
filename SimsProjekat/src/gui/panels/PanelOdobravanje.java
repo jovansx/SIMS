@@ -1,5 +1,6 @@
 package gui.panels;
 
+import dao.RecenzijaDAO;
 import gui.dialogs.DialogOdobravanje;
 import model.Recenzija;
 import gui.tables.TabelaOdobravanje;
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PanelOdobravanje extends JPanel {
@@ -27,13 +29,12 @@ public class PanelOdobravanje extends JPanel {
         this.listaRecenzija = listaRecenzija;
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
-        setBackground(new Color(226, 206, 158));
+        setBackground(Color.WHITE);
         //setLayout(null);
         namesti();
 
     }
     public void namesti() {
-
         TabelaOdobravanje t = new TabelaOdobravanje(listaRecenzija);
         table = new JTable(t);
 
@@ -45,8 +46,6 @@ public class PanelOdobravanje extends JPanel {
         final TableRowSorter<TableModel> tableSorter = new TableRowSorter<>();
         tableSorter.setModel(table.getModel());
         table.setRowSorter(tableSorter);
-
-
         table.getTableHeader().addMouseListener(new MouseListener() {
 
             @Override
@@ -93,11 +92,58 @@ public class PanelOdobravanje extends JPanel {
                 if (rIndex < 0) {
                     JOptionPane.showMessageDialog(PanelOdobravanje.this, "Morate selektovati bar jednu recenziju!", "Info", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    int id = (int) table.getModel().getValueAt(rIndex,0);
+                    Recenzija r = RecenzijaDAO.getRecenzija(id);
+                    r.setOdobreno(true);
+                    r.setObradjeno(true);
+                    try {
+                        RecenzijaDAO.update(r);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    //refreshData();
+
+
                 }
             }
         });
         dodatno.add(odobri);
+
+        ne = new JButton("   Ne odobri    ");
+        ne.setBackground(Color.white);
+        ne.setOpaque(true);
+        ne.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        ne.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int rIndex = table.getSelectedRow();
+                if (rIndex < 0) {
+                    JOptionPane.showMessageDialog(PanelOdobravanje.this, "Morate selektovati bar jednu recenziju!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    int id = (int) table.getModel().getValueAt(rIndex,0);
+                    Recenzija r = RecenzijaDAO.getRecenzija(id);
+                    r.setOdobreno(false);
+                    r.setObradjeno(true);
+                    try {
+                        RecenzijaDAO.update(r);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    refreshData();
+
+                }
+            }
+        });
+        dodatno.add(ne);
         add(dodatno, BorderLayout.SOUTH);
     }
+
+    public void refreshData() {
+        TabelaOdobravanje t = (TabelaOdobravanje) table.getModel();
+        t.fireTableDataChanged();
+    }
+
 
 }
