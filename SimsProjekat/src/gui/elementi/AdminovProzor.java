@@ -1,8 +1,6 @@
 package gui.elementi;
 
-import dao.RecenzijaDAO;
-import dao.UrednikDAO;
-import dao.ZahtevDAO;
+import dao.*;
 import gui.dialogs.*;
 import kontroler.AdminovProzorKON;
 import model.*;
@@ -52,8 +50,8 @@ public class AdminovProzor extends GlavniProzor{
         zadaci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               DialogZadataka dz = new DialogZadataka();
-               dz.setVisible(true);
+                prikaziZadatke();
+
             }
         });
         panelAkcija.add(zadaci);
@@ -75,8 +73,7 @@ public class AdminovProzor extends GlavniProzor{
         inbox.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                DialogZahteva dz= new DialogZahteva((ArrayList<Zahtev>) ZahtevDAO.getZahteve());
-                dz.setVisible(true);
+                prikaziDialogZahteva();
             }
         });
 
@@ -99,8 +96,8 @@ public class AdminovProzor extends GlavniProzor{
         odobravanje.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogAdminovihRecenzija dar = new DialogAdminovihRecenzija((ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeKojeJeUrednikKreirao());
-                dar.setVisible(true);
+                odobravanjeRecenija();
+
             }
         });
 
@@ -110,11 +107,54 @@ public class AdminovProzor extends GlavniProzor{
         pregled.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogUrednika du = new DialogUrednika(AdminovProzorKON.getUrednici());
-                du.setVisible(true);
+                pregledUrednika();
             }
         });
         panelAkcija.add(pregled);
+    }
+
+    private void prikaziZadatke() {
+        if(MuzickoDeloDAO.getNedovrsenaMuzickaDela().isEmpty() && IzvodjacDAO.getNedovrseneIzvodjace().isEmpty() &&
+        UcesnikDAO.getNedovrseneUceniske().isEmpty() && ZanrDAO.getNedovrseneZanrove().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nema sadrzaja za prikazati");
+        }
+        else{
+            DialogZadataka dz = new DialogZadataka(ZanrDAO.getNedovrseneZanrove(),UcesnikDAO.getNedovrseneUceniske(),
+                    IzvodjacDAO.getNedovrseneIzvodjace(), MuzickoDeloDAO.getNedovrsenaMuzickaDela());
+            dz.setVisible(true);
+        }
+    }
+
+    private void pregledUrednika() {
+        if(AdminovProzorKON.getUrednici().size()==0){
+            JOptionPane.showMessageDialog(null, "Nijedan urednik jos ne postoji");
+        }
+        else{
+            DialogUrednika du = new DialogUrednika(AdminovProzorKON.getUrednici());
+            du.setVisible(true);
+        }
+    }
+
+    private void odobravanjeRecenija() {
+        if(RecenzijaDAO.getRecenzijeKojeJeUrednikKreirao().size()==0){
+            JOptionPane.showMessageDialog(null, "Ne postoje neodobrene recenzije");
+        }
+        else{
+            DialogAdminovihRecenzija dar = new DialogAdminovihRecenzija((ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeKojeJeUrednikKreirao());
+            dar.setVisible(true);
+        }
+
+    }
+
+    private void prikaziDialogZahteva() {
+
+        if(ZahtevDAO.getZahteve().size()==0){
+            JOptionPane.showMessageDialog(null,"Nema zahtjeva");
+        }
+        else{
+            DialogZahteva dz= new DialogZahteva((ArrayList<Zahtev>) ZahtevDAO.getZahteve());
+            dz.setVisible(true);
+        }
     }
 
 }

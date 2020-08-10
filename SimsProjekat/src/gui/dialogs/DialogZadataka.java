@@ -26,11 +26,11 @@ public class DialogZadataka extends JDialog {
     private List<Izvodjac> izvodjaci;
     private List<MuzickoDelo> djela;
 
-    public DialogZadataka(){
-        this.djela= MuzickoDeloDAO.getNedovrsenaMuzickaDela();
-        this.izvodjaci= IzvodjacDAO.getNedovrseneIzvodjace();
-        this.ucesnici= UcesnikDAO.getNedovrseneUceniske();
-        this.zanrovi= ZanrDAO.getNedovrseneZanrove();
+    public DialogZadataka(List<Zanr> zanrovi, List<Ucesnik> ucesnici, List<Izvodjac> izvodjaci, List<MuzickoDelo> djela){
+        this.djela= djela;
+        this.izvodjaci= izvodjaci;
+        this.ucesnici= ucesnici;
+        this.zanrovi= zanrovi;
         this.zadaci=new ArrayList<>();
 
         setTitle("Zadaci");
