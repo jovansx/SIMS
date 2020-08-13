@@ -1,9 +1,17 @@
 package kontroler;
 
+import dao.IzvodjenjeDAO;
+import dao.MuzickoDeloDAO;
+import dao.RecenzijaDAO;
 import dao.UrednikDAO;
+import model.Izvodjenje;
+import model.MuzickoDelo;
+import model.Recenzija;
 import model.Urednik;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UrednikovProzorKON {
@@ -53,4 +61,32 @@ public class UrednikovProzorKON {
 
         return true;
     }
+
+    public static boolean odluka(boolean value,Recenzija r) throws SQLException {
+        if(value){
+            r.setOdobreno(true);
+            r.setObradjeno(true);
+            r.getMuzickoDelo().dodajRecenziju(r);
+        }else{
+            r.setOdobreno(false);
+            r.setObradjeno(true);
+        }
+        RecenzijaDAO.update(r);
+        return true;
+    }
+
+    public static boolean opisiMuzickoDelo(MuzickoDelo md) throws SQLException {
+        MuzickoDeloDAO.update(md);
+        return true;
+    }
+
+    public static boolean dodajIzvodjenje(int id, Izvodjenje izvodjenje) throws SQLException {
+        MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(id);
+        ArrayList<Izvodjenje> lista = (ArrayList<Izvodjenje>) md.getListaIzvodjenja();
+        lista.add(izvodjenje);
+        md.setListaIzvodjenja(lista);
+        IzvodjenjeDAO.insert(izvodjenje);
+        return true;
+    }
+
 }

@@ -42,7 +42,36 @@ public class AlbumDAO {
         }
         return album;
     }
+    public static Album getAlbumPoNazivu(String nazivDela){
+        Album album=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,nazivDela,datumPostavljanja, vremeNastanka, prosecnaOcena, " +
+                            "opis, sadrzaj, tipAlbuma, pripadaAlbumu,obrisano from MuzickoDelo where nazivDela=?");
+            ps.setString(2,nazivDela);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                if(!rs.getBoolean(9) && rs.getString(8)!=null){
+                    album=new Album();
+                    album.setId(rs.getInt(1));
+                    album.setNazivDela(rs.getString(2));
+                    album.setDatumPostavljanja(rs.getDate(3));
+                    album.setVremeNastanka(rs.getDate(4));
+                    album.setProsecnaOcena(rs.getDouble(5));
+                    album.setOpis(rs.getString(6));
+                    album.setSadrzaj(rs.getString(7));
+                    album.setTipAlbuma(TipAlbuma.valueOf(rs.getString(8)));
+                    album.setListaMuzickihDela(getDela(album.getId()));
+                }
 
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return album;
+    }
     public static List<MuzickoDelo> getDela(Integer id){
         MuzickoDelo delo =null;
         List<MuzickoDelo> dela=new ArrayList<MuzickoDelo>();
@@ -93,6 +122,7 @@ public class AlbumDAO {
                     album.setSadrzaj(rs.getString(7));
                     album.setTipAlbuma(TipAlbuma.valueOf(rs.getString(8)));
                     album.setListaMuzickihDela(getDela(rs.getInt(1)));
+                    albumi.add(album);
                 }
             }
         } catch(SQLException e){

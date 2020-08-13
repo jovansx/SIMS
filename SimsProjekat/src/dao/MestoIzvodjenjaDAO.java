@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.MestoIzvodjenja;
-import model.TopLista;
 import util.FConnection;
 
 public class MestoIzvodjenjaDAO {
@@ -28,6 +27,48 @@ public class MestoIzvodjenjaDAO {
         }
         return mesto;
     }
+    public static MestoIzvodjenja getMestoIzvodjenjaNaziv(String nazivMesta){
+        MestoIzvodjenja mesto = null;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select nazivMesta,drzava,pttBroj from MestoIzvodjenja where nazivMesta=?");
+            ps.setString(1,nazivMesta);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                mesto = new MestoIzvodjenja();
+                mesto.setPttBroj(rs.getInt(3));
+                mesto.setDrzava(rs.getString(2));
+                mesto.setNazivMesta(rs.getString(1));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mesto;
+    }
+
+    public static List<MestoIzvodjenja> getMesta(){
+        MestoIzvodjenja mesto = null;
+        List<MestoIzvodjenja> lista = new ArrayList<MestoIzvodjenja>();
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select pttBroj,drzava,nazivMesta from muzicki_sistem.MestoIzvodjenja");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                mesto = new MestoIzvodjenja();
+                mesto.setPttBroj(rs.getInt(1));
+                mesto.setDrzava(rs.getString(2));
+                mesto.setNazivMesta(rs.getString(3));
+                lista.add(mesto);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+
     public static void insert(MestoIzvodjenja mesto) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into mesto (pttBroj,drzava,nazivMesta) values (?,?,?)");

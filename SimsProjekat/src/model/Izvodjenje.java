@@ -17,7 +17,12 @@ public class Izvodjenje {
     private List<MuzickoDelo> listaMuzickihDela;
     private MestoIzvodjenja mestoIzvodjenja;
 
-    public Izvodjenje(){};
+    public Izvodjenje(){
+        this.brPristupa = 0;
+        this.brGlasova = 0;
+        this.ukupnoPrisupa = 0;
+        this.trajanje = 0;
+    };
     public Izvodjenje(int id, Date vremeIzvodjenja, TipIzvodjenja tipIzvodjenja, MestoIzvodjenja mestoIzvodjenja) {
         this.id = id;
         this.brPristupa = 0;

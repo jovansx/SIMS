@@ -105,7 +105,7 @@ public class ZadatakDAO {
 
     public static void delete(Zadatak zadatak) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.Zadatak set obrisan=? where id=?");
+                .prepareStatement("update muzicki_sistem.Zadatak set obrisano=? where id=?");
         ps.setBoolean(1, true);
         ps.setInt(2, zadatak.getId());
         ps.executeUpdate();

@@ -150,6 +150,7 @@ public class MuzickoDeloDAO {
         ps.setDouble(1, delo.getProsecnaOcena());
         ps.setString(2, delo.getOpis());
         ps.setString(3, delo.getSadrzaj());
+        ps.setInt(4,delo.getId());
         ps.executeUpdate();
         ps.close();
     }

@@ -2,6 +2,7 @@ package gui.panels;
 
 import dao.RecenzijaDAO;
 import gui.dialogs.DialogOdobravanje;
+import kontroler.UrednikovProzorKON;
 import model.Recenzija;
 import gui.tables.TabelaOdobravanje;
 
@@ -94,14 +95,20 @@ public class PanelOdobravanje extends JPanel {
                 } else {
                     int id = (int) table.getModel().getValueAt(rIndex,0);
                     Recenzija r = RecenzijaDAO.getRecenzija(id);
-                    r.setOdobreno(true);
-                    r.setObradjeno(true);
                     try {
-                        RecenzijaDAO.update(r);
+                        UrednikovProzorKON.odluka(true,r);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    //refreshData();
+                    //r.setOdobreno(true);
+                    //r.setObradjeno(true);
+                    //r.getMuzickoDelo().dodajRecenziju(r);
+                    //try {
+                     //   RecenzijaDAO.update(r);
+                    //} catch (SQLException throwables) {
+                      //  throwables.printStackTrace();
+                    //}
+                    refreshData();
 
 
                 }
@@ -124,10 +131,8 @@ public class PanelOdobravanje extends JPanel {
                 } else {
                     int id = (int) table.getModel().getValueAt(rIndex,0);
                     Recenzija r = RecenzijaDAO.getRecenzija(id);
-                    r.setOdobreno(false);
-                    r.setObradjeno(true);
                     try {
-                        RecenzijaDAO.update(r);
+                        UrednikovProzorKON.odluka(false,r);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

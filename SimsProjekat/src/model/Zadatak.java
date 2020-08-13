@@ -8,6 +8,7 @@ public class Zadatak {
     private Zanr zanr;
     private Ucesnik ucesnik;
     private Izvodjac izvodjac;
+    private boolean obrisano;
 
     public Zadatak(int id, String text, MuzickoDelo delo, Zanr zanr, Ucesnik ucesnik, Izvodjac izvodjac) {
         this.id = id;
@@ -16,39 +17,44 @@ public class Zadatak {
         this.zanr = zanr;
         this.ucesnik = ucesnik;
         this.izvodjac = izvodjac;
+        this.obrisano = false;
     }
     public Zadatak(MuzickoDelo delo){
-        this.id=-1;
-        this.text="";
-        this.delo=delo;
-        this.izvodjac=null;
-        this.zanr=null;
-        this.ucesnik=null;
+        this.id = -1;
+        this.text = "";
+        this.delo = delo;
+        this.izvodjac = null;
+        this.zanr = null;
+        this.ucesnik = null;
+        this.obrisano = false;
     }
 
     public Zadatak(Izvodjac izvodjac){
-        this.id=-1;
-        this.text="";
-        this.delo=null;
-        this.izvodjac=izvodjac;
-        this.zanr=null;
-        this.ucesnik=null;
+        this.id = -1;
+        this.text = "";
+        this.delo = null;
+        this.izvodjac = izvodjac;
+        this.zanr = null;
+        this.ucesnik = null;
+        this.obrisano = false;
     }
     public Zadatak(Zanr zanr){
-        this.id=-1;
-        this.text="";
-        this.delo=null;
-        this.izvodjac=null;
-        this.zanr=zanr;
-        this.ucesnik=null;
+        this.id = -1;
+        this.text = "";
+        this.delo = null;
+        this.izvodjac = null;
+        this.zanr = zanr;
+        this.ucesnik = null;
+        this.obrisano = false;
     }
     public Zadatak(Ucesnik ucesnik){
-        this.id=-1;
-        this.text="";
-        this.delo=null;
-        this.izvodjac=null;
-        this.zanr=null;
-        this.ucesnik=ucesnik;
+        this.id = -1;
+        this.text = "";
+        this.delo = null;
+        this.izvodjac = null;
+        this.zanr = null;
+        this.ucesnik = ucesnik;
+        this.obrisano = false;
     }
     public int getId() {
         return id;
@@ -98,6 +104,10 @@ public class Zadatak {
         this.izvodjac = izvodjac;
     }
 
+    public boolean isObrisano(){ return obrisano;}
+
+    public void setObrisano(boolean obrisano){this.obrisano = obrisano;}
+
     @Override
     public String toString() {
         return "Zadatak{" +
@@ -106,6 +116,7 @@ public class Zadatak {
                 ", zanr=" + zanr +
                 ", ucesnik=" + ucesnik +
                 ", izvodjac=" + izvodjac +
+                ", obrisano="+
                 '}';
     }
 }

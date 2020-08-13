@@ -26,7 +26,7 @@ public class UrednikovProzor extends GlavniProzor{
         super();
         idUrednika = urednik.getId();
         lista = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(idUrednika);
-        lista1 = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(idUrednika));
+        //lista1 = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(idUrednika));
         inicijalizuj();
     }
     private void inicijalizuj() {
@@ -67,7 +67,7 @@ public class UrednikovProzor extends GlavniProzor{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                DialogZadaci dz = new DialogZadaci(lista1);
+                DialogZadaci dz = new DialogZadaci(idUrednika);
                 dz.setVisible(true);
 
             }

@@ -20,7 +20,7 @@ public class UcesnikDAO {
         int idUcesnika = -1;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id from Ucesnik where obrisano=false");
+                    .prepareStatement("select id from Ucesnik");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idUcesnika = rs.getInt(1);
@@ -86,6 +86,28 @@ public class UcesnikDAO {
             PreparedStatement ps = FConnection.getInstance()
                     .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where id=?");
             ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                ucesnik = new Ucesnik();
+                ucesnik.setId(rs.getInt(1));
+                ucesnik.setNaziv(rs.getString(2));
+                ucesnik.setOpis(rs.getString(3));
+                ucesnik.setTip(TipUcesnika.valueOf(rs.getString(4)));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ucesnik;
+    }
+    public static Ucesnik getUcesnik(String nazivUcesnika) {
+        Ucesnik ucesnik = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where nazivUcesnika=?");
+            ps.setString(2, nazivUcesnika);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ucesnik = new Ucesnik();

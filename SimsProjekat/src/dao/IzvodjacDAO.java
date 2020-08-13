@@ -46,6 +46,39 @@ public class IzvodjacDAO {
         }
         return izvodjac;
     }
+    public static Izvodjac getIzvodjacNaziv(String naziv){
+        Izvodjac izvodjac=null;
+
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select nazivIzvodjaca,id,tip, opis, pripadaGrupi from Izvodjac where nazivIzvodjaca=?");
+            ps.setString(1, naziv);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(2));
+                izvodjac.setNazivIzvodjaca(rs.getString(1));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+
+
+                if(rs.getInt(5) > 0){
+                    izvodjac.setPripadaGrupi(getGrupa(rs.getInt(5)));
+                } else {
+                    izvodjac.setPripadaGrupi(null);
+                }
+
+                izvodjac.setImaClanove(getClanoveIzvodjaca(izvodjac.getId()));
+
+                //izvodjac.setListaIzvodjenja(IzvodjenjeDAO.getIzvodjenjaIzvodjaca(izvodjac.getId()));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjac;
+    }
 
     private static List<Izvodjac> getClanoveIzvodjaca(int idIzvodjaca) {
         List<Izvodjac> izvodjaci = new ArrayList<Izvodjac>();
