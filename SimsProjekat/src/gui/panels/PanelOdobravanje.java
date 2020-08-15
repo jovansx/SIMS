@@ -97,17 +97,10 @@ public class PanelOdobravanje extends JPanel {
                     Recenzija r = RecenzijaDAO.getRecenzija(id);
                     try {
                         UrednikovProzorKON.odluka(true,r);
+                        JOptionPane.showMessageDialog(PanelOdobravanje.this, "Recenzija je odobrena!", "Info", JOptionPane.INFORMATION_MESSAGE);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    //r.setOdobreno(true);
-                    //r.setObradjeno(true);
-                    //r.getMuzickoDelo().dodajRecenziju(r);
-                    //try {
-                     //   RecenzijaDAO.update(r);
-                    //} catch (SQLException throwables) {
-                      //  throwables.printStackTrace();
-                    //}
                     refreshData();
 
 
@@ -133,6 +126,7 @@ public class PanelOdobravanje extends JPanel {
                     Recenzija r = RecenzijaDAO.getRecenzija(id);
                     try {
                         UrednikovProzorKON.odluka(false,r);
+                        JOptionPane.showMessageDialog(PanelOdobravanje.this, "Recenzija nije odobrena!", "Info", JOptionPane.INFORMATION_MESSAGE);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

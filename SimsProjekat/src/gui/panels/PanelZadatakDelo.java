@@ -23,11 +23,12 @@ public class PanelZadatakDelo extends JPanel {
 
     private DialogZadatakDelo dialog;
     private JLabel naziv, opis, sadrzaj, datum, vreme, ocena,text,zanr,ucesnik,album;
-    private JTextField naziv1, datum1, vreme1, ocena1,text1;
+    private JTextField naziv1, datum1, vreme1, ocena1;
     private JButton kreiraj, dodaj;
-    private JTextArea opis1,sadrzaj1;
+    private JTextArea opis1,sadrzaj1,text1;
     private JComboBox<String> combo,combo1,combo2;
     public int id;
+    private JScrollPane scroll;
 
     public PanelZadatakDelo(DialogZadatakDelo dialog, int idZadatka) {
         this.dialog = dialog;
@@ -54,14 +55,19 @@ public class PanelZadatakDelo extends JPanel {
         text.setBorder(BorderFactory.createLineBorder(Color.black));
         add(text);
 
-        text1 = new JTextField();
+        text1 = new JTextArea();
         text1.setBounds(200, 30, 200, 50);
         text1.setBorder(BorderFactory.createLineBorder(Color.black));
         text1.setBackground(Color.white);
         text1.setOpaque(true);
         text1.setText(zadatak.getText());
         text1.setEditable(false);
-        add(text1);
+        scroll = new JScrollPane();
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setBounds(200, 30, 200, 50);
+        scroll.getViewport().setBackground(Color.white);
+        scroll.getViewport().add(text1);
+        add(scroll);
 
         naziv = new JLabel("      Naziv dela:");
         naziv.setBounds(50, 100 ,120, 23);

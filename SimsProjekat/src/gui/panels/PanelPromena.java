@@ -14,7 +14,8 @@ import java.awt.event.ActionListener;
 public class PanelPromena extends JPanel {
     private DialogPromena dialog;
     private JLabel labela,labela1,labela2;
-    private JPasswordField lozinka,lozinka1,lozinka2;
+    private JPasswordField lozinka;
+    private JTextField lozinka1,lozinka2;
     private JButton sacuvaj,otkazi;
     public int id;
 
@@ -54,7 +55,7 @@ public class PanelPromena extends JPanel {
         labela1.setToolTipText("Slaba: manje od 4, srednja: manje od 8, velika slova, jaka: specijalni znakovi(*,_,..)");
         add(labela1);
 
-        lozinka1 = new JPasswordField();
+        lozinka1 = new JTextField();
         lozinka1.setBounds(160, 100, 120, 23);
         lozinka1.setBorder(BorderFactory.createLineBorder(Color.black));
         lozinka1.setBackground(Color.white);
@@ -69,7 +70,7 @@ public class PanelPromena extends JPanel {
         labela2.setBorder(BorderFactory.createLineBorder(Color.black));
         add(labela2);
 
-        lozinka2 = new JPasswordField();
+        lozinka2 = new JTextField();
         lozinka2.setBounds(160, 150, 120, 23);
         lozinka2.setBorder(BorderFactory.createLineBorder(Color.black));
         lozinka2.setBackground(Color.white);
@@ -94,6 +95,7 @@ public class PanelPromena extends JPanel {
                 try {
                     value = UrednikovProzorKON.proveraLozinke(u,l,l1,l2);
                     JOptionPane.showMessageDialog(dialog,"Uspesno promenjena lozinka!");
+                    dialog.setVisible(false);
                 } catch (Exception exception) {
                     String tipIzuzetka = exception.getMessage();
                     if (tipIzuzetka.equals("1")) {

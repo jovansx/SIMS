@@ -1,13 +1,7 @@
 package kontroler;
 
-import dao.IzvodjenjeDAO;
-import dao.MuzickoDeloDAO;
-import dao.RecenzijaDAO;
-import dao.UrednikDAO;
-import model.Izvodjenje;
-import model.MuzickoDelo;
-import model.Recenzija;
-import model.Urednik;
+import dao.*;
+import model.*;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -19,24 +13,16 @@ public class UrednikovProzorKON {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     public static boolean provera(Urednik urednik, String ime, String prezime, String email,
-                                  String telefon, String godina) throws Exception {
+                                  String telefon, Date godina) throws Exception {
         //Ukoliko je neko od polja prazno
         if (ime.equals("") || prezime.equals("") || email.equals("") ||
                 telefon.equals("") || godina.equals(""))
             throw new Exception(String.valueOf(1));
-
-        //Ako nije dobar format datuma
-        Date godinaRodjenja = null;
-        try {
-            godinaRodjenja = sdf.parse(godina);
-        } catch (Exception ex) {
-            throw new Exception(String.valueOf(2));
-        }
         urednik.setIme(ime);
         urednik.setPrezime(prezime);
         urednik.setEmail(email);
         urednik.setKontaktTelefon(telefon);
-        urednik.setGodinaRodjenja(godinaRodjenja);
+        urednik.setGodinaRodjenja(godina);
         UrednikDAO.update(urednik);
         return true;
     }
@@ -49,8 +35,7 @@ public class UrednikovProzorKON {
         if (urednik.getNalog().getLozinka().equals(l)) {
             if (l1.equals(l2)) {
                 urednik.getNalog().setLozinka(l1);
-                UrednikDAO.update(urednik);
-
+                KorisnickiNalogDAO.update(urednik.getNalog());
             } else {
                 throw new Exception(String.valueOf(2));
                 // ne poklapaju se nove lozinke
@@ -67,7 +52,24 @@ public class UrednikovProzorKON {
         if(value){
             r.setOdobreno(true);
             r.setObradjeno(true);
-            r.getMuzickoDelo().dodajRecenziju(r);
+            if(!Objects.isNull(r.getIzvodnjenje())){
+                if(!Objects.isNull(r.getIzvodnjenje().getListaRecenzija())){
+                    r.getIzvodnjenje().dodajRecenziju(r);
+                }else{
+                    ArrayList<Recenzija> lista = new ArrayList<>();
+                    lista.add(r);
+                    r.getIzvodnjenje().setListaRecenzija(lista);
+                }
+            }
+            if(!Objects.isNull(r.getMuzickoDelo())) {
+                if (!Objects.isNull(r.getMuzickoDelo().getListaRecenzija())) {
+                    r.getMuzickoDelo().dodajRecenziju(r);
+                } else {
+                    ArrayList<Recenzija> lista = new ArrayList<>();
+                    lista.add(r);
+                    r.getMuzickoDelo().setListaRecenzija(lista);
+                }
+            }
         }else{
             r.setOdobreno(false);
             r.setObradjeno(true);

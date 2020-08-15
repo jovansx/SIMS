@@ -12,9 +12,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 public class PanelProfil extends JPanel{
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private DialogProfil dialog;
     private String separator;
     private JLabel ime, prezime, email, telefon,godina,korisnicko,lozinka, slika;
@@ -184,10 +188,20 @@ public class PanelProfil extends JPanel{
                 t = telefon1.getText();
                 e = email1.getText();
                 d = godina1.getText();
-                boolean value;
+                Date dd = null;
                 try {
-                    value = UrednikovProzorKON.provera(u,i,p,e,t,d);
-                    JOptionPane.showMessageDialog(dialog,"Uspesno izmenjeni podaci!");
+                    dd = new Date(sdf.parse(d).getTime());
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
+                boolean value = false;
+                try {
+                    value = UrednikovProzorKON.provera(u,i,p,e,t,dd);
+                    if(value) {
+                        JOptionPane.showMessageDialog(dialog, "Uspesno izmenjeni podaci!");
+                    }else{
+                        JOptionPane.showMessageDialog(dialog, "Greska!");
+                    }
                 } catch (Exception exception) {
                     String tipIzuzetka = exception.getMessage();
                     if (tipIzuzetka.equals("1")) {
@@ -220,6 +234,7 @@ public class PanelProfil extends JPanel{
                 telefon1.setEditable(false);
                 godina1.setText(u.getGodinaRodjenja().toString());
                 godina1.setEditable(false);
+                dialog.setVisible(false);
             }
 
         });

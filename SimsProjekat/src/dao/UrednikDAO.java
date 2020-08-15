@@ -125,13 +125,13 @@ public class UrednikDAO {
 
     public static void update(Urednik urednik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
-                .prepareStatement("update muzicki_sistem.Urednik set ime=?,prezime=?,email=?,kontaktTelefon?,godinaRodjenja=?,idNaloga=? where id=? and obrisano=false");
+                .prepareStatement("update Urednik set ime=?,prezime=?,email=?,kontaktTelefon=?,godinaRodjenja=? where id=?");
         ps.setString(1, urednik.getIme());
         ps.setString(2, urednik.getPrezime());
         ps.setString(3, urednik.getEmail());
         ps.setString(4, urednik.getKontaktTelefon());
         ps.setDate(5, (Date) urednik.getGodinaRodjenja());
-        ps.setInt(6, urednik.getNalog().getId());
+        ps.setInt(6,urednik.getId());
         ps.executeUpdate();
         ps.close();
     }
