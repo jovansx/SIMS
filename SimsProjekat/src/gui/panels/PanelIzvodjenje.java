@@ -13,17 +13,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PanelIzvodjenje extends JPanel{
     public DateTimeFormatter formater =  DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-mm-yyyy");
     private DialogIzvodjenje dialog;
     private JLabel trajanje, vreme,delo,izvodj,mest;
     private JTextField trajanje1,vreme1,delo1;
@@ -180,10 +179,7 @@ public class PanelIzvodjenje extends JPanel{
             public void actionPerformed(ActionEvent e) {
                     try {
                         i.setTrajanje(Integer.valueOf(trajanje1.getText()));
-                        LocalDate d = LocalDate.parse(vreme1.getText(),formater);
-                        ZoneId defaultZoneId = ZoneId.systemDefault();
-                        Date date = (Date) Date.from(d.atStartOfDay(defaultZoneId).toInstant());
-                        i.setVremeIzvodjenja(date);
+                        i.setVremeIzvodjenja(new java.sql.Date(formatter1.parse(vreme1.getText()).getTime()));
                         if(video.isSelected()){
                             i.setTipIzvodjenja(TipIzvodjenja.VIDEO);
                         }else if(audio.isSelected()){
@@ -195,7 +191,7 @@ public class PanelIzvodjenje extends JPanel{
                         UrednikovProzorKON.dodajIzvodjenje(md.getId(),i);
                         JOptionPane.showMessageDialog(PanelIzvodjenje.this,"Uspesno ste opisali izvodjenje!");
                         dialog.setVisible(false);
-                    } catch (SQLException throwables) {
+                    } catch (SQLException | ParseException throwables) {
                         throwables.printStackTrace();
                     }
 

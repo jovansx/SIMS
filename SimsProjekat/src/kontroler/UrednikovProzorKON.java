@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class UrednikovProzorKON {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -82,9 +83,15 @@ public class UrednikovProzorKON {
 
     public static boolean dodajIzvodjenje(int id, Izvodjenje izvodjenje) throws SQLException {
         MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(id);
-        ArrayList<Izvodjenje> lista = (ArrayList<Izvodjenje>) md.getListaIzvodjenja();
-        lista.add(izvodjenje);
-        md.setListaIzvodjenja(lista);
+        if(Objects.isNull(md.getListaIzvodjenja())){
+            ArrayList<Izvodjenje> lista = new ArrayList<>();
+            lista.add(izvodjenje);
+            md.setListaIzvodjenja(lista);
+        }else{
+            ArrayList<Izvodjenje> lista = (ArrayList<Izvodjenje>) md.getListaIzvodjenja();
+            lista.add(izvodjenje);
+            md.setListaIzvodjenja(lista);
+        }
         IzvodjenjeDAO.insert(izvodjenje);
         return true;
     }
