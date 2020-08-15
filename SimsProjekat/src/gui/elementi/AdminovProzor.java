@@ -51,7 +51,6 @@ public class AdminovProzor extends GlavniProzor{
             @Override
             public void actionPerformed(ActionEvent e) {
                 prikaziZadatke();
-
             }
         });
         panelAkcija.add(zadaci);
@@ -116,7 +115,7 @@ public class AdminovProzor extends GlavniProzor{
     private void prikaziZadatke() {
         if(MuzickoDeloDAO.getNedovrsenaMuzickaDela().isEmpty() && IzvodjacDAO.getNedovrseneIzvodjace().isEmpty() &&
         UcesnikDAO.getNedovrseneUceniske().isEmpty() && ZanrDAO.getNedovrseneZanrove().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Nema sadrzaja za prikazati");
+            JOptionPane.showMessageDialog(null, "Nema nedovrsenog sadrzaja");
         }
         else{
             DialogZadataka dz = new DialogZadataka(ZanrDAO.getNedovrseneZanrove(),UcesnikDAO.getNedovrseneUceniske(),

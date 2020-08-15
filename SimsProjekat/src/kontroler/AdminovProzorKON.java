@@ -3,7 +3,6 @@ package kontroler;
 import dao.*;
 import model.*;
 
-import java.lang.reflect.GenericArrayType;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;

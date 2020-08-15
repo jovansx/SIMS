@@ -1,9 +1,7 @@
 package gui.dialogs;
 
 import dao.RecenzijaDAO;
-import gui.elementi.ElementOdobravanjaRecenzije;
 import gui.elementi.ElementUrednika;
-import gui.panels.PanelUrednika;
 import model.Recenzija;
 import model.Urednik;
 
@@ -27,16 +25,17 @@ public class DialogUrednika extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        skrol=new JScrollPane();
-        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        skrolPanel=new JPanel();
-        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
         ucitajSkrol();
 
     }
 
     private void ucitajSkrol() {
+        skrol=new JScrollPane();
+        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        skrolPanel=new JPanel();
+        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
+
         resetElemente();
 
         for(Urednik u: urednici){

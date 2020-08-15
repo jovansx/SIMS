@@ -3,10 +3,7 @@ package dao;
 import model.*;
 import util.FConnection;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,6 +138,16 @@ public class MuzickoDeloDAO {
         ps.setString(6,delo.getOpis());
         ps.setString(7,delo.getSadrzaj());
         ps.setInt(8,delo.getAlbumKomPripada().getId());
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    //Insert novonastalog muzickogDela
+    public static void insertPart(MuzickoDelo delo) throws SQLException {
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("insert into MuzickoDelo (nazivDela, opis) values (?)");
+        ps.setString(1, delo.getNazivDela());
+        ps.setNull(2, Types.VARCHAR);
         ps.executeUpdate();
         ps.close();
     }

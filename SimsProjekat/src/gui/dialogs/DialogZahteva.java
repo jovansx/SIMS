@@ -27,15 +27,16 @@ public class DialogZahteva extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        ucitajSkrol();
+    }
+
+    private void ucitajSkrol() {
         skrol=new JScrollPane();
         skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         skrolPanel=new JPanel();
         skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
-        ucitajSkrol();
-    }
 
-    private void ucitajSkrol() {
         resetElemente();
 
         for( Zahtev z: zahtevi){

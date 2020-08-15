@@ -279,6 +279,16 @@ public class IzvodjacDAO {
         ps.executeUpdate();
         ps.close();
     }
+    //Insert novokreiranog izvodjaca
+    public static void insertPart(Izvodjac izvodjac) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("insert into Izvodjac(nazivIzvodjaca, tip, opis) values (?,?,?)");
+        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(1, izvodjac.getNazivIzvodjaca()); else ps.setNull(2, Types.VARCHAR);
+        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(2, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(3, Types.DATE);
+        ps.setNull(3,Types.VARCHAR);
+        ps.executeUpdate();
+        ps.close();
+    }
     //Update
     public static void update(Izvodjac izvodjac) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()

@@ -41,11 +41,6 @@ public class DialogZadataka extends JDialog {
 
         AdminovProzorKON.resetZadatke();
 
-        skrol=new JScrollPane();
-        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        skrolPanel=new JPanel();
-        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
         ucitajSkrol();
         ucitajDugmad();
 
@@ -83,6 +78,12 @@ public class DialogZadataka extends JDialog {
     }
 
     private void ucitajSkrol() {
+        skrol=new JScrollPane();
+        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        skrolPanel=new JPanel();
+        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
+
         resetElemente();
 
         for(MuzickoDelo md: djela){

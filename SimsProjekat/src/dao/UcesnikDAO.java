@@ -135,6 +135,15 @@ public class UcesnikDAO {
         ps.close();
     }
 
+    public static void insertPart(Ucesnik ucesnik) throws SQLException{
+        PreparedStatement ps = FConnection.getInstance()
+                .prepareStatement("insert into Ucesnik (nazivUcesnika,tip,opis) values (?,?,?)");
+        ps.setString(1, ucesnik.getNaziv());
+        ps.setString(2, ucesnik.getTip().toString().toUpperCase());
+        ps.setString(3, ucesnik.getOpis());
+        ps.executeUpdate();
+        ps.close();
+    }
     public static void update(Ucesnik ucesnik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("update Ucesnik set nazivUcesnika=?,tip=?,opis=? where id=?");

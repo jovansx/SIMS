@@ -1,4 +1,5 @@
 package gui.panels;
+import dao.AdministratorDAO;
 import dao.KorisnickiNalogDAO;
 import gui.dialogs.DialogProfilAdmin;
 import model.Administrator;
@@ -9,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -154,6 +156,11 @@ public class PanelProfilAdmina extends JPanel{
                 admin.setPrezime(prezime1.getText());
                 admin.setEmail(email1.getText());
                 admin.setKontaktTelefon(telefon1.getText());
+                try {
+                    AdministratorDAO.update(admin);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
 
         });

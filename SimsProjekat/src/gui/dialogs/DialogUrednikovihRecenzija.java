@@ -1,15 +1,10 @@
 package gui.dialogs;
 
-import dao.RecenzijaDAO;
-import gui.elementi.ElementUrednika;
 import gui.elementi.ElementUrednikovihRecenzija;
-import gui.panels.PanelUrednikovihRecenzija;
 import model.Recenzija;
-import model.Urednik;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.DirectoryNotEmptyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,16 +26,16 @@ public class DialogUrednikovihRecenzija extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        skrol=new JScrollPane();
-        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        skrolPanel=new JPanel();
-        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
         ucitajSkrol();
 
     }
 
     private void ucitajSkrol() {
+        skrol=new JScrollPane();
+        skrol.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        skrolPanel=new JPanel();
+        skrolPanel.setLayout(new BoxLayout(skrolPanel, BoxLayout.Y_AXIS));
         resetElemente();
 
         for(Recenzija r: recenzije){
