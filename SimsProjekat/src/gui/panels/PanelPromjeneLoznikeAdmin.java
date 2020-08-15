@@ -72,7 +72,7 @@ public class PanelPromjeneLoznikeAdmin extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int retVal = AdminovProzorKON.provjeriLozinku(admin, new String(staraT.getPassword()), new String(novaT.getPassword()),new String(nova1T.getPassword()));
                 if(retVal==1){
-                    JOptionPane.showMessageDialog(null,"Stara sifra se ne poklapa");
+                    JOptionPane.showMessageDialog(null,"Stara sifra se ne poklapa sa unesenom");
                     staraT.setText("");
                 }
                 else if(retVal==2){
@@ -93,7 +93,7 @@ public class PanelPromjeneLoznikeAdmin extends JPanel {
                     a.getNalog().setLozinka(sifra);
                     KorisnickiNalog nalog=a.getNalog();
                     try {
-                        KorisnickiNalogDAO.insert(nalog);
+                        KorisnickiNalogDAO.update(nalog);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -109,7 +109,11 @@ public class PanelPromjeneLoznikeAdmin extends JPanel {
         otkazi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                int odgovor=JOptionPane.showConfirmDialog(null,
+                        "Jeste li sigurni da zelite da ponistite promenu?", "Ponisti",JOptionPane.YES_NO_OPTION);
+                if(odgovor==0){
+                    setVisible(false);
+                }
             }
         });
         add(otkazi);

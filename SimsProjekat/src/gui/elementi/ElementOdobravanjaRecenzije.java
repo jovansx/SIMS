@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class ElementOdobravanjaRecenzije extends JPanel {
     private DialogAdminovihRecenzija dialog;
     private Recenzija recenzija;
-    private JLabel id, ocjena, komentar, autor, muzickodelo, id1, ocjena1, komentar1, autor1;
+    private JLabel id, ocjena, komentar, autor, id1, ocjena1, komentar1, autor1;
     private JButton odobri, odbij;
     
     public ElementOdobravanjaRecenzije(DialogAdminovihRecenzija d, Recenzija r){
@@ -75,7 +75,7 @@ public class ElementOdobravanjaRecenzije extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 recenzija.setOdobreno(true);
                 try {
-                    RecenzijaDAO.insert(recenzija);
+                    RecenzijaDAO.update(recenzija);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -92,7 +92,7 @@ public class ElementOdobravanjaRecenzije extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 recenzija.setOdobreno(false);
                 try {
-                    RecenzijaDAO.insert(recenzija);
+                    RecenzijaDAO.update(recenzija);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

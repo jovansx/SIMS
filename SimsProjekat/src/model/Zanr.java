@@ -7,6 +7,8 @@ public class Zanr {
     private String nazivZanra, opis;
     private Date datumNastanka;
 
+    public Zanr(){}
+
     public Zanr(String nazivZanra, String opis, Date datumNastanka) {
         this.nazivZanra = nazivZanra;
         this.opis = opis;

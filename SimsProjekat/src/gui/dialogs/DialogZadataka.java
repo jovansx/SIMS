@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,34 +48,57 @@ public class DialogZadataka extends JDialog {
     }
 
     private void ucitajDugmad() {
-
         panel = new JPanel();
         panel.setBackground(new Color(0, 77, 102));
 
+        //Dodavanje dugmeta za upisivanje novih zadataka
         posalji=new JButton("U redu");
         posalji.setBackground(new Color(153, 204, 255));
         posalji.setForeground(Color.white);
         posalji.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                posaljiZadatke();
             }
         });
         panel.add(posalji);
 
+        //Dodavanje dugmeta za otkazivanje kreiranja novih zadataka
         otkazi=new JButton("Otkazi");
         otkazi.setForeground(Color.white);
         otkazi.setBackground(new Color(153, 204, 255));
         otkazi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AdminovProzorKON.resetZadatke();
-                setVisible(false);
+                otkaziSlanje();
             }
         });
         panel.add(otkazi);
         panel.setPreferredSize(new Dimension(400, 70));
         add(panel,BorderLayout.SOUTH);
+    }
+
+    /** Kreiraju se zadaci u bazi i urednici mogu da ih prime */
+    private void posaljiZadatke() {
+        int odgovor= JOptionPane.showConfirmDialog(null, "Zelite li da posaljete zadatke urednicima?",
+                "Potvrdite slanje!", JOptionPane.YES_NO_OPTION);
+        if(odgovor==0){
+            try {
+                AdminovProzorKON.upisiZadatke();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    /** Otkazuje slanje zadataka ukoliko to korisnik potvrdi*/
+    private void otkaziSlanje() {
+        int odgovor=JOptionPane.showConfirmDialog(null,"Jeste li sigurni da zelite da otkazete slanje zadataka?"
+                ,"Izaberi opciju", JOptionPane.YES_NO_OPTION);
+        if(odgovor==0){
+            AdminovProzorKON.resetZadatke();
+            setVisible(false);
+        }
     }
 
     private void ucitajSkrol() {

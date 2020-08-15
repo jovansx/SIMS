@@ -35,7 +35,7 @@ public class PanelProfilAdmina extends JPanel{
         namesti();
     }
     private void namesti() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy.mm.dd.");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.");
         KorisnickiNalog nalog = KorisnickiNalogDAO.getNalogAdmina(admin.getId());
 
         ime = new JLabel("      Ime:");
@@ -43,7 +43,7 @@ public class PanelProfilAdmina extends JPanel{
         add(ime);
 
         ime1 = new JTextField();
-        ime1.setBounds(350, 30, 120, 23);
+        ime1.setBounds(320, 30, 120, 23);
         ime1.setBackground(Color.white);
         ime1.setOpaque(true);
         ime1.setText(admin.getIme());
@@ -55,7 +55,7 @@ public class PanelProfilAdmina extends JPanel{
         add(prezime);
 
         prezime1 = new JTextField();
-        prezime1.setBounds(350, 80, 120, 23);
+        prezime1.setBounds(320, 80, 120, 23);
         prezime1.setBackground(Color.white);
         prezime1.setOpaque(true);
         prezime1.setText(admin.getPrezime());
@@ -67,7 +67,7 @@ public class PanelProfilAdmina extends JPanel{
         add(email);
 
         email1 = new JTextField();
-        email1.setBounds(350, 130, 120, 23);
+        email1.setBounds(320, 130, 120, 23);
         email1.setBackground(Color.white);
         email1.setOpaque(true);
         email1.setText(admin.getEmail());
@@ -79,7 +79,7 @@ public class PanelProfilAdmina extends JPanel{
         add(telefon);
 
         telefon1 = new JTextField();
-        telefon1.setBounds(350, 180, 120, 23);
+        telefon1.setBounds(320, 180, 120, 23);
         telefon1.setBackground(Color.white);
         telefon1.setOpaque(true);
         telefon1.setText(admin.getKontaktTelefon());
@@ -91,7 +91,7 @@ public class PanelProfilAdmina extends JPanel{
         add(godina);
 
         godina1 = new JTextField();
-        godina1.setBounds(350, 230, 120, 23);
+        godina1.setBounds(320, 230, 120, 23);
         godina1.setBackground(Color.white);
         godina1.setOpaque(true);
         godina1.setText(dateFormat.format(admin.getGodinaRodjenja()));
@@ -103,7 +103,7 @@ public class PanelProfilAdmina extends JPanel{
         add(korisnicko);
 
         korisnicko1 = new JTextField();
-        korisnicko1.setBounds(350, 280, 120, 23);
+        korisnicko1.setBounds(320, 280, 120, 23);
         korisnicko1.setBackground(Color.white);
         korisnicko1.setOpaque(true);
         korisnicko1.setText(nalog.getKorisnickoIme());
@@ -115,7 +115,7 @@ public class PanelProfilAdmina extends JPanel{
         add(lozinka);
 
         lozinka1 = new JTextField();
-        lozinka1.setBounds(350, 330, 120, 23);
+        lozinka1.setBounds(320, 330, 120, 23);
         lozinka1.setBackground(Color.white);
         lozinka1.setOpaque(true);
         lozinka1.setText(nalog.getLozinka());
@@ -135,10 +135,7 @@ public class PanelProfilAdmina extends JPanel{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                ime1.setEditable(true);
-                prezime1.setEditable(true);
-                email1.setEditable(true);
-                telefon1.setEditable(true);
+                izmeniStanje();
             }
 
         });
@@ -146,27 +143,37 @@ public class PanelProfilAdmina extends JPanel{
 
         sacuvaj = new JButton("Sacuvaj");
         sacuvaj.setBackground(new Color(0, 122, 153));
-
         sacuvaj.setBounds(350, 400, 120, 25);
         sacuvaj.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                admin.setIme(ime1.getText());
-                admin.setPrezime(prezime1.getText());
-                admin.setEmail(email1.getText());
-                admin.setKontaktTelefon(telefon1.getText());
-                try {
-                    AdministratorDAO.update(admin);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                sacuvajIzmene();
             }
 
         });
         add(sacuvaj);
 
 
+    }
+
+    private void sacuvajIzmene() {
+        admin.setIme(ime1.getText());
+        admin.setPrezime(prezime1.getText());
+        admin.setEmail(email1.getText());
+        admin.setKontaktTelefon(telefon1.getText());
+        try {
+            AdministratorDAO.update(admin);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void izmeniStanje() {
+        ime1.setEditable(true);
+        prezime1.setEditable(true);
+        email1.setEditable(true);
+        telefon1.setEditable(true);
     }
 
 }

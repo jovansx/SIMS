@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ElementZadatka extends JPanel {
     private JLabel naziv, tip, komentar, urednik;
@@ -93,13 +94,22 @@ public class ElementZadatka extends JPanel {
         posalji.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                zadatak.setText(komentar1.getText());
-                AdminovProzorKON.dodajZadatak(zadatak, getIdUrednika(urednici.getSelectedItem().toString()));
+                posaljiZahtev();
             }
         });
         add(posalji);
 
     }
+
+    private void posaljiZahtev() {
+        if(komentar1.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Molimo unesite komentar");
+        }else{
+            zadatak.setText(komentar1.getText());
+            AdminovProzorKON.dodajZadatak(zadatak, getIdUrednika(Objects.requireNonNull(urednici.getSelectedItem()).toString()));
+        }
+    }
+
     public int getIdUrednika(String s){
         String[] dijelovi=s.split(" ");
         return Integer.parseInt(dijelovi[0]);

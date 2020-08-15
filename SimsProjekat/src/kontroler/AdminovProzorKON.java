@@ -52,6 +52,7 @@ public class AdminovProzorKON {
             if(r.getMuzickoDelo()==null){
                 prosjecneOcjene.put(r, RecenzijaDAO.getProsjecnaOcjenaPoIdIzvodjenja(r.getIzvodnjenje().getId()));
             }
+
             else {
                 prosjecneOcjene.put(r, RecenzijaDAO.getProsjecnaOcjenaPoIdDela(r.getMuzickoDelo().getId()));
             }

@@ -148,7 +148,7 @@ public class AdminovProzor extends GlavniProzor{
     private void prikaziDialogZahteva() {
 
         if(ZahtevDAO.getZahteve().size()==0){
-            JOptionPane.showMessageDialog(null,"Nema zahtjeva");
+            JOptionPane.showMessageDialog(null,"Nema zahteva");
         }
         else{
             DialogZahteva dz= new DialogZahteva((ArrayList<Zahtev>) ZahtevDAO.getZahteve());

@@ -2,6 +2,7 @@ package gui.elementi;
 
 import dao.IzvodjenjeDAO;
 import dao.MuzickoDeloDAO;
+import dao.ZahtevDAO;
 import gui.dialogs.DialogZahteva;
 import model.MuzickoDelo;
 import model.Zahtev;
@@ -9,6 +10,9 @@ import model.Zahtev;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ElementZahtjeva extends JPanel {
@@ -82,14 +86,53 @@ public class ElementZahtjeva extends JPanel {
         odobri.setBounds(270, 280, 80, 30);
         odobri.setBackground(new Color(0, 77, 102));
         odobri.setForeground(Color.white);
+        odobri.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    odobriZahtev();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
         add(odobri);
 
         odbij= new JButton("Odbij");
         odbij.setBounds(360,280, 80, 30);
         odbij.setBackground(new Color(0, 77, 102));
         odbij.setForeground(Color.white);
+        odbij.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    odbijZahtjev();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
         add(odbij);
 
+    }
+
+    private void odbijZahtjev() throws SQLException {
+        int odgovor=JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite da odbijete zahtev?",
+                "Odbijanje zahteva", JOptionPane.YES_NO_OPTION);
+        if(odgovor==0){
+            zahtev.setJeOdobren(false);
+            ZahtevDAO.update(zahtev);
+        }
+
+    }
+
+    private void odobriZahtev() throws SQLException {
+        int odgovor=JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite da odobrite zahtev?",
+                "Odobravanje zahteva", JOptionPane.YES_NO_OPTION);
+        if(odgovor==0){
+            zahtev.setJeOdobren(true);
+            ZahtevDAO.update(zahtev);
+        }
     }
 
     public String naziviMuzickihDela(){
