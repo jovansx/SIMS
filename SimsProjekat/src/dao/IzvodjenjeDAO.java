@@ -236,15 +236,6 @@ public class IzvodjenjeDAO {
         }
         return dela;
     }
-/*
-    public static List<Izvodjenje> getIzvodjenjaIzvodjaca(int idIzvodjaca) {
-        System.out.println("get");
-
-
-    }
-
-
- */
 
     //Trazenje recenzija za izvodjenje
     public static List<Recenzija> getRecenzije(Integer id){
@@ -273,6 +264,42 @@ public class IzvodjenjeDAO {
             e.printStackTrace();
         }
         return recenzije;
+    }
+
+    //Funkcija koja vraca izvodjenja u plejlisti
+    public static List<Izvodjenje> izvodjenjaUPlejlisti(int id){
+        List<Izvodjenje> izvodjenja=new ArrayList<>();
+        Izvodjenje izvodjenje=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select i.id,i.vremeIzvodjenja,i.trajanje,i.tipIzvodjenja,i.brojPristupa," +
+                            "i.brojGlasova,i.ukupnoPristupa,i.pttBrojMesta from Izvodjenje i,IzvodjenjaPlaylisti ip " +
+                            "where ip.idPlayListe=? and ip.idIzvodjenja=i.id");
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjenje=new Izvodjenje();
+                izvodjenje.setId(rs.getInt(1));
+                izvodjenje.setVremeIzvodjenja(rs.getDate(2));
+                izvodjenje.setTrajanje(rs.getInt(3));
+                izvodjenje.setTipIzvodjenja(TipIzvodjenja.valueOf(rs.getString(4)));
+                izvodjenje.setBrPristupa(rs.getInt(5));
+                izvodjenje.setBrGlasova(rs.getInt(6));
+                izvodjenje.setUkupnoPrisupa(rs.getInt(7));
+                izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+                izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
+                izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
+                izvodjenja.add(izvodjenje);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return izvodjenja;
+
     }
     //Insert
     public static void insert(Izvodjenje izvodjenje) throws SQLException{
