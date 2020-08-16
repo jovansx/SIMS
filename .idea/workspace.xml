@@ -28,16 +28,11 @@
     <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Neke sitnice izmjenjene">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/AlbumDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjacDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/UcesnikDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/UcesnikDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/AdminovProzor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZahtjeva.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZahtjeva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPromjeneLoznikeAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPromjeneLoznikeAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/kontroler/AdminovProzorKON.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/kontroler/AdminovProzorKON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/Zanr.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/Zanr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,53 +92,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="SIMS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="SIMS" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

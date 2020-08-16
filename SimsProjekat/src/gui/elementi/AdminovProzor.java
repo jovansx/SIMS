@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AdminovProzor extends GlavniProzor{
@@ -96,7 +95,6 @@ public class AdminovProzor extends GlavniProzor{
             @Override
             public void actionPerformed(ActionEvent e) {
                 odobravanjeRecenija();
-
             }
         });
 

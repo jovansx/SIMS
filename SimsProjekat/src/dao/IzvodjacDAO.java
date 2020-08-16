@@ -270,22 +270,11 @@ public class IzvodjacDAO {
     //Insert
     public static void insert(Izvodjac izvodjac) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into Izvodjac(id, nazivIzvodjaca, tip, opis, pripadaGrupi) values (?,?,?,?,?)");
-        ps.setInt(1, izvodjac.getId());
-        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(2, izvodjac.getNazivIzvodjaca()); else ps.setNull(2, Types.VARCHAR);
-        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(3, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(3, Types.DATE);
-        if(izvodjac.getOpis()!=null) ps.setString(4, izvodjac.getOpis()); else ps.setNull(4,Types.VARCHAR);
-        if(izvodjac.getPripadaGrupi()!=null) ps.setInt(5, izvodjac.getPripadaGrupi().getId()); else ps.setNull(5, Types.INTEGER);
-        ps.executeUpdate();
-        ps.close();
-    }
-    //Insert novokreiranog izvodjaca
-    public static void insertPart(Izvodjac izvodjac) throws SQLException{
-        PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into Izvodjac(nazivIzvodjaca, tip, opis) values (?,?,?)");
-        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(1, izvodjac.getNazivIzvodjaca()); else ps.setNull(2, Types.VARCHAR);
-        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(2, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(3, Types.DATE);
-        ps.setNull(3,Types.VARCHAR);
+                .prepareStatement("insert into Izvodjac(nazivIzvodjaca, tip, opis, pripadaGrupi) values (?,?,?,?)");
+        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(1, izvodjac.getNazivIzvodjaca()); else ps.setNull(1, Types.VARCHAR);
+        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(2, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(2, Types.DATE);
+        if(izvodjac.getOpis()!=null) ps.setString(3, izvodjac.getOpis()); else ps.setNull(3,Types.VARCHAR);
+        if(izvodjac.getPripadaGrupi()!=null) ps.setInt(4, izvodjac.getPripadaGrupi().getId()); else ps.setNull(4, Types.INTEGER);
         ps.executeUpdate();
         ps.close();
     }

@@ -130,7 +130,7 @@ public class AlbumDAO {
         }
         return albumi;
     }
-    public static void insert(Album album, int id) throws SQLException{
+    public static void insert(Album album) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into album(id, obrisano, nazivDela, datumPostavljanja, vremeNastanka, " +
                         "prosecnaOcena, opis, sadrzaj, tipAlbuma, pripadaAlbumu) values (?,?,?,?,?,?,?,?,?,?)");

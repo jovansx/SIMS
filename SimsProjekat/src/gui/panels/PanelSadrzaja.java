@@ -1,14 +1,8 @@
 package gui.panels;
 
-import dao.IzvodjacDAO;
-import dao.MuzickoDeloDAO;
-import dao.UcesnikDAO;
-import dao.ZanrDAO;
+import dao.*;
 import gui.dialogs.DialogSadrzaja;
-import model.Izvodjac;
-import model.MuzickoDelo;
-import model.Ucesnik;
-import model.Zanr;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -48,7 +42,7 @@ public class PanelSadrzaja extends JPanel {
         tip.setBounds(72, 190, 100, 30);
         add(tip);
 
-        String[] izborSadrzaja = { "Zanr", "Ucesnik", "Izvodjac", "Muzicko delo"};
+        String[] izborSadrzaja = { "Zanr", "Ucesnik", "Izvodjac", "Muzicko delo", "Album"};
         medija= new JComboBox<String>(izborSadrzaja);
         medija.setBounds(70, 230, 120, 30);
         add(medija);
@@ -98,6 +92,7 @@ public class PanelSadrzaja extends JPanel {
             if(!naziv.getText().equals("")){
                 z.setNazivZanra(naziv.getText());
                 z.setOpis(null);
+                z.setDatumNastanka(null);
                 ZanrDAO.insert(z);
             }else{
                 JOptionPane.showMessageDialog(null,"Unesite naziv zanra");
@@ -109,6 +104,7 @@ public class PanelSadrzaja extends JPanel {
             if(!naziv.getText().equals("")){
                 u.setNaziv(naziv.getText());
                 u.setOpis(null);
+                u.setTip(null);
                 UcesnikDAO.insert(u);
             }else{
                 JOptionPane.showMessageDialog(null,"Unesite naziv ucesnika");
@@ -119,6 +115,8 @@ public class PanelSadrzaja extends JPanel {
             if(!naziv.getText().equals("")){
                 i.setNazivIzvodjaca(naziv.getText());
                 i.setOpis(null);
+                i.setTipIzvodjaca(null);
+                i.setPripadaGrupi(null);
                 IzvodjacDAO.insert(i);
             }else{
                 JOptionPane.showMessageDialog(null,"Unesite naziv izvodjaca");
@@ -129,10 +127,22 @@ public class PanelSadrzaja extends JPanel {
             if(!naziv.getText().equals("")){
                 md.setNazivDela(naziv.getText());
                 md.setOpis(null);
-                MuzickoDeloDAO.insert(md);
+                MuzickoDeloDAO.insertPart(md);
             }else{
                 JOptionPane.showMessageDialog(null,"Unesite naziv muzickog dela");
             }
+        }
+        else if(medija.getSelectedItem()=="Album"){
+            Album a=new Album();
+            if(!naziv.getText().equals("")){
+                a.setNazivDela(naziv.getText());
+                a.setOpis(null);
+                AlbumDAO.insert(a);
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Unesite naziv albuma");
+            }
+
         }
     }
 }
