@@ -1,5 +1,8 @@
 package gui.elementi;
 
+import dao.PlejListaDAO;
+import gui.dialogs.DialogPlaylisti;
+import model.PlejLista;
 import model.RegistrovaniKorisnik;
 
 import javax.swing.*;
@@ -7,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class KorisnikovProzor extends GlavniProzor {
-    JButton profilButton,ponistiRecenzijuButton, odobravanje,glasanje,zadaci;
+    JButton profilButton,ponistiRecenzijuButton, odobravanje,glasanje,zadaci, playliste;
     public int idKorisnika;
 
     public KorisnikovProzor(RegistrovaniKorisnik korisnik) {
@@ -31,6 +34,20 @@ public class KorisnikovProzor extends GlavniProzor {
             rp.setVisible(true);
         });
 
+        playliste.addActionListener(e->{
+            prikaziPlejlisteKorisnika();
+        });
+    }
+
+    /** Provjerava da li ima plejlista za prikazivanje*/
+    private void prikaziPlejlisteKorisnika() {
+        if(PlejListaDAO.plejlisteKorisnika(idKorisnika).isEmpty()){
+            JOptionPane.showMessageDialog(null, "Korisnik nema nijednu plejlistu!");
+        }
+        else{
+            DialogPlaylisti dp=new DialogPlaylisti(KorisnikovProzor.this, PlejListaDAO.plejlisteKorisnika(idKorisnika));
+            dp.setVisible(true);
+        }
     }
 
     private void inicijalizuj() {
@@ -46,6 +63,9 @@ public class KorisnikovProzor extends GlavniProzor {
         ponistiRecenzijuButton.setBackground(new Color(59, 86, 90));
         panelAkcija.add(ponistiRecenzijuButton);
 
+        playliste=new JButton("Playliste");
+        playliste.setBackground(new Color(59,86, 90 ));
+        panelAkcija.add(playliste);
 
     }
 }

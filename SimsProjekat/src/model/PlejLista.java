@@ -8,7 +8,7 @@ public class PlejLista {
     private int id;
     private boolean jeJavna;
     private String naziv;
-    private List<MuzickoDelo> listaMuzickihDela;
+    private List<Izvodjenje> listaIzvodjenja;
 
     public PlejLista(int id, String naziv) {
         this.id = id;
@@ -41,36 +41,39 @@ public class PlejLista {
         this.naziv = naziv;
     }
 
-    public List<MuzickoDelo> getListaMuzickihDela() {
-        return listaMuzickihDela;
+    public List<Izvodjenje> getListaIzvodjenja() {
+        return listaIzvodjenja;
     }
 
-    public void dodajMuzickoDelo(MuzickoDelo muzickoDelo) {
-        if (listaMuzickihDela == null) {
-            listaMuzickihDela = new ArrayList<MuzickoDelo>();
+    public void dodajIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
+            listaIzvodjenja = new ArrayList<Izvodjenje>();
         }
-        listaMuzickihDela.add(muzickoDelo);
+        listaIzvodjenja.add(izvodjenje);
     }
 
-    public boolean obrisiMuzickoDelo(MuzickoDelo muzickoDelo) {
-        if (listaMuzickihDela == null) {
+    public boolean obrisiIzvodjenje(Izvodjenje izvodjenje) {
+        if (listaIzvodjenja == null) {
             return false;
         }
         try {
-            listaMuzickihDela.remove(muzickoDelo);
+            listaIzvodjenja.remove(izvodjenje);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    public void setListaIzvodjenja(List<Izvodjenje> izvodjenja){
+        this.listaIzvodjenja=izvodjenja;
+    }
     @Override
     public String toString() {
         return "PlejLista{" +
                 "id=" + id +
                 ", jeJavna=" + jeJavna +
                 ", naziv='" + naziv + '\'' +
-                ", listaMuzickihDela=" + listaMuzickihDela +
+                ", listaIzvodjenja=" + listaIzvodjenja +
                 '}';
     }
 }
