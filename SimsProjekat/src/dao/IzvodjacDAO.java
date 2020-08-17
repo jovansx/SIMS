@@ -281,12 +281,12 @@ public class IzvodjacDAO {
     //Update
     public static void update(Izvodjac izvodjac) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("update Izvodjac set id=?, nazivIzvodjaca=?, tip=?, opis=?, pripadaGrupi=?");
-        ps.setInt(1, izvodjac.getId());
-        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(2, izvodjac.getNazivIzvodjaca()); else ps.setNull(2, Types.VARCHAR);
-        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(3, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(3, Types.DATE);
-        if(izvodjac.getOpis()!=null) ps.setString(4, izvodjac.getOpis()); else ps.setNull(4,Types.VARCHAR);
-        if(izvodjac.getPripadaGrupi()!=null) ps.setInt(5, izvodjac.getPripadaGrupi().getId()); else ps.setNull(5, Types.INTEGER);
+                .prepareStatement("update Izvodjac set  nazivIzvodjaca=?, tip=?, opis=?, pripadaGrupi=? where id=?");
+        if(izvodjac.getNazivIzvodjaca()!=null) ps.setString(1, izvodjac.getNazivIzvodjaca()); else ps.setNull(1, Types.VARCHAR);
+        if(izvodjac.getTipIzvodjaca()!=null) ps.setString(2, izvodjac.getTipIzvodjaca().toString()); else ps.setNull(2, Types.DATE);
+        if(izvodjac.getOpis()!=null) ps.setString(3, izvodjac.getOpis()); else ps.setNull(3,Types.VARCHAR);
+        if(izvodjac.getPripadaGrupi()!=null) ps.setInt(4, izvodjac.getPripadaGrupi().getId()); else ps.setNull(4, Types.INTEGER);
+        ps.setInt(5,izvodjac.getId());
         ps.executeUpdate();
         ps.close();
     }
@@ -318,6 +318,61 @@ public class IzvodjacDAO {
             rs.close();
             ps.close();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjaci;
+    }
+    public static void insert2(Izvodjac izvodjac,Izvodjenje izvodjenje) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("insert into IzvodjacIzvodi(idIzvodjaca, idIzvodjenja) values (?,?)");
+        ps.setInt(1, izvodjac.getId());
+        ps.setInt(2,izvodjenje.getId());
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    public static List<Izvodjac> getSveGrupe(){
+        Izvodjac izvodjac=null;
+        List<Izvodjac> izvodjaci = new ArrayList<>();
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where tip = 'BEND' or tip = 'ORKESTAR'");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(1));
+                izvodjac.setNazivIzvodjaca(rs.getString(2));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+                izvodjac.setPripadaGrupi(null);
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjaci;
+    }
+    public static List<Izvodjac> getSveClanove(){
+        Izvodjac izvodjac=null;
+        List<Izvodjac> izvodjaci = new ArrayList<>();
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,nazivIzvodjaca,tip, opis, pripadaGrupi from Izvodjac where tip = 'CLAN_GRUPE'");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjac=new Izvodjac();
+                izvodjac.setId(rs.getInt(1));
+                izvodjac.setNazivIzvodjaca(rs.getString(2));
+                izvodjac.setTipIzvodjaca(TipIzvodjaca.valueOf(rs.getString(3)));
+                izvodjac.setOpis(rs.getString(4));
+                izvodjac.setPripadaGrupi(null);
+                izvodjaci.add(izvodjac);
+            }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -21,7 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PanelIzvodjenje extends JPanel{
-    public DateTimeFormatter formater =  DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public SimpleDateFormat formatter1=new SimpleDateFormat("dd-mm-yyyy");
     private DialogIzvodjenje dialog;
     private JLabel trajanje, vreme,delo,izvodj,mest;
@@ -178,6 +177,13 @@ public class PanelIzvodjenje extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                     try {
+                        if(trajanje1.getText()== "" || vreme1.getText() == ""){
+                            if(!video.isSelected() && !audio.isSelected() && !zapis.isSelected()){
+                                JOptionPane.showMessageDialog(PanelIzvodjenje.this,"Morate selektovati video, audio ili zapis!");
+                            }else{
+                                JOptionPane.showMessageDialog(PanelIzvodjenje.this,"Morate popuniti sva polja!");
+                            }
+                        }else{
                         i.setTrajanje(Integer.valueOf(trajanje1.getText()));
                         i.setVremeIzvodjenja(new java.sql.Date(formatter1.parse(vreme1.getText()).getTime()));
                         if(video.isSelected()){
@@ -191,7 +197,9 @@ public class PanelIzvodjenje extends JPanel{
                         UrednikovProzorKON.dodajIzvodjenje(md.getId(),i);
                         JOptionPane.showMessageDialog(PanelIzvodjenje.this,"Uspesno ste opisali izvodjenje!");
                         dialog.setVisible(false);
-                    } catch (SQLException | ParseException throwables) {
+                    }
+                    }
+                    catch (SQLException | ParseException throwables) {
                         throwables.printStackTrace();
                     }
 

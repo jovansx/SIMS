@@ -382,4 +382,12 @@ public class IzvodjenjeDAO {
         }
         return izvodjenja;
     }
+    public static void insert2(Izvodjenje izvodjenje,int id) throws SQLException{
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("insert into IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela) values (?,?)");
+        ps.setInt(1, izvodjenje.getId());
+        ps.setInt(2,id);
+        ps.executeUpdate();
+        ps.close();
+    }
 }

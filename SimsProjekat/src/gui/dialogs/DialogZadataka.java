@@ -1,9 +1,5 @@
 package gui.dialogs;
 
-import dao.IzvodjacDAO;
-import dao.MuzickoDeloDAO;
-import dao.UcesnikDAO;
-import dao.ZanrDAO;
 import gui.elementi.ElementZadatka;
 import kontroler.AdminovProzorKON;
 import model.*;
@@ -146,7 +142,6 @@ public class DialogZadataka extends JDialog {
             labela.setForeground(new Color(153, 204, 255));
             skrolPanel.add(labela);
         }
-
 
         skrolPanel.validate();
         skrolPanel.repaint();

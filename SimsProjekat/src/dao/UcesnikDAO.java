@@ -102,17 +102,17 @@ public class UcesnikDAO {
 
         return ucesnik;
     }
-    public static Ucesnik getUcesnik(String nazivUcesnika) {
+    public static Ucesnik getUcesnikNaziv(String nazivUcesnika) {
         Ucesnik ucesnik = null;
         try {
             PreparedStatement ps = FConnection.getInstance()
-                    .prepareStatement("select id,nazivUcesnika,opis,tip from Ucesnik where nazivUcesnika=?");
-            ps.setString(2, nazivUcesnika);
+                    .prepareStatement("select nazivUcesnika,id,opis,tip from Ucesnik where nazivUcesnika=?");
+            ps.setString(1, nazivUcesnika);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ucesnik = new Ucesnik();
-                ucesnik.setId(rs.getInt(1));
-                ucesnik.setNaziv(rs.getString(2));
+                ucesnik.setId(rs.getInt(2));
+                ucesnik.setNaziv(rs.getString(1));
                 ucesnik.setOpis(rs.getString(3));
                 ucesnik.setTip(TipUcesnika.valueOf(rs.getString(4)));
             }
@@ -134,7 +134,14 @@ public class UcesnikDAO {
         ps.executeUpdate();
         ps.close();
     }
-
+    public static void insert2(int idUcesnika,MuzickoDelo md) throws SQLException {
+        PreparedStatement ps = FConnection.getInstance()
+                .prepareStatement("insert into UcesnikMuzickogDela (idUcesnika,idMuzickogDela) values (?,?)");
+        ps.setInt(1, idUcesnika);
+        ps.setInt(2, md.getId());
+        ps.executeUpdate();
+        ps.close();
+    }
     public static void update(Ucesnik ucesnik) throws SQLException {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("update Ucesnik set nazivUcesnika=?,tip=?,opis=? where id=?");
