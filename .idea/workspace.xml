@@ -25,15 +25,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Dodavanje albuma">
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementPrikazaPlejlisti.java" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/PlejListaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/PlejListaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementPrikazaPlejlisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementPrikazaPlejlisti.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/KorisnikovProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/KorisnikovProzor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/model/PlejLista.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/model/PlejLista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/PrikazIzvodjenja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/PrikazIzvodjenja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -252,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597575330409</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen">
+      <created>1597616677061</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1597616677061</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -310,7 +316,8 @@
     <MESSAGE value="Skripta je dopunjena primjerima vrijednosti za recenzije" />
     <MESSAGE value="Neke sitnice izmjenjene" />
     <MESSAGE value="Dodavanje albuma" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodavanje albuma" />
+    <MESSAGE value="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
@@ -341,22 +348,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597075867626" />
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1597611297627">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1597695513462">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597611297627" />
-    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1597611297627">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597695513462" />
+    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1597695513462">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597611297627" />
-    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1597611297627">
+    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597695513462" />
+    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1597695513462">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597611297627" />
-    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1597611297627">
+    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597695513462" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1597695513462">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597611297627" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597695513462" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
     <state x="147" y="65" key="MergeDialog" timestamp="1597178050846">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -369,14 +392,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597510124667" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1597575335586">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1597616681322">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597575335586" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597610906956">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597616681322" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597657920541">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1597610906956" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1597657920541" />
     <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596709018408">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -389,10 +412,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596739830656" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1597066195530">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1597661724668">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1597066195530" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1597661724668" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -20,7 +20,7 @@ import java.util.List;
 public class PrikazIzvodjenja extends JDialog {
 
     private JButton prikaziIzvodjacaB, prikaziMuzickoDeloB;
-    private JButton pustiB, pauzirajB, stopirajB, preuzmiB;
+    private JButton pustiB, pauzirajB, stopirajB, preuzmiB, dodajB;
     public JButton dodajRecenzijuB;
     private JComboBox<String> comboBoxIzvodjaca, comboBoxMuzickihDela;
     public JPanel panelGlavni, panelSkrola, okvir;
@@ -113,6 +113,7 @@ public class PrikazIzvodjenja extends JDialog {
         pauzirajB = new JButton("Pauziraj");
         stopirajB = new JButton("Stopiraj");
         preuzmiB = new JButton("Preuzmi");
+        dodajB = new JButton("Dodaj");
 
         pauzirajB.setEnabled(false);
         stopirajB.setEnabled(false);
@@ -122,6 +123,7 @@ public class PrikazIzvodjenja extends JDialog {
         pauzirajB.setBackground(zelena);
         stopirajB.setBackground(zelena);
         preuzmiB.setBackground(zelena);
+        dodajB.setBackground(zelena);
         dodajRecenzijuB.setBackground(zelena);
         prikaziIzvodjacaB.setBackground(zelena);
         prikaziMuzickoDeloB.setBackground(zelena);
@@ -178,6 +180,9 @@ public class PrikazIzvodjenja extends JDialog {
         con.gridx = 3;
         con.insets = new Insets(5, 5, 15, 20);
         panelGlavni.add(preuzmiB, con);
+
+        con.gridx=4;
+        panelGlavni.add(dodajB, con);
 
         con.insets = new Insets(5, 20, 10, 20);
         con.gridy = 2;

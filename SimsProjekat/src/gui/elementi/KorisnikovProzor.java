@@ -35,17 +35,17 @@ public class KorisnikovProzor extends GlavniProzor {
         });
 
         playliste.addActionListener(e->{
-            prikaziPlejlisteKorisnika();
+            prikaziPlejlisteKorisnika(korisnik);
         });
     }
 
     /** Provjerava da li ima plejlista za prikazivanje*/
-    private void prikaziPlejlisteKorisnika() {
+    private void prikaziPlejlisteKorisnika(RegistrovaniKorisnik korisnik) {
         if(PlejListaDAO.plejlisteKorisnika(idKorisnika).isEmpty()){
             JOptionPane.showMessageDialog(null, "Korisnik nema nijednu plejlistu!");
         }
         else{
-            DialogPlaylisti dp=new DialogPlaylisti(KorisnikovProzor.this, PlejListaDAO.plejlisteKorisnika(idKorisnika));
+            DialogPlaylisti dp=new DialogPlaylisti(PlejListaDAO.plejlisteKorisnika(idKorisnika),korisnik);
             dp.setVisible(true);
         }
     }

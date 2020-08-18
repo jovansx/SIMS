@@ -722,6 +722,9 @@ idKorisnika INT UNSIGNED,
 CONSTRAINT FK_PLAY_LISTA FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id)
 );
 
+insert into playlista(naziv, idKorisnika) values('PrljavoKazaliste', 4);
+insert into playlista(naziv, idKorisnika) values('Neke tamo pjesme',4);
+
 CREATE TABLE IzvodjenjaPlayListi (
 idPlayListe INT UNSIGNED,
 idIzvodjenja INT UNSIGNED,
@@ -730,6 +733,11 @@ CONSTRAINT FK_PLAY_LISTA2 FOREIGN KEY (idPlayListe) REFERENCES PlayLista(id),
 CONSTRAINT FK_IZVODJENJE_PL FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
 PRIMARY KEY (idPlayListe, idIzvodjenja)
 );
+
+insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(1, 9);
+insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(1, 10);
+insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(2, 6);
+insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(2, 11);
 
 CREATE TABLE Zadatak (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

@@ -60,12 +60,12 @@ public class PlejListaDAO {
             }
             return liste;
         }
-        public static void insert(PlejLista plejlista) throws SQLException{
+        public static void insert(PlejLista plejlista, int id) throws SQLException{
             PreparedStatement ps=FConnection.getInstance()
-                    .prepareStatement("insert into PlayLista (id,jeJavna,naziv) values (?,?,?)");
-            ps.setInt(1,plejlista.getId());
-            ps.setBoolean(2, plejlista.isJeJavna());
-            ps.setString(3, plejlista.getNaziv());
+                    .prepareStatement("insert into PlayLista (jeJavna,naziv, idKorisnika) values (?,?,?)");
+            ps.setBoolean(1, plejlista.isJeJavna());
+            ps.setString(2, plejlista.getNaziv());
+            ps.setInt(3, id);
             ps.executeUpdate();
             ps.close();
         }
