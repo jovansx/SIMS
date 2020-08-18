@@ -181,4 +181,14 @@ public class ZanrDAO {
         }
         return zanrovi;
     }
+
+
+    public static void insert2(String naziv,MuzickoDelo md) throws SQLException {
+        PreparedStatement ps = FConnection.getInstance()
+                .prepareStatement("insert into ZanrMuzickogDela (nazivZanra,idMuzickogDela) values (?,?)");
+        ps.setString(1, naziv);
+        ps.setInt(2, md.getId());
+        ps.executeUpdate();
+        ps.close();
+    }
 }

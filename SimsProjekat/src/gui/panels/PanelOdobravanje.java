@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PanelOdobravanje extends JPanel {
     private DialogOdobravanje dialog;
@@ -24,22 +25,27 @@ public class PanelOdobravanje extends JPanel {
     private JButton odobri, ne;
     public JTable table;
     public ArrayList<Recenzija>listaRecenzija;
+    public int id;
 
-    public PanelOdobravanje(DialogOdobravanje dialog, ArrayList<Recenzija> listaRecenzija) {
+    public PanelOdobravanje(DialogOdobravanje dialog, int idUrednika) {
         this.dialog = dialog;
-        this.listaRecenzija = listaRecenzija;
+        this.id= idUrednika;
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
         setBackground(Color.WHITE);
-        //setLayout(null);
         namesti();
 
     }
     public void namesti() {
-        TabelaOdobravanje t = new TabelaOdobravanje(listaRecenzija);
-        table = new JTable(t);
+        listaRecenzija = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(id);
+        if(Objects.isNull(listaRecenzija) || listaRecenzija.size() == 0) {
+            dialog.dispose();
+            JOptionPane.showMessageDialog(null, "Ne postoje komentari za odobravanje!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            TabelaOdobravanje t = new TabelaOdobravanje(listaRecenzija);
+            table = new JTable(t);
 
-        JScrollPane sp = new JScrollPane(table);
+            JScrollPane sp = new JScrollPane(table);
         add(sp, BorderLayout.CENTER);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
@@ -101,6 +107,7 @@ public class PanelOdobravanje extends JPanel {
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+                    listaRecenzija.remove(r);
                     refreshData();
 
 
@@ -137,7 +144,7 @@ public class PanelOdobravanje extends JPanel {
         });
         dodatno.add(ne);
         add(dodatno, BorderLayout.SOUTH);
-    }
+    }}
 
     public void refreshData() {
         TabelaOdobravanje t = (TabelaOdobravanje) table.getModel();

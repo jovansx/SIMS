@@ -3,6 +3,8 @@ import dao.AlbumDAO;
 import dao.UcesnikDAO;
 import dao.ZadatakDAO;
 import dao.ZanrDAO;
+import gui.dialogs.DialogDodajAlbum;
+import gui.dialogs.DialogDodajDela;
 import gui.dialogs.DialogIzvodjenje;
 import gui.dialogs.DialogZadatakDelo;
 import kontroler.UrednikovProzorKON;
@@ -16,17 +18,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class PanelZadatakDelo extends JPanel {
-
+    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-mm-yyyy");
     private DialogZadatakDelo dialog;
     private JLabel naziv, opis, sadrzaj, datum, vreme, ocena,text,zanr,ucesnik,album;
     private JTextField naziv1, datum1, vreme1, ocena1;
     private JButton kreiraj, dodaj;
     private JTextArea opis1,sadrzaj1,text1;
     private JComboBox<String> combo,combo1,combo2;
+    private JRadioButton al,del;
+    private ButtonGroup group;
     public int id;
     private JScrollPane scroll;
 
@@ -115,7 +121,7 @@ public class PanelZadatakDelo extends JPanel {
         sadrzaj1.setEditable(true);
         add(sadrzaj1);
 
-        vreme = new JLabel("      Vreme nastanka:");
+        vreme = new JLabel("      Datum nastanka(dd-mm-yyyy):");
         vreme.setBounds(420, 250 ,120, 23);
         vreme.setBackground(Color.white);
         vreme.setOpaque(true);
@@ -126,8 +132,7 @@ public class PanelZadatakDelo extends JPanel {
         vreme1.setBounds(550, 250, 120, 23);
         vreme1.setBorder(BorderFactory.createLineBorder(Color.black));
         vreme1.setBackground(Color.white);
-        vreme1.setText(md.getVremeNastanka().toString());
-        vreme1.setEditable(false);
+        vreme1.setEditable(true);
         add(vreme1);
 
         datum = new JLabel("      Datum postavke:");
@@ -167,7 +172,6 @@ public class PanelZadatakDelo extends JPanel {
             public void itemStateChanged(ItemEvent event) {
                 String value = (String) event.getItem();
                 if(!Objects.isNull(md.getListaZanrova())){
-
                     md.getListaZanrova().add(ZanrDAO.getZanrPoNazivu(value));
                 }else{
                     md.setListaZanrova(new ArrayList<>());
@@ -176,6 +180,22 @@ public class PanelZadatakDelo extends JPanel {
                 }
                 }
         });
+
+        al = new JRadioButton("Album");
+        al.setBounds(550,30,100,20);
+        al.setActionCommand("Album");
+        al.setBackground(Color.white);
+        add(al);
+
+        del = new JRadioButton("Muzicko delo");
+        del.setBounds(420,30,100,20);
+        del.setActionCommand("Muzicko delo");
+        del.setBackground(Color.white);
+        add(del);
+
+        group = new ButtonGroup();
+        group.add(al);
+        group.add(del);
 
         ucesnik = new JLabel("      Ucesnik:");
         ucesnik.setBounds(420, 150 ,120, 23);
@@ -198,37 +218,12 @@ public class PanelZadatakDelo extends JPanel {
             public void itemStateChanged(ItemEvent event) {
                 String value = (String) event.getItem();
                 if(!Objects.isNull(md.getListaUcesnika())){
-                    md.getListaUcesnika().add(UcesnikDAO.getUcesnik(value));
+                    md.getListaUcesnika().add(UcesnikDAO.getUcesnikNaziv(value));
                 }else{
                     md.setListaUcesnika(new ArrayList<>());
-                    md.getListaUcesnika().add(UcesnikDAO.getUcesnik(value));
+                    md.getListaUcesnika().add(UcesnikDAO.getUcesnikNaziv(value));
                 }
 
-
-            }
-        });
-
-        album = new JLabel("      Album:");
-        album.setBounds(420, 30 ,120, 23);
-        album.setBackground(Color.white);
-        album.setOpaque(true);
-        album.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(album);
-
-        combo2 = new JComboBox<String>();
-        combo2.setBounds(550, 30, 120, 23);
-        for(Album a :albumi){
-            combo2.setSelectedItem(null);
-            combo2.addItem(a.getNazivDela());
-        }
-        combo2.setSelectedItem(null);
-        add(combo2);
-
-        combo2.addItemListener(new ItemListener(){
-            @Override
-            public void itemStateChanged(ItemEvent event) {
-                String value = (String) event.getItem();
-                md.setAlbumKomPripada(AlbumDAO.getAlbumPoNazivu(value));
 
             }
         });
@@ -256,12 +251,28 @@ public class PanelZadatakDelo extends JPanel {
         kreiraj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 if(sadrzaj1.getText() == "" || opis1.getText() == ""){
                     JOptionPane.showMessageDialog(PanelZadatakDelo.this,"Morate uneti opis i sadrzaj!");
                 }else{
+                    md.setSadrzaj(sadrzaj1.getText());
+                    md.setOpis(opis1.getText());
+                    md.setProsecnaOcena(Double.parseDouble(ocena1.getText()));
                     try {
+                        md.setVremeNastanka(new java.sql.Date(formatter1.parse(vreme1.getText()).getTime()));
+                    } catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
+                    try {
+                        if(del.isSelected()){
+                            DialogDodajAlbum dda = new DialogDodajAlbum(md.getId());
+                            dda.setVisible(true);
+                        }if(al.isSelected()){
+                            DialogDodajDela ddd = new DialogDodajDela(md.getId());
+                            ddd.setVisible(true);
+                        }
                         UrednikovProzorKON.opisiMuzickoDelo(md);
-                        JOptionPane.showMessageDialog(PanelZadatakDelo.this,"Uspesno ste opisali muzicko delo!");
+                        //JOptionPane.showMessageDialog(PanelZadatakDelo.this,"Uspesno ste opisali muzicko delo!");
                         dialog.setVisible(false);
                         ZadatakDAO.delete(zadatak);
                         PanelZadaci.refreshData();

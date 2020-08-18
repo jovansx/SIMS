@@ -40,6 +40,38 @@ public class MuzickoDeloDAO {
         }
         return delo;
     }
+    public static MuzickoDelo getMuzickoDeloNaziv(String naziv){
+        MuzickoDelo delo = null;
+        try{
+            PreparedStatement ps = FConnection.getInstance().prepareStatement("select nazivDela,obrisano,id," +
+                    "datumPostavljanja,vremeNastanka,prosecnaOcena,opis,sadrzaj,pripadaAlbumu from MuzickoDelo where nazivDela=?");
+            ps.setString(1,naziv);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                if(!rs.getBoolean(2)){
+                    delo = new MuzickoDelo();
+                    delo.setId(rs.getInt(3));
+                    delo.setNazivDela(rs.getString(1));
+                    delo.setDatumPostavljanja(rs.getDate(4));
+                    delo.setVremeNastanka(rs.getDate(5));
+                    delo.setProsecnaOcena(rs.getDouble(6));
+                    delo.setOpis(rs.getString(7));
+                    delo.setSadrzaj(rs.getString(8));
+                    if(rs.getInt(9) > 0){
+                        delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(9)));
+                    }else {
+                        delo.setAlbumKomPripada(null);
+                    }
+                }
+            }
+            rs.close();
+            ps.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return delo;
+    }
     public static List<MuzickoDelo> getMuzickaDela() {
         List<MuzickoDelo> dela = new ArrayList<MuzickoDelo>();
         MuzickoDelo delo = null;
@@ -57,8 +89,8 @@ public class MuzickoDeloDAO {
                 delo.setProsecnaOcena(rs.getDouble(5));
                 delo.setOpis(rs.getString(6));
                 delo.setSadrzaj(rs.getString(7));
-                if(rs.getInt(9) > 0){
-                    delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(9)));
+                if(rs.getInt(8) > 0){
+                    delo.setAlbumKomPripada(AlbumDAO.getAlbum(rs.getInt(8)));
                 }else {
                     delo.setAlbumKomPripada(null);
                 }

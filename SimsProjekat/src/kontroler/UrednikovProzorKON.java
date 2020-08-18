@@ -80,6 +80,28 @@ public class UrednikovProzorKON {
 
     public static boolean opisiMuzickoDelo(MuzickoDelo md) throws SQLException {
         MuzickoDeloDAO.update(md);
+        for(int i =0;i<md.getListaZanrova().size();i++){
+            ZanrDAO.insert2(md.getListaZanrova().get(i).getNazivZanra(),md);
+        }
+        for(int i =0;i<md.getListaUcesnika().size();i++){
+            UcesnikDAO.insert2(md.getListaUcesnika().get(i).getId(),md);
+        }
+        return true;
+    }
+
+    public static boolean opisiIzvodjaca(Izvodjac izvodjac) throws SQLException {
+        IzvodjacDAO.update(izvodjac);
+        return true;
+    }
+    public static boolean opisiZanr(Zanr zanr) throws SQLException {
+        ZanrDAO.update(zanr);
+        return true;
+    }
+    public static boolean opisiUcesnika(Ucesnik ucesnik) throws SQLException {
+        UcesnikDAO.update(ucesnik);
+        for(int i =0;i<ucesnik.getListaMuzickihDela().size();i++){
+            UcesnikDAO.insert2(ucesnik.getId(),ucesnik.getListaMuzickihDela().get(i));
+        }
         return true;
     }
 
@@ -95,6 +117,10 @@ public class UrednikovProzorKON {
             md.setListaIzvodjenja(lista);
         }
         IzvodjenjeDAO.insert(izvodjenje);
+        IzvodjenjeDAO.insert2(izvodjenje,md.getId());
+        for(int i =0;i<izvodjenje.getListaIzvodjaca().size();i++){
+            IzvodjacDAO.insert2(izvodjenje.getListaIzvodjaca().get(i),izvodjenje);
+        }
         return true;
     }
 

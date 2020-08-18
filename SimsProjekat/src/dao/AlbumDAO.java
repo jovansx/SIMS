@@ -132,7 +132,7 @@ public class AlbumDAO {
     }
     public static void insert(Album album) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("insert into album(id, obrisano, nazivDela, datumPostavljanja, vremeNastanka, " +
+                .prepareStatement("insert into MuzickoDelo(id, obrisano, nazivDela, datumPostavljanja, vremeNastanka, " +
                         "prosecnaOcena, opis, sadrzaj, tipAlbuma, pripadaAlbumu) values (?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, album.getId());
         ps.setBoolean(2, false);
@@ -164,6 +164,34 @@ public class AlbumDAO {
         ps.executeUpdate();
         ps.close();
     }
+    public static List<Album> getNedovrseneAlbume() {
+        List<Album> albumi = new ArrayList<Album>();
+        Album album = null;
+        try {
+            PreparedStatement ps = FConnection.getInstance()
+                    .prepareStatement("select id,nazivDela,datumPostavljanja,vremeNastanka,prosecnaOcena,opis," +
+                            "sadrzaj from MuzickoDelo where opis is null and obrisano = false and pripadaAlbumu = null");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               album = new Album();
+               album.setId(rs.getInt(1));
+               album.setNazivDela(rs.getString(2));
+               album.setDatumPostavljanja(rs.getDate(3));
+               album.setVremeNastanka(rs.getDate(4));
+               album.setProsecnaOcena(rs.getDouble(5));
+               album.setOpis(rs.getString(6));
+               album.setSadrzaj(rs.getString(7));
+               albumi.add(album);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return albumi;
+    }
+
+
     //Delete
     public static void delete(Album album) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()

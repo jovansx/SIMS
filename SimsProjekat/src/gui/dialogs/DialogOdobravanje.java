@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class DialogOdobravanje extends JDialog {
     public PanelOdobravanje panel;
-    public ArrayList<Recenzija> lista;
-    public DialogOdobravanje(ArrayList<Recenzija> listaRecenzija) {
+    public int id;
+    public DialogOdobravanje(int idUrednika) {
         setTitle("Odobravanje komentara");
         setSize(600, 600);
         setResizable(false);
-        this.lista = listaRecenzija;
-        panel = new PanelOdobravanje(this,lista);
+        this.id = idUrednika;
+        panel = new PanelOdobravanje(this,id);
         setContentPane(panel);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
