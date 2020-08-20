@@ -2,7 +2,6 @@ package gui.dialogs;
 
 import dao.PlejListaDAO;
 import gui.elementi.ElementPrikazaPlejlisti;
-import gui.elementi.KorisnikovProzor;
 import model.PlejLista;
 import model.RegistrovaniKorisnik;
 
@@ -41,6 +40,8 @@ public class DialogPlaylisti extends JDialog{
     }
 
     private void podesiAkcije() {
+
+
         posalji.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
