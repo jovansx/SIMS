@@ -2,10 +2,12 @@ package gui.elementi;
 
 import dao.IzvodjenjeDAO;
 import dao.PlejListaDAO;
+import gui.dialogs.DialogIzvodjenjaUPlejlisti;
 import gui.dialogs.DialogPlaylisti;
 import model.PlejLista;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +28,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(255, 204, 204));
         setPreferredSize(new Dimension(500, 200));
+        setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         setLayout(null);
         namesti();
     }
@@ -79,19 +82,28 @@ public class ElementPrikazaPlejlisti extends JPanel {
         sacuvaj.setBackground(new Color(0, 77, 102));
         sacuvaj.setForeground(Color.white);
         sacuvaj.setBounds(400, 170, 70, 30);
+        sacuvaj.setEnabled(false);
+        add(sacuvaj);
 
         dodajAkcije();
 
     }
 
     private void dodajAkcije() {
+        prikazi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogIzvodjenjaUPlejlisti dp=new DialogIzvodjenjaUPlejlisti(lista.getListaIzvodjenja(), lista);
+                dp.setVisible(true);
+            }
+        });
 
         izmeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 naziv1.setEditable(true);
                 javno1.setEnabled(true);
-                add(sacuvaj);
+                sacuvaj.setEnabled(true);
             }
         });
 

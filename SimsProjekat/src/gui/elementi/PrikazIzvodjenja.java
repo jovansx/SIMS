@@ -188,6 +188,7 @@ public class PrikazIzvodjenja extends JDialog {
         con.insets = new Insets(5, 5, 15, 20);
         panelGlavni.add(preuzmiB, con);
 
+        //Ukoliko je PlejlistaKON.getKorisnik()!=null dodaj button dodajB
         con.gridx=4;
         panelGlavni.add(dodajB, con);
 
