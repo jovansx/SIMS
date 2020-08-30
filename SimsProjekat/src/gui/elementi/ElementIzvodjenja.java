@@ -1,6 +1,8 @@
 package gui.elementi;
 
+import dao.IzvodjacDAO;
 import dao.IzvodjenjeDAO;
+import dao.MuzickoDeloDAO;
 import model.Izvodjac;
 import model.Izvodjenje;
 import model.MuzickoDelo;
@@ -12,10 +14,10 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 public class ElementIzvodjenja extends JPanel {
-    private JPanel panelGlavni;
-    private JLabel labelaNaslova;
-    private JLabel labelaOpisa;
-    private JLabel labelaIkone;
+    protected JPanel panelGlavni;
+    protected JLabel labelaNaslova;
+    protected JLabel labelaOpisa;
+    protected JLabel labelaIkone;
 
     public ElementIzvodjenja(Izvodjenje iz, GlavniProzor gp) {
         super();
@@ -25,6 +27,10 @@ public class ElementIzvodjenja extends JPanel {
         add(panelGlavni);
 
         podesiAkcije(iz, gp);
+    }
+    public ElementIzvodjenja(Izvodjenje iz){
+        inicijalizuj(iz);
+        add(panelGlavni);
     }
 
     private void inicijalizuj(Izvodjenje iz) {
@@ -72,7 +78,7 @@ public class ElementIzvodjenja extends JPanel {
         }
     }
 
-    private String generisiOpisElementa(Izvodjenje iz) {
+    String generisiOpisElementa(Izvodjenje iz) {
         String line2 = "Broj pristupa : " + iz.getBrPristupa();
         String line4 = "Trajanje : " + iz.getTrajanje();
         String line3 = "Mesto izvodjenja : " + iz.getMestoIzvodjenja().getNazivMesta();
@@ -88,7 +94,7 @@ public class ElementIzvodjenja extends JPanel {
 
     public static String generisiNazivIzvodjaca(Izvodjenje izvodjenje) {
         StringBuilder name = new StringBuilder();
-        for (MuzickoDelo mz : izvodjenje.getListaMuzickihDela()) {
+        for (MuzickoDelo mz : MuzickoDeloDAO.getMuzickaDelaIzvodjenja(izvodjenje.getId())) {
             name.append(mz.getNazivDela()).append(",");
         }
         name = new StringBuilder(name.substring(0, name.length() - 1));
@@ -97,7 +103,7 @@ public class ElementIzvodjenja extends JPanel {
 
     public static String generisiIzvodjaceIzvodjenja(Izvodjenje izvodjenje) {
         StringBuilder izvodjaci = new StringBuilder();
-        for (Izvodjac izv : izvodjenje.getListaIzvodjaca()) {
+        for (Izvodjac izv : IzvodjacDAO.getIzvodjaciIzvodjenja(izvodjenje.getId())) {
             izvodjaci.append(izv.getNazivIzvodjaca()).append(",");
         }
         String line = izvodjaci.toString();
