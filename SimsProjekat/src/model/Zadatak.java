@@ -103,7 +103,6 @@ public class Zadatak {
     public void setIzvodjac(Izvodjac izvodjac) {
         this.izvodjac = izvodjac;
     }
-
     public boolean isObrisano(){ return obrisano;}
 
     public void setObrisano(boolean obrisano){this.obrisano = obrisano;}

@@ -19,20 +19,20 @@ import java.util.List;
 
 public class PrikazIzvodjenja extends JDialog {
 
-    private JButton prikaziIzvodjacaB, prikaziMuzickoDeloB;
-    private JButton pustiB, pauzirajB, stopirajB, preuzmiB, dodajB;
+    protected JButton prikaziIzvodjacaB, prikaziMuzickoDeloB;
+    protected JButton pustiB, pauzirajB, stopirajB, preuzmiB, dodajB;
     public JButton dodajRecenzijuB;
-    private JComboBox<String> comboBoxIzvodjaca, comboBoxMuzickihDela;
+    protected JComboBox<String> comboBoxIzvodjaca, comboBoxMuzickihDela;
     public JPanel panelGlavni, panelSkrola, okvir;
-    private JLabel pristupTrajanjeL, vremeMestoL;
-    private JLabel tipIzvodjenjaL, nazivDelaL;
+    protected JLabel pristupTrajanjeL, vremeMestoL;
+    protected JLabel tipIzvodjenjaL, nazivDelaL;
     public GlavniProzor glavniProzor;
-    private JScrollPane skrol;
-    private int brojRecenzija;
+    protected JScrollPane skrol;
+    protected int brojRecenzija;
     public int idIzvodjenja;
-    private String sep;
-    private MP3Player player;
-    private File file;
+    protected String sep;
+    protected MP3Player player;
+    protected File file;
 
     public PrikazIzvodjenja(Izvodjenje iz, GlavniProzor gp) {
         super();
@@ -56,6 +56,13 @@ public class PrikazIzvodjenja extends JDialog {
 
         setResizable(false);
         setLocationRelativeTo(gp);
+    }
+    public PrikazIzvodjenja(Izvodjenje iz,Top top){
+        idIzvodjenja = iz.getId();
+        setModal(true);
+        setTitle("Prikaz informacija izvodjenja");
+        popuniIzvodjenje(iz);
+
     }
 
     private void onemoguciDodavanjeRecenzije(int idIzvodjenja, GlavniProzor gp) {

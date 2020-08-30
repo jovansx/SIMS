@@ -49,19 +49,19 @@ public class PanelDodajDela extends JPanel{
         ArrayList<MuzickoDelo> lista = (ArrayList<MuzickoDelo>) MuzickoDeloDAO.getMuzickaDela();
 
         cd = new JRadioButton("CD");
-        cd.setBounds(50,50,100,20);
+        cd.setBounds(30,50,100,20);
         cd.setActionCommand("CD");
         cd.setBackground(Color.white);
         add(cd);
 
         ploca = new JRadioButton("Ploca");
-        ploca.setBounds(150,50,100,20);
+        ploca.setBounds(100,50,100,20);
         ploca.setActionCommand("Ploca");
         ploca.setBackground(Color.white);
         add(ploca);
 
         online = new JRadioButton("Online");
-        online.setBounds(250,50,100,20);
+        online.setBounds(170,50,100,20);
         online.setActionCommand("Online");
         online.setBackground(Color.white);
         add(online);
@@ -73,14 +73,14 @@ public class PanelDodajDela extends JPanel{
         group.add(online);
 
         dela = new JLabel("      Dela:");
-        dela.setBounds(50, 100 ,120, 23);
+        dela.setBounds(30, 100 ,120, 23);
         dela.setBackground(Color.white);
         dela.setOpaque(true);
         dela.setBorder(BorderFactory.createLineBorder(Color.black));
         add(dela);
 
         combo = new JComboBox<String>();
-        combo.setBounds(250, 100, 120, 23);
+        combo.setBounds(170, 100, 120, 23);
         for(MuzickoDelo m :lista){
             combo.setSelectedItem(null);
             combo.addItem(m.getNazivDela());

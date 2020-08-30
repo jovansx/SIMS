@@ -17,24 +17,24 @@ public class PrikazMuzickogDela extends JDialog {
 
     public GlavniProzor glavniProzor;
     public JPanel panelGlavni;
-    private JLabel labelaNaziva;
-    private JLabel labelaOpis;
-    private JLabel labelaSadrzaj;
-    private JLabel labelaDatumPostavljanja;
-    private JLabel labelaVremeNastanka;
-    private JLabel labelaProsecnaOcena;
-    private JLabel labelaAlbum;
-    private JButton prikaziIzvodjenjaButton;
-    private JButton prikaziUcesnikeButton;
+    protected JLabel labelaNaziva;
+    protected JLabel labelaOpis;
+    protected JLabel labelaSadrzaj;
+    protected JLabel labelaDatumPostavljanja;
+    protected JLabel labelaVremeNastanka;
+    protected JLabel labelaProsecnaOcena;
+    protected JLabel labelaAlbum;
+    protected JButton prikaziIzvodjenjaButton;
+    protected JButton prikaziUcesnikeButton;
     public JButton dodajRecenzijuButton;
-    private JPanel panelSkrola;
-    private JScrollPane skrol;
-    private Dimension dimension;
-    private JComboBox comboBoxZanrova;
-    private JComboBox comboBoxUcesnika;
-    private JComboBox comboBoxIzvodjenja;
-    private int brojElemenata;
-    private String prosecnaOcena;
+    protected JPanel panelSkrola;
+    protected JScrollPane skrol;
+    protected Dimension dimension;
+    protected JComboBox comboBoxZanrova;
+    protected JComboBox comboBoxUcesnika;
+    protected JComboBox comboBoxIzvodjenja;
+    protected int brojElemenata;
+    protected String prosecnaOcena;
     public int idMuzickogDela;
 
     public PrikazMuzickogDela(MuzickoDelo muzickoDelo, GlavniProzor gp) {
@@ -62,12 +62,13 @@ public class PrikazMuzickogDela extends JDialog {
         setResizable(false);
         setLocationRelativeTo(gp);
     }
+    public PrikazMuzickogDela(MuzickoDelo delo,Top top){}
 
     public void osveziLabeluProseka() {
         labelaProsecnaOcena.setText("Prosecna ocena : " + prosecnaOcena);
     }
 
-    private void popuniMuzickoDelo(MuzickoDelo muzickoDelo) {
+    protected void popuniMuzickoDelo(MuzickoDelo muzickoDelo) {
         muzickoDelo.setListaZanrova(ZanrDAO.getZanroviPoMuzickomDelu(muzickoDelo));
         muzickoDelo.setListaIzvodjenja(IzvodjenjeDAO.getIzvodjenjaMuzickogDela(muzickoDelo));
         for (Izvodjenje izvodjenje : muzickoDelo.getListaIzvodjenja()) {
@@ -92,7 +93,7 @@ public class PrikazMuzickogDela extends JDialog {
         dodajRecenzijuButton.setEnabled(!retVal);
     }
 
-    private void inicijalizuj(MuzickoDelo muzickoDelo) {
+    protected void inicijalizuj(MuzickoDelo muzickoDelo) {
 
         prikaziUcesnikeButton = new JButton("Prikazi ucesnika");
         prikaziIzvodjenjaButton = new JButton("Prikazi izvodjenje");
@@ -139,7 +140,7 @@ public class PrikazMuzickogDela extends JDialog {
         brojElemenata = 3;
     }
 
-    private void dodajKomponente() {
+    protected void dodajKomponente() {
         GridBagLayout bg = new GridBagLayout();
         GridBagConstraints con = new GridBagConstraints();
         panelGlavni.setLayout(bg);
@@ -275,7 +276,7 @@ public class PrikazMuzickogDela extends JDialog {
         gp.osveziKomponentu(panelSkrola);
     }
 
-    private String generisiProsecnuOcenu(List<Recenzija> recenzije) {
+    protected String generisiProsecnuOcenu(List<Recenzija> recenzije) {
         int sum = 0;
         for (Recenzija r : recenzije) {
             sum += r.getOcena();

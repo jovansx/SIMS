@@ -1,32 +1,22 @@
 package gui.elementi;
 
-import dao.RecenzijaDAO;
-import dao.UrednikDAO;
-import dao.ZadatakDAO;
 import gui.dialogs.DialogOdobravanje;
 import gui.dialogs.DialogProfil;
 import gui.dialogs.DialogZadaci;
-import model.Recenzija;
 import model.Urednik;
-import model.Zadatak;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class UrednikovProzor extends GlavniProzor{
     public int idUrednika;
     JButton profil,odobravanje,glasanje,zadaci;
-    ArrayList<Recenzija> lista;
-    ArrayList<Zadatak> lista1;
 
     public UrednikovProzor(Urednik urednik) {
         super();
         idUrednika = urednik.getId();
-        //lista = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(idUrednika);
-        //lista1 = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(idUrednika));
         inicijalizuj();
     }
     private void inicijalizuj() {
@@ -61,6 +51,25 @@ public class UrednikovProzor extends GlavniProzor{
         });
         panelAkcija.add(odobravanje);
         glasanje = new JButton("Glasanje");
+        glasanje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocalDateTime now = LocalDateTime.now();
+                if(now.getDayOfMonth() == 1){
+                    // mesecno
+                    Top tp = new Top(true,now.getMonthValue()-1,now.getYear());
+                    tp.setVisible(true);
+
+                }else if(now.getMonthValue() == 12 && now.getDayOfMonth() == 31){
+                    // godisnje
+                    Top tp = new Top(false,now.getMonthValue(),now.getYear());
+                    tp.setVisible(false);
+
+                }else{
+                    JOptionPane.showMessageDialog(UrednikovProzor.this,"Glasanje nije moguce!");
+                }
+            }
+        });
         panelAkcija.add(glasanje);
         zadaci = new JButton("Lista zadataka");
         zadaci.addActionListener(new ActionListener(){
@@ -74,5 +83,6 @@ public class UrednikovProzor extends GlavniProzor{
 
         });
         panelAkcija.add(zadaci);
+
     }
 }

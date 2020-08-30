@@ -1,13 +1,12 @@
 package kontroler;
 
 import dao.*;
+import gui.sorters.ToplistaSorter;
 import model.*;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 public class UrednikovProzorKON {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -123,5 +122,27 @@ public class UrednikovProzorKON {
         }
         return true;
     }
+    public static List<Izvodjenje> getListaZaGlasanje(int month,int year){
+        int m = month;
+        if(month == 1){
+            m = 12;
+        }else {
+            m = month-1;
+        }
+        List<Izvodjenje> lista = new ArrayList<>();
+        for(Izvodjenje i :IzvodjenjeDAO.getIzvodjenja()){
+            if(i.getVremeIzvodjenja().getMonth() == m &&
+                    i.getVremeIzvodjenja().getYear()+1900 == year){
+                lista.add(IzvodjenjeDAO.getIzvodjenje(i.getId()));
+            }
+        }
+        lista.sort(new ToplistaSorter());
+        return lista;
+    }
 
+    public static void glasaj(Izvodjenje izvodjenje) throws SQLException {
+        int br = izvodjenje.getBrGlasova();
+        izvodjenje.setBrGlasova(br+1);
+        IzvodjenjeDAO.update(izvodjenje);
+    }
 }

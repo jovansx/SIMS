@@ -10,15 +10,15 @@ import java.awt.*;
 import java.util.List;
 
 public class PrikazIzvodjaca extends JDialog {
-    private JPanel panelGlavni;
-    private JLabel labelaNaziva;
-    private JLabel labelaOpisa;
-    private JLabel labelaTipa;
-    private JLabel labelaPripada;
-    private JButton buttonPrikaziIzvodjaca;
-    private JButton buttonPrikaziIzvodjenje;
-    private JComboBox comboBoxClanova;
-    private JComboBox comboBoxIzvodjenja;
+    protected JPanel panelGlavni;
+    protected JLabel labelaNaziva;
+    protected JLabel labelaOpisa;
+    protected JLabel labelaTipa;
+    protected JLabel labelaPripada;
+    protected JButton buttonPrikaziIzvodjaca;
+    protected JButton buttonPrikaziIzvodjenje;
+    protected JComboBox comboBoxClanova;
+    protected JComboBox comboBoxIzvodjenja;
 
     public PrikazIzvodjaca(Izvodjac izvodjac, GlavniProzor gp) {
         super();

@@ -202,11 +202,11 @@ public class IzvodjenjeDAO {
         List<Izvodjac> izvodjaci=new ArrayList<Izvodjac>();
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select idIzvodjaca, idIzvodjenja from IzvodjacIzvodi where idIzvodjenja=?");
-            ps.setInt(2, id);
+                    .prepareStatement("select idIzvodjenja,idIzvodjaca from IzvodjacIzvodi where idIzvodjenja=?");
+            ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                izvodjac=IzvodjacDAO.getIzvodjac(rs.getInt(1));
+                izvodjac = IzvodjacDAO.getIzvodjac(rs.getInt(2));
                 izvodjaci.add(izvodjac);
             }
             rs.close();
@@ -321,17 +321,18 @@ public class IzvodjenjeDAO {
     //Update
     public static void update(Izvodjenje izvodjenje) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
-                .prepareStatement("update Izvodjenje set id=?, obrisano=?, vremeIzvodjenja=?, trajanje=?, tipIzvodjenja=?, " +
-                        "brojPristupa=?, brojGlasova=?, ukupnoPristupa=?, pttBrojMesta=?");
-        ps.setInt(1, izvodjenje.getId());
-        ps.setBoolean(2, false);
-        if(izvodjenje.getVremeIzvodjenja()!=null) ps.setDate(3, (Date) izvodjenje.getVremeIzvodjenja()); else ps.setNull(3, Types.DATE);
-        ps.setInt(4, izvodjenje.getTrajanje());
-        if(izvodjenje.getTipIzvodjenja()!=null) ps.setString(5, izvodjenje.getTipIzvodjenja().toString()); else ps.setNull(5,Types.VARCHAR);
-        ps.setInt(6, izvodjenje.getBrPristupa());
-        ps.setInt(7, izvodjenje.getBrGlasova());
-        ps.setInt(8, izvodjenje.getUkupnoPrisupa());
-        if(izvodjenje.getMestoIzvodjenja()!=null) ps.setInt(9, izvodjenje.getMestoIzvodjenja().getPttBroj()); else ps.setNull(9, Types.INTEGER);
+                .prepareStatement("update Izvodjenje set obrisano=?, vremeIzvodjenja=?, trajanje=?, tipIzvodjenja=?, " +
+                        "brojPristupa=?, brojGlasova=?, ukupnoPristupa=?, pttBrojMesta=? where id =?");
+        //ps.setInt(1, izvodjenje.getId());
+        ps.setBoolean(1, false);
+        if(izvodjenje.getVremeIzvodjenja()!=null) ps.setDate(2, (Date) izvodjenje.getVremeIzvodjenja()); else ps.setNull(2, Types.DATE);
+        ps.setInt(3, izvodjenje.getTrajanje());
+        if(izvodjenje.getTipIzvodjenja()!=null) ps.setString(4, izvodjenje.getTipIzvodjenja().toString()); else ps.setNull(4,Types.VARCHAR);
+        ps.setInt(5, izvodjenje.getBrPristupa());
+        ps.setInt(6, izvodjenje.getBrGlasova());
+        ps.setInt(7, izvodjenje.getUkupnoPrisupa());
+        if(izvodjenje.getMestoIzvodjenja()!=null) ps.setInt(8, izvodjenje.getMestoIzvodjenja().getPttBroj()); else ps.setNull(8, Types.INTEGER);
+        ps.setInt(9,izvodjenje.getId());
         ps.executeUpdate();
         ps.close();
     }
@@ -416,5 +417,34 @@ public class IzvodjenjeDAO {
         ps.setInt(2,id);
         ps.executeUpdate();
         ps.close();
+    }
+    public static List<Izvodjenje> getIzvodjenja(){
+        Izvodjenje izvodjenje =null;
+        List<Izvodjenje> izvodjenja= new ArrayList<>();
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja, brojPristupa, brojGlasova, " +
+                            "ukupnoPristupa, pttBrojMesta, obrisano from Izvodjenje where obrisano=false");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                if(!rs.getBoolean(9)) {
+                    izvodjenje=new Izvodjenje();
+                    izvodjenje.setId(rs.getInt(1));
+                    izvodjenje.setVremeIzvodjenja(rs.getDate(2));
+                    izvodjenje.setTrajanje(rs.getInt(3));
+                    izvodjenje.setTipIzvodjenja(TipIzvodjenja.valueOf(rs.getString(4)));
+                    izvodjenje.setBrPristupa(rs.getInt(5));
+                    izvodjenje.setBrGlasova(rs.getInt(6));
+                    izvodjenje.setUkupnoPrisupa(rs.getInt(7));
+                    izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+                    izvodjenja.add(izvodjenje);
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjenja;
     }
 }
