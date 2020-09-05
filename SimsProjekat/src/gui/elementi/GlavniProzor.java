@@ -5,6 +5,7 @@ import gui.dialogs.DialogPrijave;
 import gui.dialogs.DialogRegistracije;
 import kontroler.GlavniProzorKON;
 import kontroler.ToplistaKON;
+import kontroler.PlejlistaKON;
 import model.Izvodjenje;
 import model.Reklama;
 
@@ -13,8 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 
 public class GlavniProzor extends JFrame implements ActionListener {
@@ -63,7 +62,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
-    private void inicijalizuj(){
+    private void inicijalizuj() {
         brojElemenataIzvodjenja = 5;
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         separator = System.getProperty("file.separator");
@@ -115,8 +114,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
             int retVal = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zeleite da se odjavite ?", "Odjava", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
             if (retVal == 0) {
                 dispose();
-                GlavniProzor gp = null;
-                gp = new GlavniProzor();
+                GlavniProzor gp = new GlavniProzor();
                 gp.setVisible(true);
             }
         } else if (button == registracijaButton) {

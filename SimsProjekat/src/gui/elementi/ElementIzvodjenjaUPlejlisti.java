@@ -30,7 +30,7 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
         this.dialog=dialog;
         this.izvodjenje=izvodjenje;
         setLayout(new BorderLayout(0, 0));
-        setBackground(new Color(255, 204, 204));
+        setBackground(new Color(230, 247, 255));
         setPreferredSize(new Dimension(400, 200));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         setLayout(null);
@@ -66,14 +66,17 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
 
         pusti=new JButton("Pusti");
         pusti.setBounds(150, 140, 70, 30);
+        pusti.setBackground(new Color(0, 77, 102));
         add(pusti);
 
         pauziraj=new JButton("Pauziraj");
         pauziraj.setBounds(230, 140, 80, 30);
+        pauziraj.setBackground(new Color(0, 77, 102));
         add(pauziraj);
 
         stopiraj=new JButton("Zaustavi");
         stopiraj.setBounds(320, 140, 80, 30);
+        stopiraj.setBackground(new Color(0, 77, 102));
         add(stopiraj);
 
     }

@@ -110,7 +110,7 @@ public class ElementZadatka extends JPanel {
         }
     }
 
-    public int getIdUrednika(String s){
+    public static int getIdUrednika(String s){
         String[] dijelovi=s.split(" ");
         return Integer.parseInt(dijelovi[0]);
     }

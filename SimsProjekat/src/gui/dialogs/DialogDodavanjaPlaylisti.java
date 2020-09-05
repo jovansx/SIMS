@@ -1,7 +1,9 @@
 package gui.dialogs;
 
 import dao.PlejListaDAO;
+import gui.elementi.DodajIzvodjenje;
 import gui.elementi.ElementPrikazaPlejlisti;
+import model.Izvodjenje;
 import model.PlejLista;
 import model.RegistrovaniKorisnik;
 
@@ -13,33 +15,51 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogPlaylisti extends JDialog{
+public class DialogDodavanjaPlaylisti extends JDialog{
     private JPanel panel;
-    private JButton posalji, uredu;
+    private JButton dodaj;
+    private JPanel nepostojeci;
     private JPanel skrolPanel;
     private JScrollPane skrol;
     private List<PlejLista> plejliste;
-    private List<ElementPrikazaPlejlisti> listaElemenata;
+    private List<DodajIzvodjenje> listaElemenata;
     private RegistrovaniKorisnik korisnik;
+    private Izvodjenje izvodjenje;
+    private JLabel labela;
 
-    public DialogPlaylisti(List<PlejLista> lista, RegistrovaniKorisnik rg){
+    public DialogDodavanjaPlaylisti(List<PlejLista> lista, RegistrovaniKorisnik rg, Izvodjenje i){
         this.plejliste=lista;
         this.listaElemenata=new ArrayList<>();
         this.korisnik=rg;
+        this.izvodjenje=i;
 
         setTitle("Playliste");
-        setSize(600, 650);
+        setModal(true);
+        setSize(340, 350);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        ucitajSkrol();
+
+        if(!plejliste.isEmpty()){
+            ucitajSkrol();
+        }
+        else {
+            nepostojeci=new JPanel();
+            nepostojeci.setBackground(Color.white);
+            labela=new JLabel("Nemate nijednu playlistu");
+            nepostojeci.add(labela);
+            add(nepostojeci, BorderLayout.CENTER);
+
+        }
+        ucitajDugmad();
+        podesiAkcije();
 
     }
 
     private void podesiAkcije() {
 
-        posalji.addActionListener(new ActionListener() {
+        dodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -50,12 +70,6 @@ public class DialogPlaylisti extends JDialog{
             }
         });
 
-        uredu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
     }
 
     private void ucitajDugmad() {
@@ -63,16 +77,11 @@ public class DialogPlaylisti extends JDialog{
         panel.setBackground(new Color(0, 77, 102));
 
         //Dodavanje dugmeta za dodavanje nove playliste
-        posalji=new JButton("Dodaj playlist");
-        posalji.setBackground(new Color(153, 204, 255));
-        posalji.setForeground(Color.white);
-        panel.add(posalji);
+        dodaj=new JButton("Dodaj playlist");
+        dodaj.setBackground(new Color(153, 204, 255));
+        dodaj.setForeground(Color.white);
 
-        //Dodavanje dugmeta za zatvaranje prozora
-        uredu=new JButton("U redu");
-        uredu.setForeground(Color.white);
-        uredu.setBackground(new Color(153, 204, 255));
-        panel.add(uredu);
+        panel.add(dodaj);
         panel.setPreferredSize(new Dimension(400, 70));
         add(panel,BorderLayout.SOUTH);
     }
@@ -87,7 +96,10 @@ public class DialogPlaylisti extends JDialog{
             p.setNaziv(naziv);
             p.setJeJavna(false);
             PlejListaDAO.insert(p, korisnik.getId());
+            PlejListaDAO.insertIzvodjenje(p, izvodjenje);
+            JOptionPane.showMessageDialog(null, "Izvodjenje je dodano u "+p.getNaziv()+".");
         }
+
     }
 
     private void ucitajSkrol() {
@@ -100,11 +112,10 @@ public class DialogPlaylisti extends JDialog{
         resetElemente();
 
         for(PlejLista p : plejliste ){
-            ElementPrikazaPlejlisti ez= new ElementPrikazaPlejlisti(this, p);
+            DodajIzvodjenje ez= new DodajIzvodjenje(this, izvodjenje,p);
             listaElemenata.add(ez);
             skrolPanel.add(ez);
             JLabel labela = new JLabel("                                        ");
-            labela.setForeground(new Color(77, 121, 255));
             skrolPanel.add(labela);
         }
 
@@ -125,5 +136,4 @@ public class DialogPlaylisti extends JDialog{
         skrolPanel.validate();
         skrolPanel.repaint();
     }
-
 }

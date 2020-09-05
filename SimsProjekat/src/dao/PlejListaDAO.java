@@ -1,5 +1,6 @@
 package dao;
 
+import model.Izvodjenje;
 import model.PlejLista;
 import model.Reklama;
 import model.TopLista;
@@ -66,6 +67,15 @@ public class PlejListaDAO {
             ps.setBoolean(1, plejlista.isJeJavna());
             ps.setString(2, plejlista.getNaziv());
             ps.setInt(3, id);
+            ps.executeUpdate();
+            ps.close();
+        }
+        public static void insertIzvodjenje(PlejLista plejlista, Izvodjenje izvodjenje) throws SQLException {
+            PreparedStatement ps=FConnection.getInstance()
+                    .prepareStatement("insert into IzvodjenjaPlayListi (idPlayListe,idIzvodjenja, obrisano) values (?,?,?)");
+            ps.setInt(1, plejlista.getId());
+            ps.setInt(2, izvodjenje.getId());
+            ps.setBoolean(3, false);
             ps.executeUpdate();
             ps.close();
         }

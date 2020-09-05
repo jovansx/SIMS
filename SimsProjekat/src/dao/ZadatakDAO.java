@@ -6,6 +6,7 @@ import util.FConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,10 +82,10 @@ public class ZadatakDAO {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("insert into muzicki_sistem.Zadatak (textZadatka,idMuzickogDela,nazivZanra,idUcesnika,idIzvodjaca,idUrednika) values (?,?,?,?,?,?)");
         ps.setString(1, zadatak.getText());
-        ps.setInt(2, zadatak.getDelo().getId());
-        ps.setString(3, zadatak.getZanr().getNazivZanra());
-        ps.setInt(4, zadatak.getUcesnik().getId());
-        ps.setInt(5, zadatak.getIzvodjac().getId());
+        if(zadatak.getDelo()!=null) ps.setInt(2, zadatak.getDelo().getId()); else ps.setNull(2, Types.INTEGER);
+        if(zadatak.getZanr()!=null) ps.setString(3, zadatak.getZanr().getNazivZanra()); else ps.setNull(3, Types.VARCHAR);
+        if(zadatak.getUcesnik()!=null) ps.setInt(4, zadatak.getUcesnik().getId()); else ps.setNull(4, Types.INTEGER);
+        if(zadatak.getIzvodjac()!=null) ps.setInt(5, zadatak.getIzvodjac().getId()); else ps.setNull(5, Types.INTEGER);
         ps.setInt(6, idUrednika);
         ps.executeUpdate();
         ps.close();
@@ -94,10 +95,10 @@ public class ZadatakDAO {
         PreparedStatement ps = FConnection.getInstance()
                 .prepareStatement("update muzicki_sistem.Zadatak set textZadatka=?,idMuzickogDela=?,nazivZanra=?,idUcesnika?,idIzvodjaca=? where id=? and obrisano=false");
         ps.setString(1, zadatak.getText());
-        ps.setInt(2, zadatak.getDelo().getId());
-        ps.setString(3, zadatak.getZanr().getNazivZanra());
-        ps.setInt(4, zadatak.getUcesnik().getId());
-        ps.setInt(5, zadatak.getIzvodjac().getId());
+        if(zadatak.getDelo()!=null) ps.setInt(2, zadatak.getDelo().getId()); else ps.setNull(2, Types.INTEGER);
+        if(zadatak.getZanr()!=null) ps.setString(3, zadatak.getZanr().getNazivZanra()); else ps.setNull(3, Types.VARCHAR);
+        if(zadatak.getUcesnik()!=null) ps.setInt(4, zadatak.getUcesnik().getId()); else ps.setNull(4, Types.INTEGER);
+        if(zadatak.getIzvodjac()!=null) ps.setInt(5, zadatak.getIzvodjac().getId()); else ps.setNull(5, Types.INTEGER);
         ps.setInt(6, zadatak.getId());
         ps.executeUpdate();
         ps.close();

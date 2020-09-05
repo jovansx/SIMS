@@ -2,10 +2,13 @@ package gui.elementi;
 
 import dao.IzvodjacDAO;
 import dao.IzvodjenjeDAO;
+import dao.PlejListaDAO;
 import dao.RecenzijaDAO;
+import gui.dialogs.DialogDodavanjaPlaylisti;
 import gui.dialogs.DialogRecenzije;
 import gui.enums.TipRecenzije;
 import jaco.mp3.player.MP3Player;
+import kontroler.PlejlistaKON;
 import model.*;
 import javax.swing.*;
 import java.awt.*;
@@ -195,9 +198,10 @@ public class PrikazIzvodjenja extends JDialog {
         con.insets = new Insets(5, 5, 15, 20);
         panelGlavni.add(preuzmiB, con);
 
-        //Ukoliko je PlejlistaKON.getKorisnik()!=null dodaj button dodajB
-        con.gridx=4;
-        panelGlavni.add(dodajB, con);
+        if(glavniProzor instanceof KorisnikovProzor){
+            con.gridx=4;
+            panelGlavni.add(dodajB, con);
+        }
 
         con.insets = new Insets(5, 20, 10, 20);
         con.gridy = 2;
@@ -376,6 +380,15 @@ public class PrikazIzvodjenja extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 DialogRecenzije dr = new DialogRecenzije(PrikazIzvodjenja.this, null);
                 dr.setVisible(true);
+            }
+        });
+
+        dodajB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogDodavanjaPlaylisti ddp= new DialogDodavanjaPlaylisti(PlejListaDAO.plejlisteKorisnika(PlejlistaKON.getKorisnik().getId()),
+                        PlejlistaKON.getKorisnik(), iz);
+                ddp.setVisible(true);
             }
         });
     }

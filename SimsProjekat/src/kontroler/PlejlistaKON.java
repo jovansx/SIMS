@@ -18,5 +18,4 @@ public class PlejlistaKON {
         return korisnik;
     }
 
-
 }

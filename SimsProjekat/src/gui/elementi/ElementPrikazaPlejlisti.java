@@ -26,7 +26,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
         this.dialog=dp;
         this.lista=p;
         setLayout(new BorderLayout(0, 0));
-        setBackground(new Color(255, 204, 204));
+        setBackground(new Color(230, 247, 255));
         setPreferredSize(new Dimension(500, 200));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         setLayout(null);

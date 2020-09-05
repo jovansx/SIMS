@@ -5,6 +5,7 @@ import gui.elementi.AdminovProzor;
 import gui.elementi.GlavniProzor;
 import gui.elementi.KorisnikovProzor;
 import gui.elementi.UrednikovProzor;
+import kontroler.PlejlistaKON;
 import kontroler.PrijavaKON;
 import kontroler.RegistrovaniKorisnikKON;
 import model.*;
