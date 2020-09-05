@@ -8,6 +8,7 @@ import model.PlejLista;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
         this.dialog=dp;
         this.lista=p;
         setLayout(new BorderLayout(0, 0));
-        setBackground(new Color(230, 247, 255));
+        setBackground(new Color(229, 255, 204));
         setPreferredSize(new Dimension(500, 200));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         setLayout(null);
@@ -39,7 +40,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
         Image im = retImageIcon.getImage();
         Image myImg = im.getScaledInstance(200, 150 , Image.SCALE_DEFAULT);
         ImageIcon newImage = new ImageIcon(myImg);
-
+        setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0, 102, 153)));
         slika = new JLabel(newImage);
         slika.setBounds(30, 50, 200, 150);
         add(slika);
@@ -51,6 +52,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
         naziv1=new JTextField(lista.getNaziv());
         naziv1.setBounds(320, 50, 200,30 );
         naziv1.setEditable(false);
+        naziv1.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 102, 153)));
         add(naziv1);
 
         javno1=new JCheckBox("Javno",lista.isJeJavna());

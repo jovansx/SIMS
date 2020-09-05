@@ -87,6 +87,14 @@ public class PlejListaDAO {
             ps.executeUpdate();
             ps.close();
         }
+        public static void updateIzvodjenje(PlejLista p, Izvodjenje i) throws  SQLException{
+            PreparedStatement ps=FConnection.getInstance()
+                    .prepareStatement("update IzvodjenjaPlayListi set obrisano=true where idPlayListe=? and idIzvodjenja=?");
+            ps.setInt(1, p.getId());
+            ps.setInt(2, i.getId());
+            ps.executeUpdate();
+            ps.close();
+        }
         public static void delete(PlejLista plejLista) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("update PlayLista  set obrisano = true where id=?");

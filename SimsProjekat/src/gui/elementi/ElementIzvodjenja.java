@@ -37,7 +37,7 @@ public class ElementIzvodjenja extends JPanel {
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension dimension = tool.getScreenSize();
         String separator = System.getProperty("file.separator");
-
+        panelGlavni.setBackground(new Color(255, 255, 255));
         panelGlavni.setPreferredSize(new Dimension(dimension.width / 4 * 3, dimension.height / 20 * 3));
         labelaIkone.setSize(200, dimension.height / 20 * 3 - 10);
 

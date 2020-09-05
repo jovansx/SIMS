@@ -185,7 +185,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     }
 
     private void ucitajReklamu() {
-
+        panelReklama.setBackground(new Color(0, 77, 102));
         java.sql.Date danasnjiDatum = new java.sql.Date(System.currentTimeMillis());
 
         for (int i = 0; i < 3; i++) {

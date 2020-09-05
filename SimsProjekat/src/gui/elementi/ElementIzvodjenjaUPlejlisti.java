@@ -1,6 +1,7 @@
 package gui.elementi;
 
 import dao.IzvodjenjeDAO;
+import dao.PlejListaDAO;
 import gui.dialogs.DialogIzvodjenjaUPlejlisti;
 import gui.dialogs.DialogPlaylisti;
 import jaco.mp3.player.MP3Player;
@@ -15,23 +16,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.SQLException;
 
 public class ElementIzvodjenjaUPlejlisti extends JPanel {
 
     private DialogIzvodjenjaUPlejlisti dialog;
     private JLabel trajanje, muzickoDelo,slika,izvodjaci;
-    private JButton pusti, pauziraj, stopiraj;
+    private JButton pusti, pauziraj, stopiraj, izbrisi;
     private Izvodjenje izvodjenje;
     private MP3Player player;
     private File file;
     private String sep;
+    private PlejLista plejlista;
 
-    public ElementIzvodjenjaUPlejlisti(DialogIzvodjenjaUPlejlisti dialog, Izvodjenje izvodjenje){
+    public ElementIzvodjenjaUPlejlisti(DialogIzvodjenjaUPlejlisti dialog, Izvodjenje izvodjenje, PlejLista p){
         this.dialog=dialog;
         this.izvodjenje=izvodjenje;
+        this.plejlista=p;
+
         setLayout(new BorderLayout(0, 0));
-        setBackground(new Color(230, 247, 255));
-        setPreferredSize(new Dimension(400, 200));
+        setBackground(new Color(229, 255, 204));
+        setPreferredSize(new Dimension(500, 200));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         setLayout(null);
         namesti();
@@ -67,17 +72,26 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
         pusti=new JButton("Pusti");
         pusti.setBounds(150, 140, 70, 30);
         pusti.setBackground(new Color(0, 77, 102));
+        pusti.setForeground(Color.white);
         add(pusti);
 
         pauziraj=new JButton("Pauziraj");
         pauziraj.setBounds(230, 140, 80, 30);
         pauziraj.setBackground(new Color(0, 77, 102));
+        pauziraj.setForeground(Color.white);
         add(pauziraj);
 
         stopiraj=new JButton("Zaustavi");
         stopiraj.setBounds(320, 140, 80, 30);
         stopiraj.setBackground(new Color(0, 77, 102));
+        stopiraj.setForeground(Color.white);
         add(stopiraj);
+
+        izbrisi=new JButton("Izbrisi");
+        izbrisi.setBounds(410, 140, 80, 30);
+        izbrisi.setBackground(new Color(0, 77, 102));
+        izbrisi.setForeground(Color.white);
+        add(izbrisi);
 
     }
 
@@ -119,6 +133,22 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
                 pauziraj.setEnabled(false);
                 stopiraj.setEnabled(false);
                 pusti.setEnabled(true);
+            }
+        });
+
+        izbrisi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int retVal=JOptionPane.showConfirmDialog(null, "Zelite li da izbrisete ovo izvodjenje?", "Da li ste sigurni", JOptionPane.YES_NO_OPTION);
+                if(retVal==0){
+                    try {
+                        PlejListaDAO.updateIzvodjenje(plejlista, izvodjenje);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+                revalidate();
+                repaint();
             }
         });
     }

@@ -274,7 +274,7 @@ public class IzvodjenjeDAO {
             PreparedStatement ps= FConnection.getInstance()
                     .prepareStatement("select i.id,i.vremeIzvodjenja,i.trajanje,i.tipIzvodjenja,i.brojPristupa," +
                             "i.brojGlasova,i.ukupnoPristupa,i.pttBrojMesta from Izvodjenje i,IzvodjenjaPlaylisti ip " +
-                            "where ip.idPlayListe=? and ip.idIzvodjenja=i.id");
+                            "where ip.idPlayListe=? and ip.idIzvodjenja=i.id and ip.obrisano=false");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){

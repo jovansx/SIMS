@@ -1,5 +1,6 @@
 package gui.dialogs;
 
+import dao.IzvodjenjeDAO;
 import dao.PlejListaDAO;
 import gui.elementi.ElementPrikazaPlejlisti;
 import model.PlejLista;
@@ -100,12 +101,15 @@ public class DialogPlaylisti extends JDialog{
         resetElemente();
 
         for(PlejLista p : plejliste ){
-            ElementPrikazaPlejlisti ez= new ElementPrikazaPlejlisti(this, p);
-            listaElemenata.add(ez);
-            skrolPanel.add(ez);
-            JLabel labela = new JLabel("                                        ");
-            labela.setForeground(new Color(77, 121, 255));
-            skrolPanel.add(labela);
+            if(!IzvodjenjeDAO.izvodjenjaUPlejlisti(p.getId()).isEmpty()){
+                ElementPrikazaPlejlisti ez= new ElementPrikazaPlejlisti(this, p);
+                listaElemenata.add(ez);
+                skrolPanel.add(ez);
+                JLabel labela = new JLabel("                                        ");
+                labela.setForeground(new Color(77, 121, 255));
+                skrolPanel.add(labela);
+            }
+
         }
 
         skrolPanel.validate();

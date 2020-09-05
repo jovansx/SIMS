@@ -24,7 +24,7 @@ public class DialogIzvodjenjaUPlejlisti extends JDialog{
         this.plejlista=plejlista;
 
         setTitle("Playlista "+plejlista.getNaziv());
-        setSize(440, 460);
+        setSize(530, 460);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class DialogIzvodjenjaUPlejlisti extends JDialog{
         resetElemente();
 
         for(Izvodjenje i : izvodjenja ){
-            ElementIzvodjenjaUPlejlisti ez= new ElementIzvodjenjaUPlejlisti(this, i);
+            ElementIzvodjenjaUPlejlisti ez= new ElementIzvodjenjaUPlejlisti(this, i, plejlista);
             listaElemenata.add(ez);
             skrolPanel.add(ez);
             JLabel labela = new JLabel("                                        ");
