@@ -20,12 +20,14 @@ public class Top extends JFrame {
     private boolean value;
     private int month;
     private List<Izvodjenje> izvodjenja;
-    public Top(boolean value, int month,int year) {
+    private boolean v;
+    public Top(boolean value, int month,int year,boolean v) {
         super();
         this.value = value;
         this.year = year;
         this.month = month;
         this.izvodjenja = null;
+        this.v = v;
         String m = proveraMeseca(month);
         if (value) {
             setTitle("Glasanje za topliste meseca " + m + " godine " + year);
@@ -37,6 +39,19 @@ public class Top extends JFrame {
         setSize(dimension.width / 5 * 3, dimension.height / 5 * 3);
 
         namesti();
+        add(glavniPanel);
+
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+    public Top(List<Izvodjenje> lista,boolean value){
+        izvodjenja = lista;
+        v = value;
+        inicijalizuj();
+
+        setSize(dimension.width / 5 * 3, dimension.height / 5 * 3);
+
+        namesti1();
         add(glavniPanel);
 
         setResizable(false);
@@ -94,7 +109,19 @@ public class Top extends JFrame {
 
         if (izvodjenja != null) {
             for (Izvodjenje iz : izvodjenja) {
-                skrolPanel.add(new Toop(iz,Top.this));
+                skrolPanel.add(new Toop(iz,Top.this,v));
+            }
+        }
+        osveziKomponentu(skrolPanel);
+        osveziKomponentu(skrol);
+    }
+    private void namesti1(){
+        skrolPanel.removeAll();
+        if (izvodjenja != null && izvodjenja.size() == 0)skrolPanel.add(nothingFoundL);
+
+        if (izvodjenja != null) {
+            for (Izvodjenje iz : izvodjenja) {
+                skrolPanel.add(new Toop(iz,Top.this,v));
             }
         }
         osveziKomponentu(skrolPanel);

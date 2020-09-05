@@ -38,6 +38,9 @@ public class TopLista {
         return listaIzvodjenja;
     }
 
+    public void setListaIzvodjenja(List<Izvodjenje> lista){
+        this.listaIzvodjenja = lista;
+    }
     public void dodajIzvodjenje(Izvodjenje izvodjenje) {
         if (listaIzvodjenja == null) {
             listaIzvodjenja = new ArrayList<Izvodjenje>();

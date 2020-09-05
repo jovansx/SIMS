@@ -4,6 +4,7 @@ import dao.ReklamaDAO;
 import gui.dialogs.DialogPrijave;
 import gui.dialogs.DialogRegistracije;
 import kontroler.GlavniProzorKON;
+import kontroler.ToplistaKON;
 import model.Izvodjenje;
 import model.Reklama;
 
@@ -12,6 +13,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class GlavniProzor extends JFrame implements ActionListener {
@@ -29,6 +32,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     private JButton pocetnaStranicaButton;
     protected JButton odjavaButton;
     private JButton izaberiFilterButton;
+    private JButton toplisteButton;
     private boolean popularnoTrenutno;
     private boolean pretraziTrenutno;
     private JLabel nothingFoundL;
@@ -41,7 +45,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
     protected String filter;
     protected String filterZanra;
 
-    public GlavniProzor() {
+    public GlavniProzor(){
         super("Muzicki sistem");
 
         inicijalizuj();
@@ -59,7 +63,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
-    private void inicijalizuj() {
+    private void inicijalizuj(){
         brojElemenataIzvodjenja = 5;
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         separator = System.getProperty("file.separator");
@@ -82,6 +86,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
         pocetnaStranicaButton.addActionListener(this);
         popularnoButton.addActionListener(this);
         pretraziButton.addActionListener(this);
+        toplisteButton.addActionListener(this);
 
         skrol.getVerticalScrollBar().addAdjustmentListener(e -> {
             JViewport vp = skrol.getViewport();
@@ -110,7 +115,8 @@ public class GlavniProzor extends JFrame implements ActionListener {
             int retVal = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zeleite da se odjavite ?", "Odjava", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
             if (retVal == 0) {
                 dispose();
-                GlavniProzor gp = new GlavniProzor();
+                GlavniProzor gp = null;
+                gp = new GlavniProzor();
                 gp.setVisible(true);
             }
         } else if (button == registracijaButton) {
@@ -134,6 +140,9 @@ public class GlavniProzor extends JFrame implements ActionListener {
             podigniSkrol();
             podesiParametreZaPocetnuStranu(true, false);
             ucitajIzvodjenjaZaPocetnuStranu();
+        }else if(button == toplisteButton){
+            PrikazTopliste dpt = new PrikazTopliste();
+            dpt.setVisible(true);
         }
     }
 
