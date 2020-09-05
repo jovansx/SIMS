@@ -24,6 +24,7 @@ public class TopListaDAO {
                 topLista = new TopLista();
                 topLista.setId(rs.getInt(1));
                 topLista.setDatumGlasanja(rs.getDate(2));
+                topLista.setListaIzvodjenja(IzvodjenjeDAO.getIzvodjenjaTopListe(topLista));
                 topListe.add(topLista);
             }
             rs.close();
@@ -37,17 +38,17 @@ public class TopListaDAO {
 
     //Eventualno se moze namestiti da se top lista dobavlja po drugim parametrima
     //Ako zatreba, samo ucitj njena izvodjenja
-    /*public static TopLista getTopLista(int id){
+    public static TopLista getTopLista(Date datum){
         TopLista topLista=null;
         try {
             PreparedStatement ps= FConnection.getInstance()
-                    .prepareStatement("select id, datumGlasanja from TopLista where id=? and obrisano=false");
-            ps.setInt(1, id);
+                    .prepareStatement("select datumGlasanja,id from TopLista where datumGlasanja=? and obrisano=false");
+            ps.setDate(1, datum);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 topLista=new TopLista();
-                topLista.setId(rs.getInt(1));
-                topLista.setDatumGlasanja(rs.getDate(2));
+                topLista.setDatumGlasanja(rs.getDate(1));
+                topLista.setId(rs.getInt(2));
             }
             rs.close();
             ps.close();
@@ -56,20 +57,28 @@ public class TopListaDAO {
         }
 
         return topLista;
-    }*/
+    }
 
     public static void insert(TopLista topLista) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into TopLista (datumGlasanja) values (?)");
         ps.setDate(1, (Date) topLista.getDatumGlasanja());
         ps.executeUpdate();
-        for (Izvodjenje izvodjenje: topLista.getListaIzvodjenja()) {
+        /*for (Izvodjenje izvodjenje: topLista.getListaIzvodjenja()) {
             ps=FConnection.getInstance()
                     .prepareStatement("insert into IzvodjenjaUTopListi (idIzvodjenja,idTopListe) values (?,?)");
             ps.setInt(1, izvodjenje.getId());
             ps.setInt(2, topLista.getId());
             ps.executeUpdate();
-        }
+        }*/
+        ps.close();
+    }
+    public static void insert2(Izvodjenje izvodjenje,int id) throws SQLException {
+        PreparedStatement ps=FConnection.getInstance()
+                .prepareStatement("insert into IzvodjenjaUTopListi (idIzvodjenja,idTopListe) values (?,?)");
+        ps.setInt(1, izvodjenje.getId());
+        ps.setInt(2, id);
+        ps.executeUpdate();
         ps.close();
     }
 

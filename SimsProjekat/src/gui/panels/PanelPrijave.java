@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 public class PanelPrijave extends JPanel implements ActionListener {
 
@@ -202,13 +204,16 @@ public class PanelPrijave extends JPanel implements ActionListener {
 
         dialog.dispose();       //Ugasi dialog prijave
         glavniProzor.dispose();     //Ugasi pocetni prozor
-        GlavniProzor prozorPrijavljenog;
-        if(korisnik instanceof RegistrovaniKorisnik)
+        GlavniProzor prozorPrijavljenog = null;
+        if(korisnik instanceof RegistrovaniKorisnik) {
             prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
-        else if(korisnik instanceof Urednik)
+        }
+        else if(korisnik instanceof Urednik) {
             prozorPrijavljenog = new UrednikovProzor((Urednik) korisnik);
-        else
+        }
+        else {
             prozorPrijavljenog = new AdminovProzor((Administrator) korisnik);
+        }
         prozorPrijavljenog.setVisible(true);
     }
 

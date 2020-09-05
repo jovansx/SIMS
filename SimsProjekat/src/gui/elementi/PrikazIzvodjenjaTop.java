@@ -21,10 +21,12 @@ public class PrikazIzvodjenjaTop extends PrikazIzvodjenja {
     private Top t;
     private JLabel mdelo,izv;
     private JButton glasaj;
-    public PrikazIzvodjenjaTop(Izvodjenje iz, Top top) {
+    private boolean v;
+    public PrikazIzvodjenjaTop(Izvodjenje iz, Top top,boolean value) {
         super(iz, top);
         idIzvodjenja = iz.getId();
         t = top;
+        v = value;
         inizijalizuj(iz);
         dodajNaGlavniPanel();
         podesiAkcije(iz, t);
@@ -37,6 +39,7 @@ public class PrikazIzvodjenjaTop extends PrikazIzvodjenja {
         setResizable(false);
         setLocationRelativeTo(t);
     }
+
     private void inizijalizuj(Izvodjenje iz) {
 
         Color zelena = new Color(188, 204, 111);
@@ -238,7 +241,9 @@ public class PrikazIzvodjenjaTop extends PrikazIzvodjenja {
                 pustiB.setEnabled(true);
             }
         });
-
+        if(v){
+            glasaj.setVisible(false);
+        }
         glasaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -253,7 +258,6 @@ public class PrikazIzvodjenjaTop extends PrikazIzvodjenja {
         });
 
 
-
     }
     public void ucitajRecenzije(Izvodjenje iz, Top t) {
         panelSkrola.removeAll();
@@ -265,6 +269,5 @@ public class PrikazIzvodjenjaTop extends PrikazIzvodjenja {
 
         t.osveziKomponentu(skrol);
     }
-
 
 }

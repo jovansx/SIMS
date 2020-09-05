@@ -447,4 +447,26 @@ public class IzvodjenjeDAO {
         }
         return izvodjenja;
     }
+    public static List<Izvodjenje> getIzvodjenjaTopListe(TopLista t) {
+        List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
+        Izvodjenje izvodjenje = null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select idTopListe,idIzvodjenja from IzvodjenjaUTopListi where idTopListe = ?");
+            ps.setInt(1, t.getId());
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                izvodjenje=getIzvodjenje(rs.getInt(2));
+                izvodjenja.add(izvodjenje);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjenja;
+    }
+
+
 }

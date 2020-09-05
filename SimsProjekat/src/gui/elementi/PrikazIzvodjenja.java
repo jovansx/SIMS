@@ -64,6 +64,13 @@ public class PrikazIzvodjenja extends JDialog {
         popuniIzvodjenje(iz);
 
     }
+    public PrikazIzvodjenja(Izvodjenje iz,PrikazTopliste p){
+        idIzvodjenja = iz.getId();
+        setModal(true);
+        setTitle("Prikaz informacija izvodjenja");
+        popuniIzvodjenje(iz);
+
+    }
 
     private void onemoguciDodavanjeRecenzije(int idIzvodjenja, GlavniProzor gp) {
         if(gp instanceof KorisnikovProzor) {

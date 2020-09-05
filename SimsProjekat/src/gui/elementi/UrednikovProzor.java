@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public class UrednikovProzor extends GlavniProzor{
     public int idUrednika;
-    JButton profil,odobravanje,glasanje,zadaci;
+    JButton profil, odobravanje, glasanje, zadaci;
 
     public UrednikovProzor(Urednik urednik) {
         super();
@@ -57,12 +57,12 @@ public class UrednikovProzor extends GlavniProzor{
                 LocalDateTime now = LocalDateTime.now();
                 if(now.getDayOfMonth() == 1){
                     // mesecno
-                    Top tp = new Top(true,now.getMonthValue()-1,now.getYear());
+                    Top tp = new Top(true,now.getMonthValue()-1,now.getYear(),false);
                     tp.setVisible(true);
 
                 }else if(now.getMonthValue() == 12 && now.getDayOfMonth() == 31){
                     // godisnje
-                    Top tp = new Top(false,now.getMonthValue(),now.getYear());
+                    Top tp = new Top(false,now.getMonthValue(),now.getYear(),false);
                     tp.setVisible(false);
 
                 }else{
@@ -83,6 +83,5 @@ public class UrednikovProzor extends GlavniProzor{
 
         });
         panelAkcija.add(zadaci);
-
     }
 }

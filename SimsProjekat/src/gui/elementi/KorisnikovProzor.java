@@ -8,9 +8,13 @@ import model.RegistrovaniKorisnik;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 
 public class KorisnikovProzor extends GlavniProzor {
-    JButton profilButton,ponistiRecenzijuButton, odobravanje,glasanje,zadaci, playliste;
+    JButton profilButton,ponistiRecenzijuButton,glasanje ,playliste;
     public int idKorisnika;
 
     public KorisnikovProzor(RegistrovaniKorisnik korisnik) {
@@ -36,6 +40,25 @@ public class KorisnikovProzor extends GlavniProzor {
 
         playliste.addActionListener(e->{
             prikaziPlejlisteKorisnika(korisnik);
+        });
+        glasanje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocalDateTime now = LocalDateTime.now();
+                if(now.getDayOfMonth() == 1){
+                    // mesecno
+                    Top tp = new Top(true,now.getMonthValue()-1,now.getYear(),false);
+                    tp.setVisible(true);
+
+                }else if(now.getMonthValue() == 12 && now.getDayOfMonth() == 31){
+                    // godisnje
+                    Top tp = new Top(false,now.getMonthValue(),now.getYear(),false);
+                    tp.setVisible(false);
+
+                }else{
+                    JOptionPane.showMessageDialog(KorisnikovProzor.this,"Glasanje nije moguce!");
+                }
+            }
         });
     }
 
@@ -66,6 +89,10 @@ public class KorisnikovProzor extends GlavniProzor {
         playliste=new JButton("Playliste");
         playliste.setBackground(new Color(59,86, 90 ));
         panelAkcija.add(playliste);
+
+        glasanje = new JButton("Glasanje");
+        glasanje.setBackground(new Color(59,86, 90 ));
+        panelAkcija.add(glasanje);
 
     }
 }

@@ -9,19 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class AdminovProzor extends GlavniProzor{
     JButton profil,inbox,zadaci,promenaLozinke,odobravanje, sadrzaj, pregled;
     Administrator admin;
 
-    public AdminovProzor(Administrator administrator) {
+    public AdminovProzor(Administrator administrator){
         super();
         this.admin=administrator;
         inicijalizuj();
     }
 
-    public AdminovProzor(){}
+    public AdminovProzor() throws ParseException, SQLException {
+        super();
+    }
 
     private void inicijalizuj() {
         panelOperacija.remove(prijavaButton);

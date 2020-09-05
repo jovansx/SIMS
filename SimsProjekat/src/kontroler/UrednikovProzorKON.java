@@ -5,6 +5,7 @@ import gui.sorters.ToplistaSorter;
 import model.*;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -136,7 +137,7 @@ public class UrednikovProzorKON {
                 lista.add(IzvodjenjeDAO.getIzvodjenje(i.getId()));
             }
         }
-        lista.sort(new ToplistaSorter());
+        lista.sort(new ToplistaSorter(true));
         return lista;
     }
 

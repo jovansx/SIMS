@@ -3,15 +3,19 @@ package main;
 import dao.IzvodjenjeDAO;
 import dao.ReklamaDAO;
 import gui.elementi.GlavniProzor;
+import kontroler.ToplistaKON;
+
 import javax.swing.*;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
 
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
         String sep = System.getProperty("file.separator");
-
+/*
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBuba.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaJala.jpg");
         IzvodjenjeDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBroj.jpg");
@@ -40,6 +44,7 @@ public class Main {
         IzvodjenjeDAO.updateAudio(10, "AudioBaza" + sep + "tuNoc.mp3");
         IzvodjenjeDAO.updateAudio(11, "AudioBaza" + sep + "indigo.mp3");
 
+*/
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -55,7 +60,18 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GlavniProzor gp = new GlavniProzor();
+                GlavniProzor gp = null;
+                try {
+                    LocalDate now = LocalDate.now();
+                    if(now.getDayOfMonth() == 3){
+                        ToplistaKON.napraviMesecnuToplistu(8,2018);
+                    }
+                    gp = new GlavniProzor();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 gp.setVisible(true);
             }
         });
