@@ -208,6 +208,7 @@ public class PanelPrijave extends JPanel implements ActionListener {
         GlavniProzor prozorPrijavljenog = null;
         if(korisnik instanceof RegistrovaniKorisnik) {
             prozorPrijavljenog = new KorisnikovProzor((RegistrovaniKorisnik) korisnik);
+            PlejlistaKON.postaviKorisnika((RegistrovaniKorisnik) korisnik);
         }
         else if(korisnik instanceof Urednik) {
             prozorPrijavljenog = new UrednikovProzor((Urednik) korisnik);

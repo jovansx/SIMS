@@ -41,7 +41,7 @@ public class DialogDodavanjaPlaylisti extends JDialog{
         setLocationRelativeTo(null);
 
 
-        if(!plejliste.isEmpty()){
+        if(plejliste!=null || !plejliste.isEmpty()){
             ucitajSkrol();
         }
         else {

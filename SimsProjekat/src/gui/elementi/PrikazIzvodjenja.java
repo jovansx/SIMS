@@ -386,6 +386,7 @@ public class PrikazIzvodjenja extends JDialog {
         dodajB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 DialogDodavanjaPlaylisti ddp= new DialogDodavanjaPlaylisti(PlejListaDAO.plejlisteKorisnika(PlejlistaKON.getKorisnik().getId()),
                         PlejlistaKON.getKorisnik(), iz);
                 ddp.setVisible(true);

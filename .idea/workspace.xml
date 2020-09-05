@@ -25,17 +25,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Zavrsen rad sa plejlistama, i neke sitnice izmijenjene">
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Izmijenjene neke stvari u vezi funkcionalnosti admina">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/IzvodjenjeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/dao/PlejListaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/dao/PlejListaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogIzvodjenjaUPlejlisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogIzvodjenjaUPlejlisti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogDodavanjaPlaylisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogDodavanjaPlaylisti.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/DodajIzvodjenje.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/DodajIzvodjenje.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenjaUPlejlisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenjaUPlejlisti.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementPrikazaPlejlisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementPrikazaPlejlisti.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/GlavniProzor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/PrikazIzvodjenja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/PrikazIzvodjenja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelPrijave.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599318768260</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Izmijenjene neke stvari u vezi funkcionalnosti admina">
+      <created>1599333729749</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1599333729749</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -344,7 +350,8 @@
     <MESSAGE value="Doradjene neke stvari sto se plejlisti tice i kreirane u bazi dvije plejliste" />
     <MESSAGE value="Prikaz izvodjenja u plejlisti, i pustanje pjesme" />
     <MESSAGE value="Zavrsen rad sa plejlistama, i neke sitnice izmijenjene" />
-    <option name="LAST_COMMIT_MESSAGE" value="Zavrsen rad sa plejlistama, i neke sitnice izmijenjene" />
+    <MESSAGE value="Izmijenjene neke stvari u vezi funkcionalnosti admina" />
+    <option name="LAST_COMMIT_MESSAGE" value="Izmijenjene neke stvari u vezi funkcionalnosti admina" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
@@ -375,22 +382,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597075867626" />
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1599333484404">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1599336004493">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599333484404" />
-    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1599333484404">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599336004493" />
+    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1599336004493">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599333484404" />
-    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1599333484404">
+    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599336004493" />
+    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1599336004493">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599333484404" />
-    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1599333484404">
+    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599336004493" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1599336004493">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599333484404" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599336004493" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1597666049813">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -419,10 +426,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597510124667" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599318771659">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599333733293">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599318771659" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599333733293" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599318580266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -147,8 +147,6 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
                         throwables.printStackTrace();
                     }
                 }
-                revalidate();
-                repaint();
             }
         });
     }

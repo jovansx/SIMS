@@ -95,8 +95,14 @@ public class ElementPrikazaPlejlisti extends JPanel {
         prikazi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogIzvodjenjaUPlejlisti dp=new DialogIzvodjenjaUPlejlisti(lista.getListaIzvodjenja(), lista);
-                dp.setVisible(true);
+                if(!IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()).isEmpty()){
+                    DialogIzvodjenjaUPlejlisti dp=new DialogIzvodjenjaUPlejlisti(IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()), lista);
+                    dp.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Ova playlista je prazna");
+                }
+
             }
         });
 

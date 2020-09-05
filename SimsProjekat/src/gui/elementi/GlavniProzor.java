@@ -116,6 +116,7 @@ public class GlavniProzor extends JFrame implements ActionListener {
                 dispose();
                 GlavniProzor gp = new GlavniProzor();
                 gp.setVisible(true);
+                PlejlistaKON.resetujKorisnika();
             }
         } else if (button == registracijaButton) {
             DialogRegistracije dr = new DialogRegistracije(GlavniProzor.this);
