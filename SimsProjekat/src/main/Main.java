@@ -63,8 +63,10 @@ public class Main {
                 GlavniProzor gp = null;
                 try {
                     LocalDate now = LocalDate.now();
-                    if(now.getDayOfMonth() == 3){
-                        ToplistaKON.napraviMesecnuToplistu(8,2018);
+                    if(now.getDayOfMonth() == 2){
+                        ToplistaKON.napraviMesecnuToplistu(now.getMonthValue(),now.getYear());
+                    }else if(now.getDayOfMonth() == 1 && now.getMonthValue() == 1){
+                        ToplistaKON.napraviGodisnjuToplistu(now.getYear());
                     }
                     gp = new GlavniProzor();
                 } catch (ParseException e) {

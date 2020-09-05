@@ -61,10 +61,15 @@ public class PrikazNazivaTopliste extends JPanel{
         return v;
     }
     public String nazivTopliste(TopLista t){
-        int month = t.getDatumGlasanja().getMonth();
-        int year = t.getDatumGlasanja().getYear()+1900;
-        String value = provera(month);
-        String s = "Toplista meseca "+value +" godine "+ year;
+        String s ="";
+        if(t.getDatumGlasanja().getDay() == 1){
+            s = "Toplista godine "+ t.getDatumGlasanja().getYear()+1900;
+        }else {
+            int month = t.getDatumGlasanja().getMonth();
+            int year = t.getDatumGlasanja().getYear() + 1900;
+            String value = provera(month);
+            s = "Toplista meseca " + value + " godine " + year;
+        }
         naziv = s;
         return s;
     }

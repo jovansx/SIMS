@@ -33,6 +33,17 @@ public class ToplistaKON {
         return lista;
 
     }
+    public static List<Izvodjenje> izglasana1(int year){
+        List<Izvodjenje> lista = new ArrayList<>();
+        for(Izvodjenje i : IzvodjenjeDAO.getIzvodjenja()){
+            if(i.getVremeIzvodjenja().getYear()+1900 == year){
+                lista.add(i);
+            }
+        }
+        lista.sort(new ToplistaSorter(false));
+        return lista;
+
+    }
     public static void upisi(TopLista t,int id) throws SQLException {
         for(Izvodjenje i: t.getListaIzvodjenja()){
             TopListaDAO.insert2(i,id);
@@ -54,7 +65,19 @@ public class ToplistaKON {
         }
         TopListaDAO.insert(t);
         TopLista tt = TopListaDAO.getTopLista((Date) t.getDatumGlasanja());
-        //System.out.println(tt.getId());
+        upisi(t,tt.getId());
+    }
+    public static void napraviGodisnjuToplistu(int year) throws ParseException, SQLException {
+        List<Izvodjenje> izv = izglasana1(year);
+        TopLista t = new TopLista();
+        String s ="";
+        s = "01.01." +year + ".";
+        t.setDatumGlasanja(new java.sql.Date(sdf.parse(s).getTime()));
+        for(Izvodjenje i: izv){
+            t.dodajIzvodjenje(i);
+        }
+        TopListaDAO.insert(t);
+        TopLista tt = TopListaDAO.getTopLista((Date) t.getDatumGlasanja());
         upisi(t,tt.getId());
     }
     public static List<TopLista> getTopliste(){
