@@ -301,6 +301,40 @@ public class IzvodjenjeDAO {
         return izvodjenja;
 
     }
+    //Funkcija koja vraca izvodjenja u plejlisti
+    public static Izvodjenje izvodjenjeUPlejlisti(int idP, int idI){
+        Izvodjenje izvodjenje=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select i.id,i.vremeIzvodjenja,i.trajanje,i.tipIzvodjenja,i.brojPristupa," +
+                            "i.brojGlasova,i.ukupnoPristupa,i.pttBrojMesta from Izvodjenje i,IzvodjenjaPlaylisti ip " +
+                            "where ip.idPlayListe=? and ip.idIzvodjenja=i.id and ip.obrisano=true and ip.idIzvodjenja=?");
+            ps.setInt(1, idP);
+            ps.setInt(2, idI);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                izvodjenje=new Izvodjenje();
+                izvodjenje.setId(rs.getInt(1));
+                izvodjenje.setVremeIzvodjenja(rs.getDate(2));
+                izvodjenje.setTrajanje(rs.getInt(3));
+                izvodjenje.setTipIzvodjenja(TipIzvodjenja.valueOf(rs.getString(4)));
+                izvodjenje.setBrPristupa(rs.getInt(5));
+                izvodjenje.setBrGlasova(rs.getInt(6));
+                izvodjenje.setUkupnoPrisupa(rs.getInt(7));
+                izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+                izvodjenje.setListaMuzickihDela(MuzickoDeloDAO.getMuzickaDelaIzvodjenja(rs.getInt(1)));
+                izvodjenje.setListaIzvodjaca(IzvodjacDAO.getIzvodjaciIzvodjenja(rs.getInt(1)));
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return izvodjenje;
+
+    }
     //Insert
     public static void insert(Izvodjenje izvodjenje) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()

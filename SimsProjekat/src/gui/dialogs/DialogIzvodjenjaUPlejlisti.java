@@ -17,18 +17,19 @@ public class DialogIzvodjenjaUPlejlisti extends JDialog{
     private List<Izvodjenje> izvodjenja;
     private List<ElementIzvodjenjaUPlejlisti> listaElemenata;
     private PlejLista plejlista;
+    private DialogPlaylisti dialog;
 
-    public DialogIzvodjenjaUPlejlisti(List<Izvodjenje> izvodjenja, PlejLista plejlista){
+    public DialogIzvodjenjaUPlejlisti(DialogPlaylisti d, List<Izvodjenje> izvodjenja, PlejLista plejlista){
         this.izvodjenja=izvodjenja;
         this.listaElemenata=new ArrayList<>();
         this.plejlista=plejlista;
-
+        this.dialog=d;
         setTitle("Playlista "+plejlista.getNaziv());
         setSize(530, 460);
         setResizable(false);
+        setModal(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-
         ucitajSkrol();
     }
 
@@ -65,5 +66,14 @@ public class DialogIzvodjenjaUPlejlisti extends JDialog{
         skrolPanel.removeAll();
         skrolPanel.validate();
         skrolPanel.repaint();
+    }
+    public void deleteComponent(Component c, int id){
+        this.remove(c);
+        skrolPanel.remove(c);
+        listaElemenata.remove(c);
+        skrolPanel.validate();
+        skrolPanel.repaint();
+        dialog.refreshDialog(id);
+
     }
 }

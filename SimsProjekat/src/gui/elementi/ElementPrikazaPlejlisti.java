@@ -4,6 +4,7 @@ import dao.IzvodjenjeDAO;
 import dao.PlejListaDAO;
 import gui.dialogs.DialogIzvodjenjaUPlejlisti;
 import gui.dialogs.DialogPlaylisti;
+import kontroler.PlejlistaKON;
 import model.PlejLista;
 
 import javax.swing.*;
@@ -87,6 +88,8 @@ public class ElementPrikazaPlejlisti extends JPanel {
         sacuvaj.setEnabled(false);
         add(sacuvaj);
 
+        PlejlistaKON.postaviListu(ElementPrikazaPlejlisti.this);
+
         dodajAkcije();
 
     }
@@ -96,7 +99,7 @@ public class ElementPrikazaPlejlisti extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()).isEmpty()){
-                    DialogIzvodjenjaUPlejlisti dp=new DialogIzvodjenjaUPlejlisti(IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()), lista);
+                    DialogIzvodjenjaUPlejlisti dp=new DialogIzvodjenjaUPlejlisti(dialog, IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()), lista);
                     dp.setVisible(true);
                 }
                 else{
@@ -133,4 +136,5 @@ public class ElementPrikazaPlejlisti extends JPanel {
             }
         });
     }
+
 }

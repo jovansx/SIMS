@@ -71,7 +71,12 @@ public class DodajIzvodjenje extends JPanel {
                 }
             }
             if (check == 0) {
-                PlejListaDAO.insertIzvodjenje(plejLista, izvodjenje);
+                if(IzvodjenjeDAO.izvodjenjeUPlejlisti(plejLista.getId(), izvodjenje.getId())!=null){
+                    PlejListaDAO.updateIzbrisanoIzvodjenje(plejLista, izvodjenje);
+                }
+                else{
+                    PlejListaDAO.insertIzvodjenje(plejLista, izvodjenje);
+                }
                 JOptionPane.showMessageDialog(null, "Izvodjenje je dodato u " + plejLista.getNaziv());
             }
 

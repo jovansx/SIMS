@@ -28,6 +28,7 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
     private File file;
     private String sep;
     private PlejLista plejlista;
+    private ElementPrikazaPlejlisti panelListe;
 
     public ElementIzvodjenjaUPlejlisti(DialogIzvodjenjaUPlejlisti dialog, Izvodjenje izvodjenje, PlejLista p){
         this.dialog=dialog;
@@ -139,6 +140,7 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
         izbrisi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 int retVal=JOptionPane.showConfirmDialog(null, "Zelite li da izbrisete ovo izvodjenje?", "Da li ste sigurni", JOptionPane.YES_NO_OPTION);
                 if(retVal==0){
                     try {
@@ -146,6 +148,7 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+                    dialog.deleteComponent(ElementIzvodjenjaUPlejlisti.this, plejlista.getId());
                 }
             }
         });

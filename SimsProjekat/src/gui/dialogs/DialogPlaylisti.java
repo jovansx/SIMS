@@ -3,6 +3,7 @@ package gui.dialogs;
 import dao.IzvodjenjeDAO;
 import dao.PlejListaDAO;
 import gui.elementi.ElementPrikazaPlejlisti;
+import kontroler.PlejlistaKON;
 import model.PlejLista;
 import model.RegistrovaniKorisnik;
 
@@ -31,64 +32,13 @@ public class DialogPlaylisti extends JDialog{
         setTitle("Playliste");
         setSize(600, 650);
         setResizable(false);
+        setModal(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         ucitajSkrol();
 
-    }
 
-    private void podesiAkcije() {
-
-        posalji.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    kreirajNovuPlaylistu();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        });
-
-        uredu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
-    }
-
-    private void ucitajDugmad() {
-        panel = new JPanel();
-        panel.setBackground(new Color(0, 77, 102));
-
-        //Dodavanje dugmeta za dodavanje nove playliste
-        posalji=new JButton("Dodaj playlist");
-        posalji.setBackground(new Color(153, 204, 255));
-        posalji.setForeground(Color.white);
-        panel.add(posalji);
-
-        //Dodavanje dugmeta za zatvaranje prozora
-        uredu=new JButton("U redu");
-        uredu.setForeground(Color.white);
-        uredu.setBackground(new Color(153, 204, 255));
-        panel.add(uredu);
-        panel.setPreferredSize(new Dimension(400, 70));
-        add(panel,BorderLayout.SOUTH);
-    }
-
-    private void kreirajNovuPlaylistu() throws SQLException {
-        String naziv = JOptionPane.showInputDialog("Unesite naziv plejliste");
-        if(naziv.equals("")){
-            JOptionPane.showMessageDialog(null,"Molimo da unesete naziv plejliste");
-        }
-        else{
-            PlejLista p=new PlejLista();
-            p.setNaziv(naziv);
-            p.setJeJavna(false);
-            PlejListaDAO.insert(p, korisnik.getId());
-        }
     }
 
     private void ucitajSkrol() {
@@ -128,6 +78,25 @@ public class DialogPlaylisti extends JDialog{
         skrolPanel.removeAll();
         skrolPanel.validate();
         skrolPanel.repaint();
+    }
+
+    public void refreshDialog(int id){
+        skrolPanel.remove(PlejlistaKON.getLista());
+        listaElemenata.remove(PlejlistaKON.getLista());
+
+        PlejlistaKON.resetujListu();
+        PlejLista lista= PlejListaDAO.getPlejLista(id);
+        assert lista != null;
+        lista.setListaIzvodjenja(IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()));
+
+        ElementPrikazaPlejlisti ez= new ElementPrikazaPlejlisti(this, lista);
+
+        listaElemenata.add(ez);
+        skrolPanel.add(ez);
+        skrolPanel.revalidate();
+        skrolPanel.repaint();
+
+
     }
 
 }
