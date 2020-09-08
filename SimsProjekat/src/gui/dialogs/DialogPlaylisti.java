@@ -80,23 +80,25 @@ public class DialogPlaylisti extends JDialog{
         skrolPanel.repaint();
     }
 
-    public void refreshDialog(int id){
+    public void deleteComponent(){
         skrolPanel.remove(PlejlistaKON.getLista());
         listaElemenata.remove(PlejlistaKON.getLista());
-
         PlejlistaKON.resetujListu();
+    }
+
+    public void refreshDialog(int id){
+        deleteComponent();
+
         PlejLista lista= PlejListaDAO.getPlejLista(id);
-        assert lista != null;
-        lista.setListaIzvodjenja(IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()));
+        if(lista!=null){
+            lista.setListaIzvodjenja(IzvodjenjeDAO.izvodjenjaUPlejlisti(lista.getId()));
+        }
 
         ElementPrikazaPlejlisti ez= new ElementPrikazaPlejlisti(this, lista);
-
         listaElemenata.add(ez);
         skrolPanel.add(ez);
         skrolPanel.revalidate();
         skrolPanel.repaint();
-
-
     }
 
 }

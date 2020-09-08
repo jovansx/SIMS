@@ -15,7 +15,7 @@ public class Main {
 
         //Deo koda koji se pokrece prvi put nakon inicijalizacije baze, nakon toga zakomentarisi
         String sep = System.getProperty("file.separator");
-/*
+
         IzvodjenjeDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBuba.jpg");
         IzvodjenjeDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaJala.jpg");
         IzvodjenjeDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"majaBroj.jpg");
@@ -27,6 +27,13 @@ public class Main {
         IzvodjenjeDAO.updateSliku(9, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"prljavoKazaliste.png");
         IzvodjenjeDAO.updateSliku(10, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"tuNoc.jpg");
         IzvodjenjeDAO.updateSliku(11, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"indigo.jpg");
+        IzvodjenjeDAO.updateSliku(12, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"straus.jpg");
+        IzvodjenjeDAO.updateSliku(13, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"tchaikovsky.jpg");
+        IzvodjenjeDAO.updateSliku(14, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"tchaikovsky.jpg");
+        IzvodjenjeDAO.updateSliku(15, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"brams.jpg");
+        IzvodjenjeDAO.updateSliku(16, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"tchaikovsky.jpg");
+        IzvodjenjeDAO.updateSliku(17, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneIzvodjenja" + sep +"pahelbel.jpg");
+
         ReklamaDAO.updateSliku(1, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"coca.jpg");
         ReklamaDAO.updateSliku(2, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"nike.jpg");
         ReklamaDAO.updateSliku(3, "SimsProjekat" + sep + "src" + sep + "gui" + sep + "icons" + sep + "ikoneReklama" + sep +"mc.jpg");
@@ -43,8 +50,15 @@ public class Main {
         IzvodjenjeDAO.updateAudio(9, "AudioBaza" + sep + "prljavoKazaliste.mp3");
         IzvodjenjeDAO.updateAudio(10, "AudioBaza" + sep + "tuNoc.mp3");
         IzvodjenjeDAO.updateAudio(11, "AudioBaza" + sep + "indigo.mp3");
+        IzvodjenjeDAO.updateAudio(12, "AudioBaza" + sep + "TheBlueDanubeWaltz.mp3");
+        IzvodjenjeDAO.updateAudio(13, "AudioBaza" + sep + "TheNutcrackerOverture.mp3");
+        IzvodjenjeDAO.updateAudio(14, "AudioBaza" + sep + "SwanLake(Swan Theme).mp3");
+        IzvodjenjeDAO.updateAudio(15, "AudioBaza" + sep + "HungarianDanceNo5.mp3");
+        IzvodjenjeDAO.updateAudio(16, "AudioBaza" + sep + "DanceoftheSugarPlumFairy.mp3");
+        IzvodjenjeDAO.updateAudio(17, "AudioBaza" + sep + "CanonInDMajor.mp3");
 
-*/
+
+
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

@@ -28,7 +28,6 @@ public class ElementIzvodjenjaUPlejlisti extends JPanel {
     private File file;
     private String sep;
     private PlejLista plejlista;
-    private ElementPrikazaPlejlisti panelListe;
 
     public ElementIzvodjenjaUPlejlisti(DialogIzvodjenjaUPlejlisti dialog, Izvodjenje izvodjenje, PlejLista p){
         this.dialog=dialog;

@@ -1,6 +1,7 @@
 create database muzicki_sistem;
 use muzicki_sistem;
-set global max_allowed_packet = 10000000;
+set global time_zone='+8:00';
+set global max_allowed_packet=100000000;
 
 CREATE TABLE MestoIzvodjenja (
 pttBroj INT UNSIGNED PRIMARY KEY,
@@ -15,6 +16,10 @@ VALUES('Novi Sad', 21000, 'Srbija');
 INSERT INTO
 MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
 VALUES('Banja Luka', 78000, 'BiH');
+
+INSERT INTO
+MestoIzvodjenja(nazivMesta, pttBRoj, drzava)
+VALUES('Budimpesta', 1011, 'Madjarska');
 
 CREATE TABLE TopLista (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -81,6 +86,30 @@ INSERT INTO
 Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
 VALUES('2017.05.15.', 4, 'VIDEO', 21000);
 
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2008.09.17.', 11, 'AUDIO', 1011);
+
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2012.12.30.', 3, 'AUDIO', 1011);
+
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2012.03.22.',3, 'AUDIO', 1011);
+
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2007.12.20.', 4, 'AUDIO', 1011);
+
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2011.06.14.', 4, 'AUDIO', 1011);
+
+INSERT INTO
+Izvodjenje(vremeIzvodjenja, trajanje, tipIzvodjenja, pttBrojMesta)
+VALUES('2008.01.26.', 7, 'AUDIO', 1011);
+
 CREATE TABLE IzvodjenjaUTopListi (
 idIzvodjenja INT UNSIGNED,
 idTopListe INT UNSIGNED,
@@ -138,6 +167,50 @@ VALUES('Prljavo kazaliste', 'BEND');
 INSERT INTO
 Izvodjac(nazivIzvodjaca, tip)
 VALUES('Rasta', 'SOLISTA');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Zubin Mehta', 'DIRIGENT');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Wiener Philharmoniker', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Alexander Vedernikov', 'DIRIGENT');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('The Russian Philharmonia', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Yuri Simonov', 'DIRIGENT');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('London Philharmonic Orchestra', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Hungarian Symphony Orchestra', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Richard Bonynge', 'DIRIGENT');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('The National Philharmonic Orchestra', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Francois Paillard', 'DIRIGENT');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Kanon Orchestre de Chambre', 'ORKESTAR');
 
 CREATE TABLE IzvodjacIzvodi (
 idIzvodjaca INT UNSIGNED,
@@ -212,6 +285,50 @@ INSERT INTO
 IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
 VALUES(10, 11);
 
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(11, 12);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(12, 12);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(13, 13);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(14, 13);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(15, 14);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(16, 14);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(17, 15);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(21, 16);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(18, 16);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(19, 17);
+
+INSERT INTO
+IzvodjacIzvodi(idIzvodjaca, idIzvodjenja)
+VALUES(20, 17);
+
 CREATE TABLE Zanr (
 nazivZanra VARCHAR(30) PRIMARY KEY,
 datumNastanka DATE,
@@ -229,6 +346,10 @@ VALUES('Pop', '2005.11.14.');
 INSERT INTO
 Zanr(nazivZanra, datumNastanka)
 VALUES('Rok', '1987.04.18.');
+
+INSERT INTO
+Zanr(nazivZanra, datumNastanka)
+VALUES('Klasicna','1000.01.01');
 
 CREATE TABLE Ucesnik (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -280,6 +401,23 @@ VALUES('L.Pajcin', 'TEKSTOPISAC');
 INSERT INTO
 Ucesnik(nazivUcesnika, tip)
 VALUES('Rasta', 'TEKSTOPISAC');
+
+INSERT INTO
+Ucesnik(nazivUcesnika, tip)
+VALUES('Johann Strauss II', 'KOMPOZITOR');
+
+INSERT INTO
+Ucesnik(nazivUcesnika, tip)
+VALUES('Pyotr Ilyich Tchaikovsky','KOMPOZITOR' );
+
+INSERT INTO
+Ucesnik(nazivUcesnika, tip)
+VALUES('Johannes Brahms','KOMPOZITOR' );
+
+INSERT INTO
+Ucesnik(nazivUcesnika, tip)
+VALUES('Johann Pachelbel','KOMPOZITOR' );
+
 
 CREATE TABLE MuzickoDelo (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -339,6 +477,30 @@ INSERT INTO
 MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
 VALUES('Indigo', '2015.05.05', '2015.05.05');
 
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('The Blue Danube', '2008.09.17', '1867.02.15');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('The Nutcracker Overture', '2012.12.30', '1892.12.18');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Swan Lake', '2012.03.22', '1877.03.03');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Hungarian Dance No. 5', '2007.12.20', '1869.01.20');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Dance of the sugar plum fairy', '2011.06.14', '1892.12.18');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Canon in D', '2008.01.26', '1706.07.29');
+
 CREATE TABLE ZanrMuzickogDela (
 nazivZanra VARCHAR(30),
 idMuzickogDela INT UNSIGNED,
@@ -391,6 +553,31 @@ VALUES('Rok', 10);
 INSERT INTO
 ZanrMuzickogDela(nazivZanra, idMuzickogDela)
 VALUES('Pop', 11);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 12);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 13);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 14);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 15);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 16);
+
+INSERT INTO
+ZanrMuzickogDela(nazivZanra, idMuzickogDela)
+VALUES('Klasicna', 17);
+
 
 CREATE TABLE UcesnikMuzickogDela (
 idUcesnika INT UNSIGNED,
@@ -469,6 +656,30 @@ INSERT INTO
 UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
 VALUES(11, 11);
 
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(12, 12);
+
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(13, 13);
+
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(13, 14);
+
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(14, 15);
+
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(13, 16);
+
+INSERT INTO
+UcesnikMuzickogDela(idUcesnika, idMuzickogDela)
+VALUES(15, 17);
+
 CREATE TABLE IzvodjenjaMuzickogDela (
 idIzvodjenja INT UNSIGNED,
 idMuzickogDela INT UNSIGNED,
@@ -520,6 +731,30 @@ VALUES(10, 10);
 INSERT INTO
 IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
 VALUES(11, 11);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(12, 12);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(13, 13);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(14, 14);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(15, 15);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(16, 16);
+
+INSERT INTO
+IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela)
+VALUES(17, 17);
 
 CREATE TABLE KorisnickiNalog (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -653,6 +888,10 @@ INSERT INTO
 UrednikPoznajeZanrove(idUrednika, nazivZanra)
 VALUES(3, 'Rok');
 
+INSERT INTO
+UrednikPoznajeZanrove(idUrednika, nazivZanra)
+VALUES(4, 'Klasicna');
+
 CREATE TABLE RegistrovaniKorisnik (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
@@ -722,9 +961,6 @@ idKorisnika INT UNSIGNED,
 CONSTRAINT FK_PLAY_LISTA FOREIGN KEY (idKorisnika) REFERENCES RegistrovaniKorisnik(id)
 );
 
-insert into playlista(naziv, idKorisnika) values('PrljavoKazaliste', 4);
-insert into playlista(naziv, idKorisnika) values('Neke tamo pjesme',4);
-
 CREATE TABLE IzvodjenjaPlayListi (
 idPlayListe INT UNSIGNED,
 idIzvodjenja INT UNSIGNED,
@@ -733,11 +969,6 @@ CONSTRAINT FK_PLAY_LISTA2 FOREIGN KEY (idPlayListe) REFERENCES PlayLista(id),
 CONSTRAINT FK_IZVODJENJE_PL FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
 PRIMARY KEY (idPlayListe, idIzvodjenja)
 );
-
-insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(1, 9);
-insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(1, 10);
-insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(2, 6);
-insert into IzvodjenjaPlayListi(idPlayListe,idIzvodjenja) values(2, 11);
 
 CREATE TABLE Zadatak (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -754,10 +985,12 @@ CONSTRAINT FK_UCESNIK2 FOREIGN KEY (idUcesnika) REFERENCES Ucesnik(id),
 CONSTRAINT FK_IZVODJAC2 FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
 CONSTRAINT FK_UREDNIK FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
 );
-INSERT INTO
-Zadatak(textZadatka, idMuzickogDela, idUrednika)
-VALUES('Opisati muzicko delo "Pravo vreme",koje izvodi Maja Berovic, zanr pop', 1, 3);
 
+insert into Zadatak(textZadatka, idIzvodjenja,idUrednika)
+values('Dopisi opis zadanog izvodjenja', 1, 3);
+
+insert into Zadatak(textZadatka, idIzvodjaca, idUrednika)
+values('Sve potrebne informacije dopisati za zadatog izvodjaca', 2, 1);
 
 
 CREATE TABLE Recenzija (
