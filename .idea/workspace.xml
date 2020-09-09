@@ -25,24 +25,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Ispravljeno brisanje izodjenja iz liste">
-      <change afterPath="$PROJECT_DIR$/AudioBaza/CanonInDMajor.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AudioBaza/DanceoftheSugarPlumFairy.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AudioBaza/HungarianDanceNo5.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AudioBaza/SwanLake(Swan Theme).mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AudioBaza/TheBlueDanubeWaltz.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AudioBaza/TheNutcrackerOverture.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/ikoneIzvodjenja/brams.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/ikoneIzvodjenja/pahelbel.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/ikoneIzvodjenja/straus.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/icons/ikoneIzvodjenja/tchaikovsky.jpg" afterDir="false" />
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Ispravljena skripta i neke sitnice">
       <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogPlaylisti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenjaUPlejlisti.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementIzvodjenjaUPlejlisti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/script.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599408297762</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Ispravljena skripta i neke sitnice">
+      <created>1599593285115</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1599593285116</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -349,7 +348,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog." />
     <MESSAGE value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
     <MESSAGE value="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora." />
     <MESSAGE value="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina" />
@@ -374,7 +372,8 @@
     <MESSAGE value="Izmijenjene neke stvari u vezi funkcionalnosti admina" />
     <MESSAGE value="Ispravljeno dodavanje izvodjenja u playlistu" />
     <MESSAGE value="Ispravljeno brisanje izodjenja iz liste" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ispravljeno brisanje izodjenja iz liste" />
+    <MESSAGE value="Ispravljena skripta i neke sitnice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ispravljena skripta i neke sitnice" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
@@ -405,22 +404,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597075867626" />
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1599588764785">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1599644474953">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599588764785" />
-    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1599588764785">
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1599644474953">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599588764785" />
-    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1599588764785">
+    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1599644474953">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599588764785" />
-    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1599588764785">
+    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1599644474953">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599588764785" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1597666049813">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -449,14 +448,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597510124667" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599408301802">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599593288298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599408301802" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599380034279">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599593288298" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599645058037">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1599380034279" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1599645058037" />
     <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596709018408">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -469,10 +468,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599300168432" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1597661724668">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599644043662">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1597661724668" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599644043662" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
