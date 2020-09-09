@@ -27,6 +27,10 @@ datumGlasanja DATE,
 obrisano BOOLEAN DEFAULT FALSE
 );
 
+INSERT INTO
+TopLista(datumGlasanja)
+VALUES('2018.08.01.');
+
 CREATE TABLE Izvodjenje (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
@@ -118,7 +122,15 @@ CONSTRAINT FK_IZVODJENJE FOREIGN KEY (idIzvodjenja) REFERENCES Izvodjenje(id),
 CONSTRAINT FK_TOP_LISTA FOREIGN KEY (idTopListe) REFERENCES TopLista(id),
 PRIMARY KEY (idIzvodjenja, idTopListe)
 );
-
+INSERT INTO
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(1,1);
+INSERT INTO
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(2,1);
+INSERT INTO
+IzvodjenjaUTopListi(idIzvodjenja, idTopListe)
+VALUES(3,1);
 CREATE TABLE Izvodjac (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nazivIzvodjaca VARCHAR(50),
@@ -211,6 +223,10 @@ VALUES('Francois Paillard', 'DIRIGENT');
 INSERT INTO
 Izvodjac(nazivIzvodjaca, tip)
 VALUES('Kanon Orchestre de Chambre', 'ORKESTAR');
+
+INSERT INTO
+Izvodjac(nazivIzvodjaca, tip)
+VALUES('Beyonce', 'SOLISTA');
 
 CREATE TABLE IzvodjacIzvodi (
 idIzvodjaca INT UNSIGNED,
@@ -418,7 +434,6 @@ INSERT INTO
 Ucesnik(nazivUcesnika, tip)
 VALUES('Johann Pachelbel','KOMPOZITOR' );
 
-
 CREATE TABLE MuzickoDelo (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 obrisano BOOLEAN DEFAULT FALSE,
@@ -500,6 +515,10 @@ VALUES('Dance of the sugar plum fairy', '2011.06.14', '1892.12.18');
 INSERT INTO
 MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
 VALUES('Canon in D', '2008.01.26', '1706.07.29');
+
+INSERT INTO
+MuzickoDelo(nazivDela, datumPostavljanja, vremeNastanka)
+VALUES('Halo', '2008.08.08', '2008.07.07');
 
 CREATE TABLE ZanrMuzickogDela (
 nazivZanra VARCHAR(30),
@@ -986,8 +1005,8 @@ CONSTRAINT FK_IZVODJAC2 FOREIGN KEY (idIzvodjaca) REFERENCES Izvodjac(id),
 CONSTRAINT FK_UREDNIK FOREIGN KEY (idUrednika) REFERENCES Urednik(id)
 );
 
-insert into Zadatak(textZadatka, idIzvodjenja,idUrednika)
-values('Dopisi opis zadanog izvodjenja', 1, 3);
+insert into Zadatak(textZadatka, idMuzickogDela,idUrednika)
+values('Dopisi opis zadatog muzickog dela', 18, 3);
 
 insert into Zadatak(textZadatka, idIzvodjaca, idUrednika)
 values('Sve potrebne informacije dopisati za zadatog izvodjaca', 2, 1);
