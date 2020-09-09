@@ -1,14 +1,21 @@
 package gui.elementi;
 
+import dao.RecenzijaDAO;
+import dao.UrednikDAO;
+import dao.ZadatakDAO;
 import gui.dialogs.DialogOdobravanje;
 import gui.dialogs.DialogProfil;
 import gui.dialogs.DialogZadaci;
+import model.Recenzija;
 import model.Urednik;
+import model.Zadatak;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class UrednikovProzor extends GlavniProzor{
     public int idUrednika;
@@ -43,9 +50,14 @@ public class UrednikovProzor extends GlavniProzor{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                ArrayList<Recenzija> listaRecenzija = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(idUrednika);
+                if(Objects.isNull(listaRecenzija) || listaRecenzija.size() == 0){
+                    JOptionPane.showMessageDialog(UrednikovProzor.this, "Ne postoje komentari za odobravanje!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                }else{
                 DialogOdobravanje dp = new DialogOdobravanje(idUrednika);
                 dp.setVisible(true);
 
+                }
             }
 
         });
@@ -76,9 +88,13 @@ public class UrednikovProzor extends GlavniProzor{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                DialogZadaci dz = new DialogZadaci(idUrednika);
-                dz.setVisible(true);
-
+                ArrayList<Zadatak> listaZadataka = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(idUrednika));
+                if(listaZadataka.size() == 0){
+                    JOptionPane.showMessageDialog(UrednikovProzor.this, "Nemate zadatke za obavljanje!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                }else {
+                    DialogZadaci dz = new DialogZadaci(idUrednika);
+                    dz.setVisible(true);
+                }
             }
 
         });

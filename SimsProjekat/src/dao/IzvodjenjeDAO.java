@@ -126,6 +126,37 @@ public class IzvodjenjeDAO {
         }
         return izvodjenje;
     }
+    public static Izvodjenje getIzvodjenjeDatum(int t,int broj){
+        Izvodjenje izvodjenje=null;
+        try {
+            PreparedStatement ps= FConnection.getInstance()
+                    .prepareStatement("select id,vremeIzvodjenja,trajanje,tipIzvodjenja, brojPristupa, brojGlasova, " +
+                            "ukupnoPristupa, pttBrojMesta, obrisano from Izvodjenje where trajanje=? and pttBrojMesta=?");
+            ps.setInt(1, t);
+            ps.setInt(2,broj);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                if(!rs.getBoolean(9)){
+                    izvodjenje=new Izvodjenje();
+                    izvodjenje.setId(rs.getInt(1));
+                    izvodjenje.setVremeIzvodjenja(rs.getDate(2));
+                    izvodjenje.setTrajanje(rs.getInt(3));
+                    izvodjenje.setTipIzvodjenja(TipIzvodjenja.valueOf(rs.getString(4)));
+                    izvodjenje.setBrPristupa(rs.getInt(5));
+                    izvodjenje.setBrGlasova(rs.getInt(6));
+                    izvodjenje.setUkupnoPrisupa(rs.getInt(7));
+                    izvodjenje.setMestoIzvodjenja(MestoIzvodjenjaDAO.getMestoIzvodjenja(rs.getInt(8)));
+                }
+
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return izvodjenje;
+
+    }
 
     public static List<Izvodjenje> getIzvodjenjaZaPocetnuStranicu(int brojElemenata, String kriterijum){
         List<Izvodjenje> izvodjenja=new ArrayList<Izvodjenje>();
@@ -447,7 +478,7 @@ public class IzvodjenjeDAO {
     public static void insert2(Izvodjenje izvodjenje,int id) throws SQLException{
         PreparedStatement ps=FConnection.getInstance()
                 .prepareStatement("insert into IzvodjenjaMuzickogDela(idIzvodjenja, idMuzickogDela) values (?,?)");
-        ps.setInt(1, izvodjenje.getId());
+        ps.setInt(1, IzvodjenjeDAO.getIzvodjenje(izvodjenje.getId()).getId());
         ps.setInt(2,id);
         ps.executeUpdate();
         ps.close();

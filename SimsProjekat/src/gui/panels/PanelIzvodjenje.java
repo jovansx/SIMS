@@ -2,38 +2,45 @@ package gui.panels;
 
 import dao.*;
 import gui.dialogs.DialogIzvodjenje;
+import gui.dialogs.DialogZadatakDelo;
 import kontroler.UrednikovProzorKON;
 import model.*;
 import model.enums.TipIzvodjenja;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Date;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PanelIzvodjenje extends JPanel{
-    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-mm-yyyy");
+    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-MM-yyyy");
     private DialogIzvodjenje dialog;
     private JLabel trajanje, vreme,delo,izvodj,mest;
     private JTextField trajanje1,vreme1,delo1;
-    private JButton kreiraj, odustani;
+    private JButton kreiraj, odustani,slika,au;
     private JComboBox<String> combo,combo1;
     private JRadioButton audio,video,zapis;
     private ButtonGroup group;
     public int id;
-
-    public PanelIzvodjenje(DialogIzvodjenje dialog, int idMuzickogDela) {
+    public String path,path1;
+    public DialogZadatakDelo dzz;
+    private int idZadatka;
+    private MuzickoDelo md;
+    public PanelIzvodjenje(DialogIzvodjenje dialog, int idMuzickogDela, DialogZadatakDelo dz,int idZadatka,MuzickoDelo md) {
         this.dialog = dialog;
         this.id = idMuzickogDela;
+        this.dzz = dz;
+        this.idZadatka = idZadatka;
+        this.md = md;
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(226, 206, 158));
@@ -42,7 +49,7 @@ public class PanelIzvodjenje extends JPanel{
 
     }
     public void namesti(){
-        MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(id);
+        //MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(id);
         ArrayList<MestoIzvodjenja> mesta = (ArrayList<MestoIzvodjenja>) MestoIzvodjenjaDAO.getMesta();
         ArrayList<Izvodjac> izvodjaci = (ArrayList<Izvodjac>) IzvodjacDAO.getIzvodjaci();
         ArrayList<Izvodjac> lista = new ArrayList<>();
@@ -168,8 +175,51 @@ public class PanelIzvodjenje extends JPanel{
         group.add(video);
         group.add(zapis);
 
+        slika = new JButton("    Dodaj sliku izvodjenja   ");
+        slika.setBounds(50,330,140,23);
+        slika.setBackground(new Color(62, 100, 103));
+        slika.setForeground(Color.WHITE);
+        slika.setBorder(BorderFactory.createLineBorder(Color.black));
+        slika.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "JPG & PNG Images", "jpg", "png");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showSaveDialog(dialog);
+                try {
+                    path = chooser.getSelectedFile().getCanonicalPath();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+        add(slika);
+        au = new JButton("    Dodaj audio izvodjenje   ");
+        au.setBounds(200,330,140,23);
+        au.setBackground(new Color(62, 100, 103));
+        au.setForeground(Color.WHITE);
+        au.setBorder(BorderFactory.createLineBorder(Color.black));
+        au.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "MP3", "mp3");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showSaveDialog(dialog);
+                try {
+                    path1 = chooser.getSelectedFile().getCanonicalPath();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+        add(au);
+
         kreiraj = new JButton("    Gotovo    ");
-        kreiraj.setBounds(50,330,120,23);
+        kreiraj.setBounds(50,390,120,23);
         kreiraj.setBackground(new Color(62, 100, 103));
         kreiraj.setForeground(Color.WHITE);
         kreiraj.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -194,18 +244,38 @@ public class PanelIzvodjenje extends JPanel{
                             i.setTipIzvodjenja(TipIzvodjenja.ZAPIS);
                         }
                         i.setListaIzvodjaca(lista);
-                        UrednikovProzorKON.dodajIzvodjenje(md.getId(),i);
+                        UrednikovProzorKON.opisiMuzickoDelo(md);
+                        UrednikovProzorKON.dodajIzvodjenje(md.getId(),i,path,path1);
                         JOptionPane.showMessageDialog(PanelIzvodjenje.this,"Uspesno ste opisali izvodjenje!");
+                        Zadatak zadatak = ZadatakDAO.getZadatakPoId(idZadatka);
+                        ZadatakDAO.delete(zadatak);
+                        PanelZadaci.refreshData();
                         dialog.setVisible(false);
+                        dzz.setVisible(false);
                     }
                     }
-                    catch (SQLException | ParseException throwables) {
+                    catch (ParseException | SQLException throwables) {
                         throwables.printStackTrace();
                     }
 
             }
         });
         add(kreiraj);
+        odustani = new JButton("    Odustani    ");
+        odustani.setBounds(200,390,120,23);
+        odustani.setBackground(new Color(62, 100, 103));
+        odustani.setForeground(Color.WHITE);
+        odustani.setBorder(BorderFactory.createLineBorder(Color.black));
+        odustani.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+            }
+
+        });
+        add(odustani);
 
     }
+
 }

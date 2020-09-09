@@ -37,12 +37,8 @@ public class PanelZadaci extends JPanel {
     }
     public void namesti(){
         listaZadataka = (ArrayList<Zadatak>) ZadatakDAO.getZadatkePoUredniku(UrednikDAO.getUrednikPoId(id));
-        if(listaZadataka.size() == 0){
-            JOptionPane.showMessageDialog(PanelZadaci.this, "Nemate zadatke za obavljanje!", "Info", JOptionPane.INFORMATION_MESSAGE);
-            dialog.setVisible(false);
-        }else{
-            TabelaZadataka t = new TabelaZadataka(listaZadataka);
-            table = new JTable(t);
+        TabelaZadataka t = new TabelaZadataka(listaZadataka);
+        table = new JTable(t);
 
         JScrollPane sp = new JScrollPane(table);
         add(sp, BorderLayout.CENTER);
@@ -96,7 +92,7 @@ public class PanelZadaci extends JPanel {
         });
         dodatno.add(prihvati);
         add(dodatno, BorderLayout.SOUTH);
-    }}
+    }
 
     public static  void refreshData() {
         TabelaZadataka t = (TabelaZadataka) table.getModel();

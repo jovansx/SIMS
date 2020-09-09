@@ -65,7 +65,7 @@ public class PrikazNazivaTopliste extends JPanel{
         if(t.getDatumGlasanja().getDay() == 1){
             s = "Toplista godine "+ t.getDatumGlasanja().getYear()+1900;
         }else {
-            int month = t.getDatumGlasanja().getMonth();
+            int month = t.getDatumGlasanja().getMonth()+1;
             int year = t.getDatumGlasanja().getYear() + 1900;
             String value = provera(month);
             s = "Toplista meseca " + value + " godine " + year;

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class PanelZadatakDelo extends JPanel {
-    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-mm-yyyy");
+    public SimpleDateFormat formatter1=new SimpleDateFormat("dd-MM-yyyy");
     private DialogZadatakDelo dialog;
     private JLabel naziv, opis, sadrzaj, datum, vreme, ocena,text,zanr,ucesnik,album;
     private JTextField naziv1, datum1, vreme1, ocena1;
@@ -272,7 +272,6 @@ public class PanelZadatakDelo extends JPanel {
                             ddd.setVisible(true);
                         }
                         UrednikovProzorKON.opisiMuzickoDelo(md);
-                        //JOptionPane.showMessageDialog(PanelZadatakDelo.this,"Uspesno ste opisali muzicko delo!");
                         dialog.setVisible(false);
                         ZadatakDAO.delete(zadatak);
                         PanelZadaci.refreshData();
@@ -291,7 +290,7 @@ public class PanelZadatakDelo extends JPanel {
         dodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogIzvodjenje di = new DialogIzvodjenje(md.getId());
+                DialogIzvodjenje di = new DialogIzvodjenje(md.getId(),dialog,id,md);
                 di.setVisible(true);
                 }
 

@@ -38,14 +38,11 @@ public class PanelOdobravanje extends JPanel {
     }
     public void namesti() {
         listaRecenzija = (ArrayList<Recenzija>) RecenzijaDAO.getRecenzijeUrednika(id);
-        if(Objects.isNull(listaRecenzija) || listaRecenzija.size() == 0) {
-            dialog.dispose();
-            JOptionPane.showMessageDialog(null, "Ne postoje komentari za odobravanje!", "Info", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            TabelaOdobravanje t = new TabelaOdobravanje(listaRecenzija);
-            table = new JTable(t);
 
-            JScrollPane sp = new JScrollPane(table);
+        TabelaOdobravanje t = new TabelaOdobravanje(listaRecenzija);
+        table = new JTable(t);
+
+        JScrollPane sp = new JScrollPane(table);
         add(sp, BorderLayout.CENTER);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
@@ -144,7 +141,7 @@ public class PanelOdobravanje extends JPanel {
         });
         dodatno.add(ne);
         add(dodatno, BorderLayout.SOUTH);
-    }}
+    }
 
     public void refreshData() {
         TabelaOdobravanje t = (TabelaOdobravanje) table.getModel();

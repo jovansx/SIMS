@@ -105,7 +105,7 @@ public class UrednikovProzorKON {
         return true;
     }
 
-    public static boolean dodajIzvodjenje(int id, Izvodjenje izvodjenje) throws SQLException {
+    public static boolean dodajIzvodjenje(int id, Izvodjenje izvodjenje,String path,String path1) throws SQLException {
         MuzickoDelo md = MuzickoDeloDAO.getMuzickoDelo(id);
         if(Objects.isNull(md.getListaIzvodjenja())){
             ArrayList<Izvodjenje> lista = new ArrayList<>();
@@ -117,10 +117,13 @@ public class UrednikovProzorKON {
             md.setListaIzvodjenja(lista);
         }
         IzvodjenjeDAO.insert(izvodjenje);
-        IzvodjenjeDAO.insert2(izvodjenje,md.getId());
+        Izvodjenje ii = IzvodjenjeDAO.getIzvodjenjeDatum( izvodjenje.getTrajanje(),izvodjenje.getMestoIzvodjenja().getPttBroj());
+        IzvodjenjeDAO.insert2(ii,md.getId());
         for(int i =0;i<izvodjenje.getListaIzvodjaca().size();i++){
-            IzvodjacDAO.insert2(izvodjenje.getListaIzvodjaca().get(i),izvodjenje);
+            IzvodjacDAO.insert2(izvodjenje.getListaIzvodjaca().get(i),ii);
         }
+        IzvodjenjeDAO.updateSliku(ii.getId(),path);
+        IzvodjenjeDAO.updateAudio(ii.getId(),path1);
         return true;
     }
     public static List<Izvodjenje> getListaZaGlasanje(int month,int year){
