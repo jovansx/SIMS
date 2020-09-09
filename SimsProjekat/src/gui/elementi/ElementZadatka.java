@@ -107,6 +107,8 @@ public class ElementZadatka extends JPanel {
         }else{
             zadatak.setText(komentar1.getText());
             AdminovProzorKON.dodajZadatak(zadatak, getIdUrednika(Objects.requireNonNull(urednici.getSelectedItem()).toString()));
+            JOptionPane.showMessageDialog(null, "Zadatak je kreiran i dodan u listu");
+            dialog.deleteComponent(ElementZadatka.this);
         }
     }
 

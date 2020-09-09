@@ -61,4 +61,12 @@ public class DialogAdminovihRecenzija extends JDialog{
         skrolPanel.validate();
         skrolPanel.repaint();
     }
+
+    public void deleteComponent(ElementOdobravanjaRecenzije elementOdobravanjaRecenzije) {
+        this.remove(elementOdobravanjaRecenzije);
+        skrolPanel.remove(elementOdobravanjaRecenzije);
+        elementiRecenzije.remove(elementOdobravanjaRecenzije);
+        skrolPanel.validate();
+        skrolPanel.repaint();
+    }
 }

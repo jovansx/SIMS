@@ -164,6 +164,7 @@ public class PanelProfilAdmina extends JPanel{
         admin.setKontaktTelefon(telefon1.getText());
         try {
             AdministratorDAO.update(admin);
+            JOptionPane.showMessageDialog(null, "Podaci su izmijenjeni.");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

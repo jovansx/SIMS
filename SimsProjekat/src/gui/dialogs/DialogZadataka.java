@@ -84,6 +84,7 @@ public class DialogZadataka extends JDialog {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            JOptionPane.showMessageDialog(null, "Zadaci su poslani!");
         }
     }
 
@@ -92,6 +93,7 @@ public class DialogZadataka extends JDialog {
         int odgovor=JOptionPane.showConfirmDialog(null,"Jeste li sigurni da zelite da otkazete slanje zadataka?"
                 ,"Izaberi opciju", JOptionPane.YES_NO_OPTION);
         if(odgovor==0){
+            JOptionPane.showMessageDialog(null,"Zadaci su izbrisani!");
             AdminovProzorKON.resetZadatke();
             setVisible(false);
         }
@@ -161,4 +163,11 @@ public class DialogZadataka extends JDialog {
         skrolPanel.repaint();
     }
 
+    public void deleteComponent(Component c){
+        this.remove(c);
+        skrolPanel.remove(c);
+        zadaci.remove(c);
+        skrolPanel.validate();
+        skrolPanel.repaint();
+    }
 }

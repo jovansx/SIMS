@@ -78,6 +78,7 @@ public class PanelSadrzaja extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     dodajSadrzaj();
+                    JOptionPane.showMessageDialog(null, "Sadrzaj je kreiran!");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
