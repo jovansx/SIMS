@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 
 
 public class PanelProfil extends JPanel{
-    public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    public SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private DialogProfil dialog;
     private String separator;
     private JLabel ime, prezime, email, telefon,godina,korisnicko,lozinka, slika;
@@ -187,10 +187,11 @@ public class PanelProfil extends JPanel{
                 p = prezime1.getText();
                 t = telefon1.getText();
                 e = email1.getText();
-                d = godina1.getText();
+               // d = godina1.getText();
                 Date dd = null;
                 try {
-                    dd = new Date(sdf.parse(d).getTime());
+                    //dd = new Date(sdf.parse(d).getTime());
+                   dd = new java.sql.Date(sdf.parse(godina1.getText()).getTime());
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
                 }
@@ -199,6 +200,7 @@ public class PanelProfil extends JPanel{
                     value = UrednikovProzorKON.provera(u,i,p,e,t,dd);
                     if(value) {
                         JOptionPane.showMessageDialog(dialog, "Uspesno izmenjeni podaci!");
+                        dialog.setVisible(false);
                     }else{
                         JOptionPane.showMessageDialog(dialog, "Greska!");
                     }

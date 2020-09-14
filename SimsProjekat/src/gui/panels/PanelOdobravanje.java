@@ -105,6 +105,7 @@ public class PanelOdobravanje extends JPanel {
                         throwables.printStackTrace();
                     }
                     listaRecenzija.remove(r);
+                    dialog.setVisible(false);
                     refreshData();
 
 
@@ -134,6 +135,7 @@ public class PanelOdobravanje extends JPanel {
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+                    dialog.setVisible(false);
                     refreshData();
 
                 }
