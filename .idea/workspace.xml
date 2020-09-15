@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:source" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="Ispravljena skripta i neke sitnice">
+      <change beforePath="$PROJECT_DIR$/.idea/SIMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SIMS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogAdminovihRecenzija.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/dialogs/DialogZadataka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementOdobravanjaRecenzije.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/elementi/ElementZadatka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelProfilAdmina.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/gui/panels/PanelSadrzaja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/SimsProjekat/src/util/FConnection.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1fPjmUC7OOPyQ2rfzIvLeghhmBb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/SimsProjekat/src/gui/icons/ikoneIzvodjenja" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\filip\Desktop\Sims\SimsProjekat\src\gui\icons\ikoneIzvodjenja" />
+      <recent name="C:\Users\filip\Desktop\Sims\AudioBaza" />
+      <recent name="C:\Users\filip\Desktop\Sims\SimsProjekat\src\gui\icons" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="SIMS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9229421-512b-4b40-b8d2-a49bade25486" name="Default Changelist" comment="" />
+      <created>1596126781399</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1596126781399</updated>
+    </task>
+    <task id="LOCAL-00001" summary="pokusaj konektovanja">
+      <created>1596127069870</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1596127069870</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Odradjene klase DAO za prvih pet klasa, kao i dodane jos neke funkcije u osnovne klase poput podrazumijevanih kontruktora i setera, napravljena klasa KorisnickiNalog i ispravljene klase koje je koriste">
+      <created>1596143119579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596143119579</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Dopunjene DAO klase za admina, album, izvodjac, izvodjenje i korisnickinalog.">
+      <created>1596323386578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596323386578</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi.">
+      <created>1596444586388</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596444586388</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora.">
+      <created>1596538320509</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596538320509</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina">
+      <created>1596562216424</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1596562216424</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Izmjenjena skripta sto se tice recenzije, jer recenzija moze biti vezana ili za muzicko dijelo ili za izvodjenje ili za korisnika ili urednika a ne za sve zajedno.">
+      <created>1596710383253</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1596710383253</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima">
+      <created>1596733886449</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596733886449</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Promjena loznike admina i neke jos sitnice">
+      <created>1596739980454</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1596739980454</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Dovresna promjena lozinke">
+      <created>1596740648015</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1596740648015</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Izmjene sto se tice obrade zahtjeva">
+      <created>1596742853604</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1596742853604</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Neke sitnice doradjenje">
+      <created>1596797794663</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596797794663</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Preradjena funkcionalnost Obrada Zahteva kod administratora">
+      <created>1596799512331</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1596799512331</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene">
+      <created>1596802821983</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1596802821983</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Zaboravila sam prikazati podatke za recenziju pa dopunila">
+      <created>1596804090094</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1596804090094</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Zavrsena zadnja funkcionalnost za admina">
+      <created>1597070532630</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1597070532630</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Neke sitnice izmijenjene sto se tice zastite">
+      <created>1597071257801</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1597071257801</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Skripta je dopunjena primjerima vrijednosti za recenzije">
+      <created>1597071337471</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1597071337471</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Neke sitnice izmjenjene">
+      <created>1597510103595</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1597510103595</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Dodavanje albuma">
+      <created>1597575330409</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1597575330409</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen">
+      <created>1597616677061</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1597616677061</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Doradjene neke stvari sto se plejlisti tice i kreirane u bazi dvije plejliste">
+      <created>1597746448469</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1597746448469</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Prikaz izvodjenja u plejlisti, i pustanje pjesme">
+      <created>1597943088884</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1597943088884</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Zavrsen rad sa plejlistama, i neke sitnice izmijenjene">
+      <created>1599318768260</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1599318768260</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Izmijenjene neke stvari u vezi funkcionalnosti admina">
+      <created>1599333729749</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1599333729749</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Ispravljeno dodavanje izvodjenja u playlistu">
+      <created>1599336581714</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1599336581714</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Ispravljeno brisanje izodjenja iz liste">
+      <created>1599408297762</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1599408297762</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Ispravljena skripta i neke sitnice">
+      <created>1599593285115</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1599593285116</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="source" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Dopunjena klasa KorisnickiNalogDao, kao i klasa KorisnickiNalog, u klasi Korisnicki Nalog imamo atribut osoba koja se referencira na osobu koja taj nalog koristi." />
+    <MESSAGE value="Adminov prozor napravljen kao i dva dialoga za dodavanje sadrzaja i profil administratora." />
+    <MESSAGE value="Dodan atribut kod recenzije odobrena i geter i seter, i uradjena funkcionalnost Odobri recenziju i Odobri zahtjev za Admina" />
+    <MESSAGE value="Izmjenjena skripta sto se tice recenzije, jer recenzija moze biti vezana ili za muzicko dijelo ili za izvodjenje ili za korisnika ili urednika a ne za sve zajedno." />
+    <MESSAGE value="Jos jedna funkcionalnost za admina zavrsena, zadavanje zadataka urednicima" />
+    <MESSAGE value="Promjena loznike admina i neke jos sitnice" />
+    <MESSAGE value="Dovresna promjena lozinke" />
+    <MESSAGE value="Izmjene sto se tice obrade zahtjeva" />
+    <MESSAGE value="Neke sitnice doradjenje" />
+    <MESSAGE value="Preradjena funkcionalnost Obrada Zahteva kod administratora" />
+    <MESSAGE value="Preradjena funkcionalnost odobravanja recenzije kod administratora i neke sitnice izmijenjene" />
+    <MESSAGE value="Zaboravila sam prikazati podatke za recenziju pa dopunila" />
+    <MESSAGE value="Zavrsena zadnja funkcionalnost za admina" />
+    <MESSAGE value="Neke sitnice izmijenjene sto se tice zastite" />
+    <MESSAGE value="Skripta je dopunjena primjerima vrijednosti za recenzije" />
+    <MESSAGE value="Neke sitnice izmjenjene" />
+    <MESSAGE value="Dodavanje albuma" />
+    <MESSAGE value="Izmijenjena tabela u bazi, umjesto MuzickoDeloPlayLista imamo IzvodjenjePlaylista, i kreiran dialog za prikaz plejlisti korisnika, ali nije jos zavrsen" />
+    <MESSAGE value="Doradjene neke stvari sto se plejlisti tice i kreirane u bazi dvije plejliste" />
+    <MESSAGE value="Prikaz izvodjenja u plejlisti, i pustanje pjesme" />
+    <MESSAGE value="Zavrsen rad sa plejlistama, i neke sitnice izmijenjene" />
+    <MESSAGE value="Izmijenjene neke stvari u vezi funkcionalnosti admina" />
+    <MESSAGE value="Ispravljeno dodavanje izvodjenja u playlistu" />
+    <MESSAGE value="Ispravljeno brisanje izodjenja iz liste" />
+    <MESSAGE value="Ispravljena skripta i neke sitnice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ispravljena skripta i neke sitnice" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="520" y="236" key="#Notifications" timestamp="1596709521438">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="520" y="236" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1596709521438" />
+    <state x="524" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599423260353">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="524" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1599423260353" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1596558781766">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1596558781766" />
+    <state x="627" y="123" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1597063546216">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="627" y="123" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1536.824@0.0.1536.824" timestamp="1597063546216" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597181774553">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1597181774553" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1597509920573">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1597509920573" />
+    <state x="501" y="154" key="FileChooserDialogImpl" timestamp="1597075867626">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="501" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597075867626" />
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1599644474953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1599644474953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1599644474953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1599644474953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599644474953" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1597666049813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597666049813" />
+    <state x="147" y="65" key="MergeDialog" timestamp="1599318692889">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1599318692889" />
+    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1597070554877">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1597070554877" />
+    <state x="277" y="0" key="SettingsEditor" timestamp="1597510124667">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597510124667" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599593288298">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1599593288298" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599645058037">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1599645058037" />
+    <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596709018408">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="304" y="148" width="927" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1596709018408" />
+    <state x="469" y="170" key="refactoring.ChangeSignatureDialog" timestamp="1597511340733">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="469" y="170" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1597511340733" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1599300168432">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599300168432" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599644043662">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599644043662" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

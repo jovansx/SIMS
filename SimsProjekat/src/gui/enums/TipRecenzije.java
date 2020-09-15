@@ -1,0 +1,8 @@
+package gui.enums;
+
+public enum TipRecenzije {
+    IZVODJENJE_UREDNIK,
+    MUZICKO_DELO_UREDNIK,
+    IZVODJENJE_REGISTROVANI,
+    MUZICKO_DELO_REGISTROVANI
+}
